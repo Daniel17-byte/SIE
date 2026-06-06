@@ -1,0 +1,149 @@
+STATISTICI GRILE SIE
+
+Cum folosesc fisierul:
+- Completez cate o intrare pentru fiecare simulare.
+- Notez scor pe capitol (procent sau punctaj), plus scor total.
+- Mod poate fi: partial, examen, complet.
+- Set poate fi: grile1, grile2, mixt.
+
+Scara recomandata (alege una):
+- Procent: 0-100%
+- Nota: 1-10
+
+============================================================
+REZUMAT RAPID
+============================================================
+
+Total simulari: ____
+Media generala (toate modurile): ____
+Media partial: ____
+Media examen: ____
+Media complet: ____
+Best score: ____
+Worst score: ____
+
+============================================================
+MEDII PE CAPITOLE (GLOBAL)
+============================================================
+
+Intreruperi: ____
+DMA si transferuri I/E: ____
+Magistrale si interconectare: ____
+PCI / PCI Express / CompactPCI: ____
+Module embedded: ____
+GPU si CUDA: ____
+Afisaje: ____
+Stocare optica: ____
+Arhitectura calculatoarelor: ____
+Diverse: ____
+
+============================================================
+SIMULARI - LOG DETALIAT
+============================================================
+
+Template intrare:
+Data: YYYY-MM-DD
+Mod: partial | examen | complet
+Set: grile1 | grile2 | mixt
+Nr intrebari: ____
+Scor total: ____
+Nota finala: ____
+Timp (min): ____
+
+Scor pe capitole:
+- Intreruperi: ____
+- DMA si transferuri I/E: ____
+- Magistrale si interconectare: ____
+- PCI / PCI Express / CompactPCI: ____
+- Module embedded: ____
+- GPU si CUDA: ____
+- Afisaje: ____
+- Stocare optica: ____
+- Arhitectura calculatoarelor: ____
+- Diverse: ____
+
+Observatii:
+- Ce a mers bine: ____
+- Ce recapitulare fac: ____
+
+------------------------------------------------------------
+Intrarea #1
+Data:
+Mod:
+Set:
+Nr intrebari:
+Scor total:
+Nota finala:
+Timp (min):
+
+Scor pe capitole:
+- Intreruperi:
+- DMA si transferuri I/E:
+- Magistrale si interconectare:
+- PCI / PCI Express / CompactPCI:
+- Module embedded:
+- GPU si CUDA:
+- Afisaje:
+- Stocare optica:
+- Arhitectura calculatoarelor:
+- Diverse:
+
+Observatii:
+- Ce a mers bine:
+- Ce recapitulare fac:
+
+------------------------------------------------------------
+Intrarea #2
+Data:
+Mod:
+Set:
+Nr intrebari:
+Scor total:
+Nota finala:
+Timp (min):
+
+Scor pe capitole:
+- Intreruperi:
+- DMA si transferuri I/E:
+- Magistrale si interconectare:
+- PCI / PCI Express / CompactPCI:
+- Module embedded:
+- GPU si CUDA:
+- Afisaje:
+- Stocare optica:
+- Arhitectura calculatoarelor:
+- Diverse:
+
+Observatii:
+- Ce a mers bine:
+- Ce recapitulare fac:
+
+------------------------------------------------------------
+Intrarea #3
+Data:
+Mod:
+Set:
+Nr intrebari:
+Scor total:
+Nota finala:
+Timp (min):
+
+Scor pe capitole:
+- Intreruperi:
+- DMA si transferuri I/E:
+- Magistrale si interconectare:
+- PCI / PCI Express / CompactPCI:
+- Module embedded:
+- GPU si CUDA:
+- Afisaje:
+- Stocare optica:
+- Arhitectura calculatoarelor:
+- Diverse:
+
+Observatii:
+- Ce a mers bine:
+- Ce recapitulare fac:
+
+------------------------------------------------------------
+(continua cu intrari noi dupa acelasi format)
+

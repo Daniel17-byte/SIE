@@ -1,0 +1,1300 @@
+[
+  {
+    "id": 1,
+    "question": "La discurile Blu-ray:",
+    "answers": [
+      "Se reduce lungimea de undă a razei laser comparativ cu cea a discurilor DVD.",
+      "Se reduce apertura numerică a lentilei obiectiv comparativ cu cea a discurilor DVD.",
+      "Se reduce grosimea stratului de acoperire pentru a compensa eroarea de focalizare a razei laser."
+    ],
+    "correctAnswers": [
+      "Se reduce lungimea de undă a razei laser comparativ cu cea a discurilor DVD.",
+      "Se reduce grosimea stratului de acoperire pentru a compensa eroarea de focalizare a razei laser."
+    ],
+    "chapter": "Stocare optica"
+  },
+  {
+    "id": 2,
+    "question": "Arhitectura CUDA (Compute Unified Device Architecture):",
+    "answers": [
+      "Reprezintă o platformă și un model de programare care se poate utiliza cu orice circuit GPU.",
+      "Este o arhitectura paralela pentru acceleratoare",
+      "Permite partajarea unei părți a memoriei GPU cu UCP.",
+      "Permite accesul la o memorie partajată de către toate firele de execuție dintr-un bloc de fire de execuție."
+    ],
+    "correctAnswers": [
+      "Este o arhitectura paralela pentru acceleratoare",
+      "Permite partajarea unei părți a memoriei GPU cu UCP.",
+      "Permite accesul la o memorie partajată de către toate firele de execuție dintr-un bloc de fire de execuție."
+    ],
+    "chapter": "GPU si CUDA"
+  },
+  {
+    "id": 3,
+    "question": "Comparativ cu memoria GDDR6, memoria High Bandwidth Memory (HBM):",
+    "answers": [
+      "Are un cost mai ridicat.",
+      "Necesită mai puțin spațiu pentru aceeași capacitate.",
+      "Are un consum de energie mai redus."
+    ],
+    "correctAnswers": [
+      "Are un cost mai ridicat.",
+      "Necesită mai puțin spațiu pentru aceeași capacitate.",
+      "Are un consum de energie mai redus."
+    ],
+    "chapter": "GPU si CUDA"
+  },
+  {
+    "id": 4,
+    "question": "Interfața DisplayPort:",
+    "answers": [
+      "Utilizează un protocol bazat pe pachete.",
+      "Permite conectarea mai multor afisaje in lant.",
+      "În modul dual opțional, permite transmiterea semnalelor HDMI prin cablul DisplayPort fără adaptoare externe.",
+      "Este compatibil cu HDMI printr-un adaptor pasiv."
+    ],
+    "correctAnswers": [
+      "Utilizează un protocol bazat pe pachete.",
+      "Permite conectarea mai multor afisaje in lant.",
+      "Este compatibil cu HDMI printr-un adaptor pasiv."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 5,
+    "question": "Afișajele cu cristale lichide cu adresare activă:",
+    "answers": [
+      "Utilizează tranzistoare pentru a controla fiecare pixel.",
+      "Oferă un timp de răspuns mai bun decât afișajele cu adresare pasivă.",
+      "Necesită mai multe conexiuni electrice decât cele cu adresare pasivă."
+    ],
+    "correctAnswers": [
+      "Utilizează tranzistoare pentru a controla fiecare pixel.",
+      "Oferă un timp de răspuns mai bun decât afișajele cu adresare pasivă."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 6,
+    "question": "UCP (procesorul central):",
+    "answers": [
+      "Poate fi o componentă a unei arhitecturi multi-core.",
+      "Este responsabil de execuția instrucțiunilor programului.",
+      "Nu poate accesa direct perifericele."
+    ],
+    "correctAnswers": [
+      "Poate fi o componentă a unei arhitecturi multi-core.",
+      "Este responsabil de execuția instrucțiunilor programului."
+    ],
+    "chapter": "Arhitectura calculatoarelor"
+  },
+  {
+    "id": 7,
+    "question": "La discurile compact reinscriptibile (CD-RW):",
+    "answers": [
+      "Se utilizează o vopsea organică pentru stratul de înregistrare.",
+      "Scrierea se execută cu laserul setat la puterea cea mai mare.",
+      "Ștergerea se execută prin încălzirea stratului de înregistrare până când ajunge în starea amorfă."
+    ],
+    "correctAnswers": [
+      "Scrierea se execută cu laserul setat la puterea cea mai mare."
+    ],
+    "chapter": "Stocare optica"
+  },
+  {
+    "id": 8,
+    "question": "Despre discurile compacte:",
+    "answers": [
+      "Un bit de 1 este înregistrat ca o cavitate (pit), iar un bit de 0 ca o zonă plană (land).",
+      "Biții de date sunt modulați pentru a evita șiruri foarte scurte de 0 consecutivi, ceea ce ar genera frecvențe înalte la citire.",
+      "Între doi biți de 1 se pot înregistra orice număr de biți de 0."
+    ],
+    "correctAnswers": [
+      "Biții de date sunt modulați pentru a evita șiruri foarte scurte de 0 consecutivi, ceea ce ar genera frecvențe înalte la citire."
+    ],
+    "chapter": "Stocare optica"
+  },
+  {
+    "id": 9,
+    "question": "Afișajele AMOLED:",
+    "answers": [
+      "Folosesc tehnologia TFT pentru a controla fiecare sub-pixel.",
+      "Pot atinge contrasturi infinite datorită controlului precis al emiterii luminii.",
+      "Nu necesită iluminare de fundal."
+    ],
+    "correctAnswers": [
+      "Folosesc tehnologia TFT pentru a controla fiecare sub-pixel.",
+      "Nu necesită iluminare de fundal."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 10,
+    "question": "Circuitele GPU conțin diferite tipuri de nuclee de umbrire, cum sunt:",
+    "answers": [
+      "Nuclee de umbrire pentru vârfuri, care pot crea sau șterge vârfuri ale obiectelor 3D.",
+      "Nuclee de umbrire geometrică, care pot modifica topologia primitivelor pe care le recepționează ca intrări.",
+      "Nuclee de umbrire pentru calcule, care pun la dispoziție facilități pentru o programare paralelă eficientă."
+    ],
+    "correctAnswers": [
+      "Nuclee de umbrire geometrică, care pot modifica topologia primitivelor pe care le recepționează ca intrări.",
+      "Nuclee de umbrire pentru calcule, care pun la dispoziție facilități pentru o programare paralelă eficientă."
+    ],
+    "chapter": "GPU si CUDA"
+  },
+  {
+    "id": 11,
+    "question": "Tehnologia Quantum Dot:",
+    "answers": [
+      "Utilizează puncte cuantice care emit lumină la excitație.",
+      "Necesită o sursă de lumină albastră.",
+      "Permite o gamă de culori mai largă."
+    ],
+    "correctAnswers": [
+      "Utilizează puncte cuantice care emit lumină la excitație.",
+      "Permite o gamă de culori mai largă."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 12,
+    "question": "Selectați valoarea cea mai apropiată pentru lățimea de bandă pe un canal în cazul versiunii 2.0 a interfeței DisplayPort:",
+    "answers": [
+      "32 Gbiti/s",
+      "8 Gbiti/s",
+      "20 Gbiti/s",
+      "5 Gbiti/s"
+    ],
+    "correctAnswers": [
+      "20 Gbiti/s"
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 13,
+    "question": "Stratul de înregistrare al discurilor CD-R este realizat din:",
+    "answers": [
+      "Vopsele organice.",
+      "Vopsele anorganice.",
+      "Aliaje cu schimbare de fază."
+    ],
+    "correctAnswers": [
+      "Vopsele organice."
+    ],
+    "chapter": "Stocare optica"
+  },
+  {
+    "id": 14,
+    "question": "Care din următoarele metode e folosită pentru a înregistra biții de date pe discurile compacte:",
+    "answers": [
+      "Un bit de 1 este înregistrat ca o tranziție de la cavitate la suprafață sau de la suprafață la cavitate, iar un bit de 0 ca lipsa unei tranziții",
+      "Un bit de 1 este înregistrat ca o tranziție de la suprafață la cavitate, iar un bit de 0 ca o tranziție de la cavitate la suprafață",
+      "Un bit de 1 este înregistrat ca o cavitate, iar un bit de 0 ca o suprafață"
+    ],
+    "correctAnswers": [
+      "Un bit de 1 este înregistrat ca o tranziție de la cavitate la suprafață sau de la suprafață la cavitate, iar un bit de 0 ca lipsa unei tranziții"
+    ],
+    "chapter": "Stocare optica"
+  },
+  {
+    "id": 15,
+    "question": "La arhitectura CUDA (Compute Unified Device Architecture):",
+    "answers": [
+      "Blocurile de fire de execuție sunt planificate pentru execuție în orice ordine pe orice număr de nuclee de procesare disponibile.",
+      "Fiecare bloc de fire de execuție are o memorie partajată care este accesibilă tuturor firelor din bloc, dar nu este accesibilă niciunui alt bloc.",
+      "Firele de execuție dintr-o grilă de blocuri au acces la o memorie globală."
+    ],
+    "correctAnswers": [
+      "Blocurile de fire de execuție sunt planificate pentru execuție în orice ordine pe orice număr de nuclee de procesare disponibile.",
+      "Fiecare bloc de fire de execuție are o memorie partajată care este accesibilă tuturor firelor din bloc, dar nu este accesibilă niciunui alt bloc.",
+      "Firele de execuție dintr-o grilă de blocuri au acces la o memorie globală."
+    ],
+    "chapter": "GPU si CUDA"
+  },
+  {
+    "id": 16,
+    "question": "La discurile compact reinscriptibile (CD-RW):",
+    "answers": [
+      "Scrierea se execută cu laserul setat la puterea cea mai mare.",
+      "Rescrierea se execută cu două setări ale puterii laserului, pentru scriere și ștergere.",
+      "Ștergerea se execută prin încălzirea stratului de înregistrare peste punctul de cristalizare și răcirea rapidă a acestuia pentru a se menține starea cristalină."
+    ],
+    "correctAnswers": [
+      "Scrierea se execută cu laserul setat la puterea cea mai mare.",
+      "Rescrierea se execută cu două setări ale puterii laserului, pentru scriere și ștergere."
+    ],
+    "chapter": "Stocare optica"
+  },
+  {
+    "id": 17,
+    "question": "La tehnologia color electroforetică Advanced Color ePaper (ACeP):",
+    "answers": [
+      "Se utilizează trei pigmenți transparenți colorați și un pigment alb opac.",
+      "Fiecare din culorile cian, magenta și galben se obține prin gruparea a doi pigmenți cu încărcare opusă.",
+      "Culorile roșu, verde și albastru se obțin prin mișcarea selectivă a pigmenților disponibili."
+    ],
+    "correctAnswers": [
+      "Se utilizează trei pigmenți transparenți colorați și un pigment alb opac."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 18,
+    "question": "La afișajele cu cristale lichide, lumina de fundal cu diode electroluminiscente (LED):",
+    "answers": [
+      "Reduce consumul de energie față de lumina de fundal cu lămpi fluorescente.",
+      "Permite menținerea unei luminozități uniforme pe termen lung.",
+      "Permite implementarea tehnicii „Full-Array Local Dimming” prin varianta sa cu șiruri de diode LED albe.",
+      "Permite realizarea afișajelor profesionale prin varianta sa cu matrice de diode LED RGB."
+    ],
+    "correctAnswers": [
+      "Reduce consumul de energie față de lumina de fundal cu lămpi fluorescente.",
+      "Permite implementarea tehnicii „Full-Array Local Dimming” prin varianta sa cu șiruri de diode LED albe.",
+      "Permite realizarea afișajelor profesionale prin varianta sa cu matrice de diode LED RGB."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 19,
+    "question": "La un afișaj cu matrice pasivă:",
+    "answers": [
+      "Nu există tranzistori conectați la pixeli.",
+      "Fiecare linie de scanare este conectată individual.",
+      "Există un tranzistor conectat la fiecare pixel."
+    ],
+    "correctAnswers": [
+      "Nu există tranzistori conectați la pixeli.",
+      "Fiecare linie de scanare este conectată individual."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 20,
+    "question": "Tehnica de generare a culorilor care utilizează diode OLED cu emisie directă:",
+    "answers": [
+      "Permite o eficiență luminoasă ridicată.",
+      "Nu ridica probleme de echilibru al culorilor",
+      "Rezolvă problema de echilibru a culorilor prezentă la alte tehnici de generare a culorilor.",
+      "Necesită un proces de fabricație complex."
+    ],
+    "correctAnswers": [
+      "Permite o eficiență luminoasă ridicată.",
+      "Necesită un proces de fabricație complex."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 21,
+    "question": "Capacitatea mai mare a discurilor DVD față de CD a fost obținută prin:",
+    "answers": [
+      "Micșorarea dimensiunii cavităților (pit-urilor).",
+      "Reducerea lungimii de undă a fasciculului laser.",
+      "Reducerea aperturii numerice a lentilei obiectiv.",
+      "Utilizarea unei metode de modulare mai eficiente."
+    ],
+    "correctAnswers": [
+      "Micșorarea dimensiunii cavităților (pit-urilor).",
+      "Reducerea lungimii de undă a fasciculului laser.",
+      "Utilizarea unei metode de modulare mai eficiente."
+    ],
+    "chapter": "Stocare optica"
+  },
+  {
+    "id": 22,
+    "question": "Afișajele cu hârtie electronică au ca dezavantaje următoarele:",
+    "answers": [
+      "Atunci când lumina ambientală este scăzută, lizibilitatea este redusă.",
+      "Timpul de răspuns este mai mare decât la afișajele LCD.",
+      "Nu pot reda conținut video fluent."
+    ],
+    "correctAnswers": [
+      "Timpul de răspuns este mai mare decât la afișajele LCD.",
+      "Nu pot reda conținut video fluent."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 23,
+    "question": "Tipuri de memorie utilizate într-un sistem cu arhitectură CUDA:",
+    "answers": [
+      "Memorie partajată (shared memory)",
+      "Memorie globală",
+      "Memorie constantă"
+    ],
+    "correctAnswers": [
+      "Memorie partajată (shared memory)",
+      "Memorie globală",
+      "Memorie constantă"
+    ],
+    "chapter": "GPU si CUDA"
+  },
+  {
+    "id": 24,
+    "question": "În cazul afișajelor cu cristale lichide (LCD), iluminarea de fundal cu LED-uri:",
+    "answers": [
+      "Permite fabricarea de afișaje profesionale, cu varianta sa matriceală LED RGB.",
+      "Permite menținerea unei luminozități uniforme pe termen lung.",
+      "Permite implementarea tehnicii „Full-Array Local Dimming”, cu varianta matrice de diode LED albe."
+    ],
+    "correctAnswers": [
+      "Permite fabricarea de afișaje profesionale, cu varianta sa matriceală LED RGB.",
+      "Permite implementarea tehnicii „Full-Array Local Dimming”, cu varianta matrice de diode LED albe."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 25,
+    "question": "La un afişaj cu cristale lichide TN (Twisted Nematic):",
+    "answers": [
+      "Stratul de cristale lichide roteşte direcţia de polarizare a luminii de fond.",
+      "Alinierea moleculelor de cristale lichide este controlată cu câmpul magnetic dintre electrozi.",
+      "Se utilizează filtre polarizatoare cu direcțiile de polarizare perpendiculare între ele."
+    ],
+    "correctAnswers": [
+      "Stratul de cristale lichide roteşte direcţia de polarizare a luminii de fond.",
+      "Se utilizează filtre polarizatoare cu direcțiile de polarizare perpendiculare între ele."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 26,
+    "question": "Selectați proprietățile care sunt folosite pentru electrophoretic e-paper display:",
+    "answers": [
+      "Pigmenți mobili cu mobilitate electroforetică diferită.",
+      "Separarea pigmenților sub influența unui câmp electric.",
+      "Ambele fenomene de mai sus."
+    ],
+    "correctAnswers": [
+      "Ambele fenomene de mai sus."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 27,
+    "question": "Tehnologia miniLED:",
+    "answers": [
+      "Folosește LED-uri de dimensiuni reduse pentru iluminare de fundal.",
+      "Permite un control local mai precis al luminii.",
+      "Este mai eficientă energetic decât iluminarea LED tradițională."
+    ],
+    "correctAnswers": [
+      "Folosește LED-uri de dimensiuni reduse pentru iluminare de fundal.",
+      "Permite un control local mai precis al luminii."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 28,
+    "question": "Metoda de înregistrare cu viteză liniară constantă (CLV) utilizată la discuri DVD:",
+    "answers": [
+      "Păstrează o rată de transfer constantă în timpul lecturii.",
+      "Necesită reglarea continuă a vitezei de rotație a discului.",
+      "Este optimă pentru redare secvențială a datelor."
+    ],
+    "correctAnswers": [
+      "Păstrează o rată de transfer constantă în timpul lecturii.",
+      "Necesită reglarea continuă a vitezei de rotație a discului.",
+      "Este optimă pentru redare secvențială a datelor."
+    ],
+    "chapter": "Stocare optica"
+  },
+  {
+    "id": 29,
+    "question": "Tehnologia Super-Twisted Nematic (STN) pentru afișaje LCD:",
+    "answers": [
+      "Timpul de răspuns este mai mare față de tehnologia TN.",
+      "Direcția de polarizare a luminii de fundal este rotită cu 90 de grade.",
+      "Se poate obține un contrast mai mare față de tehnologia TN."
+    ],
+    "correctAnswers": [
+      "Timpul de răspuns este mai mare față de tehnologia TN.",
+      "Se poate obține un contrast mai mare față de tehnologia TN."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 30,
+    "question": "Discurile CD-R (CD Recordable):",
+    "answers": [
+      "Utilizează un material organic cu schimbare de fază pentru stratul de înregistrare.",
+      "Conțin adresele sectoarelor, care se utilizează de unitate pentru a determina poziția curentă pe disc.",
+      "Conțin o canelură spiralată care permite controlul vitezei de rotație a discului."
+    ],
+    "correctAnswers": [
+      "Conțin adresele sectoarelor, care se utilizează de unitate pentru a determina poziția curentă pe disc.",
+      "Conțin o canelură spiralată care permite controlul vitezei de rotație a discului."
+    ],
+    "chapter": "Stocare optica"
+  },
+  {
+    "id": 31,
+    "question": "La tehnica de generare a culorilor utilizând diode OLED cu emisie a luminii albe:",
+    "answers": [
+      "Eficiența luminoasă este mai redusă, deoarece se utilizează filtre de culoare.",
+      "Procesul de fabricație este complex, deoarece este necesară depunerea sub-pixelilor poziționați precis.",
+      "Nu apar probleme de echilibru a culorilor."
+    ],
+    "correctAnswers": [
+      "Eficiența luminoasă este mai redusă, deoarece se utilizează filtre de culoare."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 32,
+    "question": "Diodele electroluminescente (LED):",
+    "answers": [
+      "Sunt mai eficiente decât lămpile fluorescente.",
+      "Emit lumină atunci când sunt polarizate direct.",
+      "Sunt surse de lumină punctiforme."
+    ],
+    "correctAnswers": [
+      "Sunt mai eficiente decât lămpile fluorescente.",
+      "Emit lumină atunci când sunt polarizate direct.",
+      "Sunt surse de lumină punctiforme."
+    ],
+    "chapter": "Diverse"
+  },
+  {
+    "id": 33,
+    "question": "La diodele OLED fosforescente:",
+    "answers": [
+      "Emisia luminii se menține și după ce radiația incidentă a fost eliminată.",
+      "Doar strările singlet contribuie la emisia luminii.",
+      "Eficiența este mai redusă decât cea a diodelor OLED fluorescente."
+    ],
+    "correctAnswers": [
+      "Emisia luminii se menține și după ce radiația incidentă a fost eliminată."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 34,
+    "question": "Tehnologia OLED:",
+    "answers": [
+      "Nu necesită iluminare de fundal.",
+      "Fiecare pixel emite propria lumină.",
+      "Are un contrast foarte ridicat."
+    ],
+    "correctAnswers": [
+      "Nu necesită iluminare de fundal.",
+      "Fiecare pixel emite propria lumină.",
+      "Are un contrast foarte ridicat."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 35,
+    "question": "Afișaje cu cristale lichide cu adresare pasivă:",
+    "answers": [
+      "Au o rată de reîmprospătare mai mică decât cele cu adresare activă.",
+      "Nu folosesc tranzistoare în matricea de pixeli.",
+      "Sunt mai simple și mai ieftine de produs decât cele cu adresare activă."
+    ],
+    "correctAnswers": [
+      "Au o rată de reîmprospătare mai mică decât cele cu adresare activă.",
+      "Nu folosesc tranzistoare în matricea de pixeli.",
+      "Sunt mai simple și mai ieftine de produs decât cele cu adresare activă."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 36,
+    "question": "La discurile compact:",
+    "answers": [
+      "Între doi biți de 1 se poate înregistra un șir de biți de 0 de orice lungime.",
+      "Biții sunt modulați pentru a evita șiruri foarte scurte de biți consecutivi de 0, care au ca rezultat o frecvență înaltă a semnalului generat la citire.",
+      "Un bit de 1 este reprezentat printr-o cavitate, iar un bit de 0 printr-o suprafață."
+    ],
+    "correctAnswers": [
+      "Biții sunt modulați pentru a evita șiruri foarte scurte de biți consecutivi de 0, care au ca rezultat o frecvență înaltă a semnalului generat la citire."
+    ],
+    "chapter": "Stocare optica"
+  },
+  {
+    "id": 37,
+    "question": "Memoria GDDR6:",
+    "answers": [
+      "Utilizează semnale separate de ceas pentru scriere și citire.",
+      "Utilizează tehnica de inversare a magistralei de date pentru reducerea energiei consumate.",
+      "Utilizează tehnica de antrenare a semnalelor, care constă în calibrarea nivelului semnalelor generate.",
+      "Utilizează tehnica de antrenare a liniilor de date, care constă în alinierea fazei între semnalele de date şi semnalul lor de ceas pentru scriere."
+    ],
+    "correctAnswers": [
+      "Utilizează tehnica de inversare a magistralei de date pentru reducerea energiei consumate.",
+      "Utilizează tehnica de antrenare a liniilor de date, care constă în alinierea fazei între semnalele de date şi semnalul lor de ceas pentru scriere."
+    ],
+    "chapter": "GPU si CUDA"
+  },
+  {
+    "id": 38,
+    "question": "OLED vs LCD:",
+    "answers": [
+      "LCD este mai eficient energetic pentru imagini luminoase constante.",
+      "OLED permite ecrane mai subțiri și mai flexibile.",
+      "OLED are un unghi de vizualizare mai mare."
+    ],
+    "correctAnswers": [
+      "LCD este mai eficient energetic pentru imagini luminoase constante.",
+      "OLED permite ecrane mai subțiri și mai flexibile.",
+      "OLED are un unghi de vizualizare mai mare."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 39,
+    "question": "Tehnologia MVA (Multi-Domain Vertical Alignment):",
+    "answers": [
+      "Unghiurile de vizualizare sunt mai mari decât la TN.",
+      "Contrastul este îmbunătățit față de VA.",
+      "Uniformitatea luminozității este îmbunătățită față de VA.",
+      "Reproducerea culorilor este problematică în direcția perpendiculară pe ecran."
+    ],
+    "correctAnswers": [
+      "Unghiurile de vizualizare sunt mai mari decât la TN.",
+      "Uniformitatea luminozității este îmbunătățită față de VA.",
+      "Reproducerea culorilor este problematică în direcția perpendiculară pe ecran."
+    ],
+    "chapter": "Diverse"
+  },
+  {
+    "id": 40,
+    "question": "La tehnologia In-Plane Switching (IPS) a afișajelor cu cristale lichide:",
+    "answers": [
+      "Apare remanența imaginii atunci când este atinsă o imagine în mișcare de pe ecran.",
+      "Timpul de răspuns este mai redus față de tehnologia Twisted Nematic (TN).",
+      "Sunt necesari doi tranzistori pentru fiecare sub-pixel."
+    ],
+    "correctAnswers": [
+      "Sunt necesari doi tranzistori pentru fiecare sub-pixel."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 41,
+    "question": "Comparativ cu arhitectura UCP, în arhitectura GPU:",
+    "answers": [
+      "Sincronizarea între firele de execuție paralele este mai simplă.",
+      "Utilizează fire de execuție mai simple",
+      "Conține un număr mult mai mare de nuclee de procesare",
+      "Latenta fiecărui nucleu de procesare este mult mai mare decât latenta unui nucleu UCP.",
+      "Dimensiunea memoriilor cache este mai redusă."
+    ],
+    "correctAnswers": [
+      "Conține un număr mult mai mare de nuclee de procesare",
+      "Latenta fiecărui nucleu de procesare este mult mai mare decât latenta unui nucleu UCP.",
+      "Dimensiunea memoriilor cache este mai redusă."
+    ],
+    "chapter": "GPU si CUDA"
+  },
+  {
+    "id": 42,
+    "question": "MVA (Multi-Domain Vertical Alignment) a afisajelor cu cristale lichide:",
+    "answers": [
+      "Unghiurile de vizualizare sunt mai mari decât în tehnologia TN (Twisted Nematic).",
+      "Reproducerea culorilor este problematică pentru direcția perpendiculară pe ecran.",
+      "Uniformitatea luminozității este mai bună decât în tehnologia VA (Vertical Alignment).",
+      "Contrastul este mai bun decât în tehnologia VA (Vertical Alignment)."
+    ],
+    "correctAnswers": [
+      "Unghiurile de vizualizare sunt mai mari decât în tehnologia TN (Twisted Nematic).",
+      "Reproducerea culorilor este problematică pentru direcția perpendiculară pe ecran.",
+      "Uniformitatea luminozității este mai bună decât în tehnologia VA (Vertical Alignment)."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 43,
+    "question": "Afișajele cu cristale lichide cu matrice pasivă:",
+    "answers": [
+      "Nu necesită niciun tranzistor conectat la electrozii de linie sau la electrozii de coloană",
+      "Comparativ cu afișajele cu matrice activă, au unghiuri de vizualizare mai mari.",
+      "Comparativ cu afișajele cu matrice activă, au timpul de răspuns mai mare"
+    ],
+    "correctAnswers": [
+      "Comparativ cu afișajele cu matrice activă, au timpul de răspuns mai mare"
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 44,
+    "question": "Interfata HDMI:",
+    "answers": [
+      "Permite utilizarea unui canal de retur audio, pe care se pot transmite date audio de la aparatul TV la un receptor audio/video.",
+      "Include informația de sincronizare în șirul de date seriale.",
+      "Permite utilizarea unui cablu cu un conector USB de tip C pentru conectarea la un afișaj."
+    ],
+    "correctAnswers": [
+      "Permite utilizarea unui canal de retur audio, pe care se pot transmite date audio de la aparatul TV la un receptor audio/video.",
+      "Permite utilizarea unui cablu cu un conector USB de tip C pentru conectarea la un afișaj."
+    ],
+    "chapter": "Diverse"
+  },
+  {
+    "id": 45,
+    "question": "În arhitectura CUDA (Compute Unified Device Architecture):",
+    "answers": [
+      "Firele dintr-o grilă de blocuri au acces la o memorie globală.",
+      "Fiecare bloc de fire are o memorie partajată accesibilă tuturor firelor din acel bloc, dar nu altor blocuri.",
+      "Blocurile de fire sunt planificate pentru execuție în orice ordine pe oricare nucleu de procesare disponibil.",
+      "O parte din memoria GPU poate fi partajată cu CPU."
+    ],
+    "correctAnswers": [
+      "Firele dintr-o grilă de blocuri au acces la o memorie globală.",
+      "Fiecare bloc de fire are o memorie partajată accesibilă tuturor firelor din acel bloc, dar nu altor blocuri.",
+      "Blocurile de fire sunt planificate pentru execuție în orice ordine pe oricare nucleu de procesare disponibil.",
+      "O parte din memoria GPU poate fi partajată cu CPU."
+    ],
+    "chapter": "GPU si CUDA"
+  },
+  {
+    "id": 46,
+    "question": "La tehnologia MVA (Multi-Domain Vertical Alignment) îmbunătățită a afișajelor LCD:",
+    "answers": [
+      "Oferă un contrast mai ridicat decât tehnologia TN.",
+      "Oferă unghiuri de vizualizare mai largi decât tehnologia VA simplă.",
+      "Are o uniformitate a luminii mai bună decât TN și VA simple."
+    ],
+    "correctAnswers": [
+      "Oferă un contrast mai ridicat decât tehnologia TN.",
+      "Oferă unghiuri de vizualizare mai largi decât tehnologia VA simplă.",
+      "Are o uniformitate a luminii mai bună decât TN și VA simple."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 47,
+    "question": "Tehnologia Quantum Dot Enhancement Film (QDEF):",
+    "answers": [
+      "Elimină nevoia de filtre de culoare",
+      "Utilizează o lumină de fundal albastră",
+      "Utilizează puncte cuantice pentru a genera culorile primare roșu și verde"
+    ],
+    "correctAnswers": [
+      "Utilizează o lumină de fundal albastră",
+      "Utilizează puncte cuantice pentru a genera culorile primare roșu și verde"
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 48,
+    "question": "Interfața HDMI (High-Definition Multimedia Interface):",
+    "answers": [
+      "Nu necesită un semnal de ceas separat, deoarece informația de sincronizare este înglobată în șirul de date seriale.",
+      "Permite utilizarea unui cablu care conține un canal HDMI Ethernet pentru partajarea unei conexiuni la Internet între două dispozitive.",
+      "Conține o magistrală serială care permite transferul codurilor telecomenzilor dacă o telecomandă este programată cu informația indicând tipul celorlalte dispozitive conectate.",
+      "Permite utilizarea unui cablu cu un conector USB de tip C pentru conectarea la un afișaj"
+    ],
+    "correctAnswers": [
+      "Permite utilizarea unui cablu care conține un canal HDMI Ethernet pentru partajarea unei conexiuni la Internet între două dispozitive.",
+      "Conține o magistrală serială care permite transferul codurilor telecomenzilor dacă o telecomandă este programată cu informația indicând tipul celorlalte dispozitive conectate.",
+      "Permite utilizarea unui cablu cu un conector USB de tip C pentru conectarea la un afișaj"
+    ],
+    "chapter": "Diverse"
+  },
+  {
+    "id": 49,
+    "question": "Formatul BD-ROM AV:",
+    "answers": [
+      "Utilizează un șir de transport care conține informații video, audio și grafice multiplexate.",
+      "Definește modul BD-Java, care permite dezvoltarea aplicațiilor interactive.",
+      "Definește modul HDMV, conținând un plan al graficii de prezentare care permite afișarea meniurilor grafice."
+    ],
+    "correctAnswers": [
+      "Utilizează un șir de transport care conține informații video, audio și grafice multiplexate.",
+      "Definește modul BD-Java, care permite dezvoltarea aplicațiilor interactive."
+    ],
+    "chapter": "Diverse"
+  },
+  {
+    "id": 50,
+    "question": "Memoria partajată (shared memory) în CUDA:",
+    "answers": [
+      "Este accesibilă de toate firele dintr-un bloc",
+      "Este utilizată pentru a reduce traficul de memorie globală",
+      "Este mai rapidă decât memoria globală"
+    ],
+    "correctAnswers": [
+      "Este accesibilă de toate firele dintr-un bloc",
+      "Este utilizată pentru a reduce traficul de memorie globală",
+      "Este mai rapidă decât memoria globală"
+    ],
+    "chapter": "GPU si CUDA"
+  },
+  {
+    "id": 51,
+    "question": "Afișajele cu cristale lichide cu matrice pasivă:",
+    "answers": [
+      "Timpul de răspuns este mai mare decât la matricea activă.",
+      "Sunt mai ieftine de produs.",
+      "Nu necesită tranzistori în structura pixelilor."
+    ],
+    "correctAnswers": [
+      "Timpul de răspuns este mai mare decât la matricea activă.",
+      "Sunt mai ieftine de produs.",
+      "Nu necesită tranzistori în structura pixelilor."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 52,
+    "question": "Capacitatea mai ridicată a discurilor DVD față de discurile compacte s-a obținut prin:",
+    "answers": [
+      "Reducerea dimensiunii cavităților.",
+      "Utilizarea unei metode de modulare mai eficiente.",
+      "Reducerea aperturii numerice a lentilei obiectiv.",
+      "Reducerea lungimii de undă a razei laser."
+    ],
+    "correctAnswers": [
+      "Reducerea dimensiunii cavităților.",
+      "Utilizarea unei metode de modulare mai eficiente.",
+      "Reducerea lungimii de undă a razei laser."
+    ],
+    "chapter": "Stocare optica"
+  },
+  {
+    "id": 53,
+    "question": "Afișajele cu cristale lichide, Tehnica “Full-Array Local Dimming” (FALD):",
+    "answers": [
+      "Poate determina dispersia luminii de la o zonă la zonele adiacente.",
+      "Îmbunătățește contrastul static și dinamic.",
+      "Poate fi implementată atunci când se utilizează lumina de fundal cu șiruri de diode LED albe."
+    ],
+    "correctAnswers": [
+      "Poate determina dispersia luminii de la o zonă la zonele adiacente."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 54,
+    "question": "Comparativ cu afișajele cu cristale lichide, la afișajele cu diode organice:",
+    "answers": [
+      "Timpul de răspuns este mai mare.",
+      "Procesul de fabricatie este mai complex",
+      "Consumul de energie poate fi mai mare, în funcție de imaginile afișate.",
+      "Contrastul este mai ridicat.",
+      "Este posibilă realizarea mai simplă a afișajelor transparente și flexibile."
+    ],
+    "correctAnswers": [
+      "Procesul de fabricatie este mai complex",
+      "Consumul de energie poate fi mai mare, în funcție de imaginile afișate.",
+      "Contrastul este mai ridicat.",
+      "Este posibilă realizarea mai simplă a afișajelor transparente și flexibile."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 55,
+    "question": "Discurile DVD+R:",
+    "answers": [
+      "Utilizează o canelură spiralată cu o frecvență mai ridicată a sinusoidei față de cea a discurilor DVD-R",
+      "Comparativ cu discurile DVD-R, îmbunătățesc precizia înlănțuirii între sesiunile de scriere consecutive",
+      "Stochează informații de adresare prin variația fazei sinusoidei canelurii spiralate",
+      "Îmbunătățesc precizia alinierii între sesiunile de scriere consecutive comparativ cu DVD-R.",
+      "Utilizează un sistem de gestiune a erorilor care este mai robust decât cel al discurilor DVD-R"
+    ],
+    "correctAnswers": [
+      "Utilizează o canelură spiralată cu o frecvență mai ridicată a sinusoidei față de cea a discurilor DVD-R",
+      "Comparativ cu discurile DVD-R, îmbunătățesc precizia înlănțuirii între sesiunile de scriere consecutive",
+      "Stochează informații de adresare prin variația fazei sinusoidei canelurii spiralate",
+      "Îmbunătățesc precizia alinierii între sesiunile de scriere consecutive comparativ cu DVD-R.",
+      "Utilizează un sistem de gestiune a erorilor care este mai robust decât cel al discurilor DVD-R"
+    ],
+    "chapter": "Stocare optica"
+  },
+  {
+    "id": 56,
+    "question": "Comparativ cu tehnologia TN (Twisted Nematic) a afișajelor cu cristale lichide, tehnologia IPS (In-Plane Switching):",
+    "answers": [
+      "Crește contrastul.",
+      "Reduce timpul de răspuns.",
+      "Îmbunătățește calitatea culorilor."
+    ],
+    "correctAnswers": [
+      "Îmbunătățește calitatea culorilor."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 57,
+    "question": "Lumina de fundal cu diode electroluminiscente (LED):",
+    "answers": [
+      "Permite o luminozitate uniformă pe termen lung.",
+      "Reduce luminozitatea comparativ cu lămpile fluorescente.",
+      "Permite tehnica Full-Array Local Dimming."
+    ],
+    "correctAnswers": [
+      "Permite tehnica Full-Array Local Dimming."
+    ],
+    "chapter": "Diverse"
+  },
+  {
+    "id": 58,
+    "question": "Metoda de înregistrare cu viteză unghiulară constantă (CAV) utilizată la diferite formate de discuri DVD:",
+    "answers": [
+      "Permite reducerea energiei consumate.",
+      "Favorizează aplicațiile care necesită acces secvențial.",
+      "Asigură o viteză de rotație constantă."
+    ],
+    "correctAnswers": [
+      "Asigură o viteză de rotație constantă."
+    ],
+    "chapter": "Stocare optica"
+  },
+  {
+    "id": 59,
+    "question": "Afișajele pasive cu matrice:",
+    "answers": [
+      "Au contrast și luminozitate mai reduse decât cele cu adresare activă.",
+      "Nu conțin tranzistori conectați la fiecare pixel.",
+      "Necesită linii de scanare și coloane de date separate pentru controlul fiecărui punct."
+    ],
+    "correctAnswers": [
+      "Au contrast și luminozitate mai reduse decât cele cu adresare activă.",
+      "Nu conțin tranzistori conectați la fiecare pixel.",
+      "Necesită linii de scanare și coloane de date separate pentru controlul fiecărui punct."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 60,
+    "question": "Metoda de înregistrare cu viteză liniară constantă (CLV), utilizată pentru mai multe formate de DVD:",
+    "answers": [
+      "Asigură o viteză de rotație constantă",
+      "Reduce consumul de energie comparativ cu metoda cu viteză unghiulară constantă (CAV)",
+      "Este avantajoasă pentru aplicațiile care necesită acces secvențial"
+    ],
+    "correctAnswers": [
+      "Este avantajoasă pentru aplicațiile care necesită acces secvențial"
+    ],
+    "chapter": "Stocare optica"
+  },
+  {
+    "id": 61,
+    "question": "La diodele OLED fosforescente:",
+    "answers": [
+      "Se folosesc materiale fosforescente pentru toate cele trei culori primare.",
+      "Durata de viață este mai mare.",
+      "Eficiența este mai mare decât cea a diodei OLED fluorescente."
+    ],
+    "correctAnswers": [
+      "Eficiența este mai mare decât cea a diodei OLED fluorescente."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 62,
+    "question": "Tehnologia Quantum Dot Electro-Luminescent (QDEL):",
+    "answers": [
+      "Permite utilizarea materialelor anorganice pentru punctele cuantice, care au durate de viață mai lungi decât materialele organice.",
+      "Utilizează puncte cuantice electro-emisive, care sunt mai puțin susceptibile la degradare decât punctele cuantice foto-emisive.",
+      "Permite obținerea unor nivele ridicate ale luminozității."
+    ],
+    "correctAnswers": [
+      "Permite obținerea unor nivele ridicate ale luminozității."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 63,
+    "question": "Afișajele cu hârtie electronică au ca dezavantaje următoarele",
+    "answers": [
+      "Robustețea lor este redusă.",
+      "Ratele de reîmprospătare sunt reduse.",
+      "Atunci când lumina ambientală este intensă, vizibilitatea este redusă."
+    ],
+    "correctAnswers": [
+      "Ratele de reîmprospătare sunt reduse."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 64,
+    "question": "BD-ROM (Blu-ray Disc Read-Only Memory):",
+    "answers": [
+      "Permite o densitate de date mai mare",
+      "Utilizează un strat de protecție mai subțire decât DVD-ul",
+      "Utilizează un laser cu lungime de undă mai mică decât DVD-ul"
+    ],
+    "correctAnswers": [
+      "Permite o densitate de date mai mare",
+      "Utilizează un strat de protecție mai subțire decât DVD-ul",
+      "Utilizează un laser cu lungime de undă mai mică decât DVD-ul"
+    ],
+    "chapter": "Stocare optica"
+  },
+  {
+    "id": 65,
+    "question": "Discurile DVD+R",
+    "answers": [
+      "Utilizează un sistem de gestiune a erorilor care este mai robust decât cel al discurilor DVD-R.",
+      "Utilizează o canelură spiralată cu o frecvență mai ridicată a sinusoidei față de cea a discurilor DVD-R.",
+      "Conțin informații de adresare înregistrate prin gravarea unor cavități în zona dintre caneluri.",
+      "Comparativ cu discurile DVD-R, îmbunătățesc precizia înlănțuirii între sesiunile de scriere consecutive."
+    ],
+    "correctAnswers": [
+      "Utilizează un sistem de gestiune a erorilor care este mai robust decât cel al discurilor DVD-R.",
+      "Utilizează o canelură spiralată cu o frecvență mai ridicată a sinusoidei față de cea a discurilor DVD-R.",
+      "Comparativ cu discurile DVD-R, îmbunătățesc precizia înlănțuirii între sesiunile de scriere consecutive."
+    ],
+    "chapter": "Stocare optica"
+  },
+  {
+    "id": 66,
+    "question": "Comparativ cu interfețele bazate pe protocolul LVDS, interfața Embedded DisplayPort:",
+    "answers": [
+      "Permite creșterea ratei de biți, dar necesită un număr mai mare de conexiuni.",
+      "Permite reducerea consumului de energie.",
+      "Permite utilizarea canalului auxiliar pentru funcții de control ale luminii de fundal."
+    ],
+    "correctAnswers": [
+      "Permite reducerea consumului de energie.",
+      "Permite utilizarea canalului auxiliar pentru funcții de control ale luminii de fundal."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 67,
+    "question": "La afișajele cu cristale lichide, timpul de răspuns:",
+    "answers": [
+      "Depinde de intensitatea luminii de fundal.",
+      "Este mai rapid pentru tranziții de la negru la gri deschis decât pentru tranziții de la negru la gri închis.",
+      "Se reduce atunci când se mărește contrastul."
+    ],
+    "correctAnswers": [
+      "Este mai rapid pentru tranziții de la negru la gri deschis decât pentru tranziții de la negru la gri închis.",
+      "Se reduce atunci când se mărește contrastul."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 68,
+    "question": "Lumina de fond cu diode electroluminiscente (LED):",
+    "answers": [
+      "Necesită un consum redus de energie.",
+      "Reduce luminozitatea comparativ cu lumina de fond cu lămpi fluorescente.",
+      "Permite realizarea afişajelor cu grosime redusă."
+    ],
+    "correctAnswers": [
+      "Necesită un consum redus de energie.",
+      "Permite realizarea afişajelor cu grosime redusă."
+    ],
+    "chapter": "Diverse"
+  },
+  {
+    "id": 69,
+    "question": "Punctele cuantice sunt formate din:",
+    "answers": [
+      "Polimeri electroluminescenți.",
+      "Nano-cristale semiconductoare.",
+      "Diode organice emițătoare de lumină."
+    ],
+    "correctAnswers": [
+      "Nano-cristale semiconductoare."
+    ],
+    "chapter": "Diverse"
+  },
+  {
+    "id": 70,
+    "question": "Quantum Dot OLED (QD-OLED):",
+    "answers": [
+      "Utilizează puncte cuantice foto-emisive.",
+      "Folosește OLED-uri albastre pentru iluminare.",
+      "Nu necesită filtre de culoare."
+    ],
+    "correctAnswers": [
+      "Utilizează puncte cuantice foto-emisive.",
+      "Folosește OLED-uri albastre pentru iluminare.",
+      "Nu necesită filtre de culoare."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 71,
+    "question": "La afișajele cu cristale lichide, gama de culori:",
+    "answers": [
+      "Reprezintă numărul de culori care pot fi reproduse.",
+      "Se poate îmbunătăți cu tehnica de control al ratei cadrelor.",
+      "Este mai largă atunci când se utilizează lumina de fundal cu diode LED RGB față de cazul în care se utilizează LED albe."
+    ],
+    "correctAnswers": [
+      "Este mai largă atunci când se utilizează lumina de fundal cu diode LED RGB față de cazul în care se utilizează LED albe."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 72,
+    "question": "La tehnologia de modulare interferometrică utilizată pentru afișajele cu hârtie electronică:",
+    "answers": [
+      "Se poate utiliza interpolarea temporală pentru a crea nuanțe suplimentare ale culorilor primare.",
+      "Culorile primare sunt generate prin modificarea tensiunii aplicate între un film subțire și un electrod dintr-o cavitate optică.",
+      "Modularea luminii se obține cu o cavitate optică ce conține o membrană și un film subțire care au rolul unor micro-oglinzi."
+    ],
+    "correctAnswers": [
+      "Modularea luminii se obține cu o cavitate optică ce conține o membrană și un film subțire care au rolul unor micro-oglinzi."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 73,
+    "question": "În faza colesterică a cristalelor lichide:",
+    "answers": [
+      "Moleculele se aliniază în straturi, iar în fiecare strat ele sunt răsucite față de straturile adiacente.",
+      "Moleculele au o ordine de orientare aproximativ paralelă.",
+      "Moleculele se aliniază în straturi, iar în fiecare strat ele sunt orientate în aceeași direcție."
+    ],
+    "correctAnswers": [
+      "Moleculele se aliniază în straturi, iar în fiecare strat ele sunt răsucite față de straturile adiacente."
+    ],
+    "chapter": "Diverse"
+  },
+  {
+    "id": 74,
+    "question": "Într-un afișaj TN (Twisted Nematic):",
+    "answers": [
+      "Moleculele sunt răsucite pentru a controla polarizarea luminii.",
+      "Răspunsul este mai rapid decât la IPS sau VA.",
+      "Direcția de polarizare se modifică în funcție de câmpul electric aplicat."
+    ],
+    "correctAnswers": [
+      "Moleculele sunt răsucite pentru a controla polarizarea luminii.",
+      "Răspunsul este mai rapid decât la IPS sau VA.",
+      "Direcția de polarizare se modifică în funcție de câmpul electric aplicat."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 75,
+    "question": "Selectați proprietățile care sunt utilizate pentru proiectarea afișajelor e-paper color electroforetice:",
+    "answers": [
+      "Separarea pigmenților",
+      "Mobilitatea pigmenților într-un câmp electric",
+      "Agregarea pigmenților",
+      "Greutatea pigmenților"
+    ],
+    "correctAnswers": [
+      "Separarea pigmenților",
+      "Mobilitatea pigmenților într-un câmp electric",
+      "Agregarea pigmenților"
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 76,
+    "question": "La afișajele TN (Twisted Nematic):",
+    "answers": [
+      "Direcția de polarizare este influențată de rotația moleculelor.",
+      "Moleculele de la capete sunt orientate perpendicular.",
+      "Cele din mijloc se aliniează la câmpul electric"
+    ],
+    "correctAnswers": [
+      "Direcția de polarizare este influențată de rotația moleculelor.",
+      "Moleculele de la capete sunt orientate perpendicular.",
+      "Cele din mijloc se aliniează la câmpul electric"
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 77,
+    "question": "Diodele OLED cu molecule mici:",
+    "answers": [
+      "Necesită tensiuni mai reduse față de diodele OLED cu polimeri.",
+      "În general, necesită procese de fabricație costisitoare.",
+      "Utilizează structuri cu mai puține straturi față de diodele OLED cu polimeri."
+    ],
+    "correctAnswers": [
+      "În general, necesită procese de fabricație costisitoare."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 78,
+    "question": "HDMI (High-Definition Multimedia Interface):",
+    "answers": [
+      "Permite partajarea unei conexiuni la Internet între două dispozitive.",
+      "Nu necesită un semnal de ceas separat.",
+      "Poate transmite și semnal Ethernet.",
+      "Suportă transmisia simultană a semnalelor video și audio."
+    ],
+    "correctAnswers": [
+      "Permite partajarea unei conexiuni la Internet între două dispozitive.",
+      "Poate transmite și semnal Ethernet.",
+      "Suportă transmisia simultană a semnalelor video și audio."
+    ],
+    "chapter": "Diverse"
+  },
+  {
+    "id": 79,
+    "question": "La diodele OLED fluorescente:",
+    "answers": [
+      "Eficiența este mai redusă față de cea a diodelor OLED fosforescente.",
+      "Emisia luminii se menține și după ce radiația incidentă a fost eliminată.",
+      "Lumina este emisă atunci când materialul lor absoarbe energie de la o radiație incidentă."
+    ],
+    "correctAnswers": [
+      "Eficiența este mai redusă față de cea a diodelor OLED fosforescente.",
+      "Lumina este emisă atunci când materialul lor absoarbe energie de la o radiație incidentă."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 80,
+    "question": "Diodele OLED cu polimeri:",
+    "answers": [
+      "Pot utiliza structuri simple, cu doar două straturi organice.",
+      "Sunt mai eficiente decât diodele OLED cu molecule mici.",
+      "Necesită procese de fabricație mai costisitoare față de diodele OLED cu molecule mici."
+    ],
+    "correctAnswers": [
+      "Pot utiliza structuri simple, cu doar două straturi organice."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 81,
+    "question": "Într-un afișaj cu cristale lichide cu tehnologia Twisted Nematic (TN):",
+    "answers": [
+      "Moleculele din mijlocul lanțurilor de cristale lichide tind să se alinieze în paralel cu un câmp electric dintre doi electrozi.",
+      "Direcția de polarizare a luminii nu se modifică, deoarece cristalele lichide sunt transparente și lumina care trece prin ele nu este afectată.",
+      "Moleculele de la capetele lanțurilor de cristale lichide sunt orientate perpendicular unele față de altele."
+    ],
+    "correctAnswers": [
+      "Moleculele din mijlocul lanțurilor de cristale lichide tind să se alinieze în paralel cu un câmp electric dintre doi electrozi.",
+      "Moleculele de la capetele lanțurilor de cristale lichide sunt orientate perpendicular unele față de altele."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 82,
+    "question": "La tehnologia MVA (Multi-Domain Vertical Alignment) îmbunătățită a afişajelor cu cristale lichide:",
+    "answers": [
+      "Protuberanţele de pe ambele substraturi sunt înlocuite cu electrozi.",
+      "Timpul de răspuns creşte dacă schimbarea de culoare necesară este redusă.",
+      "Contrastul este îmbunătăţit faţă de tehnologia MVA de bază."
+    ],
+    "correctAnswers": [
+      "Timpul de răspuns creşte dacă schimbarea de culoare necesară este redusă.",
+      "Contrastul este îmbunătăţit faţă de tehnologia MVA de bază."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 83,
+    "question": "Discurile BD-R și BD-RE:",
+    "answers": [
+      "Utilizează o canelură spiralată cu deviații sinusoidale care sunt modulate utilizând două metode pentru o fiabilitate crescută.",
+      "Pentru deviațiile sinusoidale, utilizează modularea Minimum-Shift Keying, care inversează faza anumitor date.",
+      "Utilizează o canelură spiralată care este modulată prin deviații sinusoidale pentru a îngloba informații de sincronizare."
+    ],
+    "correctAnswers": [
+      "Utilizează o canelură spiralată cu deviații sinusoidale care sunt modulate utilizând două metode pentru o fiabilitate crescută.",
+      "Pentru deviațiile sinusoidale, utilizează modularea Minimum-Shift Keying, care inversează faza anumitor date.",
+      "Utilizează o canelură spiralată care este modulată prin deviații sinusoidale pentru a îngloba informații de sincronizare."
+    ],
+    "chapter": "Stocare optica"
+  },
+  {
+    "id": 84,
+    "question": "Display-uri cu puncte cuantice (Quantum Dot):",
+    "answers": [
+      "Permit o gamă de culori mai largă decât LED-urile tradiționale.",
+      "Folosesc nanocristale care emit lumină la excitare.",
+      "Sunt folosite împreună cu o sursă de lumină albastră."
+    ],
+    "correctAnswers": [
+      "Permit o gamă de culori mai largă decât LED-urile tradiționale.",
+      "Folosesc nanocristale care emit lumină la excitare.",
+      "Sunt folosite împreună cu o sursă de lumină albastră."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 85,
+    "question": "Tehnologia color electroforetică „Advanced Color ePaper” se bazează pe:",
+    "answers": [
+      "Gruparea și separarea pigmenților sub influența unui câmp electric.",
+      "Mobilitatea electroforetică diferită a pigmenților.",
+      "Ambele fenomene."
+    ],
+    "correctAnswers": [
+      "Ambele fenomene."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 86,
+    "question": "Într-un afișaj LCD cu adresare pasivă:",
+    "answers": [
+      "Nu sunt utilizați tranzistori pentru fiecare pixel.",
+      "Costurile de producție sunt mai mici decât la afișajele cu adresare activă.",
+      "Timpul de răspuns este mai mare decât la cele cu adresare activă."
+    ],
+    "correctAnswers": [
+      "Nu sunt utilizați tranzistori pentru fiecare pixel.",
+      "Costurile de producție sunt mai mici decât la afișajele cu adresare activă.",
+      "Timpul de răspuns este mai mare decât la cele cu adresare activă."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 87,
+    "question": "Tehnologia Quantum Dot on OLED (QD-OLED):",
+    "answers": [
+      "Utilizează emițătoare OLED pentru a genera lumina de fundal.",
+      "Utilizează puncte cuantice foto-emisive.",
+      "Nu necesită filtre de culoare."
+    ],
+    "correctAnswers": [
+      "Utilizează emițătoare OLED pentru a genera lumina de fundal.",
+      "Utilizează puncte cuantice foto-emisive.",
+      "Nu necesită filtre de culoare."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 88,
+    "question": "Memoria unificată din arhitectura CUDA (Compute Unified Device Architecture):",
+    "answers": [
+      "Nu poate fi accesată simultan de UCP și circuitul GPU.",
+      "Este gestionată de sistem, fără a avea loc transferuri efective de date.",
+      "Permite accesul la o parte a memoriei GPU atât de către UCP, cât și de către GPU",
+      "Permite reducerea timpului de execuție al programelor executate pe circuitul GPU."
+    ],
+    "correctAnswers": [
+      "Nu poate fi accesată simultan de UCP și circuitul GPU.",
+      "Permite accesul la o parte a memoriei GPU atât de către UCP, cât și de către GPU"
+    ],
+    "chapter": "GPU si CUDA"
+  },
+  {
+    "id": 89,
+    "question": "La afișajele cu diode organice (OLED):",
+    "answers": [
+      "Consumul de energie este întotdeauna mai redus față de cel al afișajelor cu cristale lichide.",
+      "Unghiurile de vizualizare sunt mari.",
+      "Lizibilitatea în condiții de exterior poate fi limitată.",
+      "Timpul de răspuns este mai redus față de cel al afișajelor cu cristale lichide."
+    ],
+    "correctAnswers": [
+      "Unghiurile de vizualizare sunt mari.",
+      "Lizibilitatea în condiții de exterior poate fi limitată.",
+      "Timpul de răspuns este mai redus față de cel al afișajelor cu cristale lichide."
+    ],
+    "chapter": "Afisaje"
+  },
+  {
+    "id": 90,
+    "question": "OLED:",
+    "answers": [
+      "Vizibilitatea în lumina exterioară poate fi redusă.",
+      "Consumul de energie este întotdeauna mai mic decât la LCD.",
+      "Unghiurile de vizualizare sunt mai mari.",
+      "Timpul de răspuns este mai mic decât la LCD."
+    ],
+    "correctAnswers": [
+      "Vizibilitatea în lumina exterioară poate fi redusă.",
+      "Unghiurile de vizualizare sunt mai mari.",
+      "Timpul de răspuns este mai mic decât la LCD."
+    ],
+    "chapter": "Afisaje"
+  }
+]

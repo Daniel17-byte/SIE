@@ -1,0 +1,968 @@
+[
+  {
+    "id": 31,
+    "title": "Comparaţie MVA vs. TN (3 criterii)",
+    "source": "10 SIE-Afisaje-2.pdf, p. 55–66",
+    "content": "| Criteriu | TN (Twisted Nematic) | MVA (Multi-Domain Vertical Alignment) |\n|---|---|---|\n| **Contrast** | < 1000:1; blocarea luminii incompletă în starea inactivă | Contrast **îmbunătăţit** (blocarea aprox. completă — moleculele perpendiculare pe plăci în starea inactivă → negru mai profund) |\n| **Unghi de vizualizare** | **Redus**, mai ales pe verticală; luminozitatea variază semnificativ cu unghiul | **Mult mai mare** (ex. 160° pe orizontală şi verticală), datorită împărţirii celulei în domenii cu molecule orientate în direcţii diferite |\n| **Reproducerea culorilor** | Numai 64 orientări posibile → 6 biţi/sub-pixel; necesită tehnici FRC sau dithering pentru 16 milioane culori | Permite culoare de **24 biţi** fără tehnici speciale; reproducere îmbunătăţită, dar problemă într-o direcţie strict perpendiculară |"
+  },
+  {
+    "id": 36,
+    "title": "Trei avantaje ale afişajelor cu matrice activă faţă de cele cu matrice pasivă",
+    "source": "10 SIE-Afisaje-2.pdf, p. 11–17",
+    "content": "1. **Timp de răspuns mai redus** — tranzistorul TFT asociat fiecărui pixel menţine tensiunea în condensatorul pixelului între ciclurile de baleiere, eliminând inerţia din matricea pasivă.\n2. **Contrast mai ridicat** — fiecare pixel este controlat individual de un tranzistor; nu există efect „crosstalk\" (interferenţa între pixeli vecini) prezent la matricea pasivă.\n3. **Nivel de strălucire mai ridicat şi unghi de vizualizare mai mare** — controlul precis al tensiunii pe fiecare pixel permite o modulare fină a luminozităţii.\n\n> *Dezavantaje matrice activă: necesită lumină de fond mai puternică şi are cost mai ridicat.*"
+  },
+  {
+    "id": 37,
+    "title": "Principiul MVA şi avantajele faţă de VA; deosebirile MVA vs. VA",
+    "source": "10 SIE-Afisaje-2.pdf, p. 55–66",
+    "content": "**Tehnologia VA**: moleculele sunt aliniate **perpendicular pe plăcile de sticlă** în absenţa tensiunii → blocarea luminii aproape completă (negru de calitate). La aplicarea tensiunii, moleculele se înclină cu până la 90°, permiţând trecerea luminii. **Problema**: moleculele se înclină toate în aceeaşi direcţie → luminozitatea celulei variază puternic cu unghiul de vizualizare.\n\n**Tehnologia MVA**: fiecare celulă este **împărţită în 2+ domenii** (prin protuberanţe piramidale sau electrozi în zigzag), în care moleculele se înclină în **direcţii diferite** la aplicarea tensiunii. Combinarea domeniilor cu orientări opuse produce o luminozitate mai **uniformă** indiferent de unghiul de vizualizare.\n\n| | VA | MVA |\n|---|---|---|\n| Domenii per celulă | 1 (o singură direcţie de înclinare) | ≥ 2 (domenii cu orientări diferite) |\n| Unghi de vizualizare | Limitat | Mult mai mare (ex. 160° pe ambele axe) |\n| Uniformitatea luminozităţii | Dependentă de unghiul de vizualizare | Îmbunătăţită semnificativ |"
+  },
+  {
+    "id": 42,
+    "title": "Trei avantaje ale luminii de fond cu LED faţă de CCFL",
+    "source": "9 SIE-Afisaje-1.pdf, p. 36–38",
+    "content": "1. **Consum de energie redus** cu 35–40% faţă de lămpile fluorescente.\n2. **Durata de viaţă mai lungă** a diodelor LED faţă de lămpile CCFL.\n3. **Afişaje cu grosime redusă** (< 1 cm grosime), contrast şi luminozitate mai ridicate.\n\n> *Alte avantaje din curs: posibilitatea tehnicii Local Dimming (control individual al intensităţii pe zone).*"
+  },
+  {
+    "id": 49,
+    "title": "Structura unui afişaj color cu cristale lichide TN",
+    "source": "9 SIE-Afisaje-1.pdf, p. 13–21",
+    "content": "Structura (de la sursa de lumină spre utilizator):\n1. **Sursă de lumină de fond** (CCFL sau LED)\n2. **Polarizator liniar** (primul filtru de polarizare)\n3. **Placă de sticlă** cu electrozi transparenți şi strat de aliniere pe prima placă\n4. **Strat de cristale lichide TN** — moleculele răsucite cu 90° în starea inactivă\n5. **Filtru color** — fiecare pixel are 3 sub-pixeli cu filtre R, G, B\n6. **Placă de sticlă** cu electrozi transparenți şi strat de aliniere pe a doua placă (caneluri perpendiculare faţă de prima placă)\n7. **Polarizator liniar** (al doilea, perpendicular pe primul)\n\n**Funcţionare color**: la fiecare sub-pixel se aplică o tensiune care controlează gradul de rotire a polarizării → cantitatea de lumină care trece prin filtrul de culoare corespunzător. Combinând cele 3 sub-pixeli se obţin toate culorile prin **sinteză aditivă** (R+G+B = alb)."
+  },
+  {
+    "id": 51,
+    "title": "Principiul PVA şi Super-PVA",
+    "source": "10 SIE-Afisaje-2.pdf, p. 67–71",
+    "content": "**PVA (Patterned Vertical Alignment)** — dezvoltat de Samsung. Protuberanţele de pe ambele substraturi (din MVA) sunt **înlocuite cu electrozi în formă de zigzag**. Celula PVA în stare inactivă: molecule perpendiculare pe plăci; la aplicarea tensiunii, electrozii în zigzag creează câmpuri oblice care determină înclinarea moleculelor în **domenii cu orientări diferite**.\n- Contrast: îmbunătăţit până la **3000:1**; timp de răspuns similar cu MVA.\n\n**S-PVA (Super-PVA)**:\n- **Timp de răspuns îmbunătăţit** printr-o metodă RTC avansată (Dynamic Capacitance Compensation) — ex. de la 50 ms la 8 ms.\n- **Nu utilizează tehnici de simulare a culorilor** → culori de **24 biţi** sau 30 biţi.\n- Structura sub-pixelilor modificată: **două secţiuni** aliniate în direcţii opuse, care pot compensa deplasarea culorilor la unghiuri de vizualizare mai mari."
+  },
+  {
+    "id": 105,
+    "title": "Prezentați și explicați trei tehnici utilizate de memoria grafică GDDR6 pentru a reduce consumul de energie",
+    "source": "Q&A_Partea2.pdf",
+    "content": "• Scalarea frecventei semnalului de ceas\n\no GDDR6 permite scalarea frecventei semnalului de ceas de la valori foarte\nreduse pana la frecventa maxima de functionare. Astfel, cand cerintele de\nperformanta sunt reduse, memoria poate functiona la frecvente mai mici,\ndiminuand consumul de energie.\n\n• Moduri speciale cu consum redus\n\no\n\nInclude moduri precum\n\n• Mod cu consum redus pentru nucleul DRAM\n\n• Auto-reimprospatare\n\n• Hibernare cu auto-reimprospatare, care permit reducerea activitatii si\n\neconomisirea de energie in perioade de inactivitate\n\n• Tensiune de alimentare redusa si tehnici de inversare a magistralei\n\no Memoria functioneaza la o tensiune redusa de 1,5V si utilizeaza tehnici\n\nprecum\n\n•\n\n•\n\nInversarea magistralei de date\n\nInversarea magistralei de comenzi/adrese\n\no Pentru a reduce numarul de biti de 0 transmisi si, implicit, puterea disipata\n\nprin liniile de transmisie.\n\nScalarea frecventei semnalului de ceas, moduri speciale cu consum redus si tensiune\nde alimentare redusa.\n\nScalarea frecventei semnalului de ceas\n\n• Permite scalarea semnalului de la valori foarte reduse pana la frecventa\n\nmaxima de functionare\n\n• Se modifica in functie de cerintele de performanta, la performante reduse\n\nmemoria poate functiona la frecvente mici, diminuand consumul de energie\n\nModuri speciale\n\n• Mod consum redus pt nucleu DRAM\n\n• Auto-reimprospatare\n\n• Hibernare cu auto-reimprospatare\n\n• Acestea permit reducerea activitatii si economisirea energiei in perioade de\n\ninactivitate\n\nTensiune de alimentare redusa\n\n• Memoria functioneaza la o tensiune redusa de 1,5 V si utilizeaza tehnici precum\n\no\n\nInversarea magistralei de date\n\no\n\nInversarea magistralei de comenzi/adrese\n\n• Pentru a reduce numarul de biti de 0 transmisi si, implicit, puterea disipata prin\n\nliniile de transmisie"
+  },
+  {
+    "id": 106,
+    "title": "Prezentați și explicați trei funcții ale canalului auxiliar utilizat de interfața DisplayPort.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "• Citirea informatiilor EDID\n\no Canalul AUX permite sursei sa citeasca informatiile EDID (extended display\nidentification data) stocate in monitor. Aceste informatii include rezolutiile\nsuportate, frecventele de reimprospatare, dimensiunile ecranului, etc.\n\n• Transmiterea comenzilor MCCS (monitor control command set)\n\no Canalul AUX este folosit pentru a trimite comenzi de control catre monitor,\ncum ar fi ajustarea luminozitatii, a contrastului sau a modului de afisare.\n\n• Negocierea si configurarea legaturii DisplayPort\n\no\n\nInainte de a incepe transmisia de date video/audio, canalul AUX este folosit\npentru a negocia parametrii legaturii intre sursa si afisaj."
+  },
+  {
+    "id": 107,
+    "title": "Explicați conceptul memoriei unificate care se utilizează la arhitectura CUDA (Compute Unified Device Architecture).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "CUDA = Compute Unified Device Architecture\n\nMemoria unificata este o zona de memorie comuna, care poate fi folosita atat de CPU cat\nsi de GPU. Aceasta foloseste un model cu pointer unic, adica aceeasi adresa este\nvizibila de ambele parti. Sistemul de operare gestioneaza automat transferul datelor,\nfara a fi nevoie de apeluri explicite de copiere. Astfel, datele stocate intr-o zona de\nmemorie unificata sunt migrate automat intre CPU si GPU in functie de nevoie. Necesita\nsincronizare pt a evita conflictele."
+  },
+  {
+    "id": 108,
+    "title": "Descrieți structura unei legături TMDS (Transition Minimized Differential Signaling) care se utilizează la interfața HDMI.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "TMDS = Transition Minimized Differential Signaling\n\nLegatura TMDS consta intr-un transmitator TMDS si un receptor TMDS. De asemena\ncontine 3 canale pentru date: fiecare transporta un semnal diferential pentru una din\ncomponentele de culoare (RGB), si un canal de ceas. Fiecare canal transmite datele sub\nforma diferentiala (doua fire per canal) pentru a reduce interferentele\nelectromagnetice si a mentine intregritatea semnalului. Codarea TMDS minimizeaza\ntranzitiile de biti si asigura un echilibru de semnal, fiind optima pentru transmisii digitale\nde mare viteza, cum sunt cele video/audio prin HDMI."
+  },
+  {
+    "id": 109,
+    "title": "Explicati avantajele utilizarii CUDA.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Permite folosirea directa a resurselor GPU pentru calcule generale, nu doar pentru grafica.\n\nPrin arhitectura sa paralela, GPU-ul poate executa simultan mii de fire de executie, fiind\nideal pentru prelucrari pe matrice mari.\n\nExtinde limbajul C/C++ cu functii speciale pentru programarea GPU.\n\nPermite utilizarea memoriei unificate, o zona de memorie accesibila atat de GPU cat si de\nCPU, cu un singur pointer, fara copieri explicite de date."
+  },
+  {
+    "id": 110,
+    "title": "Comparati UCP cu GPU pe baza a 3 criterii",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Arhitectura\n\n• UCP are un numar redus de nuclee (2-16), optimizate pentru executie secventiala si\n\nsarcini generale\n\n• GPU are sute sau mii de nuclee, optimizate pentru executie paralela masiva (SMID -\n\nSingle Instruction Multiple Data)\n\nTipul de sarcini\n\n• UCP este eficient pentru sarcini secventiale, control, logica de decizie si I/O\n\n• GPU este eficient pentru calcule repetitive si paralele, cum sunt procesarile grafice\n\nsau matriceale\n\nAccesul la memorie\n\n• UCP are o memorie cache performanta si acces rapid la RAM\n\n• GPU are o memorie proprie de tip GDDR, cu latime mare de banda, dar acces mai\n\nlent la RAM-ul sistemului"
+  },
+  {
+    "id": 111,
+    "title": "Prezentați trei caracteristici ale arhitecturii CUDA (Compute Unified Device Architecture).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Permite folosirea directa a resurselor GPU pentru calcule generale, nu doar pentru grafica,\n\nPrin arhitectura sa paralela, GPU-ul poate executa simultan mii de fire de executie, fiind\nideal pentru prelucrari pe matrice mari.\n\nExtinde limbajul C/C++ cu functii speciale pentru programarea GPU.\n\nPermite utilizarea memoriei unificate, o zona de memorie accesibila atat de GPU cat si de\nCPU, cu un singur pointer, fara copieri explicite de date."
+  },
+  {
+    "id": 112,
+    "title": "Prezentați ierarhia de memorii a arhitecturii CUDA (Compute Unified Device",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Architecture) și modul în care se utilizează diferitele tipuri de memorii din această\nierarhie.\n\nMemoria locala\n\n• Asociata fiecarui fir de executie\n\n• Se foloseste pentru variabile locale mari sau structuri de date care nu incap in\n\nregistre\n\n• Are latenta mare si viteza redusa\n\nMemoria partajata\n\n• Este comuna tuturor firelor de executie dintr-un bloc de fire\n\n• Se foloseste pentru comunicare si sincronizare intre firele dintr-un bloc\n\n• Este rapida si permite optimizarea performantei prin reutilizarea datelor\n\nMemoria globala\n\n• Este vizibila de toate firele din toate blocurile\n\n• Se foloseste pentru date partajate la nivel global in kernel\n\n• Este cea mai lenta, dar are cea mai mare capacitate\n\n33. MVA vs TN\n\nMVA - multi domain vertical alignment\n\nTN - twisted nematic\n\nTehnologia MVA ofera unghiuri largi de vizualizare, contrast ridicat si o reproducere a\nculorilor mai buna decat TN.\n\nIn schimb, TN are un timp de raspuns mai mic, fiind preferat pentru aplicatii rapide, dar are\nunghiuri de vizualizare reduse si culori mai slabe.\n\nMVA este mai scump, dar ofera oc alitate vizuala superioara fata de TN."
+  },
+  {
+    "id": 113,
+    "title": "Prezentați trei caracteristici ale tehnologiei Super IPS (Super In-Plane Switching), utilizată la afișajele cu cristale lichide.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "S-IPS este o imbunatatire a tehnologiei IPS.\n\nTimpul de raspuns este redus prin utilizarea unor tehnici RTC.\n\nContrastul este imbunatatit, datorita utilizarii unei metode complexe pentru cresterea\ncontrastului dinamic, numita Digital Fine Contrast.\n\nLuminozitatea si contrastul sunt mai ridicate, avand un aranjament imbunatatit al\nelectrozilor."
+  },
+  {
+    "id": 114,
+    "title": "Explicați tehnica de compensare a timpului de răspuns (RTC - Response Time",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Compensation), utilizată la afișajele cu cristale lichide.\n\nEste o tehnica pentru imbunatatirea timpului de raspuns pentru tranzitii gri-gri. Se\nfoloseste aplicarea unei supratensiuni cristalelor care sunt fortate intr-o pozitie\nintermediara. Afisajele care utilizeaza tehnica RTC au timpi de raspuns specificati pentru\ntranzitii gri-gri."
+  },
+  {
+    "id": 115,
+    "title": "Prezentați două dezavantaje ale afișajelor cu diode organice față de afișajele cu cristale lichide.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Durata de viata redusa\n\n• Materialele organice utilizate in OLED, in special cele albastre, au o durata de viata\n\nlimitata\n\nCosturi de fabricatie ridicate\n\n• Procesul tehnologic de producte OLED este mai scump decat cel al LCD-urilor,\n\nceea ce afecteaza pretul final al dispozitivului"
+  },
+  {
+    "id": 116,
+    "title": "Explicați ce sunt punctele cuantice și care este motivul pentru care ele se utilizează la afișajele cu cristale lichide.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Punctele cuantice sunt nano-cristale semiconductoare de dimensiuni mici, care emit\nlumina monocromatica daca sunt iluminate sau la trecerea unui curent electric.\nCuloarea emisa depinde de dimensiune. Acestea sunt foto-emisive (emisie la absorbtia\nfotonilor) sau electro-emisive (emisie la trecerea unui curent).\n\nLa afisajele cu cristale lichide, punctele cuantice sunt utilizate pentru a imbunatati\ncalitatea culorilor si a creste eficienta luminoasa, fiind plasate intr-un strat care\nconverteste lumina de fundal albastra in rosu si verde cu o puritate spectrala mai mare\ndecat filtrele traditionale."
+  },
+  {
+    "id": 117,
+    "title": "Prezentați caracteristicile luminii de fond cu matrice de diode LED RGB, utilizată la afișajele cu cristale lichide.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Este similar cu o matrice de diode LED albe, dar utilizeaza triade de diode LED RGB. Se\npoate obtine o gama extinsa de culori, pure si saturate. Se utilizeaza la monitoarele\nprofesionale pentru editare grafica, fotografie, post-productie video/film, efecte vizuale,\nanimatie. Acestea au cost ridicat."
+  },
+  {
+    "id": 118,
+    "title": "Structura IPS + prezentat.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Tehnologia IPS are ambii electrozi plasati pe acelasi substrat de sticla, iar moleculele de\ncristal lichid sunt dispuse paralel cu ecranul. La aplicarea tensiunii, moleculele se rotesc\nin plan, fara a schimba orientarea verticala. Aceasta structura ofera unghiuri largi de\nvizualizare si culori stabile, dar necesita o lumina de fond mai puternica din cauza\ntransparentei reduse."
+  },
+  {
+    "id": 119,
+    "title": "Explicați principiul tehnologiei TrueX care se utilizează de ansamblurile optice de citire.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Tehnologia TrueX este utilizata pentru a creste performanta unitatilor de citire a discurilor\noptice.\n\nEa foloseste mai multe fascicule laser pentru a scana simultan mai multe piste, ceea ce\npermite o rata de transfer mai mare la viteze de rotatie mai reduse (reduce vibratiile).\n\nSistemul TrueX este implementat intr-un circuit integrat."
+  },
+  {
+    "id": 120,
+    "title": "Explicați principiul tehnologiei afișajelor color cu hârtie electronică care utilizează cerneală cu trei pigmenți.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Afisajele color cu hartie electronica folosesc cerneala electroforetica, un lichid\ntransparent care contine particule microscopice de pigmenti incarcati electric, inchise in\nmicro-capsule. Electrodul superior este transparent si continuu, iar cel inferior este divizat\npe pixeli. Aplicarea campului electric determina deplasarea pigmentului dorit la suprafata,\nmodificand culoarea perceputa.\n\nIn cazul cernelii cu trei pigmenti, pe langa alb si negru, se adauga rosu sau galben, fiecare\npigment avand o mobilitate diferita. Astfel se pot afisa mai multe culori, prin controlul\nprecis al pozitiei fiecarui pigment in micro-capsula."
+  },
+  {
+    "id": 121,
+    "title": "Explicați principiul afișajelor cu diode organice cu matrice activă (AMOLED) și avantajele acesteia față de afișajele cu diode organice cu matrice pasivă.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Contine o matrice de tranzistoare cu film subtire. Sunt necesare doua tranzistoare TFT\nsi un condesator pentru fiecare pixel: primul TFT: folosit pt incarcarea condensatorului;\nal doilea TFT: folosit pt furnizarea tensiunii corecte. Avantajele sunt ratele de\nimprospatare mai ridicate, luminozitate mai ridicata si consumul de energie mai redus."
+  },
+  {
+    "id": 122,
+    "title": "Diferenta dintre diode fluorescente si diode fosforescente",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Fluorescenta este emisia luminii vizibile de un material in urma absorbtiei energiei. Energia\neste re-emisa atunci cand electronii revin la nivelul de energie initial. Inceteaza imediat ce\nsursa de energie este eliminata.\n\nFosforescenta este emisia luminii de un material expus la o forma de radiatie. Emisia se\nmentine si dupa ce radiatia a fost eliminata."
+  },
+  {
+    "id": 123,
+    "title": "Diferenta dintre șiruri de diode LED albe (EL-WLED (Edge-Lit White LED)) si matrice de diode LED albe:",
+    "source": "Q&A_Partea2.pdf",
+    "content": "EL-WLED\n\n• Siruri de diode LED albe amplasate la margini\n\n• Exista si variante cu diodele amplasate pe patru margini, doua margini, sau o\n\nmargine\n\n• Ofera posibilitatea modificarii intensitatii luminoase in mod diferit in diferite zone\n\n(\"local dimming\")\n\nMatrice de diode\n\n• Matrice de diode LED albe distribuite in mod uniform in spatele panoului de afisare\n\n• Setarea intensitatii luminoase se face in mod diferit pe ecran (\"full array local\n\ndimming\")\n\n• Tehnica FALD permite un control mai eficient al intensitatii decat tehnica local\n\ndimming"
+  },
+  {
+    "id": 124,
+    "title": "Comparați diodele OLED cu emisie directă și diodele OLED cu emisia luminii albe pe baza a trei criterii.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Modul de generare a culorii\n\n• OLED cu emisie directa: utilizeaza subpx RGB realizati din materiale organice\n\ndiferite, care emit direct culorile RGB\n\n• OLED cu lumina alba: emite lumina alba dintr-un strat comun, iar culorile sunt\n\nobtinute prin filtre de culoare aplicate peste supx\n\nComplexitatea fabricatiei si eficienta\n\n• OLED cu emisie directa: are un proces de fabricatie mai complex, dar ofera\n\neficienta luminoasa mai mare\n\n• OLED cu lumina alba: este mai simplu de fabricat, dar pierde eficienta din cauza\n\nfiltrarii culorilor\n\nCalitatea si stabilitatea culorii in timp\n\n• OLED cu emisie directa: culorile pot deveni dezechillibrate in timp, din cauza\n\ndegradarii diferentiate a materialelor RGB\n\n• OLED cu lumina alba: are echilibru mai stabil al culorilor, mai ales cand se adauga\n\nun al patrulea subpx alb pt luminozitate crescuta"
+  },
+  {
+    "id": 125,
+    "title": "Prezentați trei avantaje ale luminii de fond cu diode electroluminiscente (LED) față de lumina de fond cu lămpi fluorescente, ambele utilizate la afișajele cu cristale",
+    "source": "Q&A_Partea2.pdf",
+    "content": "lichide.\n\nConsum redus de energie\n\n• LED-urile sunt mai eficiente energetic decat lampile fluorescente cu catod rece,\n\nceea ce duce la autonomie mai mare in dispozitivele portabile\n\nDimensiuni mai mici si greutate redusa\n\n• LED-urile permit realizarea de afisaje mai subtiri si mai usoare, datorita formei\n\ncompacte si distributiei mai flexibile\n\nDurata de viata mai mare si fiabilitate ridicata\n\n• LED-urile au o durata de viata mai lunga si sunt mai rezistente la socuri si vibratii\n\nfata de lampile fluorescente, care sunt mai fragile"
+  },
+  {
+    "id": 126,
+    "title": "Explicați principiul afișajelor cu puncte cuantice electro-luminiscente și avantajele acestora.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Afisajele QDEL folosesc puncte cuantice electro-emisive, similare cu diodele organice.\n\nAcestea contin materiale anorganice plasate intre straturi care transporta electroni si\ngoluri.\n\nFunctioneaza ca micro-diode LED, emitand direct lumina cand sunt alimentate electric.\n\nDesi in prezent tehnologia QDEL este instabila si inca in dezvoltare, avantajele potentiale\ninclude\n\n• Eficienta foarte ridicata\n\n•\n\nIntensitate luminoasa mare\n\n• Costuri reduse de fabricatie"
+  },
+  {
+    "id": 127,
+    "title": "Explicați procesele de scriere și de ștergere la discurile CD-RW.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Scrierea pe un CD-RW se realizeaza prin incalzirea stratului de inregistrare peste punctul\nsau de topire. Aceasta transforma structura cristalina intr-o stare amorfa, care se mentine\ndaca racirea este rapida.\n\nStergerea implica incalzirea aceluiasi strat sub punctul de topire, dar peste punctul de\ncristalizare. Temperatura este mentinuta suficient de mult pentru ca materialul sa revina in\nstare cristalina."
+  },
+  {
+    "id": 128,
+    "title": "Prezentați discurile Blu-ray de capacitate ridicată (BDXL) inscriptibile (BDXL-R) și reinscriptibile (BDXL-RE).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "BDXL este un format Blu-ray de capacitate extinsa, care utilizeaza 3 sau 4 straturi pt a\nstoca mai multe date decat discurile blu-ray obisnuite.\n\n• BDXL-R (inscriptibil)\n\no Utilizeaza 3 straturi (triple layer), cu o capacitate totala de 100GB\n\no Exista si variante cu doua fete, ajungand la 200GB, protejate de un cartus\n\no Sunt destinate aplicatiilor profesionale\n\n• BDXL-RE (reinscriptibil)\n\no Variante doar cu 3 straturi, capacitate 100GB\n\no Pot fi sterse si rescrise\n\no Viteza de scriere este de 2x"
+  },
+  {
+    "id": 129,
+    "title": "Prezentați tehnicile utilizate la discurile DVD pentru creșterea capacității față de discurile compact.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Pentru a creste capacitatea fata de CD, discurile DVD folosesc mai multe tehnici:\n\n• Diminuarea dimensiunii cavitatilor si distantei intre piste, crescand densitatea\n\ndatelor\n\n• Folosirea unei raze laser cu lungime de unda mai mica si apertura numerica mai\n\nmare pentru focalizare mai precisa\n\n• Utilizarea mai multor straturi si codare EFMPlus, care este mai eficienta decat EFM-\n\nul de la CD"
+  },
+  {
+    "id": 130,
+    "title": "Descrieți structura și explicați funcționarea unui ansamblu optic de citire.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Structura\n\n• Dioda laser\n\n• Sistem de lentile si oglinzi semitransparente\n\n• Fotodioda\n\n• Mecanism de focalizare si pozitionare\n\nFunctionare:\n\n• Dioda laser emite un fascicul laser\n\n• Fasciculul este focalizat pe suprafata discului\n\n• Fasciculul este pozitionat ca un servomecanism\n\n• O parte a fasciculului este reflectata si dirijata catre o fotodioda, rezulta semnalul\n\nelectric"
+  },
+  {
+    "id": 131,
+    "title": "Explicați tehnicile utilizate de discurile Blu-ray pentru creșterea capacității față de discurile DVD.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Lungimea de unda mai mica -> permite focalizarea unui punct mai mic pe suprafata\ndiscului\n\nCavitati mai scurte -> permite plasarea mai multor informatii pe o pista, mai multe date\npe rotatie\n\nDistanta intre piste mai mica -> permite scrierea mai multor piste pe aceeasi suprafata,\ndensitate liniara crescuta"
+  },
+  {
+    "id": 132,
+    "title": "Explicati functiile canelurii spiralate care se utilizeaza la discurile DVD-R",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Canelura spiralata de pe discurile DVD-R are rol de ghidaj pentru fasciulul laser si contine\ninformatii de adresare pentru blocurile de date.\n\nSe utilizeaza metoda LPP (Land Pre Pit), in care cavitatile sunt gravate intre caneluri pentru\ncodificarea pozitiei de scriere.\n\nAstfel, canelura permite o scriere precisa si sincronizata a datelor pe disc."
+  },
+  {
+    "id": 133,
+    "title": "Explicati frame rate control",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Frame rate control este o tehnica de intercalare temporala utilzata pentru a simula mai\nmulte culori decat cele suportate nativ de un afisaj. Culoarea unui pixel se modifica usor\nintre cadre succesive, iar prin combinarea a patru cadre se pot genera pana la 16,2\nmilioane de culori. FRC poate introduce artefacte vizuale, precum palpaire sau benzi de\nculoare, iar eficienta sa depinde de setarile de luminozitate si contrast."
+  },
+  {
+    "id": 134,
+    "title": "Informatii legate de Quantum Dot Color Conversation. Explicatie cum functioneaza.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Quantum dot color conversion este o tehnologie de afisaje care foloseste puncte cuantice\npentru a converti lumina albastra de fundal in rosu si verde, inlocuind filtrele clasice de\nculoare.\n\nStratul QD este impartit pe subpixeli, iar subpixelii albastri raman transparenti.\n\nPunctele cuantice emit lumina dorita prin foto-emisie atunci cand sunt excitate de lumina\nalbastra.\n\nAvantaje\n\n• Culori mai pure\n\n• Luminozitate mai mare\n\n• Eficienta energetica mai buna"
+  },
+  {
+    "id": 135,
+    "title": "Descrieți structura unui afișaj cu puncte cuantice care utilizează tehnologia",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Quantum Dot Color Conversion (QDCC) și explicați funcția fiecărui strat component.\n\nUn afisaj QDCC are urmatoarea structura\n\n• Sursa de lumina albastra (backlight)\n\no Emite lumina albastra care va fi convertita in rosu si verde\n\n• Strat cu puncte cuantice\n\no Contine puncte cuantice rosii si verzi; acestea transforma lumina albastra in\n\nrosu si verde prin foto-emisie\n\no Sub-pixelii albastri raman transparenti si lasa lumina sa treaca\n\n• Strat de control al pixelilor\n\no Regleaza cantitatea de lumina transmisa pentru fiecare subpixel RGB\n\ncontroland imaginea afisata\n\n• Strat de polarizator final + sticla frontala\n\no Asigura directionarea corecta a luminii si protejeaza afisajul"
+  },
+  {
+    "id": 136,
+    "title": "Explicati motivul pentru care QDEF imbunatateste calitatea culorii la afisajele cu cristale lichide",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Tehnologia QDEF utilizeaza un strat cu puncte cuantice care transforma lumina albastra\nde la LED-urile de fundal in rosu si verde pur, cu spectru ingust. Astfel, se obtine o gama de\nculori mai larga si culori mai saturate si precise decat in cazul filtrelor de culoare\ntraditionale. QDEF permite afisajelor LCD sa se apropie de performanta culorii din QLED,\npastrand eficienta energetica."
+  },
+  {
+    "id": 137,
+    "title": "Descrieți și explicați structura unei cavități optice care se utilizează la afișajele cu hârtie electronică bazate pe tehnologia de modulare interferometrică.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Cavitatea optica este formata dintr-un strat reflectorizant, un strat semitransparent si un\nspatiu de aer intre ele.\n\nPrin aplicarea unei tensiuni, se modifica distanta dintre straturi, iar lumina reflectata\nintefereaza constructiv pentru a produce o culoare specifica.\n\nCand cavitatea este inchisa, pixelul apare negru sau inchis la culoare. Culorile afisate\ndepind de lumina de unda reflectata, reglata prin grosimea cavitatii."
+  },
+  {
+    "id": 138,
+    "title": "Descrieți structura unui afișaj color cu cristale lichide care utilizează tehnologia Twisted Nematic (TN).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Un afisaj TN este compus din urmatoarele straturi:\n\n1. Sursa de lumina de fond\n\n2. Polarizator interior - permite doar lumina polarizata liniar\n\n3. Placa de sticla + strat de aliniere - orientare initiala a cristalelor lichide"
+  },
+  {
+    "id": 139,
+    "title": "Strat de cristale lichide TN - moleculele sunt rasucite la 90°, permitand ghidarea polarizarii luminii",
+    "source": "Q&A_Partea2.pdf",
+    "content": "5. Strat de aliniere + sticla + electrozi - controleaza electric orientarea cristalelor\n\n6. Filtru de culoare RGB - defineste culoarea fiecarui pixel"
+  },
+  {
+    "id": 140,
+    "title": "Polarizator superior - determina blocarea sau trecerea luminii in functie de starea cristalelor",
+    "source": "Q&A_Partea2.pdf",
+    "content": ""
+  },
+  {
+    "id": 141,
+    "title": "Prezentați două deosebiri dintre diodele OLED fluorescente și diodele OLED fosforescente.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Fluorescenta functioneaza prin emisia luminii vizibile de un material in urma absorbtiei\nenergiei. Energia este re-emisa atunci cand electronii revin la nivelul de energie initial.\nInceteaza imediat ce sursa de energie este eliminata. (deci emit lumina cat timp sunt\nalimentate)\n\nIn cazul fosforescentei, este emisia luminii de un material expus la o forma de radiatie.\nEmisia se mentine si dupa ce radiatia a fost eliminata. (astea se cumva se \"incarca\" si emit\nlumina si dupa ce e scoasa sursa de radiatie)"
+  },
+  {
+    "id": 142,
+    "title": "Explicați principiul tehnologiilor Patterned Vertical Alignment (PVA) și Super-PVA, utilizate la afișajele cu cristale lichide.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "PVA\n\n• Utilizeaza electrozi in zigzag in locul protuberantelor clasice, pentru a controla\n\norientarea cristalelor lichide\n\n• Ofera contrast imbunatatit si un timp de raspuns comparabil cu MVA, dar acesta\n\nscade daca diferentele de nuante sunt mici\n\n• Poate folosi FRC pentru afisaje low-cost, dar calitatea culorii scade la unghiuri\n\nfoarte mici (perpendicular pe ecran)\n\nS-PVA\n\n•\n\nImbunatateste timpul de raspuns printr-o versiune avansata a tehnicii RTC\n\n• Suporta culori reale de 24 sau 30 biti, fara simulare\n\n• Fiecare sub-pixel este impartit in doua sectiuni aliniate in directii opuse, pentru o\n\nmai buna uniformitate si unghiuri largi de vizualizare"
+  },
+  {
+    "id": 143,
+    "title": "3 avantaje ale afisajelor cu cristale lichide cu matrice activa fata de cele cu matrice pasiva",
+    "source": "Q&A_Partea2.pdf",
+    "content": "1. Timp de raspuns mai redus\n\no Fiecare pixel este controlat individual care permite aplicarea rapida si\n\nprecisa a tensiunii, rezultand timp de raspuns mai mici.\n\n2. Contrast mai ridicat\n\no Controlul mai precis al pixelilor permite obtinerea unui contrast\n\nsuperior, intrucat fiecare pixel poate fi activat sau dezactivat eficient\nfara interferentele intre vecini.\n\n3. Unghi de vizualizare mai mare si luminozitate mai sporita\n\no Structura cu tranzistori si control individual permite afisarea culorilor\nmai consistente si clare chiar si atunci cand ecranul este privit din\nunghiuri laterale."
+  },
+  {
+    "id": 144,
+    "title": "explicati de ce IPS are unghiuri de vizualizare mai mari comparativ cu TN",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Deoarece moleculele de cristal lichid raman paralele cu planul ecranului, chiar sia tunci\ncand se aplica tensiune.\n\nAceasta orientare stabila permite mentinerea directiei polarizarii luminii, ceea ce duce la\nculori si contrast constante din unghiuri largi.\n\nIn schimb, in tehnologia TN, orientarea cristalelor se modifica pe directie verticala, iar la\nunghiuri mari lumina se distorsioneaza, cauzand degradarea culorilor si a contrastului."
+  },
+  {
+    "id": 145,
+    "title": "Explicați principiul tehnologiei Multi-Domain Vertical Alignment (MVA) care se utilizează la afișajele cu cristale lichide și avantajele acesteia față de tehnologia",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Vertical Alignment (VA).\n\nEste o imbunatatire a tehnologiei VA, utilizata in afisajele cu cristale lichide.\n\nIn MVA, stratul de cristal lichid este impartit in domenii multiple, cu orientari diferite,\nobtinute prin introducerea de protuberante pe substraturi.\n\nAceasta structurare determina moleculele sa se incline in directii diferite atunci cand se\naplica tensiune, oferind o directie de iesire a luminii mai uniforma.\n\nAvantaje fata de VA simplu\n\n• Unghiuri de vizualizare mai largi\n\n• Culori si contrast mai stabile la vizualizarea oblica\n\n• Calitate superioara a imaginii fara pierderi semnificative de culoare sau\n\nluminozitate din unghi"
+  },
+  {
+    "id": 146,
+    "title": "Prezentați îmbunătățirile introduse de tehnologia Super In-Plane Switching (Super",
+    "source": "Q&A_Partea2.pdf",
+    "content": "IPS) față de tehnologia IPS de bază, ambele utilizate la afișajele cu cristale lichide.\n\n• Timp de raspuns mai bun\n\no Prin utilizarea tehnicii RTC, timpul de comutare a pixelilor este mai scurt\n\n• Contrast dinamic imbunatatit\n\no Se aplica o tehnica avansata numita Digital Fine Contrast, care ajusteaza\n\ncontrastul in functie de imagine\n\n• Luminozitate si uniformitate mai bune\n\no Datorita unui aranjament imbunatatit al electrozilor, ecranul ofera o\nluminozitate mai ridicata si o distributie mai uniforma a luminii\n\n15.Metoda de înregistrare cu viteză liniară constantă (CLV) utilizată la diferite discuri\nDVD:\n\nMentine viteza liniara constanta pe suprafata discului, astfel incat densitatea de date\nscrise pe pista sa fie uniforma\n\nPentru a realiza asta, viteza de rotatie a discului este mai mare la inceputul discului si\nscade spre margine\n\nAceasta metoda este utilizata mai ales la DVD video si DVD rom pt a maximiza capacitatea\nde stocare si asigura o rata constanta de citire a datelor\n\n17.Interfața HDMI (High-Definition Multimedia Interface):\n\nHDMI este o interfata digitala care transmite video si audio de inalta definite printr-un\nsingur cablu. Foloseste tehnologia TDMS pentru transmisie video digitala necomprimata si\nsuporta sunet multicanal. Include functii suplimentare precum protectie a continutului,\ncanal audio de retur si controlul altor echipamente.\n\n18.La afișajele cu cristale lichide, gama de culori:\n\nDepinde de calitatea filtrelor de culoare si a luminii de fundal.\n\nLCD nu emit lumina propriu-zis, ci folosesc filtre RGB pentru a selecta componentele din\nlumina de fundal alba.\n\nGama de culori poate fi imbunatatita prin utilizarea de lumini de fundal cu LED-uri RGB sau\npuncte cuantice, care ofera culori mai pure, saturate.\n\n20.Tehnologia “Quantum Dot Enhancement Film” (QDEF):\n\nFoloseste un strat de puncte cuantice care transforma lumina albastra de fundal in rosu si\nverde pur, inlocuind luminile albe conventionale. Aceasta imbunatateste gama de culori,\nofera culori mai saturate si eficienta luminoasa mai mare la afisajele cu cristale lichide.\n\n22.Descrieți structura și explicați funcționarea unui ansamblu optic de citire.\n\nAnsamblul optic contine\n\n• Dioda laser\n\n• Lentile si oglinzi pentru focalizare\n\n• Fotodioda pentru detectarea semnalului\n\n• Servomecanism pentru pozitionare\n\nFunctionare\n\n• Fasciculul laser este focalizat pe disc si ghidat precis\n\n• Lumina reflectata este captata de fotodioda si transformata in semnal electric, care\n\neste apoi interpretat ca date digitale\n\n23.Memoria grafică GDDR6:\n\nGDDR6 este o memorie grafica de inalta performanta, utilizata in placile video moderne.\n\nAre latime de banda mare si suporta transferuri de date duble pe ciclu de ceas.\n\nInclude tehnici pentru reducerea consumului de energie, cum ar fi dual-channel, moduri\nde economisire si tensiune adaptiva.\n\n24. Afișajele cu cristale lichide cu matrice pasivă:\n\nAfisajele cu matrice pasiva controleaza pixelii printr-o retea de linii si coloane\nconductoare, fara tranzistoare individuale.\n\nTensiunea se aplica secvential pe randuri si coloane, ceea ce duce la\n\n• Timp de raspuns mai lent\n\n• Contrast si unghiuri de vizualizare mai reduse\n\n• Posibila estompare a imaginii (efect de \"ghosting\")\n\nSunt utilizate la dispozitivele simple, unde costul redus este mai important decat\nperformanta.\n\n25.Descrieți structura și explicați funcționarea unui afișaj cu hârtie electronică care\nutilizează tehnologia electroforetică cu micro-capsule.\n\nAfisajul contine micro-capsule cu un lichid transparent in care plutesc particule albe si\nnegre incarcate electric\n\nPrin aplicarea unei tensiuni, particulele se deplaseaza:\n\n• Daca ies la suprafata cele albe - pixel alb\n\n• Daca ies la suprafata cele negre - pixel negru\n\nImaginea ramane afisata si fara consum de energie, datorita caracterului bi-stabil al\ntehnologiei\n\n26.Afișajele cu hârtie electronică au ca dezavantaje următoarele:\n\nTimp de raspuns lent, reproducere slaba a culorilor si rata de reimprospatare scazuta.\n\n29.Prezentați trei avantaje ale afișajelor cu diode organice (OLED) față de afișajele cu\ncristale lichide.\n\nContrast mai ridicat\n\n• OLED-urile emit lumina proprie si pot opri complet pixelii, oferind negru perfect si\n\ncontrast excelent\n\nUnghiuri de vizualizare mai largi\n\n• Lumina este emisa direct de fiecare pixel, fara pierderi vizuale din unghi\n\nTimp de raspuns mai rapid\n\n• Comutarea pixelilolr se face mult mai repede, eliminand efectele de intarziere sau\n\nestompare\n\n30.Explicați principiul afișajelor cu puncte cuantice electro-luminiscente și\navantajele acestora.\n\nFolosesc puncte cuantice care emit lumina direct atunci cand sunt alimentate electric\n\nAceste puncte cuantice sunt plasate intre straturi pentru transportul electronilor si al\ngolurilor si functioneaza similar unor micro-LED-uri dar cu materiale anorganice.\n\nAvantaje\n\n• Eficienta ridicata si culori pure\n\n• Luminozitate mare\n\n• Protential pentru costuri reduse de fabricatie comparativ cu OLED\n\nDin carte\n\nAfisaje"
+  },
+  {
+    "id": 147,
+    "title": "Explicați faza nematică a cristalelor lichide termotropice.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "In faza nematica, moleculele cristalului lichid au forma alungita (sau filiforma) si nu\nprezinta ordine pozitionala, ci doar ordine de orientare. Sunt aproximativ paralele intre ele\nsi se pot alinia usor sub actiunea unui camp electric."
+  },
+  {
+    "id": 148,
+    "title": "Explicați faza colesterică a cristalelor lichide termotropice.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Faza colesterica este tipica pentru esteri ai colesterolului. Moleculele au o forma chirala,\nfara plan intern de simetrie. Structura este similara cu o stiva de straturi nematice 2D. Este\nutilizata in tehnologii de afisare precum Twisted Nematic."
+  },
+  {
+    "id": 149,
+    "title": "Desenați structura și explicați funcționarea unui afișaj cu cristale lichide de tip TN.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "-"
+  },
+  {
+    "id": 150,
+    "title": "Explicați de ce tehnologia STN este mai avantajoasă decât tehnologia TN pentru afișaje mari cu adresare convențională.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Tehnologia TN nu este potrivita pentru afisajele de dimensiuni mari cu adresare\nconventionala, din cauza contrastului slab si unghiurilor de vizualizare reduse.\n\nTehnologia STN imbunatateste performanta prin rasucirea cu un unghi mai mare, ceea ce\npermite\n\n• Contrast mai ridicat\n\n• Unghiuri de vizualizare mai mari\n\n• Control mai precis al transmisiei luminii"
+  },
+  {
+    "id": 151,
+    "title": "Explicați tehnologiile DSTN și FSTN ca îmbunătățiri ale tehnologiei TN.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "DSTN\n\n• Rezolva problema de colorare prin adaugarea unui al doilea strat STN, fara electrozi\nsi polarizatoare, iar sensul de rotire a luminii polarizate este opsu fata de cel al\nprimului strat\n\n•\n\nIn starea inactiva, deplasarea fazei datorita primului strat este compensata de\nstratul al doilea, rezulta un pixel negru\n\n•\n\nIn starea activa, pixelul nu este afectat de al doilea strat STN, rezulta un pixel alb\n\nFSTN\n\n•\n\nIn acest caz, compensarea culorilor se obtine cu un film subtire de polimer in locul\nstratului de sticla\n\n• Avantajele sunt costul mai redus, grosimea si greutatea mai mica si sursa de\n\nlumina poate avea o putere mai redusa"
+  },
+  {
+    "id": 152,
+    "title": "Explicați diferența dintre adresarea directă și adresarea multiplexată.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "In cazul adresarii directe, fiecare element poate fi adresat sau comandat direct si separat.\nTrebuie sa se aplice o tensiune asupra fiecarui element pentru a schimba orientarea\ncristalelor (adica pentru a-l activa/dezactiva). Adresarea directa este utilizata pentru\nafisajele cu un numar redus de elemente.\n\nIn adresarea multiplexata, pixelii se adreseaza printr-o matrice de linii si coloane. Fiecare\npixel se afla la intersectia unui electrod de linie si a unui electrod de coloana. Aceasta\nvarianta este utilizata pentru afisaje cu un numar mare de pixeli. Se reduce complexitatea\ncircuitelor, fiind necesare semnificativ mai putine drivere, dar este redus contrastul. Au\nfost imbunatatite prin diferite tehnici."
+  },
+  {
+    "id": 153,
+    "title": "Prezentați dezavantajele afișajelor LCD cu matrice pasivă.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Exista interferente intre pixeli vecini, care cauzeaza aparitia unor umbre ale obiectelor\nluminoase. Unghiul de vizualizare este limitat, iar timpul de raspuns este relativ ridicat:\nimaginea curenta este mentinuta pe ecran si dupa afisarea unei noi imagini, din cauza\ninertiei pixelilor."
+  },
+  {
+    "id": 154,
+    "title": "Prezentați materialele semiconductoare care pot fi folosite în tranzistorii cu film subțire (TFT) ai LCD-urilor cu matrice activă.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Siliciu cristalin (c-Si): costisitor, are mobilitate ridicata a purtatorilor de sarcina si permite\nintegrarea driverelor\n\nSiliciu amorf (a-Si): mai simplu, mobilitate relativ redusa, Si amorf hidrogenat creste\nmobilitatea electronilor\n\nPoli-siliciu (p-Si): consta in mici cristale de siliciu, are mobilitate ridicata\n\nOxizi metalici semiconductori"
+  },
+  {
+    "id": 155,
+    "title": "Prezentați tipurile de pixeli defectuoși care pot apărea în LCD-urile cu matrice activă.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Pixel luminos, care este aprins in permanenta.\n\nPixel negru, care este stins in permanenta.\n\nPixel blocat, reprezinta unul sau doi sub-pixeli aprinsi sau stinsi."
+  },
+  {
+    "id": 156,
+    "title": "Prezentați variantele de iluminare de fundal cu LED utilizate pentru LCD-uri.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Cu siruri de diode LED albe\n\n• Are siruri de diode LED albe amplasate la margini\n\n• Exista si variante cu diodele amplasate pe patru margini, doua margini sau o\n\nmargine\n\n• Are posibiltatea de a modifica intensitatea luminoasa in mod diferit in diferite zone,\n\nnumit si Local Dimming\n\nCu matrice de diode LED albe\n\n• Matrice de diode LED albe distribuite in mod uniform in spatele panoului de afisare\n\n• Ofera posibilitatea setarii intensitatii luminoase in diferite zone de pe ecran, numit\n\nsi Full-Array Local Dimming (FALD)\n\nCu matrice de mini-diode LED\n\n• Dimensiuni mai scazute\n\n• Permite cresterea numarului de zone utilizate de FALD, avand densitate mult mai\n\nmare pe suprafata ecranului\n\nCu matrice de diode LED RGB\n\n• Similar cu matrice de diode LED albe, dar utilizeaza triade de diode LED RGB\n\n• Obtine o gama extinsa de culori pure si saturate\n\n• Costul este ridicat"
+  },
+  {
+    "id": 157,
+    "title": "Prezentați avantajele iluminării de fundal cu LED comparativ cu iluminarea cu lămpi fluorescente CCFL.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Spre deosebire de lampile fluorescente, consumul de energie este redus, durata de viata\nmai lunga a diodelor, se pot realiza afisaje cu grosime redusa, iar contrastul si\nluminozitatea sunt mai ridicate."
+  },
+  {
+    "id": 158,
+    "title": "Explicați principiul tehnologiei de Compensare a Timpului de Răspuns (RTC – Response Time Compensation).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Timpul de raspuns reprezinta timpul necesar pentru schimbarea orientarii cristalelor\nlichide, mai exact tranzitia culorii.\n\nRTC reprezinta o tehnica de compensare a timpului de raspuns, care functioneaza prin\naplicarea unei supratensiuni controlate cristalelor. Astfel ajuta moleculele sa ajunga mai\nrapid la pozitia dorita, reducand latenta tranzitiei de culoare. Cristalele lichide sunt fortate\nsa treaca mai repede prin pozitiile intermediare, accelerand procesul de comutare si\nreducand efectul de ghosting (sau remanenta a imaginii)."
+  },
+  {
+    "id": 159,
+    "title": "Explicați diferența dintre raportul de contrast static și raportul de contrast dinamic.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Raportul de contrast static reprezinta raportul dintre luminozitatea maxima (albul cel mai\nintens) si luminozitatea minima (negrul cel mai intens) pe care un ecran le poate reda\nsimultan, intr-un cadru fix, masurate in centrul ecranului. Este un parametru constant si\nreflecta capacitatea nativa a panoului.\n\nRaportul de contrast dinamic reprezinta raportul dintre lum max si lum min pe care ecranul\nle poate reda la momente diferite, prin ajustarea automata a luminii de fundal in functie\nde continutul afisat. Este influentat de procesarea digitala si poate avea valori foarte mari,\ndar nu reflecta contrastul real simultan."
+  },
+  {
+    "id": 160,
+    "title": "Explicați tehnica de spatial dithering utilizată pentru îmbunătățirea adâncimii culorii.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Spatial dithering, sau intercalarea spatiala a culorilor, reprezinta creearea unei noi culori\nprin pixeli adiacenti cu nuante usor diferite. Ochiul uman combina culorile pixelilor\napropiati, astfel dand \"impresia\" de o culoare noua."
+  },
+  {
+    "id": 161,
+    "title": "Explicați tehnica Frame Rate Control (FRC) folosită pentru îmbunătățirea adâncimii culorii.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Frame Rate Control reprezinta o intercalare temporala, in care un pixel sau un grup de\npixeli isi modifica usor culoarea in timpul unor cadre succesive, astfel reproducand culori\n\ncare altfel nu pot fi realizate. Calitatea tehnicii FRC poate depinde de setarile luminozitatii\nsi ale contrastului."
+  },
+  {
+    "id": 162,
+    "title": "Explicați conceptele de luminozitate (luminance), cromaticitate (chromaticity), nuanță (hue) și saturație (saturation).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Luminanta reprezinta intensitatea luminoasa pe unitatea de suprafata.\n\nCromaticitatea reprezinta calitatea unei culori independent de luminanta sa.\n\nNuanta este dependenta de lunigmea de unda a luminii, mai exact spune ce fel de culoare\neste.\n\nSaturatia este raportul lungimii de unda dominante la alte lungimi de unda, mai exact\npuritatea culorii. (cat de verde e)"
+  },
+  {
+    "id": 163,
+    "title": "Explicați tehnicile care pot fi utilizate pentru îmbunătățirea unghiurilor de vizualizare ale LCD-urilor.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Tehnologia Vertical Alignment, care implica si tehnologia Multi Domain VA si Patterned VA.\n\nTehnologia In-Plane Switching, care implica si Super IPS, Horizontal IPS si Advanced High-\nPerformance IPS."
+  },
+  {
+    "id": 164,
+    "title": "Explicați principiul tehnologiei LCD cu Aliniere Verticală (Vertical Alignment – VA).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "In cazul tehnologiei cu aliniere verticala, cristalele lichide se aliniaza in functie de\ntensiunea primita. Daca nu exista tensiune, cristalele sunt pozitionate perpendicular cu\necranul, nepermitand luminii sa treaca, astfel oferind un negru pur si clar.\n\nIn cazul in care este aplicata tensiunea, cristalele se rotesc cu pana la 90 de grade,\npermitand luminii sa treaca.\n\nApar probleme la unghiul de vizualizare, deoarece cristalele nu se rotesc cu perfect 90 de\ngrade: din anumite directii, imaginea poate aparea mai inchisa sau cu schimbari de\nculoare."
+  },
+  {
+    "id": 165,
+    "title": "Explicați cum tehnologiile Multi-domain Vertical Alignment (MVA) și versiunile îmbunătățite MVA reduc dependența luminozității de unghiul de vizualizare.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "In cazul MVA, tehnologia se foloseste de mai multe domenii, si anume grupari de cristale\nlichide din interiorul pixelului, si pretuberante (deformari) pentru a alinia in mod diferit\ncristalele. In starea inactiva, cristalele se aliniaza perpendicular cu marginile\npretuberantei, nepermitand trecerea luminii, dar unghiurile formate nu sunt perfect\nperpendiculare, astfel nu ofera un negru pur. In starea activa, cristalele se reorienteaza\nparalel cu marginile pretuberantei, avand mici diferente de orientare, pentru a transmite\nlumina in directii usor diferite, astfel crescand unghiul de vizualizare. In acest caz, sunt\nsacrificate luminanta si cromaticitatea, de exemplu o imagine dintr-o culoare, poate\naparea cu \"pete\" sau \"neuniforma\".\n\nIn cazul MVA imbunatatit, protuberantele sunt inlocuite de electrozi transparenti pentru\nfiecare pixel sau subpixel. In starea inactiva comportamentul este similar, cristalele sunt\naliniate perpendicular cu electrozii, dar in momentul aplicarii tensiunii se creeaza un camp\nelectric dupa care se vor alinia cristalele."
+  },
+  {
+    "id": 166,
+    "title": "Explicați principiul tehnologiei LCD Advanced Multi-domain Vertical Alignment (AMVA) și prezentați avantajele acesteia.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "In cazul AMVA, nu protuberantele de pe un substrat sunt inlocuite cu electroni\ntransparenti. In starea inactiva, cristalele lichide sunt orientate paralel cu substratul, iar in\nmomentul activarii, electronii creeaza un camp electric de o anumita forma dupa care se\nrotesc si cristalele. Avantajele sunt costul redus si contrastul imbunatatit."
+  },
+  {
+    "id": 167,
+    "title": "Explicați principiul tehnologiilor Patterned Vertical Alignment (PVA) și Super Patterned Vertical Alignment (SPVA).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "PVA - similar cu AMVA, dar protuberantele de pe ambele substraturi sunt inlocuite cu\nelectrozi transparenti modelati. Contrastul, numarul de culori si calitatea acestora este\ncrescut, campul electric fiind controlat mai precis. Timpul de raspuns este similar cu MVA\n\nSPVA - utilizeaza o varianta performanta de RTC, astfel timpul de raspuns este mai mic; nu\nutilizeaza metode de simulare a culorilor, acestea sunt generate nativ; structura\nsubpixelilor este modifica, sectiunile se aliniaza doua cate doua in directii opuse."
+  },
+  {
+    "id": 168,
+    "title": "Explicați principiul tehnologiei LCD In-Plane Switching (IPS). Desenați structura și explicați funcționarea unei celule IPS.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "In IPS, electrozii transparenti sunt amplasati pe acelasi plan de sticla. Cristalele lichide\nsunt plasate paralel cu electrozii, indiferent de stare. In momentul aplicarii tensiunii, se\ngenereaza un camp electric orizontal, iar sub influenta acestui camp, cristalele pivoteaza\n(se rotesc) in planul ecranului, aliniindu-se cu directia campului electric.\n\nAceasta rotatie \"in plan\" permite controlul precis al cantitatii de lumina polarizata care\ntrece prin pixel, oferind culori stabile si unghiuri largi de vizualizare."
+  },
+  {
+    "id": 169,
+    "title": "Prezentați avantajele tehnologiei In-Plane Switching (IPS) pentru LCD-uri.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Unghi de vizualizare ridicat, calitate ridicata pentru reproducerea culorilor, imaginea nu\neste afectata la atingere, deoarece cristalele sunt orientate in plan (orizontal), iar daca un\ntranzistor este defect, subpx ramane negru."
+  },
+  {
+    "id": 170,
+    "title": "Explicați principiul tehnologiei Horizontal In-Plane Switching (H-IPS).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Electrozii sunt amplasati pe orizontala, latimea lor este redusa, iar sub-pixelii sunt\norientati pe linii verticale."
+  },
+  {
+    "id": 171,
+    "title": "Explicați principiul tehnologiei Super In-Plane Switching (S-IPS).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Se folosesc tehnici avansate de RTC prin care se scade timpul de raspuns, costurile de\nproductie sunt reduse, sub-pixelii sunt divizati in mai multe domenii, altfel exista un\ncontrol mai mare, contrastul si luminozitatea sunt mai ridicate, prin aranjamentul diferit al\nelectrozilor, sub un mic unghi, sunt orientate opus doua cate doua."
+  },
+  {
+    "id": 172,
+    "title": "Explicați principiul tehnologiei Advanced High-Performance In-Plane Switching (AH-IPS).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Rezolutii inalte si densitate crescuta a pixelilor; timp de raspuns mai ridicat; contrast\nstatic; unghi de vizualizare mai mare; calitatea culorilor imbunatatita."
+  },
+  {
+    "id": 173,
+    "title": "Explicați diferența dintre OLED-urile fluorescente și OLED-urile fosforescente.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Oled-urile fluorescente folosesc materiale care emit lumina prin fluorescenta, adica\nimediat dupa aplicarea tensiunii, doar din excitoni de tip singlet, ceea ce limiteaza\neficienta dispozitivului.\n\nOled-urile fosforescente utilizeaza materiale speciale care pot emite lumina si din excitoni\nde tip triplet, prin fosforescenta, permitand astfel o conversie mult mai eficienta a energiei\nin lumina.\n\nOled-urile fosforescente sunt mai performante, dar implica tehnologii si materiale mai\ncomplexe."
+  },
+  {
+    "id": 174,
+    "title": "Desenați structura și explicați funcționarea unui afișaj OLED cu polimer emițător de lumină de jos (bottom-emitting polymer OLED display).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Un afișaj bottom-emitting P-OLED emite lumina prin substratul inferior transparent. Stratul\nactiv este un polimer electroluminescent pe care se aplică curent, determinând\nrecombinarea electronilor și golurilor. Lumina rezultată este emisă în jos, prin anodul\ntransparent (de obicei ITO). Acest tip de afișaj permite fabricație ieftină prin imprimare și\neste utilizat în ecrane subțiri și flexibile."
+  },
+  {
+    "id": 175,
+    "title": "Desenați structura și explicați funcționarea unui afișaj OLED cu matrice pasivă (passive-matrix OLED display).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Un afisaj PMOLED are o matrice de electrozi pasivi: randurile sunt selectate secvential, iar\ntensiunea de pe coloane determina ce pixeli se aprind. Nu exista tranzistori in pixel, deci\nafisajul trebuie reimprospatat constant. Este simplu si ieftin, dar limitat la rezolutii mici."
+  },
+  {
+    "id": 176,
+    "title": "Prezentați circuitele de adresare necesare pentru fiecare sub-pixel al unui afișaj",
+    "source": "Q&A_Partea2.pdf",
+    "content": "OLED cu matrice activă (active-matrix OLED display).\n\nUn afisaj AMOLED are o matrice de electrozi activi: fiecare sub-pixel are doua tranzistoare\nsi un condensator, astfel fiecare sub-pixel este controlat individual. Un tranzistor\nselecteaza subpixelul si celalalt regleaza curentul de comanda, iar condensatorul\nstocheaza tensiunea de poarta. Astfel nu este necesara reimprospatare constanta, pixelul\nfiind aprins continuu."
+  },
+  {
+    "id": 177,
+    "title": "Explicați OLED-ul cu emisie albă și filtre de culoare (WOLED-CF) ca tehnică de generare a culorii pentru afișajele OLED.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Diodele OLED cu emisie alba presupun utilizarea unui strat OLED care emite lumina alba\nuniforma pe intreaga suprafata a pixelului, iar pentru a obtine culorile RGB necesare, se\naplica un filtru de culoare RGB deasupra pixelului. Astfel, structura pixelului este impartita\nin 3, pentru fiecare culoare. Poate fi adaugat si un al patrulea sub-pixel alb, pentru a creste\neficienta."
+  },
+  {
+    "id": 178,
+    "title": "Explicați principiul OLED-urilor stratificate (stacked OLEDs, SOLEDs).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "In cazul diodelor OLED stratificate, fiecare subpixel contine emitatoare RGB si alb.\nAcestea sunt stivuite pe verticala separate de electrozi transparenti. Straturile sunt\ntransparente, se activeaza doar in momentul aplicarii de tensiune."
+  },
+  {
+    "id": 179,
+    "title": "Prezentați tehnologia de evaporare termică în vid pentru fabricarea afișajelor OLED.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "In procesul de evaporare termina in vid, materialele organice electroluminescente sunt\nincalzite pana la temperatura lor de evaporare intr-o camera de vid. Odata ajunsi la\nsubstrat, vaporii se condenseaza si formeaza straturi extrem de subtiri si uniforme, cu\ngrosimi de ordinul nanometrilor. Aceste straturi formeaza componentele active ale OLED-\nului."
+  },
+  {
+    "id": 180,
+    "title": "Prezentați tehnologia de imprimare cu jet de cerneală (inkjet printing) pentru fabricarea afișajelor OLED.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Imprimarea cu jet de cerneală este o metodă utilizată la fabricarea afișajelor P-OLED, care\nfolosesc materiale organice sub formă de soluții. Această tehnologie permite depunerea\nselectivă a straturilor de polimeri emițători pe substrat, fără a fi necesar un mediu de vid,\nceea ce reduce considerabil costurile de producție față de metoda evaporării în vid folosită\nla SM-OLED.\n\nProcesul presupune utilizarea unor capete de imprimare asemănătoare celor din\nimprimantele clasice, care pulverizează cu precizie picături de material organic lichid în\nzonele corespunzătoare pixelilor. Aceasta permite formarea de filme subțiri și structuri\ncomplexe în straturi multiple."
+  },
+  {
+    "id": 181,
+    "title": "Prezentați tipurile de afișaje OLED flexibile (FOLED).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Afisaje curbate, care sunt curbate usor de producator.\n\nAfisaje pliabile, care au o raza de curbura redusa.\n\nAfisaje rulabile, aparate TV care se ruleaza intr-un cilindru, tablete care se ruleaza sub\nforma de creion."
+  },
+  {
+    "id": 182,
+    "title": "Prezentați aranjamentul sub-pixelilor PenTile utilizat în afișajele OLED.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Este o structura de sub-pixeli care optimizeaza distributia lor in functie de sensibilitatea\nochiului uman, mai ales fata de verde.\n\nCele mai comune sunt:\n\nRG-BG\n\n• Structura formata din subpixeli verzi alternati cu subpx rosii si versi\n\n• Fiecare px logic nu are proprii subpx RGB, ci foloseste o distributie partajata, mai\n\nales pentru R si B\n\n• Subpx verzi sunt mai numerosi si sunt singurii care au corespondenta 1:1 cu pixelii\n\nde intrare\n\n• Pastreaza fidel luminanta, pe care ochiul o percepe in mare parte verde\n\nRG-B-RG\n\n• 2 subpx verzi si rosii la exterior si un singur subpx albastru la mijloc\n\n• Dispunere inspirata din structura retinei, unde sensibilitatea fata de albastru este\n\nredusa\n\n• Se foloseste un algoritm brevetat care mapeaza pixelii de intrare catre \"pixelii logici\"\n\nconstruiti pe baza acestor subpx"
+  },
+  {
+    "id": 183,
+    "title": "Prezentați aranjamentul sub-pixelilor tip Diamond Pixel utilizat în afișajele OLED.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Diamond Pixel este o varianta imbunatatita a PenTile, un aranjament avansat cu sub-pixeli\nverzi ovali si R/B rombici, asezati in retea diagonala. Numarul subpx G este dublu fata de\ncel RB. Optimizeaza claritatea si consumul energetic pe ecranele OLED de inalta rezolutie."
+  },
+  {
+    "id": 184,
+    "title": "Prezentați avantajele afișajelor OLED.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Avantajele sunt contrastul ridicat, atat static cat si dinamic, unghiuri de vizualizare mai\nmari fara deplasarea culorii, gama mult mai larga de culori, timpul de raspuns este\nsemnificativ redus, iar in medie consumul de energie este mai redus comparativ cu LCD.\nSubstratul de plastic este usor si se pot realiza afisaje transparente si flexibile."
+  },
+  {
+    "id": 185,
+    "title": "Prezentați dezavantajele afișajelor OLED.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Dezavantajele sunt costul ridicat al procesului de fabricatie, durata de viata a anumitor\nmateriale organice este limitata, lucru care poate cauza dezechilibrul culorilor sau\npersistenta imaginilor in timp, din cauza uzurii inegale a materialelor. Lizibilitatea in\nconditii de exterior poate fi limitata si energia consumata creste la afisarea img pe fond\nalb."
+  },
+  {
+    "id": 186,
+    "title": "Desenați structura și explicați funcționarea unui afișaj e-paper electroforetic cu microîncapsulare.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Afisajele electroforetice sunt compuse din 2 electrozi, cel de sus transparent iar cel de jos\nsegmentat. In interiorul capsulei, se afla un lichid transparent cu particule albe si negre\nincarcate electric, cele albe pozitiv iar cele negre negativ. In momentul aplicarii tensiunii,\nparticulele se deplaseaza in sus si in jos, formand imaginea dorita. In interiorul afisajului\nse afla milioane de microcapsule, de dimensiuni de ordinul zecilor de microni."
+  },
+  {
+    "id": 187,
+    "title": "Prezentați avantajele și dezavantajele afișajelor e-paper electroforetice.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Energie consumata extrem de redusa, contrastul este ridicat, unghiul de vizualizare ridicat,\nvizibilitate foarte buna la lumina soarelui sau la lumina redusa, rezolutie ridicata,\nrobustete, afisaje usoare subtiri si flexibile."
+  },
+  {
+    "id": 188,
+    "title": "Explicați principiul tehnologiei cu modulatoare interferometrice utilizată pentru afișajele e-paper.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Tehnologia modulatoare interferometrice controleaza culoarea fiecarui pixel prin\ninterferenta luminii reflectate intr-o cavitate optica, a carei grosime este ajustata electric.\nNu foloseste pigmenti sau filtre, ci manipuleaza fizic lumina, cu consum aproape zero si\nvizibiltate excelenta in lumina naturala."
+  },
+  {
+    "id": 189,
+    "title": "Desenați structura și explicați funcționarea unei cavități optice utilizate în afișajele e-paper cu modulator interferometric.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "In IMOD, cavitatea optica controleaza ce lungime de unda (culoare) este reflectata, prin\ninteferenta luminii intre doua straturi reflectorizante (membrana mobila de sus si stratul\nreflectorizant fix de jos). Culoarea unui pixel este aleasa electric, modificand distanta\ndintre cele doua straturi reflectorizante din cavitate."
+  },
+  {
+    "id": 190,
+    "title": "Prezentați tehnologiile care pot fi utilizate pentru afișaje e-paper electroforetice full-color.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Utilizarea filtrelor de culoare\n\n• Se adauga filtre de culoare deasupra fiecarei cavitati/ fiecarui subpixel (R, G, B)\n\n• Cerneala de dedesupt afiseaja alb sau negru\n\n• Lumina ambientala trece prin filtrul color, formand iluzia unei culori (cerneala alba\n\n+ filtru rosu, rezulta culoarea rosie)\n\n• Combinatia celor 3 subpx formeaza o culoare perceputa de ochi\n\n• Dezavantajul este luminozitatea scazuta"
+  },
+  {
+    "id": 191,
+    "title": "Prezentați tehnologia Advanced Color ePaper (ACeP).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Nu se mai folosesc filtre de culoare, ci pigmenti colorati reali direct in cerneala, de culoare\nCMY si un pigment alb opac. Se utilizeaza miscarea electroforetica selectiva a pigmentilor,\nculoarea afisata depinde de ce particule sunt aduse la suprafata prin campul electric."
+  },
+  {
+    "id": 192,
+    "title": "Prezentați tehnologia cu modulatoare interferometrice de culoare pentru afișaje e-paper.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "În IMOD, culoarea se generează optic, prin interferența controlată a luminii reflectate într-\no cavitate optică variabilă.\n\nDistanța dintre straturi determină ce lungime de undă (culoare) este reflectată."
+  },
+  {
+    "id": 193,
+    "title": "Prezentați punctele cuantice foto-emisive.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Punctele cuantice sunt nanocristale semiconductoare extrem de mici, care au\nproprietatea de a absorbi energie si apoi de a emite lumina colorata, printr-un proces\nnumit fotoluminescenta. Culoarea luminii emise depinde de dimensiunea punctului\ncunatic: puncte mai mici = lumina albastra, puncte mai mari = verde, galben, rosu."
+  },
+  {
+    "id": 194,
+    "title": "Explicați principiul tehnologiei Quantum Dot Enhancement Film (QDEF).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "QDEF este un film subtire cu puncte cuantice care convertesc lumina albastra din LED in\nrosu si verde pur, generand o iluminare de fundal RGB de calitate superioara pentru\nafisajele LCD. Rezultatul este o imagine mai clasa, cu culori mai intense si naturale, fara a\nschimba structura de baza a LCD-ului. Necesita in continuare filtre de culoare, deoarece\nQDEF nu produce imaginea directa, ci doar imbunatateste lumina de fundal, nu are control\npe culoare."
+  },
+  {
+    "id": 195,
+    "title": "Explicați principiul tehnologiei Quantum Dot on Glass (QDOG).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Tehnologie bazata pe puncte cuantice, utlizata pentru imbunatatirea culorilor in afisajele\nLCD. Principiul consta in depunerea directa a unui strat de puncte cuantice pe substratul\nde sticla al panoului LCD, in loc de utilizarea unui film separat. Lumina emisa trece prin\nacest strat, care transforma o parte din lumina albastra in lumina rosu si verde pur, iar\nrestul ramane albastra."
+  },
+  {
+    "id": 196,
+    "title": "Explicați principiul tehnologiei Quantum Dot Color Conversion (QDCC).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Sunt eliminate filtrele de culoare, foloseste punctele cuantice pentru a converti lumina\nintr-o anumita culoare direct in pixel. Se foloseste o lumina de baza albastra, stratul cu\n\npuncte cuantice este plasat direct deasupra fiecarui subpixel, contine puncte cuantice\nrosii si verzi, iar subpx albastru nu are QD, transmite lumina albastra direct."
+  },
+  {
+    "id": 197,
+    "title": "Explicați principiul tehnologiei Quantum Dot on OLED (QD-OLED).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "QD-OLED folosește un panou OLED albastru ca sursă de lumină și puncte cuantice pentru\na transforma lumina albastră în roșu și verde.\n\nNu sunt necesare filtre de culoare, ceea ce duce la culori mai vii, un consum mai redus și\nimagini de calitate superioară, cu contrast perfect."
+  },
+  {
+    "id": 198,
+    "title": "Explicați principiul tehnologiei Quantum Dot on MicroLED (QD-MicroLED).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Micro-dioda led pt fiecare subpixel, albastre, ca sursa de lumina si se folosesc punctele\ncuantice pentru a genera rosu si verde. Tehnologie auto-emisiva, eficienta si durabila, fara\nfiltre de culoare si ofera imagini luminoase, cu contrast si culori excelente."
+  },
+  {
+    "id": 199,
+    "title": "Explicați principiul tehnologiei Quantum Dot Electro-Luminescent (QDEL).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "QDEL (Quantum Dot Electro-Luminescent) este o tehnologie de afișaj auto-emisivă în care\npunctele cuantice emit direct lumină atunci când sunt alimentate electric. Fiecare\nsubpixel conține puncte cuantice care produc roșu, verde sau albastru, în funcție de\ndimensiunea lor.\n\nSpre deosebire de alte tehnologii, QDEL:\n\n• nu necesită iluminare de fundal,\n\n• nu folosește filtre de culoare,\n\n• oferă culori foarte pure, un contrast ridicat și unghiuri largi de vizualizare.\n\nEste considerată o tehnologie promițătoare pentru viitorul afișajelor de înaltă performanță.\n\nAdaptoare grafice"
+  },
+  {
+    "id": 200,
+    "title": "Desenează structura unui adaptor grafic și explică funcțiile componentelor sale.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Un adaptor grafic este componenta hardware a unui sistem care se ocupa de generarea si\nsi transmiterea imaginilor pentru un dispozitiv de afisare, cum ar fi un monitor. Poate fi de\n\ndoua tipuri, dedicat si integrat. Functiile sale principale sunt de accelerare pentru redarea\ngraficii 2d si 3d, decodificare si codificare video si posibilitate conectarii mai multor\nafisaje.\n\nStructura sa cuprinde: BIOS Video, GPU, memoria grafica si afisajul."
+  },
+  {
+    "id": 201,
+    "title": "Prezintă principalele componente ale unui GPU și explică operațiile realizate de acestea.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Componente principale:\n\n• Procesoare geometrice: efectueaza transformari, iluminare si taierea obiectelor 3D\n\n• Nuclee de shading: realizeaza rasterizare, shading si alpha blending\n\n• Unitati de textura: gestioneaza texturarea\n\n• Render Output Pipelines: genereaza pixelii finali atasati\n\n• Motor grafic 2D: accelereaza desenarea elementelor 2D\n\n• Motor video: ofera accelerare pentru codare/decodare video"
+  },
+  {
+    "id": 202,
+    "title": "Explică diferența dintre memoria grafică cu un singur port și cea cu două porturi.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "In cazul memoriei cu un singur port, citirea si scrierea se fac pe rand, necesitand arbitrare\nintre GPU si afisaj pentru utilizarea memoriei. Este o solutie ieftina, cu performante\nreduse.\n\nIn cazul memoriei cu doua porturi, scrierea si citirea se fac simultan pe cate un port. GPU\npoate actualiza imaginea in timp ce controlerul face citirea pt afisare. Performanta\nridicata, afisare fluida, fara conflicte."
+  },
+  {
+    "id": 203,
+    "title": "Explică diferența dintre memoriile Quad Data Rate (QDR) și Double Data Rate (DDR).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "DDR\n\n• Frecventa semnalului de ceas pentru scriere nu este dublata intern, se efectueaza\ncate 2 transferuri de date per ciclu de ceas, unul pe frontul ascendent si unul pe\ndescendent.\n\nQDR\n\n• Frecventa semnalelor de scriere este dublata intern, se efectueaza cate 4\n\ntransferuri de date per ciclu al ceasului de comanda, se atinge o rata de transfer\nmai mare pe aceeasi magistrala fizica."
+  },
+  {
+    "id": 204,
+    "title": "Prezintă funcțiile de gestionare a consumului de energie oferite de memoria GDDR6.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Frecventa de ceas scalabila in functie de nevoia de performanta, mod de consum redus\npentru DRAM - intra in mod de activitate redusa cand nu este utilizata intensiv, cresterea\nimpedantei de terminare la rate reduse ale datelor - la viteze mici, creste rezistenta de\nterminare, ceea ce duce la consum redus de curent, mod de autoreimprosapatare si\nhibernare - memoria DRAM necesita refresh periodic ca sa nu piarda datele, tensiune de\nalimentare redusa, inversarea magistralei pentru a scadea curentul consumat si\ninterferentele electromagnetice."
+  },
+  {
+    "id": 205,
+    "title": "Desenează și explică structura memoriei High Bandwidth Memory (HBM).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "HBM este o memorie foarte rapida care este amplasata chiar langa procesor si are mai\nmulte straturi puse unul peste altul. Poate trimite multe date in paralel, consuma mai\nputin curent si este folosita in placi video sau sisteme foarte puternice."
+  },
+  {
+    "id": 206,
+    "title": "Prezintă caracteristicile principale ale primelor trei generații de memorie HBM (HBM, HBM2, HBM2E).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "HBM\n\n• Viteza de transfer: 1GB/s\n\n• Latime de banda: 128 GB/s\n\n• Capacitate: 4G\n\nHBM2\n\n• Viteza de transfer: 2GT/s\n\n• Latime de banda: 256 GB/s\n\n• Capacitate: 8GB\n\nHBM3\n\n• Viteza de transfer: 3,2 GB/s\n\n• Latime de banda: 409.6 GB/s\n\n• Capacitate: 24 GB/s"
+  },
+  {
+    "id": 207,
+    "title": "Prezintă sub-etapele funcționale ale etapei de procesare geometrică din pipeline-ul grafic.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Etapa de procesare geometrica din pipeline-ul grafic include operatii precum\ntransformarea obiectelor, iluminarea si taierea. Aceste operatii sunt efectuate de\nprocesoarele grafice si au rolul de a pregati obiectele 3D pentru afisare pe ecranul 2D."
+  },
+  {
+    "id": 208,
+    "title": "Prezintă sub-etapele de configurare a triunghiului și de parcurgere a triunghiului din etapa de rasterizare a pipeline-ului grafic.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Doua sub etape:\n\n• Configurarea triunghiului\n\no Calculeaza info necesare pt rasterizare, precum pozitiile varfurilor si\n\necuatiile interpolare\n\n• Parcurgerea triunghiului\n\no\n\nIdentifica toti pixelii care se afla in interiorul triunghiului si genereaza\nfragmente pentru fiecare pixel"
+  },
+  {
+    "id": 209,
+    "title": "Explică tehnicile de filtrare a texturilor care pot fi utilizate în sub-etapa de umbrire a pixelilor din etapa de procesare a pixelilor.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Filtrarea texturii reduce efectele nedorite atunci cand o textura este mai mica sau mai\nmare decat zona pixelilor care trebuie texturati."
+  },
+  {
+    "id": 210,
+    "title": "Prezintă shaderele de vârfuri (vertex), geometrie și pixeli ale unui GPU.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Shadere de varfuri\n\n• Proceseaza fiecare varf al unui obiect 3D\n\n• Aplica transformari geometrice\n\n• Calculeaza iluminarea si pozitia in spatiul ecranului\n\n• Pregatesc datele pt rasterizare\n\nShadere de geometrie\n\n• Etapa optionala\n\n• Primesc primitive intregi si pot genera vf noi sau modifica/elimina primitive\n\n• Folosite pt efecte speciale\n\nShadere de pixeli\n\n• Ruleaza pt fiecare pixel ce urmeaza sa fie afisat\n\n• Determina culoarea finala\n\n• Contribuie la crearea unui aspect realist al scenelor"
+  },
+  {
+    "id": 211,
+    "title": "Prezintă shaderele unificate ale unui GPU.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "• Pot executa diferite operatii de umbrire\n\n• GPU contin o matrice de nuclee de umbrire unificate si o unitate de planificare\n\ndinamica\n\n• Nucleele de umbrire unificate permit o utilizare mai flexibila a resurselor hardware"
+  },
+  {
+    "id": 212,
+    "title": "Compară GPU-urile dedicate cu cele integrate.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Dedicat\n\n• Placa grafica separata, conectata prin PCIe\n\n• Are memorie proprie\n\n• Ofera performanta superioara pentru aplicatii 3D, jocuri sau randari\n\nIntegrat\n\n•\n\nInclus in procesor sau chipsetul de placii de baza\n\n• Foloseste o parte din memoria RAM a sistemului, nu are memorie dedicata\n\n• Performanta redusa dar si consum mai mic de energie"
+  },
+  {
+    "id": 213,
+    "title": "Explică principalele concepte introduse de API-ul Vulkan.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "•\n\nInterfata de programare pentru grafica 3D si calcule de uz general\n\n• Versiunea originala donata de AMD consortiului khronos group\n\n• Poate beneficia de avantajele GPU moderne si ale UCP cu nuclee multiple\n\n• Ofera suport imbunatatit pentru UCPcu fire de executie multiple si reduce\n\nincarcarea UCP\n\n• Compatibil cu majoritatea SO importante"
+  },
+  {
+    "id": 214,
+    "title": "Prezintă principalele diferențe dintre API-urile Vulkan și OpenGL.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Caracteristica\n\nOpenGL\n\nVulkan\n\nNivel de\nabstractizare\n\nMai ridicat\n\nMai scazut\n\nIncarcare CPU\n\nMai mare\n\nRedusa semnificativ\n\nSuport multi thread\n\nLimitat\n\nExtins\n\nControl asupra GPU Mai putin control\n\nControl detaliat asupra executiei\n\nCompatibilitate\n\nMulti-platforma\n\nTot multi-platforma\n\nUtilizare\n\nAplicatii simple sau\ntraditionale\n\nAplicatii complexe, jocuri moderne,\nrandare 3D avansata"
+  },
+  {
+    "id": 215,
+    "title": "Prezintă cele mai comune comenzi grafice implementate de motorul grafic 2D al unui GPU.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "•\n\nImplementare functii pentru accelerarea interfetelor grafice ale SO si aplicatiilor\n\n• Transferuri pe blocuri de biti (BitBlt): instructiuni pentru mutarea datelor in bufferul\n\nde cadre\n\n• Desenarea figurilor geometrice\n\n• Umplerea poligoanelor cu o culoare specificata"
+  },
+  {
+    "id": 216,
+    "title": "Descrie etapa de tesselare din pipeline-ul logic al GPU-ului și explică avantajele utilizării tesselării implementate hardware.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Tesselare = mozaicare\n\nEste o etapa din pipeline-ul GPU care imparte o suprafata 3D complexa in triunghiuri mici\npentru a permite redarea detaliata a obiectelor curbate. Avantajele include economia de\nmemorie, nivel de detaliu adaptiv si procesare rapida prin hardware dedicat."
+  },
+  {
+    "id": 217,
+    "title": "Prezintă operațiile realizate de etapa de combinare a rezultatelor (output merger) din pipeline-ul logic al GPU-ului.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Etapa de mixare iesire este ultima etapa din pipeline-ul grafic. Aici se combina pixelii\ngenerati cu cei existenti in imaginea finala, folosind testul de adancime si amestecarea\nalfa. Este cunoscuta ca output merger sau ROP (Raster Operation Pipeline)"
+  },
+  {
+    "id": 218,
+    "title": "Explică diferențele dintre arhitectura GPU și arhitectura CPU.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Arhitectura GPU este optimizata pentru rata de prelucrare, adica numarul mare de operatii\nexecutate in paralel. Un GPU cuprinde mii de nuclee simple, fiind ideal pentru sarcini\nparalele, cum ar fi randarea grafica.\n\nArhitectura CPU in schimb este optimizata pentru latenta redusa, adica raspuns rapid la\nsarcini individuale. Are putine nuclee, dar foarte performante, memorie cache mare si\ntehnici rpecum preincarcarea instructiunilor si predictia salturilor.\n\nAstfel, Gpu are rata mare dar latenta mare, iar CPU are latenta mica dar rata redusa."
+  },
+  {
+    "id": 219,
+    "title": "Desenează structura și explică componentele unui nucleu de shader tipic al unui GPU.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "• Decodificator de instructiuni\n\n• Colector de operanzi\n\n• Unitati aritmetice si logice\n\n• Colector de rezultate"
+  },
+  {
+    "id": 220,
+    "title": "Desenează structura și explică componentele unui multiprocesor generic al unui GPU.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "• Planificator\n\n• Register file\n\n• L1 cache\n\n• Unitati de textura\n\n• Unitati de functii speciale"
+  },
+  {
+    "id": 221,
+    "title": "Prezintă exemple de limbaje de programare de uz general dezvoltate pentru a susține calculul pe GPU.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "• Brook - extensie C\n\n• Accelerator - bazat pe C#\n\n• CUDA - permite scrierea de programe C/C++ pentru GPU nvidia\n\n• OpenCL - executie pe sisteme eterogene"
+  },
+  {
+    "id": 222,
+    "title": "Prezintă exemple de biblioteci accelerate pe GPU dezvoltate de NVIDIA pentru aplicații de învățare profundă.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "• cuDNN"
+  },
+  {
+    "id": 223,
+    "title": "Prezintă exemple de biblioteci accelerate pe GPU dezvoltate de NVIDIA pentru algoritmi paralele.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "• nvGRAPH\n\n• Nvidia video codec sdk\n\n• Opencv\n\n• Ffmpeg"
+  },
+  {
+    "id": 224,
+    "title": "Explică ce este un kernel în arhitectura CUDA (Compute Unified Device Architecture).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Kernel este o functie care este rulata in paralel de toate firele de executie de pe GPU, in\ncadrul platformei CUDA. Fiecare fix executa aceeasi functie, dar pe date diferite, avand un\nID unic."
+  },
+  {
+    "id": 225,
+    "title": "Prezintă blocurile de fire de execuție (thread blocks) și grilele de blocuri (grids) în CUDA.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Blocul de fire\n\n• Este un grup de fire organizat in structura 1D, 2D sau 3D\n\n• Fiecare bloc executa acelasi kernel pe date diferite\n\n• Firele pot comunica intre ele printr-o memorie partajata\n\n• Se pot sincroniza intre ele folosind bariere de executie\n\n• Fiecare bloc este executat independent si ruleaza pe un singur multiprocesor\n\nGrilele de blocuri\n\n• Este o colectie de blocuri de fire\n\n• Toate firele din grila acceseaza memoria globala comuna\n\n• Grila este rulata pe mai multe multiprocesoare de pe GPU"
+  },
+  {
+    "id": 226,
+    "title": "Prezintă tipurile de spații de memorie la care pot avea acces firele CUDA.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Memorie locala - apartine unui fir de executie\n\nMemorie partajata - memorie accesata de toate firele de executie dintr-un bloc\n\nMemorie globala - memorie accesata de toate blocurile de fire de executie"
+  },
+  {
+    "id": 227,
+    "title": "Prezintă componentele unui sistem HDMI single-link.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "• Transmitator TMDS in sursa\n\n• Un receptor TMDS\n\n• O legatura TMDS\n\n• Canalul DCC"
+  },
+  {
+    "id": 228,
+    "title": "Descrie legătura TMDS dintre un transmițător și un receptor TMDS.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Legatura TMDS este conexiunea dintre transmitatorul si receptorul HDMI care transmite\ndatele video si audio sub forma de semnal diferential. Este alcatuita din3 canale de date si"
+  },
+  {
+    "id": 229,
+    "title": "canal de ceas, fiecare folosind perechi de fire rasucite. TMDS minimizeaza tranzitiile binare si reduce interferentele, permitand o transmisie digitala fiabila de mare viteza.",
+    "source": "Q&A_Partea2.pdf",
+    "content": ""
+  },
+  {
+    "id": 230,
+    "title": "Prezintă funcțiile canalului de date DDC utilizat de HDMI.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "DDC = display data channel\n\nDDC are un ropl esential in comunicarea dintre sursa si afisaj. E folosit pentru configurarea\nautomata (rezolutie, refresh si alte setari) si negocierea parametrilor de afisare, cum ar fi\ndatele EDID."
+  },
+  {
+    "id": 231,
+    "title": "Explică modul în care sunt transmise mesajele pe magistrala CEC a HDMI.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Mesajele CEC sunt transmise in mod serial asincron pe o linie bidirectionala unica,\nfolosind semnale de tip open-drain, cu un protocol simplu de adresare si arbitraj.\nStandardul este similar ca principii cu magistralele simple de control dar e optimizat\npentru fiabilitate si inter-operabilitate intre echipamentele multi media."
+  },
+  {
+    "id": 232,
+    "title": "Prezintă funcționalitățile pentru utilizatori și funcțiile suportate de magistrala CEC a HDMI.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Utilizatorul poate controla mai multe aparate conectate prin HDMI cu o telecomanda. De\nasemenea, aparatele se pot comanda unele pe altele fara interventia utilizatorului."
+  },
+  {
+    "id": 233,
+    "title": "Prezintă îmbunătățirile introduse de versiunea 2.1 a specificației HDMI.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "• Cresterea latimii de banda la 46 Gbs\n\n• Suport pentru rezolutii mai mari, pana la 10k\n\n• Rate de reimprospatare de pana la 120Hz\n\n• Dynamic HDR - gama de culori optimizata\n\n• eARC - transmiterea de formate audio avansate\n\n• VRR - reduce altenta si elimina efectele de tip stutter si tearing"
+  },
+  {
+    "id": 234,
+    "title": "Prezintă componentele unei legături DisplayPort.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "• Canalele principale\n\no 1 pana la 4 linii\n\no Transmit date video si audio\n\n• Canal auxiliar\n\no Bidirectional\n\no Utilizat pt control si configurare\n\n• Hot plug detect\n\no Semnal care indica conectarea sau deconectarea monitorului"
+  },
+  {
+    "id": 235,
+    "title": "Descrie serviciile oferite de canalul auxiliar al interfeței DisplayPort.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Este un canal serial bidirectional utilizat pentru schimbul de informatii de control si\nconfigurare intre sursa video si monitor. Acesta permite citirea informatiilor EDID,\nnegocierea parametrilor de transmisie, gestionarea protectiei la copiere, precum si\ntransmiterea de comenzi pentru controlul parametrilor monitorului."
+  },
+  {
+    "id": 236,
+    "title": "Prezintă îmbunătățirile introduse de versiunea 2.0 a specificației DisplayPort.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "• Latime de banda pana la 20 Gbs\n\n• Codificare 128b/132b\n\n•\n\nInterfata fizica Thunderbolt 3\n\n• Compresie DSC"
+  },
+  {
+    "id": 237,
+    "title": "Explică diferențele dintre protocoalele utilizate de DisplayPort și Embedded DisplayPort.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Utilizeaza acelasi protocol de baza pentru transmisia datelor video si audio, dar difera prin\nmodul de utilizare si optimizarile aplicate.\n\nDisplayport este proiectat pentru conexiuni externe, intre un computer si monitor, folosind\ncabluri si conectori standard.\n\nIn schimb, eDP este destinat conexiunii interne intre placa grafica si panoul de afisare al\ndispozitivelor portabile, precum laptopuri sau tablete. eDP elimina anumite functionalitati\ninutile pentru utilizarea interna si introduce extensii specifice, cum ar fi modul panel self-\nrefresh, care permite reducerea consumului de energie atunci cand imaginea afisata nu se\nschimba."
+  },
+  {
+    "id": 238,
+    "title": "Prezintă avantajele interfeței Embedded DisplayPort față de interfața LVDS.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "• Un singur conector\n\n• Nr redus de conexiuni, utilizeaza un cablu simplu\n\n•\n\nInterferente electromagnetice mai reduse\n\n• Permite noi posibilitati de control al afisajelor\n\n• Consum redus de energie\n\n• Protocolul bazat pe pachete este extensibil\n\nDiscuri Optice"
+  },
+  {
+    "id": 239,
+    "title": "Explică scopurile codificării datelor utilizate pentru discurile compacte.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "• Obtinerea unei densitati ridicate de inregistrare - pentru a stoca cat mai multe date\n\nintr-un spatiu fizic limitat\n\n• Recuperarea fiabila a erorilor - cauzate de defectele fizice precum zgarieturi sau\n\npraf"
+  },
+  {
+    "id": 240,
+    "title": "Explică principiul codificării Non-Return to Zero Inverted (NRZI).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Este o metoda de codificare a datelor binare folosita pentru a transforma bitii de 0 si 1 in\ntranzitii fizice pe disc. Foloseste tranzitiile intre stari pentru a marca bitii:\n\n• Bitul 1 se reprezinta printr-o tranzitie\n\n• Bitul 0 se reprezinta prin lipsa unei tranzitii"
+  },
+  {
+    "id": 241,
+    "title": "Explică modularea Eight-to-Fourteen (EFM) utilizată pentru discurile compacte și cerințele satisfăcute de codurile EFM.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Este o tehnica de modulatie care converteste fiecare octet de 8 biti din datele originale\nintr-un cod de 14 biti urmati de 3 biti de legatura. Scopul este sa evite secventele prea\nscurte de tranzitii si secventele prea lungi fara tranzitii.\n\nFiecare octet de 8 biti este cautat intr-un tabel EFM si inlocuit cu o secventa unica de 14\nbiti. Intre fiecare secventa de 14 biti se adauga 3 biti de legatura, astfel incat intre doua\ncoduri consecutive sa fie pastrate regulile RLL. Rezultatul este o secventa de 17 biti pentru\nfiecare octet de date."
+  },
+  {
+    "id": 242,
+    "title": "Desenează structura unui sistem de înregistrare pe disc compact.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Datele intra in codificatorul EFM, care transmite mai departe secvente EFM. Acestea intra\nintr-un pre-codificator, din care rezulta biti de canal. Acestia intra in generatorul de\nimpulsuri de scriere, care transmit semnale multi impuls driverului laser, de unde ajung\nmai apoi in dioda laser."
+  },
+  {
+    "id": 243,
+    "title": "Explică sistemul de detecție și corectare a erorilor Cross Interleaved Reed-",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Solomon Code (CIRC) utilizat în cadrul cadrelor discurilor compacte.\n\nSistemul CIRC este folosit pe discurile compacte pentru detectia si corectarea erorilor. El\nare doua componente: intercalarea incrucisata, care imprastie erorile lungi in erori scurte\nprin rearanjarea datelor, si codul Reed-Solomon, care detecteaza si corecteaza aceste\n\nerori. Astfel, CIRC asigura redarea fiabila a datelor chiar si in prezenta zgarieturilor sau\ndefectelor pe disc."
+  },
+  {
+    "id": 244,
+    "title": "Desenează structura și explică funcționarea unui ansamblu optic de citire.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Un laser emite un fascicul care este focalizat pe suprafata discului cu ajutorul unor lentile\nsi oglinzi semitransparente. Fasciculul loveste suprafata discului, unde intalneste cavitati\nsi suprafete plane. Reflectivitatea diferita a acestora face ca intensitatea luminii reflectate\nsa varieze. Lumina reflectata este directionata catre o fotodioda, care o transforma intr-un\nsemnal electric.\n\nUn sistem servo cu trei fascicule mentine laserul aliniat pe pista si focalizat corect, chiar\ndaca discul are variatii de pozitie sau planeitate. Acest sistem permite citirea precisa a\ndatelor de pe disc in timp real."
+  },
+  {
+    "id": 245,
+    "title": "Explică principiul înregistrării datelor pe discurile Compact Disc-Recordable (CD-R).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Discurile CD-R au un strat subtire de vopsea organica, aflat intre stratul de plastic si stratul\nreflectorizant. Scrierea se face un laser de putere mare, aflat in unitatea CD-writer, care\neste folosit pentru a incalzi local aceasta vopsea. Caldura intensa modifica chimic\nvopseaua in punctele selectate, iar aceste zone nu mai reflecta bine lumina."
+  },
+  {
+    "id": 246,
+    "title": "Explică funcțiile canelurii spiralate utilizate pe discurile CD-R.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Canelura spiralata de pe CD-R este utilizata de unitatea de scriere pentrua urmari calea\nde date de pe disc. Laserul se ghideaza dupa aceasta canelura in timpul inregistrarii,\nasigurand scrierea precisa si continua a datelor."
+  },
+  {
+    "id": 247,
+    "title": "Explică funcția zonei de calibrare a puterii (PCA) și a zonei de memorie a programului (PMA) de pe discurile CD-R.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "PCA este zona folosita de unitatea de scriere pentru a testa si calibra puterea laserului\ninainte de inregistrare.\n\nPMA este o zona in care sunt salvate temporar informatiile despre pistele scrise, servind ca\ntabel de continut provizoriu pana la finalizarea discului."
+  },
+  {
+    "id": 248,
+    "title": "Explică operațiile de scriere, ștergere și rescriere efectuate pe discurile Compact Disc-Read/Write (CD-RW).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Discul are un strat cu schimbare de faza. Laserul este controlat fin pt a face trei tipuri de\nactiuni\n\n• Scriere: laserul se incalzeste puternic, materialul devine amorfic (reflecta slab = pit)\n\n• Stergere: laserul se incalzeste moderat, materialul se incalzeste incet si revine in\n\nstarea cristalina\n\n• Rescriere: combina cele doua struturi de mai sus, schimband din nou intre stari"
+  },
+  {
+    "id": 249,
+    "title": "Prezintă tehnicile utilizate de DVD-uri pentru a crește capacitatea discului comparativ cu CD-urile.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "• Discuri cu straturi multiple\n\n• Reducerea dimensiunii cavitatilor\n\n• Reducerea distantei intre piste\n\n• Reducerea lungimii de unda a razei laser\n\n• Cresterea aperturii numerice a lentilei obiectiv"
+  },
+  {
+    "id": 250,
+    "title": "Prezintă caracteristicile principale ale discurilor DVD-Recordable (DVD-R).",
+    "source": "Q&A_Partea2.pdf",
+    "content": "• Are format write once, datele pot fi scrise o singura data, fara posibiltate de stergere\n\nsau rescriere\n\n• Ca tehnologie de scriere, utilizeaza o vopsea organica care isi modifica\n\nreflectivitatea la ardere\n\n• Metoda de adresare LPP, informatiile despre locatia blocurilor sunt stocate in pits\n\nintre caneluri, care actioneaza ca repere de pozitionare\n\n• Capacitate de 4,38GB pt single layer si 7,95GB pt dual layer"
+  },
+  {
+    "id": 251,
+    "title": "Explică metoda Address In Pre-Groove (ADIP) utilizată pentru stocarea adreselor de bloc pe discurile DVD+R.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Este o metoda de adresare in care informatiile despre locatia datelor sunt codificate prin\nmodificari de faza in ondulatia sinusoidala a canelurii spiralate. Aceasta metoda este mai\nprecisa si mai robusta decat LPP, permitand scriere la viteze mai mari si cu mai putine\nerori."
+  },
+  {
+    "id": 252,
+    "title": "Prezintă avantajele formatului DVD+R față de formatul DVD-R.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "• Sistemul de control al pozitiei spotului si de adresare ADIP este mai putin\n\nsusceptibil la interferente si erori\n\n• Sistemul de gestiune al erorilor este mai robust\n\n•\n\nInlantuirea mai precisa a sesiunilor multiple"
+  },
+  {
+    "id": 253,
+    "title": "Explică modul în care formatul DVD+ReWritable (DVD+RW) permite legarea fără pierderi.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Permite legarea fara pierderi datorita metodei precise de adresare ADIP care foloseste o\ncanelura spiralata cu deviatie sinusoidala. Aceasta permite unitatii de scriere sa localizeze\ncu precizie de 1 micron locul unde s a terminat scrierea anterioara si sa reia exact din acel\npunct, fara a irosi spatiu sau a introduce erori."
+  },
+  {
+    "id": 254,
+    "title": "Prezintă tehnicile utilizate de discurile Blu-ray pentru a crește capacitatea comparativ cu DVD-urile.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "• Dimensiunile cavitatilor sunt mai reduse\n\n• Distanta intre piste este mai redusa\n\n• Apertura numerica a lentilei obiectiv este marita\n\n• Lungimea de unda a laserului este mai scurta\n\n• Stratul protector este mai subtire"
+  },
+  {
+    "id": 255,
+    "title": "Explică tehnica de modulare utilizată de discurile Blu-ray.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Blu-ray foloseste codul de modulatie 17PP, un cod RLL, care transforma datele binare intr-\no forma potrivita pentru inregistrarea optica. Acest cod asigura densitate mare, pastreaza\nparitatea bitilor sursa si limiteaza secventele de 0 pentru a mentine sincronizarea in timpul\ncitirii."
+  },
+  {
+    "id": 256,
+    "title": "Explică funcțiile sistemului de caneluri utilizat de discurile Blu-ray inscriptibile și reinscriptibile.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "La discurile blu-ray, sistemul de caneluri are rolul de a ghida laserul, de a genera semnalul\nde ceas necesar scrierii, si de a furniza info auxiliare prin modulatii speciale, inclusiv\nadresele blocurilor si parametrii de control."
+  },
+  {
+    "id": 257,
+    "title": "Explică principiul modulațiilor Minimum-Shift Keying și Saw-Tooth Wobble utilizate de discurile Blu-ray inscriptibile și reinscriptibile.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Minimum shift keying\n\n• Bazata pe functia cosinus\n\n• Un bit de 1 este diferentiat de un bit de 0 prin inversarea fazei anumitor deviatii\n\nSaw tooth wobble\n\n• Bazata pe o combinatie a functiilor cosinus si sinus\n\n• Orientare diferita a dintilor de fierastrau pentru bitii de 0 si 1"
+  },
+  {
+    "id": 258,
+    "title": "Prezintă caracteristicile principale ale discurilor Blu-ray cu trei și patru straturi.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Trei straturi: 93,1 GB\n\nPatru straturi: 119,2 GB"
+  },
+  {
+    "id": 259,
+    "title": "Explică interferențele optice care pot apărea pe discurile Blu-ray cu mai multe straturi.",
+    "source": "Q&A_Partea2.pdf",
+    "content": "Diafonie optica\n\n• Cauzata de semnalele care trec de la un strat la altul\n\n• Grosimea stratululi de spatiere trebuie sa fie mai mare ed 10 m\n\nInterferenta optica intre straturi\n\n• Cauzata de semnalele reflectate de straturile de inregistrare\n\n• Semnalele reflectate interfereaza cu semnalul principal\n\n• Diferenta de grosime intre stratul de acoperire si straturile de spatiere trebuie sa fie\n\nde peste 1 micron"
+  }
+]
