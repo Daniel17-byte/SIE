@@ -38,6 +38,27 @@ Include:
 - Node.js (recomandat: versiune LTS recenta)
 - npm
 
+## Instalare rapida pentru colegi
+
+1. Cloneaza repo-ul
+2. Intra in folderul proiectului
+3. Instaleaza dependintele
+4. Ruleaza aplicatia local
+
+```bash
+git clone <link-repo>
+cd sie-app
+npm install
+npm run dev
+```
+
+Pentru build de productie:
+
+```bash
+npm run build
+npm run preview
+```
+
 ## Instalare si rulare locala
 
 ```bash
