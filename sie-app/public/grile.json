@@ -11,7 +11,7 @@
       "Prioritatea unui dispozitiv depinde de poziția bitului său asociat în întreruperea înregistrată.",
       "Un codificator prioritar este utilizat pentru a genera o parte din vectorul de întrerupere."
     ],
-    "chapter": "Intreruperi"
+    "chapter": "Metode IE"
   },
   {
     "id": 2,
@@ -26,7 +26,7 @@
       "Se obțin avantaje atunci când există un singur dispozitiv „slave”.",
       "Datele sunt transferate în ambele direcții simultan."
     ],
-    "chapter": "Magistrale si interconectare"
+    "chapter": "Magistrale"
   },
   {
     "id": 3,
@@ -39,7 +39,7 @@
     "correctAnswers": [
       "Se poate utiliza ca un modul mezzanin conectat la o placă purtătoare."
     ],
-    "chapter": "Module embedded"
+    "chapter": "Module Extensie"
   },
   {
     "id": 4,
@@ -53,7 +53,7 @@
       "Prioritizează cererile de întrerupere de la mai multe surse.",
       "Poate fi programabil (PIC)."
     ],
-    "chapter": "Intreruperi"
+    "chapter": "Metode IE"
   },
   {
     "id": 5,
@@ -67,7 +67,7 @@
       "Prioritatea unui dispozitiv este dată de poziția bitului asociat în registrul de întrerupere.",
       "Un codificator de prioritate este utilizat pentru a genera o parte din vectorul de întrerupere."
     ],
-    "chapter": "Intreruperi"
+    "chapter": "Metode IE"
   },
   {
     "id": 6,
@@ -80,7 +80,7 @@
     "correctAnswers": [
       "Utilizează semnale de solicitare și recunoaștere pentru fiecare transfer de date."
     ],
-    "chapter": "Magistrale si interconectare"
+    "chapter": "Magistrale"
   },
   {
     "id": 7,
@@ -94,7 +94,7 @@
       "Se utilizează un protocol sincron la sursa datelor.",
       "Protocolul de comunicație utilizează ambele fronturi ale semnalului de ceas pentru transferul datelor."
     ],
-    "chapter": "Magistrale si interconectare"
+    "chapter": "Magistrale"
   },
   {
     "id": 8,
@@ -107,7 +107,7 @@
     "correctAnswers": [
       "Se poate utiliza ca un modul mezanin conectat la o placă purtătoare."
     ],
-    "chapter": "Module embedded"
+    "chapter": "Module Extensie"
   },
   {
     "id": 9,
@@ -121,7 +121,7 @@
       "Prin intermediul unui modul de I/E",
       "Prin utilizarea unor interfete standardizate"
     ],
-    "chapter": "Magistrale si interconectare"
+    "chapter": "Magistrale"
   },
   {
     "id": 10,
@@ -135,7 +135,7 @@
       "Are interferențe electrice reduse, deoarece are nevoie de mai puține fire.",
       "Permite simplificarea sincronizării atunci când nu există o transmisie a unui ceas extern împreună cu datele."
     ],
-    "chapter": "Magistrale si interconectare"
+    "chapter": "Magistrale"
   },
   {
     "id": 11,
@@ -148,7 +148,7 @@
     "correctAnswers": [
       "Utilizeaza un spatiu de adrese separat fata de cel al memoriei"
     ],
-    "chapter": "Diverse"
+    "chapter": "Introducere"
   },
   {
     "id": 12,
@@ -165,7 +165,7 @@
       "Se bazează pe accesul exclusiv al DMA la magistrală pe durata unui bloc.",
       "Transferă blocuri mari de date în tranșe consecutive."
     ],
-    "chapter": "DMA si transferuri I/E"
+    "chapter": "Metode IE"
   },
   {
     "id": 13,
@@ -180,7 +180,7 @@
       "Acceptă pierderi ocazionale de date.",
       "Asigură livrarea datelor în intervalul de timp solicitat."
     ],
-    "chapter": "Magistrale si interconectare"
+    "chapter": "Magistrale"
   },
   {
     "id": 14,
@@ -193,7 +193,7 @@
     "correctAnswers": [
       "Conectorii sunt de calitate ridicată."
     ],
-    "chapter": "PCI / PCI Express / CompactPCI"
+    "chapter": "Magistrale"
   },
   {
     "id": 15,
@@ -206,7 +206,7 @@
     "correctAnswers": [
       "Nu necesită cicluri suplimentare de ceas pentru procedura de arbitraj"
     ],
-    "chapter": "Magistrale si interconectare"
+    "chapter": "Magistrale"
   },
   {
     "id": 16,
@@ -220,7 +220,7 @@
       "Se utilizează o linie de comandă separată pentru interogarea modulelor, de exemplu, TEST I/E.",
       "Se utilizează un lanţ de dispozitive format cu ajutorul liniei de achitare a întreruperii."
     ],
-    "chapter": "Intreruperi"
+    "chapter": "Metode IE"
   },
   {
     "id": 17,
@@ -235,7 +235,7 @@
       "Pot executa transferuri prin DMA.",
       "Execută programe de I/E care pot conține și transferuri executate prin acces direct la memorie."
     ],
-    "chapter": "DMA si transferuri I/E"
+    "chapter": "Metode IE"
   },
   {
     "id": 18,
@@ -249,7 +249,7 @@
       "Include timpul necesar pentru executarea operatiunilor I/E",
       "Include timpul necesar pentru accesul la memorie"
     ],
-    "chapter": "Diverse"
+    "chapter": "Introducere"
   },
   {
     "id": 19,
@@ -263,7 +263,7 @@
       "Prioritatea unui dispozitiv este dată de poziția sa în lanțul de dispozitive.",
       "Fiecare dispozitiv care recepționează semnalul de achitare a întreruperii poate bloca propagarea acestui semnal la următorul dispozitiv."
     ],
-    "chapter": "Intreruperi"
+    "chapter": "Metode IE"
   },
   {
     "id": 20,
@@ -277,7 +277,7 @@
       "Pot fi mascate de procesor dacă nu sunt urgente.",
       "Sunt generate de periferice pentru a solicita atenția procesorului."
     ],
-    "chapter": "Intreruperi"
+    "chapter": "Metode IE"
   },
   {
     "id": 21,
@@ -291,7 +291,7 @@
       "În mod compatibil, utilizează mesaje speciale cu rolul unor linii virtuale",
       "În modul nativ, utilizează semnale prin tranzitul de mesaje specific magistralei PCI Express"
     ],
-    "chapter": "Intreruperi"
+    "chapter": "Metode IE"
   },
   {
     "id": 22,
@@ -304,7 +304,7 @@
     "correctAnswers": [
       "Timpul de răspuns este mai mare decât în cazul întreruperilor hardware."
     ],
-    "chapter": "Intreruperi"
+    "chapter": "Metode IE"
   },
   {
     "id": 23,
@@ -319,7 +319,7 @@
       "Cererile de întrerupere ale dispozitivelor pot fi mascate individual.",
       "Toate semnalele de cerere de întrerupere sunt combinate într-un singur semnal către UCP."
     ],
-    "chapter": "Intreruperi"
+    "chapter": "Metode IE"
   },
   {
     "id": 24,
@@ -333,7 +333,7 @@
       "Folosesc o topologie în stea pentru conexiunile seriale rapide.",
       "Se utilizează plăci de bază pasive, care conțin conectori pentru modulele de extensie."
     ],
-    "chapter": "PCI / PCI Express / CompactPCI"
+    "chapter": "Magistrale"
   },
   {
     "id": 25,
@@ -347,7 +347,7 @@
       "Sunt conectate la o placă de transport care implementează funcții comune pentru diferite sisteme.",
       "Folosește conectori de semnal care permit implementarea interfețelor seriale și paralele."
     ],
-    "chapter": "Module embedded"
+    "chapter": "Module Extensie"
   },
   {
     "id": 26,
@@ -362,7 +362,7 @@
       "Este util pentru transferuri de date cu volum redus",
       "Permite UCP să continue execuția instrucțiunilor între transferuri"
     ],
-    "chapter": "DMA si transferuri I/E"
+    "chapter": "Metode IE"
   },
   {
     "id": 27,
@@ -377,7 +377,7 @@
       "Se suspendă operațiile UCP în timpul transferului",
       "Crește rata de transfer comparativ cu metoda de transfer prin furt de ciclu"
     ],
-    "chapter": "DMA si transferuri I/E"
+    "chapter": "Metode IE"
   },
   {
     "id": 28,
@@ -390,7 +390,7 @@
     "correctAnswers": [
       "Necesită mai multe linii comparativ cu magistralele sincrone."
     ],
-    "chapter": "Magistrale si interconectare"
+    "chapter": "Magistrale"
   },
   {
     "id": 29,
@@ -405,7 +405,7 @@
       "Eliberează procesorul de gestionarea transferului",
       "Coordonează transferul între periferic și memorie"
     ],
-    "chapter": "DMA si transferuri I/E"
+    "chapter": "Metode IE"
   },
   {
     "id": 30,
@@ -421,7 +421,7 @@
       "Este mai eficientă pentru aplicații simple.",
       "Este mai eficienta pentru aplicatii care necesita comunicatie duplex"
     ],
-    "chapter": "Magistrale si interconectare"
+    "chapter": "Magistrale"
   },
   {
     "id": 31,
@@ -438,7 +438,7 @@
       "Utilizează o topologie de tip stea pentru interconectarea modulelor.",
       "Implementează o topologie stea pe placa de bază."
     ],
-    "chapter": "Magistrale si interconectare"
+    "chapter": "Magistrale"
   },
   {
     "id": 32,
@@ -453,7 +453,7 @@
       "Permite scalare prin adăugarea de benzi suplimentare.",
       "Conține canale bidirecționale independente."
     ],
-    "chapter": "PCI / PCI Express / CompactPCI"
+    "chapter": "Magistrale"
   },
   {
     "id": 33,
@@ -467,7 +467,7 @@
       "Constă din canale bidirecționale.",
       "Necesită cel puțin patru fire."
     ],
-    "chapter": "PCI / PCI Express / CompactPCI"
+    "chapter": "Magistrale"
   },
   {
     "id": 34,
@@ -482,7 +482,7 @@
       "Utilizeaza un spatiu de adrese separat fata de memoria principala",
       "Nu permite folosirea acelorași instrucțiuni ca pentru memoria principală."
     ],
-    "chapter": "Diverse"
+    "chapter": "Introducere"
   },
   {
     "id": 35,
@@ -497,7 +497,7 @@
       "Poate utiliza module de extensie cu răcire prin convecție, cu ghiduri speciale ale plăcilor care transferă căldura către șasiu.",
       "Permite adăugarea și eliminarea modulelor de extensie fără oprirea sistemului."
     ],
-    "chapter": "Magistrale si interconectare"
+    "chapter": "Magistrale"
   },
   {
     "id": 36,
@@ -514,7 +514,7 @@
       "Se pot utiliza pentru diferite interconexiuni seriale, fără modificări.",
       "Pot utiliza o topologie plasă, cu toate plăcile normale interconectate fără o placă comutatoare."
     ],
-    "chapter": "Magistrale si interconectare"
+    "chapter": "Magistrale"
   },
   {
     "id": 37,
@@ -528,7 +528,7 @@
       "Sunt adecvate pentru viteze reduse de transfer.",
       "Necesită intervenția procesorului pentru fiecare transfer"
     ],
-    "chapter": "Diverse"
+    "chapter": "Introducere"
   },
   {
     "id": 38,
@@ -543,7 +543,7 @@
       "Dispozitivele sunt conectate într-un lanț prin linia de achitare a întreruperii.",
       "Sunt necesare doar două linii de control pentru arbitrajul de magistrală."
     ],
-    "chapter": "Diverse"
+    "chapter": "Introducere"
   },
   {
     "id": 39,
@@ -557,7 +557,7 @@
       "Se utilizeaza magistrale specializate pentru date, adrese si control",
       "Magistralele sunt utilizate pentru conectarea componentelor interne"
     ],
-    "chapter": "Diverse"
+    "chapter": "Introducere"
   },
   {
     "id": 40,
@@ -572,7 +572,7 @@
       "Bistabilul de stare a întreruperilor permite un control global al sistemului de întreruperi.",
       "Se utilizează un codificator prioritar pentru a genera o parte a vectorilor de întrerupere"
     ],
-    "chapter": "Intreruperi"
+    "chapter": "Metode IE"
   },
   {
     "id": 41,
@@ -586,7 +586,7 @@
       "Utilizează ambele fronturi ale semnalului de ceas.",
       "Este sincronizat la sursă."
     ],
-    "chapter": "Magistrale si interconectare"
+    "chapter": "Magistrale"
   },
   {
     "id": 42,
@@ -601,7 +601,7 @@
       "Transferă un bloc de date între periferic și memorie",
       "Este mai eficient pentru transferuri de volum mare"
     ],
-    "chapter": "DMA si transferuri I/E"
+    "chapter": "Metode IE"
   },
   {
     "id": 43,
@@ -617,7 +617,7 @@
       "Metoda este folosită pentru dispozitive periferice lente.",
       "Controlerul DMA poate fi proiectat astfel încât să fure cicluri doar când UCP nu folosește magistrala."
     ],
-    "chapter": "DMA si transferuri I/E"
+    "chapter": "Metode IE"
   },
   {
     "id": 44,
@@ -631,7 +631,7 @@
       "Se poate utiliza ca un modul mezzanin conectat la o placă purtătoare",
       "Se poate utiliza ca un calculator pe o singură placă, doar cu procesorul, memoria RAM și o interfață minimă."
     ],
-    "chapter": "Module embedded"
+    "chapter": "Module Extensie"
   },
   {
     "id": 45,
@@ -645,7 +645,7 @@
       "Reduce timpul de procesor petrecut pentru gestionarea dispozitivelor de I/E",
       "Permite UCP să execute alte instrucțiuni până când dispozitivul semnalează finalizarea operației"
     ],
-    "chapter": "Intreruperi"
+    "chapter": "Metode IE"
   },
   {
     "id": 46,
@@ -660,7 +660,7 @@
       "Generează o cerere de întrerupere către procesorul principal.",
       "Pot comunica cu UCP printr-o memorie partajată si prin linii de control."
     ],
-    "chapter": "DMA si transferuri I/E"
+    "chapter": "Metode IE"
   },
   {
     "id": 47,
@@ -681,7 +681,7 @@
       "Comunicatia full duplex nu este posibila",
       "Rata de transfer este mai redusă comparativ cu magistrala SPI."
     ],
-    "chapter": "Magistrale si interconectare"
+    "chapter": "Magistrale"
   },
   {
     "id": 48,
@@ -695,7 +695,7 @@
     "correctAnswers": [
       "Operare pe 2 benzi."
     ],
-    "chapter": "Magistrale si interconectare"
+    "chapter": "Magistrale"
   },
   {
     "id": 49,
@@ -709,7 +709,7 @@
       "Prezintă interferențe electrice reduse, deoarece necesită mai puține fire.",
       "Permite simplificarea sincronizării atunci când nu se transmite un semnal extern de ceas împreună cu datele."
     ],
-    "chapter": "Magistrale si interconectare"
+    "chapter": "Magistrale"
   },
   {
     "id": 50,
@@ -722,7 +722,7 @@
     "correctAnswers": [
       "Utilizează magistrala PCI combinată cu module de extensie având aceleași formate ca și cele utilizate cu magistrala VME."
     ],
-    "chapter": "PCI / PCI Express / CompactPCI"
+    "chapter": "Magistrale"
   },
   {
     "id": 51,
@@ -735,7 +735,7 @@
     "correctAnswers": [
       "Adaugă două canale unidirecționale la canalul diferențial din USB 2.0."
     ],
-    "chapter": "Magistrale si interconectare"
+    "chapter": "Magistrale"
   },
   {
     "id": 52,
@@ -749,7 +749,7 @@
       "Pot apărea pierderi în fluxul de date",
       "Datele sunt livrate întotdeauna la timp"
     ],
-    "chapter": "Magistrale si interconectare"
+    "chapter": "Magistrale"
   },
   {
     "id": 53,
@@ -764,7 +764,7 @@
       "Dispozitivele pot fi prioritizate prin poziția în lanț.",
       "Fiecare dispozitiv poate modifica semnalul de arbitraj."
     ],
-    "chapter": "Diverse"
+    "chapter": "Introducere"
   },
   {
     "id": 54,
@@ -779,7 +779,7 @@
       "Permite conectarea și deconectarea dispozitivelor fără repornirea sistemului.",
       "Suportă alimentarea dispozitivelor conectate."
     ],
-    "chapter": "Magistrale si interconectare"
+    "chapter": "Magistrale"
   },
   {
     "id": 55,
@@ -793,7 +793,7 @@
       "Adresele de memorie sunt rezervate de sistem",
       "În modul nativ, sunt semnalate prin tranzacții de scriere în memorie."
     ],
-    "chapter": "Intreruperi"
+    "chapter": "Metode IE"
   },
   {
     "id": 56,
@@ -806,7 +806,7 @@
     "correctAnswers": [
       "Suspendă temporar activitatea procesorului."
     ],
-    "chapter": "DMA si transferuri I/E"
+    "chapter": "Metode IE"
   },
   {
     "id": 57,
@@ -820,7 +820,7 @@
       "Permite transferul unui bloc de date fără intervenția procesorului.",
       "Este mai eficient decât furtul de ciclu pentru volume mari de date."
     ],
-    "chapter": "DMA si transferuri I/E"
+    "chapter": "Metode IE"
   },
   {
     "id": 58,
@@ -836,7 +836,7 @@
       "Este gestionat de o unitate dedicata",
       "Permite transferuri rapide între memorie și periferice."
     ],
-    "chapter": "DMA si transferuri I/E"
+    "chapter": "Metode IE"
   },
   {
     "id": 59,
@@ -849,7 +849,7 @@
     "correctAnswers": [
       "Specifică module cu lățime simplă, cu lățime dublă și cu lățime triplă."
     ],
-    "chapter": "Module embedded"
+    "chapter": "Module Extensie"
   },
   {
     "id": 60,
@@ -864,7 +864,7 @@
       "Este necesară o metodă de identificare a sursei de întrerupere.",
       "Prioritatea unui dispozitiv este stabilită printr-un registru de prioritate."
     ],
-    "chapter": "Intreruperi"
+    "chapter": "Metode IE"
   },
   {
     "id": 61,
@@ -878,7 +878,7 @@
       "Se înlocuiesc 4 socluri CompactPCI cu socluri CompactPCI PlusIO pentru adăugarea noilor interfețe seriale.",
       "Se utilizează plăci de bază pasive, care conțin conexiuni paralele și seriale"
     ],
-    "chapter": "PCI / PCI Express / CompactPCI"
+    "chapter": "Magistrale"
   },
   {
     "id": 62,
@@ -892,7 +892,7 @@
       "Nu include timpul in care se executa operatii de I/E",
       "Include timpul necesar acceselor la memorie"
     ],
-    "chapter": "Arhitectura calculatoarelor"
+    "chapter": "Introducere"
   },
   {
     "id": 63,
@@ -907,7 +907,7 @@
       "Utilizează ambele fronturi ale semnalului de ceas pentru transferul datelor.",
       "Este asincron în timpul fazelor de adrese."
     ],
-    "chapter": "Magistrale si interconectare"
+    "chapter": "Magistrale"
   },
   {
     "id": 64,
@@ -921,7 +921,7 @@
       "Utilizează semnale de solicitare și recunoaștere.",
       "Necesită mai multe linii comparativ cu magistralele sincronizate."
     ],
-    "chapter": "Magistrale si interconectare"
+    "chapter": "Magistrale"
   },
   {
     "id": 65,
@@ -936,7 +936,7 @@
       "Permite viteze de transfer mai mari prin transmisie simultană full-duplex.",
       "Adaugă două canale unidirecționale la canalul diferențial USB 2.0."
     ],
-    "chapter": "Magistrale si interconectare"
+    "chapter": "Magistrale"
   },
   {
     "id": 66,
@@ -950,7 +950,7 @@
       "În modul nativ, sunt semnalate prin tranzacții de scriere în memorie.",
       "În modul compatibil, utilizează mesaje speciale cu rolul unor semnale de cerere de întrerupere."
     ],
-    "chapter": "Intreruperi"
+    "chapter": "Metode IE"
   },
   {
     "id": 67,
@@ -963,6 +963,6 @@
     "correctAnswers": [
       "Viteza este crescută comparativ cu tehnica de interogare software."
     ],
-    "chapter": "Intreruperi"
+    "chapter": "Metode IE"
   }
 ]

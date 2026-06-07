@@ -3,480 +3,560 @@
     "id": 1,
     "title": "Frecvența semnalului de ceas: magistrală paralelă vs. serială",
     "source": "5 SIE-Magistrale-2.pdf, p. 2",
-    "content": "La magistralele paralele, creșterea frecvenței semnalului de ceas este dificilă din cauza **nesimetriei de propagare** — diferența dintre întârzierile de propagare a semnalelor pe linii diferite. Cu cât frecvența crește, cu atât această diferență de fază determină coruperea datelor, deoarece biții unui cuvânt nu mai sosesc simultan la destinație.\n\nLa magistralele seriale, informațiile de sincronizare pot fi **înglobate direct în șirul de biți serial** (ex. codificare 8b/10b, 128b/130b), eliminând necesitatea sincronizării simultane a mai multor fire și permițând frecvențe mult mai ridicate."
+    "content": "La magistralele paralele, creșterea frecvenței semnalului de ceas este dificilă din cauza **nesimetriei de propagare** — diferența dintre întârzierile de propagare a semnalelor pe linii diferite. Cu cât frecvența crește, cu atât această diferență de fază determină coruperea datelor, deoarece biții unui cuvânt nu mai sosesc simultan la destinație.\n\nLa magistralele seriale, informațiile de sincronizare pot fi **înglobate direct în șirul de biți serial** (ex. codificare 8b/10b, 128b/130b), eliminând necesitatea sincronizării simultane a mai multor fire și permițând frecvențe mult mai ridicate.",
+    "chapter": "Magistrale"
   },
   {
     "id": 2,
     "title": "Diagrama de timp — transfer inițiat de destinație, protocol unidirecțional",
     "source": "4 SIE-Magistrale-1.pdf, p. 20–22",
-    "content": "Semnalul utilizat: **DREQ** (Data Request).\n\n1. **Destinația** activează semnalul DREQ, indicând că este pregătită să primească date.\n2. **Sursa** detectează DREQ activ, plasează datele pe magistrală și le menține stabile.\n3. **Destinația** prepară intrările și preia datele de pe magistrală (DREQ rămâne activ pe durata transferului sau servește drept strob de încărcare).\n4. **Destinația** dezactivează DREQ după preluarea datelor.\n\n> **Dezavantaj**: sursa nu are confirmarea că destinația a recepționat corect datele (nu există semnal ACK)."
+    "content": "Semnalul utilizat: **DREQ** (Data Request).\n\n1. **Destinația** activează semnalul DREQ, indicând că este pregătită să primească date.\n2. **Sursa** detectează DREQ activ, plasează datele pe magistrală și le menține stabile.\n3. **Destinația** prepară intrările și preia datele de pe magistrală (DREQ rămâne activ pe durata transferului sau servește drept strob de încărcare).\n4. **Destinația** dezactivează DREQ după preluarea datelor.\n\n> **Dezavantaj**: sursa nu are confirmarea că destinația a recepționat corect datele (nu există semnal ACK).",
+    "chapter": "Magistrale"
   },
   {
     "id": 3,
     "title": "Diagrama de timp — operație de scriere pe magistrală sincronă",
     "source": "4 SIE-Magistrale-1.pdf, p. 14–17",
-    "content": "1. La **frontul crescător** al ceasului, **masterul** plasează adresa pe liniile de adrese și activează semnalul de scriere (WR).\n2. Mastrul plasează **datele** pe magistrală (în același ciclu sau în ciclul următor, conform specificației).\n3. La **frontul ceasului** următor, **slave-ul** eșantionează datele și le memorează.\n4. Dacă slave-ul nu poate finaliza operația la timp, activează semnalul **WAIT** (sau nu activează ACK) → masterul introduce **stări de așteptare** și menține datele pe magistrală.\n5. Masterul dezactivează WR și eliberează liniile la terminarea ciclului.\n\n> **Dezavantaj**: dacă un transfer se termină înainte de un număr întreg de cicli de ceas, trebuie așteptat sfârşitul ciclului; viteza se alege după dispozitivul cel mai lent."
+    "content": "1. La **frontul crescător** al ceasului, **masterul** plasează adresa pe liniile de adrese și activează semnalul de scriere (WR).\n2. Mastrul plasează **datele** pe magistrală (în același ciclu sau în ciclul următor, conform specificației).\n3. La **frontul ceasului** următor, **slave-ul** eșantionează datele și le memorează.\n4. Dacă slave-ul nu poate finaliza operația la timp, activează semnalul **WAIT** (sau nu activează ACK) → masterul introduce **stări de așteptare** și menține datele pe magistrală.\n5. Masterul dezactivează WR și eliberează liniile la terminarea ciclului.\n\n> **Dezavantaj**: dacă un transfer se termină înainte de un număr întreg de cicli de ceas, trebuie așteptat sfârşitul ciclului; viteza se alege după dispozitivul cel mai lent.",
+    "chapter": "Magistrale"
   },
   {
     "id": 4,
     "title": "Arbitraj centralizat prin conectarea în lanț (daisy chaining)",
     "source": "5 SIE-Magistrale-2.pdf, p. 8–12",
-    "content": "Schema utilizează **două linii de control**:\n- **BUSREQ** (Bus Request) — SAU cablat, toate dispozitivele o pot activa simultan;\n- **BUSGNT** (Bus Grant) — linie de acordare, înlănțuită fizic prin toate dispozitivele.\n\n**Funcționare:**\n1. Un dispozitiv care dorește accesul activează **BUSREQ**.\n2. Arbitrul (central) detectează BUSREQ și activează **BUSGNT**.\n3. BUSGNT se propagă de la primul dispozitiv spre celelalte.\n4. Primul dispozitiv care **a solicitat** magistrala interceptează BUSGNT (nu îl propagă mai departe), obţine controlul magistralei şi activează **BUSY**.\n5. Un dispozitiv care **nu a solicitat** lasă BUSGNT să continue spre el.\n\n**Prioritatea** este determinată de poziția fizică: dispozitivul cel mai apropiat de arbitru are prioritatea maximă.\n\n**Avantaje**: număr redus de linii de control; poate conecta teoretic orice număr de dispozitive.  \n**Dezavantaje**: priorități fixe; un dispozitiv cu prioritate înaltă poate bloca celelalte; susceptibil la defecte pe linia BUSGNT."
+    "content": "Schema utilizează **două linii de control**:\n- **BUSREQ** (Bus Request) — SAU cablat, toate dispozitivele o pot activa simultan;\n- **BUSGNT** (Bus Grant) — linie de acordare, înlănțuită fizic prin toate dispozitivele.\n\n**Funcționare:**\n1. Un dispozitiv care dorește accesul activează **BUSREQ**.\n2. Arbitrul (central) detectează BUSREQ și activează **BUSGNT**.\n3. BUSGNT se propagă de la primul dispozitiv spre celelalte.\n4. Primul dispozitiv care **a solicitat** magistrala interceptează BUSGNT (nu îl propagă mai departe), obţine controlul magistralei şi activează **BUSY**.\n5. Un dispozitiv care **nu a solicitat** lasă BUSGNT să continue spre el.\n\n**Prioritatea** este determinată de poziția fizică: dispozitivul cel mai apropiat de arbitru are prioritatea maximă.\n\n**Avantaje**: număr redus de linii de control; poate conecta teoretic orice număr de dispozitive.  \n**Dezavantaje**: priorități fixe; un dispozitiv cu prioritate înaltă poate bloca celelalte; susceptibil la defecte pe linia BUSGNT.",
+    "chapter": "Magistrale"
   },
   {
     "id": 5,
     "title": "Transfer inițiat de sursă — protocol bidirecțional",
     "source": "4 SIE-Magistrale-1.pdf, p. 24–25",
-    "content": "1. **Sursa** plasează datele pe magistrală şi activează semnalul **DREADY** (Data Ready).\n2. **Destinația** detectează DREADY activ, preia datele şi activează semnalul de confirmare **ACK** (Acknowledge).\n3. **Sursa** detectează ACK activ, dezactivează DREADY şi retrage datele de pe magistrală (confirmarea recepţiei cu succes).\n4. **Destinația** detectează dezactivarea DREADY şi dezactivează ACK."
+    "content": "1. **Sursa** plasează datele pe magistrală şi activează semnalul **DREADY** (Data Ready).\n2. **Destinația** detectează DREADY activ, preia datele şi activează semnalul de confirmare **ACK** (Acknowledge).\n3. **Sursa** detectează ACK activ, dezactivează DREADY şi retrage datele de pe magistrală (confirmarea recepţiei cu succes).\n4. **Destinația** detectează dezactivarea DREADY şi dezactivează ACK.",
+    "chapter": "Magistrale"
   },
   {
     "id": 6,
     "title": "Transfer inițiat de destinație — protocol bidirecțional",
     "source": "4 SIE-Magistrale-1.pdf, p. 24–26",
-    "content": "1. **Destinația** activează semnalul **DREQ**, indicând că este pregătită să primească date.\n2. **Sursa** detectează DREQ, plasează datele pe magistrală şi activează **ACK**.\n3. **Destinația** preia datele şi dezactivează **DREQ**.\n4. **Sursa** detectează dezactivarea DREQ, dezactivează **ACK** şi retrage datele de pe magistrală."
+    "content": "1. **Destinația** activează semnalul **DREQ**, indicând că este pregătită să primească date.\n2. **Sursa** detectează DREQ, plasează datele pe magistrală şi activează **ACK**.\n3. **Destinația** preia datele şi dezactivează **DREQ**.\n4. **Sursa** detectează dezactivarea DREQ, dezactivează **ACK** şi retrage datele de pe magistrală.",
+    "chapter": "Magistrale"
   },
   {
     "id": 7,
     "title": "Arbitrajul descentralizat cu 3 linii",
     "source": "5 SIE-Magistrale-2.pdf, p. 17–20",
-    "content": "Schema foloseşte **3 linii**:\n- **BUSREQ** — SAU cablat, orice dispozitiv o poate activa;\n- **BUSY** — activată de dispozitivul care controlează magistrala;\n- **Linie de arbitrare** — conectată în lanț prin toate dispozitivele (similar cu BUSGNT, dar fără arbitru central).\n\n**Funcționare:**\n1. Un dispozitiv care dorește accesul activează **BUSREQ**.\n2. Dacă **BUSY** este inactiv, semnalul de arbitrare se propagă prin lanț.\n3. Primul dispozitiv din lanț care **a solicitat** magistrala interceptează semnalul de arbitrare, devine master şi activează **BUSY**.\n4. La terminarea utilizării, masterul dezactivează BUSY.\n\n**Avantaje față de centralizat**: cost mai redus, viteză mai ridicată, nu este susceptibilă la defectele unui arbitru central."
+    "content": "Schema foloseşte **3 linii**:\n- **BUSREQ** — SAU cablat, orice dispozitiv o poate activa;\n- **BUSY** — activată de dispozitivul care controlează magistrala;\n- **Linie de arbitrare** — conectată în lanț prin toate dispozitivele (similar cu BUSGNT, dar fără arbitru central).\n\n**Funcționare:**\n1. Un dispozitiv care dorește accesul activează **BUSREQ**.\n2. Dacă **BUSY** este inactiv, semnalul de arbitrare se propagă prin lanț.\n3. Primul dispozitiv din lanț care **a solicitat** magistrala interceptează semnalul de arbitrare, devine master şi activează **BUSY**.\n4. La terminarea utilizării, masterul dezactivează BUSY.\n\n**Avantaje față de centralizat**: cost mai redus, viteză mai ridicată, nu este susceptibilă la defectele unui arbitru central.",
+    "chapter": "Magistrale"
   },
   {
     "id": 8,
     "title": "Rolul zonei de comunicare dintre CPU și procesorul de I/E (PIE)",
     "source": "3 SIE-Metode-IE-2.pdf, p. 28–31",
-    "content": "**Zona de comunicare** este o regiune din **memoria principală** prin care UCP şi PIE (procesorul de I/E) fac schimb de date şi comenzi fără a bloca reciproc magistrala. UCP scrie în această zonă **comenzile şi parametrii** operaţiilor de I/E pe care PIE trebuie să le execute (programul de canal), iar PIE scrie **rezultatele şi starea** operaţiilor executate.\n\nPe lângă zona de memorie, comunicaţia se realizează şi prin semnale directe de control: UCP atenţionează PIE prin semnalul **ATN** (Attention) că a scris date noi în zona de comunicare, iar PIE atenţionează UCP prin **IREQ** (Interrupt Request) la terminarea secvenţei de operaţii de I/E."
+    "content": "**Zona de comunicare** este o regiune din **memoria principală** prin care UCP şi PIE (procesorul de I/E) fac schimb de date şi comenzi fără a bloca reciproc magistrala. UCP scrie în această zonă **comenzile şi parametrii** operaţiilor de I/E pe care PIE trebuie să le execute (programul de canal), iar PIE scrie **rezultatele şi starea** operaţiilor executate.\n\nPe lângă zona de memorie, comunicaţia se realizează şi prin semnale directe de control: UCP atenţionează PIE prin semnalul **ATN** (Attention) că a scris date noi în zona de comunicare, iar PIE atenţionează UCP prin **IREQ** (Interrupt Request) la terminarea secvenţei de operaţii de I/E.",
+    "chapter": "Metode IE"
   },
   {
     "id": 9,
     "title": "Metoda „furt de ciclu\" pentru DMA",
     "source": "3 SIE-Metode-IE-2.pdf, p. 14–15",
-    "content": "Prin metoda **„furt de ciclu\"** (cycle stealing), controlerul DMA transferă **câte un cuvânt** (sau un număr mic de cuvinte) de date în intervalele de timp în care UCP nu accesează memoria (nu efectuează accese la magistrală). Blocurile lungi de date sunt transferate printr-o **secvenţă de tranzacţii DMA intercalate** cu tranzacţiile UCP, astfel UCP suferă o suspendare minimă şi poate continua execuţia programului în paralel.\n\nMetoda reduce rata maximă de transfer (faţă de metoda „în rafală\"), dar minimizează interferenţa controlerului DMA cu activitatea UCP şi accesul acesteia la memorie."
+    "content": "Prin metoda **„furt de ciclu\"** (cycle stealing), controlerul DMA transferă **câte un cuvânt** (sau un număr mic de cuvinte) de date în intervalele de timp în care UCP nu accesează memoria (nu efectuează accese la magistrală). Blocurile lungi de date sunt transferate printr-o **secvenţă de tranzacţii DMA intercalate** cu tranzacţiile UCP, astfel UCP suferă o suspendare minimă şi poate continua execuţia programului în paralel.\n\nMetoda reduce rata maximă de transfer (faţă de metoda „în rafală\"), dar minimizează interferenţa controlerului DMA cu activitatea UCP şi accesul acesteia la memorie.",
+    "chapter": "Metode IE"
   },
   {
     "id": 10,
     "title": "Trei îmbunătățiri introduse de PCI Express față de PCI precedente",
     "source": "5 SIE-Magistrale-2.pdf, p. 38–54",
-    "content": "1. **Conexiune serială punct-la-punct** — elimină dezavantajele magistralei paralele (nesimetrie de propagare, dificultatea sincronizării), permiţând frecvenţe de operare mult mai ridicate (2,5 → 64 GT/s în funcţie de generaţie).\n\n2. **Performanţă scalabilă** — lăţimea legăturii este variabilă (x1, x4, x8, x16 benzi de comunicaţie), setată automat, adaptând performanţa la cerinţele fiecărui dispozitiv.\n\n3. **Protocol bazat pe pachete cu facilităţi avansate** — include calitate a serviciilor (QoS), gestiune avansată a puterii consumate şi a erorilor, tranzacţii de tip split (similare PCI-X) şi posibilitatea conectării/deconectării perifericelor în timpul funcţionării (hot-plug).\n\n> *Alte îmbunătăţiri menţionate în curs: model software compatibil cu PCI; suport MSI (Message Signaled Interrupts); codificare 128b/130b din Gen 3.*"
+    "content": "1. **Conexiune serială punct-la-punct** — elimină dezavantajele magistralei paralele (nesimetrie de propagare, dificultatea sincronizării), permiţând frecvenţe de operare mult mai ridicate (2,5 → 64 GT/s în funcţie de generaţie).\n\n2. **Performanţă scalabilă** — lăţimea legăturii este variabilă (x1, x4, x8, x16 benzi de comunicaţie), setată automat, adaptând performanţa la cerinţele fiecărui dispozitiv.\n\n3. **Protocol bazat pe pachete cu facilităţi avansate** — include calitate a serviciilor (QoS), gestiune avansată a puterii consumate şi a erorilor, tranzacţii de tip split (similare PCI-X) şi posibilitatea conectării/deconectării perifericelor în timpul funcţionării (hot-plug).\n\n> *Alte îmbunătăţiri menţionate în curs: model software compatibil cu PCI; suport MSI (Message Signaled Interrupts); codificare 128b/130b din Gen 3.*",
+    "chapter": "Magistrale"
   },
   {
     "id": 11,
     "title": "Caracteristicile magistralei VXS (VMEbus Switched Serial)",
     "source": "7 SIE-Magistrale-4.pdf, p. 13–15",
-    "content": "- **VXS** combină magistrala VME paralelă cu **conexiuni seriale comutatoare de viteză ridicată**.\n- Standarde ANSI/VITA 41.x (InfiniBand, Serial RapidIO, Gigabit Ethernet, PCI Express ×4).\n- Interconexiune serială comutată cu **conexiuni punct-la-punct** între module; semnalele de ceas şi date sunt combinate într-un şir de biţi serial.\n- **Rate de date**: 3,125 sau 6,25 Gbiţi/s; cu codificare 8b/10b → 312,5 sau 625 MB/s; cu codificare 64b/66b → 378 sau 756 MB/s.\n- **Plăci comutatoare** (1–2): conţin un comutator; **plăci normale** (până la 18): se conectează la plăcile comutatoare.\n- Topologii de baze de bord: **stea simplă, stea duală, plasă, lanţ**."
+    "content": "- **VXS** combină magistrala VME paralelă cu **conexiuni seriale comutatoare de viteză ridicată**.\n- Standarde ANSI/VITA 41.x (InfiniBand, Serial RapidIO, Gigabit Ethernet, PCI Express ×4).\n- Interconexiune serială comutată cu **conexiuni punct-la-punct** între module; semnalele de ceas şi date sunt combinate într-un şir de biţi serial.\n- **Rate de date**: 3,125 sau 6,25 Gbiţi/s; cu codificare 8b/10b → 312,5 sau 625 MB/s; cu codificare 64b/66b → 378 sau 756 MB/s.\n- **Plăci comutatoare** (1–2): conţin un comutator; **plăci normale** (până la 18): se conectează la plăcile comutatoare.\n- Topologii de baze de bord: **stea simplă, stea duală, plasă, lanţ**.",
+    "chapter": "Magistrale"
   },
   {
     "id": 12,
     "title": "Arhitectura unui sistem CompactPCI",
     "source": "8 SIE-Module-Extensie.pdf, p. 22–30",
-    "content": "- **CompactPCI** (cPCI) combină specificaţiile electrice ale magistralei **PCI paralele de 32 sau 64 biţi** cu formatele de placă **Eurocard 3U şi 6U**.\n- Are o **placă de bază pasivă** (numai conectori, fără componente active) → întreţinere simplă, fiabilitate ridicată.\n- **Conectori**: HM (Hard Metric), pas 2 mm; module 3U au J1 (32 biţi) şi opţional J2 (64 biţi sau pini de I/O); module 6U au J1–J5; placa de bază are P1–P2 (3U) sau P1–P5 (6U).\n- Suportă **până la 8 socluri** periferice per segment de magistrală.\n- Extensii: **Hot Swap** (PICMG 2.1 — inserare la cald), **Ethernet** (PICMG 2.16 — reţea locală între module, max. 2 Gbiţi/s per soclu).\n- **Avantaje**: modularitate, robusteţe, scalabilitate, independenţă faţă de procesor, cost redus al circuitelor PCI/PCIe."
+    "content": "- **CompactPCI** (cPCI) combină specificaţiile electrice ale magistralei **PCI paralele de 32 sau 64 biţi** cu formatele de placă **Eurocard 3U şi 6U**.\n- Are o **placă de bază pasivă** (numai conectori, fără componente active) → întreţinere simplă, fiabilitate ridicată.\n- **Conectori**: HM (Hard Metric), pas 2 mm; module 3U au J1 (32 biţi) şi opţional J2 (64 biţi sau pini de I/O); module 6U au J1–J5; placa de bază are P1–P2 (3U) sau P1–P5 (6U).\n- Suportă **până la 8 socluri** periferice per segment de magistrală.\n- Extensii: **Hot Swap** (PICMG 2.1 — inserare la cald), **Ethernet** (PICMG 2.16 — reţea locală între module, max. 2 Gbiţi/s per soclu).\n- **Avantaje**: modularitate, robusteţe, scalabilitate, independenţă faţă de procesor, cost redus al circuitelor PCI/PCIe.",
+    "chapter": "Module Extensie"
   },
   {
     "id": 13,
     "title": "Arhitectura unui sistem CompactPCI Serial",
     "source": "8 SIE-Module-Extensie.pdf, p. 40–44",
-    "content": "- **CompactPCI Serial** (PICMG CPCI-S.0) **înlocuieşte complet** magistrala PCI paralelă cu **interconexiuni seriale rapide**.\n- Conectorii HM originali sunt înlocuiţi cu conectori **AirMax** (rate de 12 Gbiţi/s; până la 184 perechi pe modul 3U).\n- Formate **Eurocard 3U şi 6U**, cu răcire prin convecţie sau conducţie; **placă de bază complet pasivă**.\n- Module 3U: până la **6 conectori** (P1–P6); module 6U: până la **7 conectori** (P0–P6); P2–P6 au 360 pini de I/O definiţi de utilizator.\n- **Interfaţe suportate** per soclu periferic: o legătură PCIe (×8), SATA/SAS, USB 2.0, USB 3.0, până la 8 interfeţe Ethernet.\n- Permite **înlocuirea modulelor în timpul funcţionării** (hot-swap)."
+    "content": "- **CompactPCI Serial** (PICMG CPCI-S.0) **înlocuieşte complet** magistrala PCI paralelă cu **interconexiuni seriale rapide**.\n- Conectorii HM originali sunt înlocuiţi cu conectori **AirMax** (rate de 12 Gbiţi/s; până la 184 perechi pe modul 3U).\n- Formate **Eurocard 3U şi 6U**, cu răcire prin convecţie sau conducţie; **placă de bază complet pasivă**.\n- Module 3U: până la **6 conectori** (P1–P6); module 6U: până la **7 conectori** (P0–P6); P2–P6 au 360 pini de I/O definiţi de utilizator.\n- **Interfaţe suportate** per soclu periferic: o legătură PCIe (×8), SATA/SAS, USB 2.0, USB 3.0, până la 8 interfeţe Ethernet.\n- Permite **înlocuirea modulelor în timpul funcţionării** (hot-swap).",
+    "chapter": "Module Extensie"
   },
   {
     "id": 14,
     "title": "Caracteristicile versiunii 4 a magistralei USB (USB4)",
     "source": "6 SIE-Magistrale-3.pdf, p. 47–48",
-    "content": "- **USB4** (2019) se bazează pe protocolul **Thunderbolt 3**.\n- **Versiunea 1.0**: până la **40 Gbiţi/s**; **versiunea 2.0**: până la **80 Gbiţi/s**.\n- Permite **protocoale multiple simultane** pentru date şi afişaje: USB 3.x SuperSpeed, PCI Express, DisplayPort.\n- Se pot aloca pachete dedicate pentru **conexiuni de date directe** între echipamente gazdă.\n- Utilizează conectorul **de tip C reversibil** şi codificarea **128b/132b**.\n- **Compatibil** cu USB 3.1, 3.0 şi 2.0."
+    "content": "- **USB4** (2019) se bazează pe protocolul **Thunderbolt 3**.\n- **Versiunea 1.0**: până la **40 Gbiţi/s**; **versiunea 2.0**: până la **80 Gbiţi/s**.\n- Permite **protocoale multiple simultane** pentru date şi afişaje: USB 3.x SuperSpeed, PCI Express, DisplayPort.\n- Se pot aloca pachete dedicate pentru **conexiuni de date directe** între echipamente gazdă.\n- Utilizează conectorul **de tip C reversibil** şi codificarea **128b/132b**.\n- **Compatibil** cu USB 3.1, 3.0 şi 2.0.",
+    "chapter": "Magistrale"
   },
   {
     "id": 15,
     "title": "Adresare cu mapare în memorie vs. adresare izolată (2 criterii)",
     "source": "2 SIE-Metode-IE-1.pdf, p. 7–11",
-    "content": "| Criteriu | Mapare în memorie | Adresare izolată |\n|---|---|---|\n| **Spaţiul de adrese** | Un singur spaţiu de adrese pentru memorie şi dispozitivele de I/O; registrele modulelor de I/O ocupă locaţii din spaţiul memoriei | Spaţiu de adrese de I/O **separat** de cel al memoriei; magistrala necesită linii suplimentare (IORD, IOWR, MRD, MWR) |\n| **Instrucţiunile utilizate** | Se utilizează **aceleaşi instrucţiuni** pentru accesul la memorie şi la dispozitivele de I/O (LD, ST — nu sunt necesare instrucţiuni speciale de I/O) | UCP trebuie să execute **instrucţiuni separate de I/O** (IN, OUT la Intel) care activează linii de control diferite faţă de accesele la memorie |"
+    "content": "| Criteriu | Mapare în memorie | Adresare izolată |\n|---|---|---|\n| **Spaţiul de adrese** | Un singur spaţiu de adrese pentru memorie şi dispozitivele de I/O; registrele modulelor de I/O ocupă locaţii din spaţiul memoriei | Spaţiu de adrese de I/O **separat** de cel al memoriei; magistrala necesită linii suplimentare (IORD, IOWR, MRD, MWR) |\n| **Instrucţiunile utilizate** | Se utilizează **aceleaşi instrucţiuni** pentru accesul la memorie şi la dispozitivele de I/O (LD, ST — nu sunt necesare instrucţiuni speciale de I/O) | UCP trebuie să execute **instrucţiuni separate de I/O** (IN, OUT la Intel) care activează linii de control diferite faţă de accesele la memorie |",
+    "chapter": "Metode IE"
   },
   {
     "id": 16,
     "title": "Comparaţie „furt de ciclu\" vs. „în rafală\" pentru DMA (2 criterii)",
     "source": "3 SIE-Metode-IE-2.pdf, p. 13–15",
-    "content": "| Criteriu | Furt de ciclu | În rafală (pe blocuri) |\n|---|---|---|\n| **Interferenţa cu UCP** | Minimă — DMA fură câte un ciclu în intervalele libere ale UCP; UCP continuă execuţia programului în paralel | Maximă — UCP este **complet suspendată** pe toată durata transferului blocului; magistrala trece în stare de înaltă impedanţă |\n| **Rata de transfer şi necesitate** | Rată mai mică (transfer fragmentat intercalat cu ciclurile UCP) | Rată maximă posibilă; **obligatorie** pentru dispozitive (ex. unităţi de disc) al căror transfer nu poate fi oprit sau încetinit |"
+    "content": "| Criteriu | Furt de ciclu | În rafală (pe blocuri) |\n|---|---|---|\n| **Interferenţa cu UCP** | Minimă — DMA fură câte un ciclu în intervalele libere ale UCP; UCP continuă execuţia programului în paralel | Maximă — UCP este **complet suspendată** pe toată durata transferului blocului; magistrala trece în stare de înaltă impedanţă |\n| **Rata de transfer şi necesitate** | Rată mai mică (transfer fragmentat intercalat cu ciclurile UCP) | Rată maximă posibilă; **obligatorie** pentru dispozitive (ex. unităţi de disc) al căror transfer nu poate fi oprit sau încetinit |",
+    "chapter": "Metode IE"
   },
   {
     "id": 17,
     "title": "Operaţiile executate de UCP pentru transferul controlului la subrutina de tratare a întreruperii",
     "source": "2 SIE-Metode-IE-1.pdf, p. 25–27",
-    "content": "1. **Termină execuţia instrucţiunii curente** (suspendarea are loc între instrucţiuni, nu în mijlocul uneia).\n2. **Activează semnalul IACK** (Interrupt Acknowledge), confirmând recunoaşterea cererii.\n3. **Identifică sursa întreruperii** (prin linie dedicată, interogare software/hardware sau vector furnizat de sursă).\n4. **Determină adresa subrutinei de tratare**:\n   - *Ntreruperi ne-vectorizate*: adresă fixă prestabilită în memorie;\n   - *Ntreruperi vectorizate*: adresa este furnizată de sursa de întrerupere sub forma unui **vector de întrerupere**.\n5. **Salvează contorul de program (PC)** şi alte informaţii de stare (registre flags, eventual alţi registri) — de obicei pe stivă.\n6. **Încarcă adresa subrutinei de tratare în PC**, transferând astfel controlul execuţiei la subrutină."
+    "content": "1. **Termină execuţia instrucţiunii curente** (suspendarea are loc între instrucţiuni, nu în mijlocul uneia).\n2. **Activează semnalul IACK** (Interrupt Acknowledge), confirmând recunoaşterea cererii.\n3. **Identifică sursa întreruperii** (prin linie dedicată, interogare software/hardware sau vector furnizat de sursă).\n4. **Determină adresa subrutinei de tratare**:\n   - *Ntreruperi ne-vectorizate*: adresă fixă prestabilită în memorie;\n   - *Ntreruperi vectorizate*: adresa este furnizată de sursa de întrerupere sub forma unui **vector de întrerupere**.\n5. **Salvează contorul de program (PC)** şi alte informaţii de stare (registre flags, eventual alţi registri) — de obicei pe stivă.\n6. **Încarcă adresa subrutinei de tratare în PC**, transferând astfel controlul execuţiei la subrutină.",
+    "chapter": "Metode IE"
   },
   {
     "id": 18,
     "title": "Diagrama de timp — operaţie de citire pe magistrală paralelă sincronă",
     "source": "4 SIE-Magistrale-1.pdf, p. 14–17",
-    "content": "1. La **frontul semnalului de ceas**, **masterul** plasează **adresa** pe liniile de adrese şi activează semnalul de citire **RD**.\n2. **Slave-ul** decodifică adresa, preia controlul liniilor de date şi plasează **datele** pe magistrală (în intervalul de timp specificat).\n3. La **frontul următor al ceasului**, masterul **eşantionează datele** de pe magistrală (şi le stochează intern).\n4. Masterul dezactivează **RD** şi eliberează magistrala.\n5. Dacă slave-ul nu poate furniza datele la timp, activează **WAIT** (sau nu activează ACK) → masterul introduce **stări de aşteptare** (hold cycles) şi amână eşantionarea."
+    "content": "1. La **frontul semnalului de ceas**, **masterul** plasează **adresa** pe liniile de adrese şi activează semnalul de citire **RD**.\n2. **Slave-ul** decodifică adresa, preia controlul liniilor de date şi plasează **datele** pe magistrală (în intervalul de timp specificat).\n3. La **frontul următor al ceasului**, masterul **eşantionează datele** de pe magistrală (şi le stochează intern).\n4. Masterul dezactivează **RD** şi eliberează magistrala.\n5. Dacă slave-ul nu poate furniza datele la timp, activează **WAIT** (sau nu activează ACK) → masterul introduce **stări de aşteptare** (hold cycles) şi amână eşantionarea.",
+    "chapter": "Magistrale"
   },
   {
     "id": 21,
     "title": "Conectarea în serie a liniilor de întrerupere",
     "source": "3 SIE-Metode-IE-2.pdf, p. 8–10",
-    "content": "Dispozitivele sunt conectate în **lanţ (daisy chain)**, fiecare cu o intrare **PI** (Priority In) şi o ieşire **PO** (Priority Out). Linia de cerere IREQ este **comună** pentru toate (SAU cablat). Dispozitivul cu **prioritatea maximă** este plasat primul în lanţ.\n\n**Funcţionare:**\n1. Un dispozitiv activează **IREQ**; UCP detectează cererea şi activează **IACK**.\n2. Semnalul IACK se propagă de la primul dispozitiv (prin PI → PO) spre celelalte.\n3. Primul dispozitiv care **a solicitat** întreruperea **interceptează IACK** (nu îl propagă la PO) şi plasează **vectorul de întrerupere** pe magistrala de date.\n4. UCP foloseşte vectorul pentru a sări la subrutina de tratare corespunzătoare.\n5. Un dispozitiv care **nu a solicitat** lasă semnalul IACK să continue (PI → PO)."
+    "content": "Dispozitivele sunt conectate în **lanţ (daisy chain)**, fiecare cu o intrare **PI** (Priority In) şi o ieşire **PO** (Priority Out). Linia de cerere IREQ este **comună** pentru toate (SAU cablat). Dispozitivul cu **prioritatea maximă** este plasat primul în lanţ.\n\n**Funcţionare:**\n1. Un dispozitiv activează **IREQ**; UCP detectează cererea şi activează **IACK**.\n2. Semnalul IACK se propagă de la primul dispozitiv (prin PI → PO) spre celelalte.\n3. Primul dispozitiv care **a solicitat** întreruperea **interceptează IACK** (nu îl propagă la PO) şi plasează **vectorul de întrerupere** pe magistrala de date.\n4. UCP foloseşte vectorul pentru a sări la subrutina de tratare corespunzătoare.\n5. Un dispozitiv care **nu a solicitat** lasă semnalul IACK să continue (PI → PO).",
+    "chapter": "Metode IE"
   },
   {
     "id": 22,
     "title": "Componentele unui controler DMA necesare pentru execuţia unui transfer",
     "source": "3 SIE-Metode-IE-2.pdf, p. 17–22",
-    "content": "| Componentă | Funcţie |\n|---|---|\n| **Registrul de adresă I/O (IOAR)** | Memorează adresa dispozitivului de I/O implicat în transfer; se transmite de UCP la iniţializare |\n| **Contorul de date (DC)** | Memorează numărul de octeţi/cuvinte rămase de transferat; se decrementează după fiecare ciclu DMA; când DC = 0, transferul s-a terminat |\n| **Registrul de adresă memorie** | Memorează adresa curentă din memoria principală de la/la care se transferă date; se incrementează după fiecare ciclu pentru a adresa locaţia următoare |\n| **Logica de control** | Generează semnalele **DMAREQ** (cerere de magistrală) şi recepţionează **DMAACK** (acordare magistrală); coordonează transferul şi generează o **cerere de ntrerupere** (IREQ) la terminare |\n| **Registrul de stare/comandă** | Memorează direcţia transferului (citire/scriere), starea operaţiei şi parametrii primiţi de la UCP în secvenţa de iniţializare |"
+    "content": "| Componentă | Funcţie |\n|---|---|\n| **Registrul de adresă I/O (IOAR)** | Memorează adresa dispozitivului de I/O implicat în transfer; se transmite de UCP la iniţializare |\n| **Contorul de date (DC)** | Memorează numărul de octeţi/cuvinte rămase de transferat; se decrementează după fiecare ciclu DMA; când DC = 0, transferul s-a terminat |\n| **Registrul de adresă memorie** | Memorează adresa curentă din memoria principală de la/la care se transferă date; se incrementează după fiecare ciclu pentru a adresa locaţia următoare |\n| **Logica de control** | Generează semnalele **DMAREQ** (cerere de magistrală) şi recepţionează **DMAACK** (acordare magistrală); coordonează transferul şi generează o **cerere de ntrerupere** (IREQ) la terminare |\n| **Registrul de stare/comandă** | Memorează direcţia transferului (citire/scriere), starea operaţiei şi parametrii primiţi de la UCP în secvenţa de iniţializare |",
+    "chapter": "Metode IE"
   },
   {
     "id": 23,
     "title": "Deosebirile dintre VME320 şi VME64x",
     "source": "7 SIE-Magistrale-4.pdf, p. 9–12",
-    "content": "| Aspect | VME64x | VME320 (VME 2eSST) |\n|---|---|---|\n| **Rată de transfer** | Max. **160 MB/s** (protocol 2eVME — Double-edge VME) | **> 320 MB/s** (vârf > 500 MB/s), protocol **2eSST** (Double-edge Source Synchronous Transfer) |\n| **Topologie interconectare** | Magistrală partajată convenţională | **Conexiune în stea**: toţi conectorii legaţi la conectorul din mijlocul plăcii de bază |\n| **Protocol de date** | Protocol 2eVME | Protocol **2eSST** — sincron la sursă în fazele de date |\n| **Conectori** | 5 rânduri × 32 pini (160 pini) + conector suplimentar 95 pini | Aceeaşi bază mecanică VME64x; modificare de protocol şi topologie |\n| **Alte caracteristici VME64x** | Pini alimentare 3,3 V; 141 pini I/O utilizator; inserare în funcţionare; panouri frontale cu pini de ghidare | — |"
+    "content": "| Aspect | VME64x | VME320 (VME 2eSST) |\n|---|---|---|\n| **Rată de transfer** | Max. **160 MB/s** (protocol 2eVME — Double-edge VME) | **> 320 MB/s** (vârf > 500 MB/s), protocol **2eSST** (Double-edge Source Synchronous Transfer) |\n| **Topologie interconectare** | Magistrală partajată convenţională | **Conexiune în stea**: toţi conectorii legaţi la conectorul din mijlocul plăcii de bază |\n| **Protocol de date** | Protocol 2eVME | Protocol **2eSST** — sincron la sursă în fazele de date |\n| **Conectori** | 5 rânduri × 32 pini (160 pini) + conector suplimentar 95 pini | Aceeaşi bază mecanică VME64x; modificare de protocol şi topologie |\n| **Alte caracteristici VME64x** | Pini alimentare 3,3 V; 141 pini I/O utilizator; inserare în funcţionare; panouri frontale cu pini de ghidare | — |",
+    "chapter": "Magistrale"
   },
   {
     "id": 24,
     "title": "Îmbunătăţirile introduse de USB 3.1 şi USB 3.2",
     "source": "6 SIE-Magistrale-3.pdf, p. 43–48",
-    "content": "**USB 3.1**:\n- Introduce codificarea **128b/132b** (în locul 8b/10b din USB 3.0), reducând overheadul de codificare.\n- Atinge modul **SuperSpeed+ USB 10 Gbps** (10 Gbiţi/s pe un singur canal).\n\n**USB 3.2**:\n- Adaugă suportul pentru modul **SuperSpeed+ USB 20 Gbps** prin utilizarea a **două canale de date simultane** pe conectorul de tip C reversibil.\n- Defineşte variante: **Gen 1×1** (5 Gbiţi/s), **Gen 1×2** (10 Gbiţi/s), **Gen 2×1** (10 Gbiţi/s), **Gen 2×2** (20 Gbiţi/s).\n- Exploatează **reversibilitatea conectorului de tip C**; foloseşte aceeaşi codificare 128b/132b ca USB 3.1."
+    "content": "**USB 3.1**:\n- Introduce codificarea **128b/132b** (în locul 8b/10b din USB 3.0), reducând overheadul de codificare.\n- Atinge modul **SuperSpeed+ USB 10 Gbps** (10 Gbiţi/s pe un singur canal).\n\n**USB 3.2**:\n- Adaugă suportul pentru modul **SuperSpeed+ USB 20 Gbps** prin utilizarea a **două canale de date simultane** pe conectorul de tip C reversibil.\n- Defineşte variante: **Gen 1×1** (5 Gbiţi/s), **Gen 1×2** (10 Gbiţi/s), **Gen 2×1** (10 Gbiţi/s), **Gen 2×2** (20 Gbiţi/s).\n- Exploatează **reversibilitatea conectorului de tip C**; foloseşte aceeaşi codificare 128b/132b ca USB 3.1.",
+    "chapter": "Magistrale"
   },
   {
     "id": 25,
     "title": "Rolul terminatorului de magistrală şi tipuri de conexiune",
     "source": "4 SIE-Magistrale-1.pdf, p. 6–9",
-    "content": "**Rolul**: terminatorul elimină sau reduce **reflexiile de semnal** cauzate de discontinuităţile de impedanţă (conectori, sarcini capacitive, treceri între straturi). Fără terminator, reflexiile produc oscilaţii ale tensiunii şi curentului care reduc fiabilitatea transferurilor.\n\n**Terminator rezistiv serie**:\n- Se conectează **în serie** cu linia, la capătul transmisiei (lângă driver).\n- Condiţia ideală: **R_s + Z_s = Z_0** (Rs — rezistenţa serie, Zs — impedanţa sursei, Z0 — impedanţa caracteristică a liniei).\n- Absoarbe unda reflectată la recepţie la nivel de sursă.\n\n**Terminator rezistiv paralel**:\n- Se conectează **în paralel** la capătul receptor, formând un **divizor de tensiune**.\n- Rezistenţa echivalentă trebuie să fie egală cu Z0.\n- Poate fi utilizat pentru **magistrale bidirecţionale**."
+    "content": "**Rolul**: terminatorul elimină sau reduce **reflexiile de semnal** cauzate de discontinuităţile de impedanţă (conectori, sarcini capacitive, treceri între straturi). Fără terminator, reflexiile produc oscilaţii ale tensiunii şi curentului care reduc fiabilitatea transferurilor.\n\n**Terminator rezistiv serie**:\n- Se conectează **în serie** cu linia, la capătul transmisiei (lângă driver).\n- Condiţia ideală: **R_s + Z_s = Z_0** (Rs — rezistenţa serie, Zs — impedanţa sursei, Z0 — impedanţa caracteristică a liniei).\n- Absoarbe unda reflectată la recepţie la nivel de sursă.\n\n**Terminator rezistiv paralel**:\n- Se conectează **în paralel** la capătul receptor, formând un **divizor de tensiune**.\n- Rezistenţa echivalentă trebuie să fie egală cu Z0.\n- Poate fi utilizat pentru **magistrale bidirecţionale**.",
+    "chapter": "Magistrale"
   },
   {
     "id": 28,
     "title": "Transferul prin protocol bidirecţional (ambele variante)",
     "source": "4 SIE-Magistrale-1.pdf, p. 24–26",
-    "content": "**a) Inițiat de sursă**:\n1. Sursa plasează datele şi activează **DREADY**.\n2. Destinaţia preia datele şi activează **ACK**.\n3. Sursa dezactivează DREADY (confirmarea recepţiei).\n4. Destinaţia dezactivează ACK.\n\n**b) Inițiat de destinaţie**:\n1. Destinaţia activează **DREQ**.\n2. Sursa plasează datele şi activează **ACK**.\n3. Destinaţia preia datele şi dezactivează DREQ.\n4. Sursa dezactivează ACK şi retrage datele."
+    "content": "**a) Inițiat de sursă**:\n1. Sursa plasează datele şi activează **DREADY**.\n2. Destinaţia preia datele şi activează **ACK**.\n3. Sursa dezactivează DREADY (confirmarea recepţiei).\n4. Destinaţia dezactivează ACK.\n\n**b) Inițiat de destinaţie**:\n1. Destinaţia activează **DREQ**.\n2. Sursa plasează datele şi activează **ACK**.\n3. Destinaţia preia datele şi dezactivează DREQ.\n4. Sursa dezactivează ACK şi retrage datele.",
+    "chapter": "Magistrale"
   },
   {
     "id": 29,
     "title": "Deosebirea topologiilor „stea simplă\" vs. „stea duală\" VXS",
     "source": "8 SIE-Module-Extensie.pdf, p. 13–14",
-    "content": "**Stea simplă**: fiecare placă normală se conectează la **o singură placă comutatoare**. Există o singură cale de comunicaţie, care poate deveni un punct unic de defecţiune.\n\n**Stea duală**: fiecare placă normală se conectează la **ambele plăci comutatoare**. Aceasta asigură **redundanţă** — dacă una dintre plăcile comutatoare defectează, comunicaţia continuă prin cealaltă, crescând fiabilitatea sistemului. Este preferată în aplicaţii critice (militare, aerospaţiale)."
+    "content": "**Stea simplă**: fiecare placă normală se conectează la **o singură placă comutatoare**. Există o singură cale de comunicaţie, care poate deveni un punct unic de defecţiune.\n\n**Stea duală**: fiecare placă normală se conectează la **ambele plăci comutatoare**. Aceasta asigură **redundanţă** — dacă una dintre plăcile comutatoare defectează, comunicaţia continuă prin cealaltă, crescând fiabilitatea sistemului. Este preferată în aplicaţii critice (militare, aerospaţiale).",
+    "chapter": "Module Extensie"
   },
   {
     "id": 30,
     "title": "Avantajele utilizării modulelor COM Express",
     "source": "8 SIE-Module-Extensie.pdf, p. 64–71",
-    "content": "1. **Performanţe ridicate** — datorită magistralelor şi interfeţelor seriale cu viteze ridicate (PCIe, USB, SATA, Ethernet, afişaj).\n2. **Flexibilitate** — disponibile în dimensiuni multiple (Mini 84×55 mm, Compact 95×95 mm, Basic 125×95 mm, Extended 155×110 mm) şi tipuri variate de configuraţii ale pinilor (tipuri 1, 2, 3, 4, 5, 6, 7, 10).\n3. **Versatilitate de utilizare** — pot fi folosite atât independent (calculator pe o singură placă) cât şi ca modul mezanin procesor conectat la o placă purtătoare a utilizatorului.\n4. **Cost şi timp de dezvoltare reduse** — utilizatorul proiectează numai placa purtătoare cu I/O specific aplicaţiei.\n5. **Actualizări simple** — la o nouă generaţie de procesor, se înlocuieşte doar modulul COM Express, placa purtătoare rămânând neschimbată."
+    "content": "1. **Performanţe ridicate** — datorită magistralelor şi interfeţelor seriale cu viteze ridicate (PCIe, USB, SATA, Ethernet, afişaj).\n2. **Flexibilitate** — disponibile în dimensiuni multiple (Mini 84×55 mm, Compact 95×95 mm, Basic 125×95 mm, Extended 155×110 mm) şi tipuri variate de configuraţii ale pinilor (tipuri 1, 2, 3, 4, 5, 6, 7, 10).\n3. **Versatilitate de utilizare** — pot fi folosite atât independent (calculator pe o singură placă) cât şi ca modul mezanin procesor conectat la o placă purtătoare a utilizatorului.\n4. **Cost şi timp de dezvoltare reduse** — utilizatorul proiectează numai placa purtătoare cu I/O specific aplicaţiei.\n5. **Actualizări simple** — la o nouă generaţie de procesor, se înlocuieşte doar modulul COM Express, placa purtătoare rămânând neschimbată.",
+    "chapter": "Module Extensie"
   },
   {
     "id": 52,
     "title": "Explicati diferenta dintre timpul de executie al CPU si timpul de raspuns.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Timpul de executie masoara cat de repede termina CPU o sarcina, in timp ce timpul de\nraspuns masoara cat de repede sistemul reactioneaza la o solicitare."
+    "content": "Timpul de executie masoara cat de repede termina CPU o sarcina, in timp ce timpul de\nraspuns masoara cat de repede sistemul reactioneaza la o solicitare.",
+    "chapter": "Introducere"
   },
   {
     "id": 53,
     "title": "Explicati motivele pentru care dispozitivele periferice nu sunt conectate direct la magistrala sistemului.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Perifericele sunt mai lente si folosesc protocoale diferite, deci au nevoie de module de\ninterfata pentru a evita incarcarea si blocarea magistralei sistemului."
+    "content": "Perifericele sunt mai lente si folosesc protocoale diferite, deci au nevoie de module de\ninterfata pentru a evita incarcarea si blocarea magistralei sistemului.",
+    "chapter": "Discuri Optice"
   },
   {
     "id": 54,
     "title": "Descrieti functiile unui modul de I/E.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Modulul de I/E gestioneaza transferul de date, sincronizeaza comunicatia si adapteaza\nsemnalele intre CPU si periferice."
+    "content": "Modulul de I/E gestioneaza transferul de date, sincronizeaza comunicatia si adapteaza\nsemnalele intre CPU si periferice.",
+    "chapter": "Introducere"
   },
   {
     "id": 55,
     "title": "Explicati cum este executata o operatie de I/E programata.",
     "source": "Q&A_Partea1.pdf",
-    "content": "In IE programata, CPU controleaza si executa fiecare transfer de date, verificand manual\nstarea dispozitivului."
+    "content": "In IE programata, CPU controleaza si executa fiecare transfer de date, verificand manual\nstarea dispozitivului.",
+    "chapter": "Introducere"
   },
   {
     "id": 56,
     "title": "Explicati diferentele intre adresarea cu mapare in memorie si adresarea izolata.",
     "source": "Q&A_Partea1.pdf",
-    "content": "In adresarea cu mapare in memorie perifericele sunt tratate ca locatii de memorie normale\nsi se folosesc aceleasi instructiuni ca pentru accesul la memorie. In adresarea izolata,\nperifericele au spatiu de adrese separat de memorie si sunt necesare instructiuni speciale\npentru IE."
+    "content": "In adresarea cu mapare in memorie perifericele sunt tratate ca locatii de memorie normale\nsi se folosesc aceleasi instructiuni ca pentru accesul la memorie. In adresarea izolata,\nperifericele au spatiu de adrese separat de memorie si sunt necesare instructiuni speciale\npentru IE.",
+    "chapter": "Metode IE"
   },
   {
     "id": 57,
     "title": "Explicati dezavantajele IE programate.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Dezavantajele majore sunt faptul ca CPU este blocat si ocupat in timpul transferului,\npierzand timp pretios si rata de transfer este limitata de cat de rapid poate CPU testa\ndispozitivele periferice."
+    "content": "Dezavantajele majore sunt faptul ca CPU este blocat si ocupat in timpul transferului,\npierzand timp pretios si rata de transfer este limitata de cat de rapid poate CPU testa\ndispozitivele periferice.",
+    "chapter": "Metode IE"
   },
   {
     "id": 58,
     "title": "Explicati metodele care pot fi folosite pentru alegerea adresei rutinei de tratare a intreruperii.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Metodele principale sunt: linii multiple de intrerupere dedicate fiecarui dispozitiv,\ninterogare software (polling secvential), interogare hardware (daisy-chain sau scanare\nprioritara), arbitraj de magistrala (pentru sistemele complexe)."
+    "content": "Metodele principale sunt: linii multiple de intrerupere dedicate fiecarui dispozitiv,\ninterogare software (polling secvential), interogare hardware (daisy-chain sau scanare\nprioritara), arbitraj de magistrala (pentru sistemele complexe).",
+    "chapter": "Metode IE"
   },
   {
     "id": 59,
     "title": "Explicati tehnica de interogare hardware.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Interogarea hardware implicaa un semnal de cerere comun, CPU sau un arbitru trimite\nsemnale de interogare adresata dispozitivelor, dispozitivul activ raspunde, identificandu-\nse rapid fara testare secventiala."
+    "content": "Interogarea hardware implicaa un semnal de cerere comun, CPU sau un arbitru trimite\nsemnale de interogare adresata dispozitivelor, dispozitivul activ raspunde, identificandu-\nse rapid fara testare secventiala.",
+    "chapter": "Introducere"
   },
   {
     "id": 60,
     "title": "Prezentati metodele de efectuare a transferurilor prin DMA.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Furt de ciclu - DMA \"fura\" cicluri de magistrala intre accesarile CPU-ului\n\nTransfer in rafala - DMA preia controlul magistralei pentru a transfera blocuri mari de date."
+    "content": "Furt de ciclu - DMA \"fura\" cicluri de magistrala intre accesarile CPU-ului\n\nTransfer in rafala - DMA preia controlul magistralei pentru a transfera blocuri mari de date.",
+    "chapter": "Metode IE"
   },
   {
     "id": 61,
     "title": "Explicati avantajul utilizarii procesoarelor de IE fata de transferurile prin DMA.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Procesoarele de IE pot gestiona operatii complexe autonome, nu doar transferuri brute de\ndate ca DMA."
+    "content": "Procesoarele de IE pot gestiona operatii complexe autonome, nu doar transferuri brute de\ndate ca DMA.",
+    "chapter": "Metode IE"
   },
   {
     "id": 62,
     "title": "Explicati diagrama de timp a unui transfer initiat de sursa pe o magistrala asincrona folosind un protocol bidirectional.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Sursa pune adresa si comanda pe magistrala, trimite un semnal de solicitare, destinatia\nraspunde cu un semnal de acceptare cand este gata, datele sunt apoi transferate."
+    "content": "Sursa pune adresa si comanda pe magistrala, trimite un semnal de solicitare, destinatia\nraspunde cu un semnal de acceptare cand este gata, datele sunt apoi transferate.",
+    "chapter": "Discuri Optice"
   },
   {
     "id": 63,
     "title": "Explicati diagrama de timp a unui transfer initiat de destinatie pe o magistrala asincrona folosind un protocol bidirectional.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Destinatia trimite un semnal de solicitare, sursa pregateste datele si semnaleaza ca datele\nsunt valide, transferul are loc dupa confirmare."
+    "content": "Destinatia trimite un semnal de solicitare, sursa pregateste datele si semnaleaza ca datele\nsunt valide, transferul are loc dupa confirmare.",
+    "chapter": "Discuri Optice"
   },
   {
     "id": 64,
     "title": "Prezentati avantajele magistralelor seriale comparativ cu magistralele paralele.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Dimensiuni mai mici ale conectorilor si cablurilor, interferente electrice reduse,\nsincronizare mai simpla, distanta de interconectare mai mare, costuri mai mici."
+    "content": "Dimensiuni mai mici ale conectorilor si cablurilor, interferente electrice reduse,\nsincronizare mai simpla, distanta de interconectare mai mare, costuri mai mici.",
+    "chapter": "Magistrale"
   },
   {
     "id": 65,
     "title": "Prezentati dezavantajele arbitrajului centralizat al magistralei prin conectare in lant.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Prioritati fixe ale dispozitivelor, dispozitivele apropiate de arbitru au prioritate mai mare,\ndefectiunea unui dispozitiv poate bloca intreaga magistrala."
+    "content": "Prioritati fixe ale dispozitivelor, dispozitivele apropiate de arbitru au prioritate mai mare,\ndefectiunea unui dispozitiv poate bloca intreaga magistrala.",
+    "chapter": "Magistrale"
   },
   {
     "id": 66,
     "title": "Explicati diagrama unui sistem folosind arbitrarea centralizata a magistralei prin interogare.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Arbitrul trimite semnale de interogare secvential catre dispozitive, primul dispozitiv\npregatit raspunde si primeste codul magistralei.\n\nPractic arbitrul intreaba dispozitivele pe rand cine are nevoie de magistrala."
+    "content": "Arbitrul trimite semnale de interogare secvential catre dispozitive, primul dispozitiv\npregatit raspunde si primeste codul magistralei.\n\nPractic arbitrul intreaba dispozitivele pe rand cine are nevoie de magistrala.",
+    "chapter": "Magistrale"
   },
   {
     "id": 67,
     "title": "Explicati avantajele conectarii statiilor de lucru la magistrala locala a procesorului.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Viteza mare de transfer, latenta scazuta, performanta imbunatatita, simplificarea\narhitecturii si costuri reduse."
+    "content": "Viteza mare de transfer, latenta scazuta, performanta imbunatatita, simplificarea\narhitecturii si costuri reduse.",
+    "chapter": "Magistrale"
   },
   {
     "id": 68,
     "title": "Explicati de ce magistrala PCI nu necesita terminatori.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Pe magistrala PCI, semnalul este emis la un nivel de tensiune redus, iar reflexia controlata\ndin capatul magistralei dubleaza tensiunea pentru a atinge nivelul logic complet. De aceea\nnu sunt necesari terminatori clasici."
+    "content": "Pe magistrala PCI, semnalul este emis la un nivel de tensiune redus, iar reflexia controlata\ndin capatul magistralei dubleaza tensiunea pentru a atinge nivelul logic complet. De aceea\nnu sunt necesari terminatori clasici.",
+    "chapter": "Magistrale"
   },
   {
     "id": 69,
     "title": "prezentati noile caracteristici introduse de versiunea 2.0 a magistralei PCI-X.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Frecventa de 266 si 533 Mhz, transferuri de date imbunatatite, corectie de erori ECC,\nsuport pentru Hot Swap."
+    "content": "Frecventa de 266 si 533 Mhz, transferuri de date imbunatatite, corectie de erori ECC,\nsuport pentru Hot Swap.",
+    "chapter": "Magistrale"
   },
   {
     "id": 70,
     "title": "Prezentati imbunatatirile introduse de magistrala PCIe.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Conexiuni seriale punct la punct, transfer de date bazat pe pachete, scalabilitate prin lane-\nuri multiple."
+    "content": "Conexiuni seriale punct la punct, transfer de date bazat pe pachete, scalabilitate prin lane-\nuri multiple.",
+    "chapter": "Magistrale"
   },
   {
     "id": 71,
     "title": "Descrieti componentele principale ale topologiei magistralei PCIe.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Complex radacina (conecteaza procesorul si memoria la periferice), puncte terminale\n(dispozitive periferice), comutatoare (directioneaza traficul intre module)"
+    "content": "Complex radacina (conecteaza procesorul si memoria la periferice), puncte terminale\n(dispozitive periferice), comutatoare (directioneaza traficul intre module)",
+    "chapter": "Magistrale"
   },
   {
     "id": 72,
     "title": "Explicati functia comutatorului intr-un sistem folosind PCIe.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Conecteaza mai multe perifeice prin conexiuni punct la punct si gestioneaza traficul intre\nele, inlocuind magistrala partajata."
+    "content": "Conecteaza mai multe perifeice prin conexiuni punct la punct si gestioneaza traficul intre\nele, inlocuind magistrala partajata.",
+    "chapter": "Magistrale"
   },
   {
     "id": 73,
     "title": "Prezentati categoriile si tipurile de tranzactii pe magistrala PCIe.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Tranzacii de memorie, de IE, de configurare si de mesaje."
+    "content": "Tranzacii de memorie, de IE, de configurare si de mesaje.",
+    "chapter": "Magistrale"
   },
   {
     "id": 74,
     "title": "Explicati mecanismele native si traditionale de semnalizare a intreruperilor pe magistrala PCIe.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Mod nativ: intreruperi semnalate prin mesaje\n\nMod compatibil: utilizarea liniilor virtuale INTx#"
+    "content": "Mod nativ: intreruperi semnalate prin mesaje\n\nMod compatibil: utilizarea liniilor virtuale INTx#",
+    "chapter": "Metode IE"
   },
   {
     "id": 75,
     "title": "Comparati magistralele I2C si SPI",
     "source": "Q&A_Partea1.pdf",
-    "content": "I2C: utilizeaza 2 linii (SDA de date si SCL de clock), este mai lenta dar suporta multi-master\n\nSPI: 4 linii, transfer mai rapid, comunicatie full duplex"
+    "content": "I2C: utilizeaza 2 linii (SDA de date si SCL de clock), este mai lenta dar suporta multi-master\n\nSPI: 4 linii, transfer mai rapid, comunicatie full duplex",
+    "chapter": "Magistrale"
   },
   {
     "id": 76,
     "title": "Prezentati caracteristicile principale ale magistralei USB",
     "source": "Q&A_Partea1.pdf",
-    "content": "Conexiuni de tip arbore, plug and play, alimentarea prin cablu si arhitectura master/slave."
+    "content": "Conexiuni de tip arbore, plug and play, alimentarea prin cablu si arhitectura master/slave.",
+    "chapter": "Magistrale"
   },
   {
     "id": 77,
     "title": "Prezentati imbunatatirile aduse de USB 3.0, 3.1 si 3.2",
     "source": "Q&A_Partea1.pdf",
-    "content": "USB 3.0: SuperSpeed 5 Gbs\n\nUSB 3.1: SuperSpeed+ 10 Gbs\n\nUSB 3.2: SuperSpeed+ 20 Gbs cu doua benzi"
+    "content": "USB 3.0: SuperSpeed 5 Gbs\n\nUSB 3.1: SuperSpeed+ 10 Gbs\n\nUSB 3.2: SuperSpeed+ 20 Gbs cu doua benzi",
+    "chapter": "Magistrale"
   },
   {
     "id": 78,
     "title": "Prezentati caracteristicile principale ale USB4.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Bazat pe thunderbolt 3, 40-80 Gbs, conector USB-C, protocoale multiple simultane."
+    "content": "Bazat pe thunderbolt 3, 40-80 Gbs, conector USB-C, protocoale multiple simultane.",
+    "chapter": "Discuri Optice"
   },
   {
     "id": 79,
     "title": "Explicati diferenta dintre transferurile izocrone si transferurile asincrone pe USB",
     "source": "Q&A_Partea1.pdf",
-    "content": "Izocrone: flux continuu de date in timp real, fara retransmisii\n\nAsincrone: date validate si retransmise la erori"
+    "content": "Izocrone: flux continuu de date in timp real, fara retransmisii\n\nAsincrone: date validate si retransmise la erori",
+    "chapter": "Magistrale"
   },
   {
     "id": 80,
     "title": "Prezentati caracteristicile principale ale magistralei VME320",
     "source": "Q&A_Partea1.pdf",
-    "content": "Rata de transfer peste 320 Mbps, structura paralela si metode rapide de arbitrare."
+    "content": "Rata de transfer peste 320 Mbps, structura paralela si metode rapide de arbitrare.",
+    "chapter": "Magistrale"
   },
   {
     "id": 81,
     "title": "Prezentati caracteristicile principale ale magistralei VXS",
     "source": "Q&A_Partea1.pdf",
-    "content": "Combinatie intre VME paralel si semnale seriale rapide, suport pentru stea plasa si lant,\ncreste rata de transfer"
+    "content": "Combinatie intre VME paralel si semnale seriale rapide, suport pentru stea plasa si lant,\ncreste rata de transfer",
+    "chapter": "Magistrale"
   },
   {
     "id": 82,
     "title": "Prezentati caracteristicile principale ale magistralei VPX",
     "source": "Q&A_Partea1.pdf",
-    "content": "Interconexiuni punct la punct, suport pentru PCIe, Ethernet de mare viteza, conectori\nrobusti, pentru aplicatii militare si industriale."
+    "content": "Interconexiuni punct la punct, suport pentru PCIe, Ethernet de mare viteza, conectori\nrobusti, pentru aplicatii militare si industriale.",
+    "chapter": "Magistrale"
   },
   {
     "id": 83,
     "title": "Prezentati cerintele care trebuie indeplinite de sistemele embedded utilizate in aplicatii industriale si militare.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Robustete la temperaturi extreme, vibratii si socuri termice. Fiabilitate ridicata si\nfunctionare continua. Dimensiuni compacte si consum redus de energie. Securitate\nridicata a datelor si comunicatiilor. Compatibilitate cu standarde industriale si militare."
+    "content": "Robustete la temperaturi extreme, vibratii si socuri termice. Fiabilitate ridicata si\nfunctionare continua. Dimensiuni compacte si consum redus de energie. Securitate\nridicata a datelor si comunicatiilor. Compatibilitate cu standarde industriale si militare.",
+    "chapter": "Introducere"
   },
   {
     "id": 84,
     "title": "Prezentati caracteristicile optionale ale magistralelor VME si VME64x.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Transferuri de date pe 32 sau 64 biti. Transfere de date rapide prin moduri block transfer si\npipelining. Hot Swap. Adresare geografica (identificare automata a placilor). Semnale de\nfault management."
+    "content": "Transferuri de date pe 32 sau 64 biti. Transfere de date rapide prin moduri block transfer si\npipelining. Hot Swap. Adresare geografica (identificare automata a placilor). Semnale de\nfault management.",
+    "chapter": "Metode IE"
   },
   {
     "id": 85,
     "title": "Explicati caracteristica de adresare geografica a modulelor VME64x.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Fiecare modul VME64x primeste automat o adresa bazata pe pozitia sa in sasiu. Elimina\nneceitatea configurarii manuale a adreselor."
+    "content": "Fiecare modul VME64x primeste automat o adresa bazata pe pozitia sa in sasiu. Elimina\nneceitatea configurarii manuale a adreselor.",
+    "chapter": "Metode IE"
   },
   {
     "id": 86,
     "title": "Prezentati caracteristicile placilor comutatoare si ale placilor de sarcina VXS.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Placile comutatoare gestioneaza transferul de date serial inter placile payload, au switch-\nuri rapide.\n\nPlacile payload realizeaza procesarea si comunicatia, conectate prin switch."
+    "content": "Placile comutatoare gestioneaza transferul de date serial inter placile payload, au switch-\nuri rapide.\n\nPlacile payload realizeaza procesarea si comunicatia, conectate prin switch.",
+    "chapter": "Magistrale"
   },
   {
     "id": 87,
     "title": "Prezentati topologiile care pot fi utilizate pentru backplane-urile VXS.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Topologii VXS: stea simpla, stea dubla, plasa, lant."
+    "content": "Topologii VXS: stea simpla, stea dubla, plasa, lant.",
+    "chapter": "Magistrale"
   },
   {
     "id": 88,
     "title": "Explicati conceptul de plane in OpenVPX si prezentati tipurile de plane definite.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Data plane, control plane, utility plane si management plane, fiecare plane are un rol clar\nin transportul de date, control sau alimentare."
+    "content": "Data plane, control plane, utility plane si management plane, fiecare plane are un rol clar\nin transportul de date, control sau alimentare.",
+    "chapter": "Introducere"
   },
   {
     "id": 89,
     "title": "Explicati conceptul de profil OpenVPX si prezentati tipurile de profiluri definite",
     "source": "Q&A_Partea1.pdf",
-    "content": "Profiluri de modul (ce face fiecare placa), profiluri de slot (ce poate fi montat intr-un slot),\nprofiluri de backplane (cum sunt legate sloturile) si profiluri sistem (configuratia intregului\nsistem)."
+    "content": "Profiluri de modul (ce face fiecare placa), profiluri de slot (ce poate fi montat intr-un slot),\nprofiluri de backplane (cum sunt legate sloturile) si profiluri sistem (configuratia intregului\nsistem).",
+    "chapter": "Introducere"
   },
   {
     "id": 90,
     "title": "Prezentati caracteristicile principale ale formatului CompactPCI.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Bazat pe magistrala PCI standard, placi Eurocard 3U/6U montate pe backplane pasiv,\nrobustete industriala si suport hot swap in unele variante."
+    "content": "Bazat pe magistrala PCI standard, placi Eurocard 3U/6U montate pe backplane pasiv,\nrobustete industriala si suport hot swap in unele variante.",
+    "chapter": "Magistrale"
   },
   {
     "id": 91,
     "title": "Avantajele formatului CompactPCI",
     "source": "Q&A_Partea1.pdf",
-    "content": "Fiabilitate ridicata, dimensiuni standardizate, operare in conditii extreme, flexibilitate si\nmodularitate."
+    "content": "Fiabilitate ridicata, dimensiuni standardizate, operare in conditii extreme, flexibilitate si\nmodularitate.",
+    "chapter": "Magistrale"
   },
   {
     "id": 92,
     "title": "Prezentati caracteristicile placilor CompactPCI Express, sloturilor de sistem si hibride.",
     "source": "Q&A_Partea1.pdf",
-    "content": "PCIe folosit ca interfata seriala, sloturi de sistem pentru controlerele procesor, soturi\nhibride pentru compatibilitate CompactPCI + PCIe."
+    "content": "PCIe folosit ca interfata seriala, sloturi de sistem pentru controlerele procesor, soturi\nhibride pentru compatibilitate CompactPCI + PCIe.",
+    "chapter": "Magistrale"
   },
   {
     "id": 93,
     "title": "Prezentati magistralele si interfetele disponibile in sistemele CompactPCI PlusIO.",
     "source": "Q&A_Partea1.pdf",
-    "content": "PCI Express, Ethernet, USB si SATA."
+    "content": "PCI Express, Ethernet, USB si SATA.",
+    "chapter": "Magistrale"
   },
   {
     "id": 94,
     "title": "Prezentati caracteristicile principale ale formatului CompactPCI Serial.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Doar comunicatii seriale (PCIe, Ethernet, SATA, USB), conexiuni punct la punct rapide,\nbackplane dedicat."
+    "content": "Doar comunicatii seriale (PCIe, Ethernet, SATA, USB), conexiuni punct la punct rapide,\nbackplane dedicat.",
+    "chapter": "Magistrale"
   },
   {
     "id": 95,
     "title": "Explicati avantajele utilizarii modulelor mezanin standardizate.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Compatibilitate intre furnizori, flexibilitate in configurare, costuri reduse de dezvoltare.\nModulele mezanin standardizate simplifica si accelereaza dezvoltarea."
+    "content": "Compatibilitate intre furnizori, flexibilitate in configurare, costuri reduse de dezvoltare.\nModulele mezanin standardizate simplifica si accelereaza dezvoltarea.",
+    "chapter": "Module Extensie"
   },
   {
     "id": 96,
     "title": "Prezentati extensiile standardului PCI Mezzanine Card (PMC)",
     "source": "Q&A_Partea1.pdf",
-    "content": "Suport pentru PCI 66 MHz si 64 biti, alimentare imbunatatita si interfete aditionale."
+    "content": "Suport pentru PCI 66 MHz si 64 biti, alimentare imbunatatita si interfete aditionale.",
+    "chapter": "Magistrale"
   },
   {
     "id": 97,
     "title": "Prezentati caracteristicile principale ale formatului XMC",
     "source": "Q&A_Partea1.pdf",
-    "content": "Extensie a PMC cu magistrala seriala, ofera suport pentru comunicatii rapide."
+    "content": "Extensie a PMC cu magistrala seriala, ofera suport pentru comunicatii rapide.",
+    "chapter": "Magistrale"
   },
   {
     "id": 98,
     "title": "Explicati motivele dezvoltarii standardului FMC",
     "source": "Q&A_Partea1.pdf",
-    "content": "Necesitatea conectarii flexibile a FPGA-urilor la semnale diverse, fara impunerea unui\nprotocol fix."
+    "content": "Necesitatea conectarii flexibile a FPGA-urilor la semnale diverse, fara impunerea unui\nprotocol fix.",
+    "chapter": "Discuri Optice"
   },
   {
     "id": 99,
     "title": "Prezentati caracteristicile principale ale formatului FMC",
     "source": "Q&A_Partea1.pdf",
-    "content": "Conector de mare densitate, suport pentru semnale analogice si digitale, flexibilitate in\nconfigurarea FPGA-ului."
+    "content": "Conector de mare densitate, suport pentru semnale analogice si digitale, flexibilitate in\nconfigurarea FPGA-ului.",
+    "chapter": "Module Extensie"
   },
   {
     "id": 100,
     "title": "Prezentati imbunatatirile aduse de FMC+",
     "source": "Q&A_Partea1.pdf",
-    "content": "Mai multe semnale de mare viteza, viteza de transfer de pana la 28Gbps pe linie, conector\nHSPC de mare densitate."
+    "content": "Mai multe semnale de mare viteza, viteza de transfer de pana la 28Gbps pe linie, conector\nHSPC de mare densitate.",
+    "chapter": "Module Extensie"
   },
   {
     "id": 101,
     "title": "Explicati avantajele utilizarii modulelor COM Express pentru sisteme inglobate.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Integrare procesor + memorie + interfata, upgrade facil prin schimbarea modulului, timp\nscurt de dezvoltare."
+    "content": "Integrare procesor + memorie + interfata, upgrade facil prin schimbarea modulului, timp\nscurt de dezvoltare.",
+    "chapter": "Module Extensie"
   },
   {
     "id": 102,
     "title": "Prezentati magistralele si interfetele incluse in modulele COM Express Tip 10",
     "source": "Q&A_Partea1.pdf",
-    "content": "PCI Express, USB, SATA, Ethernet Gigabit, LVDS pentru afisaj."
+    "content": "PCI Express, USB, SATA, Ethernet Gigabit, LVDS pentru afisaj.",
+    "chapter": "Afisaje"
   },
   {
     "id": 103,
     "title": "Prezentati diferentele dintre modulele COM Express Tip 6 si Tip 10.",
     "source": "Q&A_Partea1.pdf",
-    "content": "Tip 6: format mare, multe interfete, suport mai multe afisaje\n\nTip 10: formati mic, interfete reduse, un singur afisaj."
+    "content": "Tip 6: format mare, multe interfete, suport mai multe afisaje\n\nTip 10: formati mic, interfete reduse, un singur afisaj.",
+    "chapter": "Afisaje"
   },
   {
     "id": 104,
     "title": "Prezentati magistralele si interfetele din modulele COM Express Tip 7.",
     "source": "Q&A_Partea1.pdf",
-    "content": "PCI Express, Ethernet 10G, SATA, fara interfete video."
+    "content": "PCI Express, Ethernet 10G, SATA, fara interfete video.",
+    "chapter": "Magistrale"
   },
   {
     "id": 260,
     "title": "Prezintă caracteristicile principale ale formatului fizic Blu-ray Disc-Read/Only Memory (BD-ROM).",
     "source": "Q&A_Partea2.pdf",
-    "content": "Format doar pt citire, folosit pt distributia profesionala de continut HD. Are capacitate de\n25 GB sau 50 GB, permite redare a pana la 8 ore de video MPEG-4, iar rata minima de\ntransfer este de 54 Mbs pt continut 2D si 72 Mbs pt continut 3D."
+    "content": "Format doar pt citire, folosit pt distributia profesionala de continut HD. Are capacitate de\n25 GB sau 50 GB, permite redare a pana la 8 ore de video MPEG-4, iar rata minima de\ntransfer este de 54 Mbs pt continut 2D si 72 Mbs pt continut 3D.",
+    "chapter": "Discuri Optice"
   }
 ]

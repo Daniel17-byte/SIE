@@ -11,7 +11,7 @@
       "Se reduce lungimea de undă a razei laser comparativ cu cea a discurilor DVD.",
       "Se reduce grosimea stratului de acoperire pentru a compensa eroarea de focalizare a razei laser."
     ],
-    "chapter": "Stocare optica"
+    "chapter": "Discuri Optice"
   },
   {
     "id": 2,
@@ -27,7 +27,7 @@
       "Permite partajarea unei părți a memoriei GPU cu UCP.",
       "Permite accesul la o memorie partajată de către toate firele de execuție dintr-un bloc de fire de execuție."
     ],
-    "chapter": "GPU si CUDA"
+    "chapter": "Adaptoare Grafice"
   },
   {
     "id": 3,
@@ -42,7 +42,7 @@
       "Necesită mai puțin spațiu pentru aceeași capacitate.",
       "Are un consum de energie mai redus."
     ],
-    "chapter": "GPU si CUDA"
+    "chapter": "Adaptoare Grafice"
   },
   {
     "id": 4,
@@ -86,7 +86,7 @@
       "Poate fi o componentă a unei arhitecturi multi-core.",
       "Este responsabil de execuția instrucțiunilor programului."
     ],
-    "chapter": "Arhitectura calculatoarelor"
+    "chapter": "Introducere"
   },
   {
     "id": 7,
@@ -99,7 +99,7 @@
     "correctAnswers": [
       "Scrierea se execută cu laserul setat la puterea cea mai mare."
     ],
-    "chapter": "Stocare optica"
+    "chapter": "Discuri Optice"
   },
   {
     "id": 8,
@@ -112,7 +112,7 @@
     "correctAnswers": [
       "Biții de date sunt modulați pentru a evita șiruri foarte scurte de 0 consecutivi, ceea ce ar genera frecvențe înalte la citire."
     ],
-    "chapter": "Stocare optica"
+    "chapter": "Discuri Optice"
   },
   {
     "id": 9,
@@ -140,7 +140,7 @@
       "Nuclee de umbrire geometrică, care pot modifica topologia primitivelor pe care le recepționează ca intrări.",
       "Nuclee de umbrire pentru calcule, care pun la dispoziție facilități pentru o programare paralelă eficientă."
     ],
-    "chapter": "GPU si CUDA"
+    "chapter": "Adaptoare Grafice"
   },
   {
     "id": 11,
@@ -181,7 +181,7 @@
     "correctAnswers": [
       "Vopsele organice."
     ],
-    "chapter": "Stocare optica"
+    "chapter": "Discuri Optice"
   },
   {
     "id": 14,
@@ -194,7 +194,7 @@
     "correctAnswers": [
       "Un bit de 1 este înregistrat ca o tranziție de la cavitate la suprafață sau de la suprafață la cavitate, iar un bit de 0 ca lipsa unei tranziții"
     ],
-    "chapter": "Stocare optica"
+    "chapter": "Discuri Optice"
   },
   {
     "id": 15,
@@ -209,7 +209,7 @@
       "Fiecare bloc de fire de execuție are o memorie partajată care este accesibilă tuturor firelor din bloc, dar nu este accesibilă niciunui alt bloc.",
       "Firele de execuție dintr-o grilă de blocuri au acces la o memorie globală."
     ],
-    "chapter": "GPU si CUDA"
+    "chapter": "Adaptoare Grafice"
   },
   {
     "id": 16,
@@ -223,7 +223,7 @@
       "Scrierea se execută cu laserul setat la puterea cea mai mare.",
       "Rescrierea se execută cu două setări ale puterii laserului, pentru scriere și ștergere."
     ],
-    "chapter": "Stocare optica"
+    "chapter": "Discuri Optice"
   },
   {
     "id": 17,
@@ -297,7 +297,7 @@
       "Reducerea lungimii de undă a fasciculului laser.",
       "Utilizarea unei metode de modulare mai eficiente."
     ],
-    "chapter": "Stocare optica"
+    "chapter": "Discuri Optice"
   },
   {
     "id": 22,
@@ -326,7 +326,7 @@
       "Memorie globală",
       "Memorie constantă"
     ],
-    "chapter": "GPU si CUDA"
+    "chapter": "Adaptoare Grafice"
   },
   {
     "id": 24,
@@ -396,7 +396,7 @@
       "Necesită reglarea continuă a vitezei de rotație a discului.",
       "Este optimă pentru redare secvențială a datelor."
     ],
-    "chapter": "Stocare optica"
+    "chapter": "Discuri Optice"
   },
   {
     "id": 29,
@@ -424,7 +424,7 @@
       "Conțin adresele sectoarelor, care se utilizează de unitate pentru a determina poziția curentă pe disc.",
       "Conțin o canelură spiralată care permite controlul vitezei de rotație a discului."
     ],
-    "chapter": "Stocare optica"
+    "chapter": "Discuri Optice"
   },
   {
     "id": 31,
@@ -452,7 +452,7 @@
       "Emit lumină atunci când sunt polarizate direct.",
       "Sunt surse de lumină punctiforme."
     ],
-    "chapter": "Diverse"
+    "chapter": "Introducere"
   },
   {
     "id": 33,
@@ -508,7 +508,7 @@
     "correctAnswers": [
       "Biții sunt modulați pentru a evita șiruri foarte scurte de biți consecutivi de 0, care au ca rezultat o frecvență înaltă a semnalului generat la citire."
     ],
-    "chapter": "Stocare optica"
+    "chapter": "Discuri Optice"
   },
   {
     "id": 37,
@@ -523,7 +523,7 @@
       "Utilizează tehnica de inversare a magistralei de date pentru reducerea energiei consumate.",
       "Utilizează tehnica de antrenare a liniilor de date, care constă în alinierea fazei între semnalele de date şi semnalul lor de ceas pentru scriere."
     ],
-    "chapter": "GPU si CUDA"
+    "chapter": "Adaptoare Grafice"
   },
   {
     "id": 38,
@@ -554,7 +554,7 @@
       "Uniformitatea luminozității este îmbunătățită față de VA.",
       "Reproducerea culorilor este problematică în direcția perpendiculară pe ecran."
     ],
-    "chapter": "Diverse"
+    "chapter": "Introducere"
   },
   {
     "id": 40,
@@ -584,7 +584,7 @@
       "Latenta fiecărui nucleu de procesare este mult mai mare decât latenta unui nucleu UCP.",
       "Dimensiunea memoriilor cache este mai redusă."
     ],
-    "chapter": "GPU si CUDA"
+    "chapter": "Adaptoare Grafice"
   },
   {
     "id": 42,
@@ -628,7 +628,7 @@
       "Permite utilizarea unui canal de retur audio, pe care se pot transmite date audio de la aparatul TV la un receptor audio/video.",
       "Permite utilizarea unui cablu cu un conector USB de tip C pentru conectarea la un afișaj."
     ],
-    "chapter": "Diverse"
+    "chapter": "Introducere"
   },
   {
     "id": 45,
@@ -645,7 +645,7 @@
       "Blocurile de fire sunt planificate pentru execuție în orice ordine pe oricare nucleu de procesare disponibil.",
       "O parte din memoria GPU poate fi partajată cu CPU."
     ],
-    "chapter": "GPU si CUDA"
+    "chapter": "Adaptoare Grafice"
   },
   {
     "id": 46,
@@ -690,7 +690,7 @@
       "Conține o magistrală serială care permite transferul codurilor telecomenzilor dacă o telecomandă este programată cu informația indicând tipul celorlalte dispozitive conectate.",
       "Permite utilizarea unui cablu cu un conector USB de tip C pentru conectarea la un afișaj"
     ],
-    "chapter": "Diverse"
+    "chapter": "Introducere"
   },
   {
     "id": 49,
@@ -704,7 +704,7 @@
       "Utilizează un șir de transport care conține informații video, audio și grafice multiplexate.",
       "Definește modul BD-Java, care permite dezvoltarea aplicațiilor interactive."
     ],
-    "chapter": "Diverse"
+    "chapter": "Introducere"
   },
   {
     "id": 50,
@@ -719,7 +719,7 @@
       "Este utilizată pentru a reduce traficul de memorie globală",
       "Este mai rapidă decât memoria globală"
     ],
-    "chapter": "GPU si CUDA"
+    "chapter": "Adaptoare Grafice"
   },
   {
     "id": 51,
@@ -750,7 +750,7 @@
       "Utilizarea unei metode de modulare mai eficiente.",
       "Reducerea lungimii de undă a razei laser."
     ],
-    "chapter": "Stocare optica"
+    "chapter": "Discuri Optice"
   },
   {
     "id": 53,
@@ -800,7 +800,7 @@
       "Îmbunătățesc precizia alinierii între sesiunile de scriere consecutive comparativ cu DVD-R.",
       "Utilizează un sistem de gestiune a erorilor care este mai robust decât cel al discurilor DVD-R"
     ],
-    "chapter": "Stocare optica"
+    "chapter": "Discuri Optice"
   },
   {
     "id": 56,
@@ -826,7 +826,7 @@
     "correctAnswers": [
       "Permite tehnica Full-Array Local Dimming."
     ],
-    "chapter": "Diverse"
+    "chapter": "Introducere"
   },
   {
     "id": 58,
@@ -839,7 +839,7 @@
     "correctAnswers": [
       "Asigură o viteză de rotație constantă."
     ],
-    "chapter": "Stocare optica"
+    "chapter": "Discuri Optice"
   },
   {
     "id": 59,
@@ -867,7 +867,7 @@
     "correctAnswers": [
       "Este avantajoasă pentru aplicațiile care necesită acces secvențial"
     ],
-    "chapter": "Stocare optica"
+    "chapter": "Discuri Optice"
   },
   {
     "id": 61,
@@ -921,7 +921,7 @@
       "Utilizează un strat de protecție mai subțire decât DVD-ul",
       "Utilizează un laser cu lungime de undă mai mică decât DVD-ul"
     ],
-    "chapter": "Stocare optica"
+    "chapter": "Discuri Optice"
   },
   {
     "id": 65,
@@ -937,7 +937,7 @@
       "Utilizează o canelură spiralată cu o frecvență mai ridicată a sinusoidei față de cea a discurilor DVD-R.",
       "Comparativ cu discurile DVD-R, îmbunătățesc precizia înlănțuirii între sesiunile de scriere consecutive."
     ],
-    "chapter": "Stocare optica"
+    "chapter": "Discuri Optice"
   },
   {
     "id": 66,
@@ -979,7 +979,7 @@
       "Necesită un consum redus de energie.",
       "Permite realizarea afişajelor cu grosime redusă."
     ],
-    "chapter": "Diverse"
+    "chapter": "Introducere"
   },
   {
     "id": 69,
@@ -992,7 +992,7 @@
     "correctAnswers": [
       "Nano-cristale semiconductoare."
     ],
-    "chapter": "Diverse"
+    "chapter": "Introducere"
   },
   {
     "id": 70,
@@ -1046,7 +1046,7 @@
     "correctAnswers": [
       "Moleculele se aliniază în straturi, iar în fiecare strat ele sunt răsucite față de straturile adiacente."
     ],
-    "chapter": "Diverse"
+    "chapter": "Introducere"
   },
   {
     "id": 74,
@@ -1121,7 +1121,7 @@
       "Poate transmite și semnal Ethernet.",
       "Suportă transmisia simultană a semnalelor video și audio."
     ],
-    "chapter": "Diverse"
+    "chapter": "Introducere"
   },
   {
     "id": 79,
@@ -1191,7 +1191,7 @@
       "Pentru deviațiile sinusoidale, utilizează modularea Minimum-Shift Keying, care inversează faza anumitor date.",
       "Utilizează o canelură spiralată care este modulată prin deviații sinusoidale pentru a îngloba informații de sincronizare."
     ],
-    "chapter": "Stocare optica"
+    "chapter": "Discuri Optice"
   },
   {
     "id": 84,
@@ -1264,7 +1264,7 @@
       "Nu poate fi accesată simultan de UCP și circuitul GPU.",
       "Permite accesul la o parte a memoriei GPU atât de către UCP, cât și de către GPU"
     ],
-    "chapter": "GPU si CUDA"
+    "chapter": "Adaptoare Grafice"
   },
   {
     "id": 89,

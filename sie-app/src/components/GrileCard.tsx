@@ -60,15 +60,118 @@ interface Props {
 const QUIZ_SIZE = 10;
 const QUIZ_HISTORY_LIMIT = QUIZ_SIZE * 3;
 const ALL_CHAPTERS_VALUE = "__all__";
-const DEFAULT_CHAPTER_LABEL = "Diverse";
+const DEFAULT_CHAPTER_LABEL = "Introducere";
 
-function getChapterLabel(chapter: string | undefined) {
-  if (typeof chapter !== "string") {
-    return DEFAULT_CHAPTER_LABEL;
+const COURSE_CHAPTERS = [
+  "Adaptoare Grafice",
+  "Afisaje",
+  "Discuri Optice",
+  "Metode IE",
+  "Magistrale",
+  "Introducere",
+  "Module Extensie",
+] as const;
+
+const LEGACY_TO_COURSE_CHAPTER: Record<string, (typeof COURSE_CHAPTERS)[number]> = {
+  "Intreruperi": "Metode IE",
+  "DMA si transferuri I/E": "Metode IE",
+  "Magistrale si interconectare": "Magistrale",
+  "PCI / PCI Express / CompactPCI": "Magistrale",
+  "Module embedded": "Module Extensie",
+  "GPU si CUDA": "Adaptoare Grafice",
+  "Afisaje": "Afisaje",
+  "Stocare optica": "Discuri Optice",
+  "Arhitectura calculatoarelor": "Introducere",
+  "Diverse": "Introducere",
+};
+
+const CHAPTER_KEYWORD_RULES: Array<{
+  chapter: (typeof COURSE_CHAPTERS)[number];
+  patterns: string[];
+}> = [
+  {
+    chapter: "Adaptoare Grafice",
+    patterns: ["cuda", "gpu", "gddr", "hbm", "shader", "adaptor grafic"],
+  },
+  {
+    chapter: "Afisaje",
+    patterns: [
+      "afisaj",
+      "display",
+      "displayport",
+      "lcd",
+      "oled",
+      "amoled",
+      "ips",
+      "tn",
+      "mva",
+      "stn",
+      "quantum dot",
+      "hdmi",
+      "tmds",
+      "e-paper",
+      "hartie electronica",
+    ],
+  },
+  {
+    chapter: "Discuri Optice",
+    patterns: ["disc", "cd", "dvd", "blu-ray", "pit", "land", "laser", "toc", "msf", "atapi"],
+  },
+  {
+    chapter: "Metode IE",
+    patterns: [
+      "dma",
+      "intrerup",
+      "polling",
+      "iack",
+      "ireq",
+      "adresarea izolata",
+      "mapare in memorie",
+      "procesoarele de i/e",
+      "controlerul dma",
+    ],
+  },
+  {
+    chapter: "Module Extensie",
+    patterns: ["compactpci", "com express", "fmc", "mezzanin", "mezanin", "xmc", "picmg"],
+  },
+  {
+    chapter: "Magistrale",
+    patterns: ["magistral", "pci express", "pcie", "pci", "smbus", "usb", "spi", "i2c", "serial", "paralel", "vme", "vxs"],
+  },
+];
+
+function normalizeChapterText(value: string) {
+  return value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
+}
+
+function inferQuestionChapter(question: GrilaQuestion) {
+  if (typeof question.chapter === "string" && question.chapter.trim().length > 0) {
+    const trimmedChapter = question.chapter.trim();
+    if ((COURSE_CHAPTERS as readonly string[]).includes(trimmedChapter)) {
+      return trimmedChapter;
+    }
+
+    if (trimmedChapter in LEGACY_TO_COURSE_CHAPTER) {
+      return LEGACY_TO_COURSE_CHAPTER[trimmedChapter];
+    }
   }
 
-  const trimmedChapter = chapter.trim();
-  return trimmedChapter.length > 0 ? trimmedChapter : DEFAULT_CHAPTER_LABEL;
+  const searchableText = normalizeChapterText(
+    `${question.question} ${(question.answers ?? []).join(" ")}`
+  );
+
+  for (const rule of CHAPTER_KEYWORD_RULES) {
+    if (rule.patterns.some((pattern) => searchableText.includes(normalizeChapterText(pattern)))) {
+      return rule.chapter;
+    }
+  }
+
+  return DEFAULT_CHAPTER_LABEL;
 }
 
 function getRandomIndex(maxExclusive: number) {
@@ -278,7 +381,7 @@ const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete }) => {
               uid: `${source.id}-${question.id}`,
               sourceId: source.id,
               sourceLabel: source.label,
-              chapter: getChapterLabel(question.chapter),
+              chapter: inferQuestionChapter(question),
               hasAnswerKey:
                 source.hasAnswerKey &&
                 Array.isArray(question.correctAnswers) &&
@@ -318,9 +421,7 @@ const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete }) => {
   }, [sources]);
 
   const chapterOptions = useMemo(() => {
-    const chapters = Array.from(
-      new Set(questionPool.map((question) => getChapterLabel(question.chapter)))
-    );
+    const chapters = Array.from(new Set(questionPool.map((question) => question.chapter)));
 
     return chapters.sort((a, b) => a.localeCompare(b, "ro"));
   }, [questionPool]);
@@ -340,7 +441,7 @@ const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete }) => {
     }
 
     return questionPool.filter(
-      (question) => getChapterLabel(question.chapter) === selectedChapter
+      (question) => question.chapter === selectedChapter
     );
   }, [questionPool, selectedChapter]);
 

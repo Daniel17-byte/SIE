@@ -81,46 +81,71 @@ const EMPTY_QUESTION_SETS: Record<OpenQuestionSetKey, Question[]> = {
 
 const STATS_FILE_SUGGESTED_NAME = "statistici-grile.txt";
 const ALL_OPEN_CHAPTERS_VALUE = "__all_open__";
-const DEFAULT_OPEN_CHAPTER = "Diverse";
+const DEFAULT_OPEN_CHAPTER = "Introducere";
 
 type OpenQuestionWithChapter = Question & { chapter: string };
 
+const COURSE_CHAPTERS = [
+  "Adaptoare Grafice",
+  "Afisaje",
+  "Discuri Optice",
+  "Metode IE",
+  "Magistrale",
+  "Introducere",
+  "Module Extensie",
+] as const;
+
+const LEGACY_TO_COURSE_CHAPTER: Record<string, (typeof COURSE_CHAPTERS)[number]> = {
+  "Intreruperi": "Metode IE",
+  "DMA si transferuri I/E": "Metode IE",
+  "Magistrale si interconectare": "Magistrale",
+  "PCI / PCI Express / CompactPCI": "Magistrale",
+  "Module embedded": "Module Extensie",
+  "GPU si CUDA": "Adaptoare Grafice",
+  "Afisaje": "Afisaje",
+  "Stocare optica": "Discuri Optice",
+  "Arhitectura calculatoarelor": "Introducere",
+  "Diverse": "Introducere",
+};
+
+const SOURCE_CHAPTER_RULES: Array<{ chapter: (typeof COURSE_CHAPTERS)[number]; patterns: string[] }> = [
+  { chapter: "Adaptoare Grafice", patterns: ["adaptoare-grafice"] },
+  { chapter: "Afisaje", patterns: ["afisaje"] },
+  { chapter: "Discuri Optice", patterns: ["discuri-optice"] },
+  { chapter: "Metode IE", patterns: ["metode-ie"] },
+  { chapter: "Magistrale", patterns: ["magistrale"] },
+  { chapter: "Introducere", patterns: ["introducere"] },
+  { chapter: "Module Extensie", patterns: ["module-extensie"] },
+];
+
 const OPEN_CHAPTER_RULES: Array<{ chapter: string; patterns: string[] }> = [
   {
-    chapter: "Intreruperi",
-    patterns: ["intrerup", "interrupt", "iack", "ireq", "daisy"],
-  },
-  {
-    chapter: "DMA si transferuri I/E",
-    patterns: ["dma", "furt de ciclu", "cycle steal", "rafala", "procesorul de i/e", "pie"],
-  },
-  {
-    chapter: "Magistrale si interconectare",
-    patterns: ["magistral", "usb", "spi", "i2c", "smbus", "serial", "paralel", "vme", "vxs"],
-  },
-  {
-    chapter: "PCI / PCI Express / CompactPCI",
-    patterns: ["pci", "pcie", "compactpci"],
-  },
-  {
-    chapter: "Module embedded",
-    patterns: ["com express", "fmc", "mezzanin", "mezanin", "soc"],
-  },
-  {
-    chapter: "GPU si CUDA",
-    patterns: ["cuda", "gpu", "gddr", "hbm", "shading", "nuclee"],
+    chapter: "Adaptoare Grafice",
+    patterns: ["cuda", "gpu", "gddr", "hbm", "adaptor grafic"],
   },
   {
     chapter: "Afisaje",
-    patterns: ["afisaj", "display", "lcd", "oled", "amoled", "ips", "mva", "tn", "stn", "quantum dot"],
+    patterns: ["afisaj", "display", "lcd", "oled", "amoled", "ips", "tn", "mva", "stn", "quantum dot", "e-paper", "tmds", "hdmi"],
   },
   {
-    chapter: "Stocare optica",
-    patterns: ["disc", "dvd", "cd", "blu-ray", "laser", "pit", "land", "atapi", "ata"],
+    chapter: "Discuri Optice",
+    patterns: ["disc", "cd", "dvd", "blu-ray", "pit", "land", "laser", "toc", "msf", "atapi"],
   },
   {
-    chapter: "Arhitectura calculatoarelor",
-    patterns: ["ucp", "procesor", "memorie", "cache", "multicore"],
+    chapter: "Metode IE",
+    patterns: ["dma", "intrerup", "polling", "iack", "ireq", "adresare", "mapare in memorie", "procesor de i/e", "pie"],
+  },
+  {
+    chapter: "Magistrale",
+    patterns: ["magistral", "pci", "pcie", "usb", "spi", "i2c", "smbus", "serial", "paralel", "vme", "vxs", "displayport"],
+  },
+  {
+    chapter: "Module Extensie",
+    patterns: ["compactpci", "com express", "fmc", "mezzanin", "mezanin", "xmc", "picmg", "module de extensie"],
+  },
+  {
+    chapter: "Introducere",
+    patterns: ["introducere", "sistem de intrare/iesire"],
   },
 ];
 
@@ -133,7 +158,21 @@ function normalizeText(value: string) {
 
 function inferOpenQuestionChapter(question: Question) {
   if (typeof question.chapter === "string" && question.chapter.trim().length > 0) {
-    return question.chapter.trim();
+    const trimmedChapter = question.chapter.trim();
+    if ((COURSE_CHAPTERS as readonly string[]).includes(trimmedChapter)) {
+      return trimmedChapter;
+    }
+
+    if (trimmedChapter in LEGACY_TO_COURSE_CHAPTER) {
+      return LEGACY_TO_COURSE_CHAPTER[trimmedChapter];
+    }
+  }
+
+  const sourceText = normalizeText(question.source ?? "");
+  for (const rule of SOURCE_CHAPTER_RULES) {
+    if (rule.patterns.some((pattern) => sourceText.includes(normalizeText(pattern)))) {
+      return rule.chapter;
+    }
   }
 
   const searchableText = normalizeText(
