@@ -181,16 +181,6 @@ function isExactMatch(selectedAnswers: string[], correctAnswers: string[]) {
   return correctAnswers.every((answer) => selectedSet.has(answer));
 }
 
-function formatAnswerWithLabel(question: QuizQuestion, answer: string) {
-  const index = question.answers.indexOf(answer);
-
-  if (index === -1) {
-    return answer;
-  }
-
-  return `${String.fromCharCode(65 + index)}. ${answer}`;
-}
-
 const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete }) => {
   const [questionPool, setQuestionPool] = useState<QuizQuestion[]>([]);
   const [quizQuestions, setQuizQuestions] = useState<QuizQuestion[]>([]);
@@ -674,7 +664,7 @@ const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete }) => {
                     <ul>
                       {result.selectedAnswers.map((answer) => (
                         <li key={answer}>
-                          {formatAnswerWithLabel(result.question, answer)}
+                          {answer}
                         </li>
                       ))}
                     </ul>
@@ -688,7 +678,7 @@ const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete }) => {
                     <ul>
                       {(result.question.correctAnswers ?? []).map((answer) => (
                         <li key={answer}>
-                          {formatAnswerWithLabel(result.question, answer)}
+                          {answer}
                         </li>
                       ))}
                     </ul>
@@ -711,9 +701,6 @@ const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete }) => {
 
   const currentSelection = selectedAnswers[currentQuestion.uid] ?? [];
   const isCurrentReviewed = reviewedAnswers[currentQuestion.uid] ?? false;
-  const isCurrentCorrect = currentQuestion.hasAnswerKey
-    ? isExactMatch(currentSelection, currentQuestion.correctAnswers ?? [])
-    : null;
 
   return (
     <div className="grile-wrapper">
@@ -806,74 +793,6 @@ const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete }) => {
           })}
         </div>
 
-        {isCurrentReviewed ? (
-          currentQuestion.hasAnswerKey ? (
-            <div
-              className={`quiz-feedback ${
-                isCurrentCorrect ? "quiz-feedback-correct" : "quiz-feedback-wrong"
-              }`}
-            >
-              <div className="quiz-feedback-header">
-                <span className="quiz-feedback-badge">
-                  {isCurrentCorrect ? "✅ Corect" : "❌ Greșit"}
-                </span>
-                <p className="quiz-feedback-title">
-                  {isCurrentCorrect
-                    ? "Răspunsul tău este corect."
-                    : "Răspunsul tău nu este corect."}
-                </p>
-              </div>
-
-              {!isCurrentCorrect && currentSelection.length > 0 ? (
-                <div className="quiz-feedback-block">
-                  <p>Tu ai selectat:</p>
-                  <ul>
-                    {currentSelection.map((answer) => (
-                      <li key={answer}>
-                        {formatAnswerWithLabel(currentQuestion, answer)}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ) : null}
-
-              <div className="quiz-feedback-block">
-                <p>Răspunsurile corecte erau:</p>
-                <ul>
-                  {(currentQuestion.correctAnswers ?? []).map((answer) => (
-                    <li key={answer}>
-                      {formatAnswerWithLabel(currentQuestion, answer)}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ) : (
-            <div className="quiz-feedback quiz-feedback-pending">
-              <div className="quiz-feedback-header">
-                <span className="quiz-feedback-badge">ℹ️ Neevaluat</span>
-                <p className="quiz-feedback-title">
-                  Răspunsurile corecte pentru acest set vor fi adăugate ulterior.
-                </p>
-              </div>
-
-              <div className="quiz-feedback-block">
-                <p>Tu ai selectat:</p>
-                {currentSelection.length > 0 ? (
-                  <ul>
-                    {currentSelection.map((answer) => (
-                      <li key={answer}>
-                        {formatAnswerWithLabel(currentQuestion, answer)}
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <span className="quiz-review-empty">Nu ai selectat niciun răspuns.</span>
-                )}
-              </div>
-            </div>
-          )
-        ) : null}
       </div>
 
       <div className="card-nav">
