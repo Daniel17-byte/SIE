@@ -323,6 +323,14 @@
   background: #33406b;
 }
 
+.nav-btn-warning {
+  background: #b45309;
+}
+
+.nav-btn-warning:hover:not(:disabled) {
+  background: #d97706;
+}
+
 .dot-answered {
   background: #14b8a6;
 }

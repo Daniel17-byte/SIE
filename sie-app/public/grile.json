@@ -539,6 +539,8 @@
       "Sunt necesare doar două linii de control pentru arbitrajul de magistrală."
     ],
     "correctAnswers": [
+      "Apare susceptibilitatea la defectele liniei de achitare a întreruperii.",
+      "Dispozitivele sunt conectate într-un lanț prin linia de achitare a întreruperii.",
       "Sunt necesare doar două linii de control pentru arbitrajul de magistrală."
     ],
     "chapter": "Diverse"
@@ -859,7 +861,8 @@
     ],
     "correctAnswers": [
       "Toate dispozitivele pot genera semnalul de întrerupere simultan.",
-      "Este necesară o metodă de identificare a sursei de întrerupere."
+      "Este necesară o metodă de identificare a sursei de întrerupere.",
+      "Prioritatea unui dispozitiv este stabilită printr-un registru de prioritate."
     ],
     "chapter": "Intreruperi"
   },

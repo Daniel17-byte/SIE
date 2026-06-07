@@ -101,6 +101,11 @@ function getQuizHistoryKey(sources: readonly QuizSourceConfig[]) {
   return `sie-app:quiz-history:${sourceIds}`;
 }
 
+function getBlockedQuestionsKey(sources: readonly QuizSourceConfig[]) {
+  const sourceIds = sources.map((source) => source.id).sort().join("+");
+  return `sie-app:quiz-blocked:${sourceIds}`;
+}
+
 function readRecentQuestionHistory(historyKey: string) {
   if (typeof window === "undefined") {
     return [] as string[];
@@ -135,6 +140,38 @@ function writeRecentQuestionHistory(historyKey: string, questionIds: string[]) {
   }
 }
 
+function readBlockedQuestionIds(blockedKey: string) {
+  if (typeof window === "undefined") {
+    return [] as string[];
+  }
+
+  try {
+    const rawBlockedIds = window.sessionStorage.getItem(blockedKey);
+    if (!rawBlockedIds) {
+      return [] as string[];
+    }
+
+    const parsedBlockedIds = JSON.parse(rawBlockedIds);
+    return Array.isArray(parsedBlockedIds)
+      ? parsedBlockedIds.filter((item): item is string => typeof item === "string")
+      : [];
+  } catch {
+    return [] as string[];
+  }
+}
+
+function writeBlockedQuestionIds(blockedKey: string, questionIds: string[]) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  try {
+    window.sessionStorage.setItem(blockedKey, JSON.stringify([...new Set(questionIds)]));
+  } catch {
+    // Ignore storage write failures and continue with in-memory filtering.
+  }
+}
+
 function isExactMatch(selectedAnswers: string[], correctAnswers: string[]) {
   if (selectedAnswers.length !== correctAnswers.length) {
     return false;
@@ -164,6 +201,7 @@ const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedChapter, setSelectedChapter] = useState(ALL_CHAPTERS_VALUE);
+  const [blockedQuestionIds, setBlockedQuestionIds] = useState<string[]>([]);
 
   const sourceLabels = useMemo(
     () => sources.map((source) => source.label).join(" + "),
@@ -174,6 +212,24 @@ const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete }) => {
     () => `${getQuizHistoryKey(sources)}:${selectedChapter}`,
     [selectedChapter, sources]
   );
+
+  const blockedQuestionsKey = useMemo(
+    () => getBlockedQuestionsKey(sources),
+    [sources]
+  );
+
+  const blockedQuestionSet = useMemo(
+    () => new Set(blockedQuestionIds),
+    [blockedQuestionIds]
+  );
+
+  useEffect(() => {
+    setBlockedQuestionIds(readBlockedQuestionIds(blockedQuestionsKey));
+  }, [blockedQuestionsKey]);
+
+  useEffect(() => {
+    writeBlockedQuestionIds(blockedQuestionsKey, blockedQuestionIds);
+  }, [blockedQuestionIds, blockedQuestionsKey]);
 
   const startQuiz = useCallback((questions: QuizQuestion[]) => {
     const quizSize = Math.min(QUIZ_SIZE, questions.length);
@@ -187,7 +243,13 @@ const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete }) => {
       questions.filter((question) => recentQuestionSet.has(question.uid))
     );
 
-    const pickedQuestions = [...freshQuestions, ...repeatedQuestions].slice(0, quizSize);
+    const pickedQuestions = [...freshQuestions, ...repeatedQuestions]
+      .slice(0, quizSize)
+      .map((question) => ({
+        ...question,
+        // Shuffle options per appearance to avoid learning answer positions.
+        answers: shuffleQuestions(question.answers),
+      }));
 
     writeRecentQuestionHistory(activeQuizHistoryKey, [
       ...pickedQuestions.map((question) => question.uid),
@@ -282,7 +344,7 @@ const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete }) => {
     }
   }, [chapterOptions, selectedChapter]);
 
-  const filteredQuestionPool = useMemo(() => {
+  const chapterQuestionPool = useMemo(() => {
     if (selectedChapter === ALL_CHAPTERS_VALUE) {
       return questionPool;
     }
@@ -292,12 +354,17 @@ const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete }) => {
     );
   }, [questionPool, selectedChapter]);
 
+  const filteredQuestionPool = useMemo(
+    () => chapterQuestionPool.filter((question) => !blockedQuestionSet.has(question.uid)),
+    [blockedQuestionSet, chapterQuestionPool]
+  );
+
   useEffect(() => {
     if (isLoading) {
       return;
     }
 
-    if (filteredQuestionPool.length === 0) {
+    if (chapterQuestionPool.length === 0) {
       setQuizQuestions([]);
       setSelectedAnswers({});
       setReviewedAnswers({});
@@ -306,8 +373,14 @@ const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete }) => {
       return;
     }
 
+    if (filteredQuestionPool.length === 0) {
+      // If everything in the active chapter filter was blocked, reset for this session.
+      setBlockedQuestionIds([]);
+      return;
+    }
+
     startQuiz(filteredQuestionPool);
-  }, [filteredQuestionPool, isLoading, startQuiz]);
+  }, [chapterQuestionPool.length, filteredQuestionPool, isLoading, startQuiz]);
 
   const currentQuestion = quizQuestions[currentIndex];
 
@@ -431,6 +504,20 @@ const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete }) => {
     if (filteredQuestionPool.length > 0) {
       startQuiz(filteredQuestionPool);
     }
+  };
+
+  const handleBlockCurrentQuestion = () => {
+    if (!currentQuestion) {
+      return;
+    }
+
+    setBlockedQuestionIds((prev) => {
+      if (prev.includes(currentQuestion.uid)) {
+        return prev;
+      }
+
+      return [...prev, currentQuestion.uid];
+    });
   };
 
   const handleCheckAnswer = () => {
@@ -829,6 +916,9 @@ const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete }) => {
       </div>
 
       <div className="quiz-actions quiz-actions-bottom">
+        <button className="nav-btn nav-btn-warning" onClick={handleBlockCurrentQuestion}>
+          🚫 Blochează întrebarea
+        </button>
         <button className="nav-btn nav-btn-secondary" onClick={handleRetake}>
           🔄 Întrebări noi
         </button>

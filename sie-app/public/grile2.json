@@ -611,6 +611,7 @@
       "Comparativ cu afișajele cu matrice activă, au timpul de răspuns mai mare"
     ],
     "correctAnswers": [
+      "Nu necesită niciun tranzistor conectat la electrozii de linie sau la electrozii de coloană",
       "Comparativ cu afișajele cu matrice activă, au timpul de răspuns mai mare"
     ],
     "chapter": "Afisaje"
