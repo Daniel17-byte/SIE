@@ -1,0 +1,220 @@
+.merged-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 11, 20, 0.78);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  z-index: 50;
+}
+
+.merged-modal {
+  width: min(1100px, 100%);
+  max-height: 90vh;
+  background: #161929;
+  border: 1px solid #2d3555;
+  border-radius: 24px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.merged-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.35rem 1.5rem 1rem;
+  border-bottom: 1px solid #2d3555;
+  background: linear-gradient(180deg, rgba(59, 79, 216, 0.08), transparent);
+}
+
+.merged-modal-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #3b4fd8;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 0.35rem 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 0.7rem;
+}
+
+.merged-modal-title {
+  color: #eef2ff;
+  font-size: clamp(1.3rem, 1.08rem + 0.9vw, 1.9rem);
+  margin-bottom: 0.35rem;
+}
+
+.merged-modal-subtitle {
+  color: #93a0d6;
+  line-height: 1.6;
+}
+
+.merged-modal-close {
+  border: 1px solid #2d3555;
+  background: #1e2233;
+  color: #c8cfe8;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.merged-modal-close:hover {
+  background: #252d4a;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.merged-modal-content {
+  overflow: auto;
+  padding: 1.25rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.merged-question-card {
+  background: #1e2233;
+  border: 1px solid #2d3555;
+  border-radius: 18px;
+  padding: 1.2rem 1.25rem;
+}
+
+.merged-question-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.9rem;
+}
+
+.merged-question-badge,
+.merged-question-chapter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 0.35rem 0.75rem;
+}
+
+.merged-question-badge {
+  background: rgba(59, 79, 216, 0.16);
+  color: #c7d2fe;
+}
+
+.merged-question-chapter {
+  background: rgba(14, 165, 160, 0.12);
+  color: #99f6e4;
+}
+
+.merged-question-title {
+  color: #eef2ff;
+  font-size: 1.12rem;
+  line-height: 1.45;
+  margin-bottom: 0.45rem;
+}
+
+.merged-question-source {
+  color: #94a3b8;
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.merged-question-content {
+  color: #dbe4ff;
+  line-height: 1.8;
+}
+
+.merged-question-content p {
+  margin: 0.8rem 0;
+}
+
+.merged-question-content ul,
+.merged-question-content ol {
+  padding-left: 1.6rem;
+}
+
+.merged-question-content li {
+  margin: 0.4rem 0;
+}
+
+.merged-question-content strong {
+  color: #a5b4fc;
+}
+
+.merged-question-content em {
+  color: #cbd5e1;
+}
+
+.merged-question-content blockquote {
+  border-left: 3px solid #3b4fd8;
+  background: #161929;
+  border-radius: 0 10px 10px 0;
+  padding: 0.85rem 1rem;
+  color: #94a3b8;
+}
+
+.merged-question-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.merged-question-content th,
+.merged-question-content td {
+  border: 1px solid #2d3555;
+  padding: 0.75rem 0.85rem;
+  vertical-align: top;
+}
+
+.merged-question-content th {
+  background: #252d4a;
+  color: #c7d2fe;
+  text-align: left;
+}
+
+.merged-question-content tr:nth-child(even) td {
+  background: #161929;
+}
+
+.merged-question-content code {
+  background: #252d4a;
+  color: #93c5fd;
+  padding: 0.2rem 0.45rem;
+  border-radius: 6px;
+}
+
+@media (max-width: 720px) {
+  .merged-modal-overlay {
+    padding: 0.8rem;
+  }
+
+  .merged-modal-header,
+  .merged-modal-content {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .merged-modal-header {
+    flex-direction: column;
+  }
+
+  .merged-modal-close {
+    align-self: flex-end;
+  }
+}
+

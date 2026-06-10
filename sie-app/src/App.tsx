@@ -2,11 +2,14 @@ import { useState, useCallback, useEffect, useMemo } from "react";
 import { studyModes } from "./data/questions";
 import type { Question } from "./data/questions";
 import QuestionCard from "./components/QuestionCard";
+import MergedQuestionsModal from "./components/MergedQuestionsModal";
+import StudySearchTab from "./components/StudySearchTab";
+import type { StudySource } from "./components/StudySearchTab";
 import GrileCard from "./components/GrileCard";
 import type { SimulationSummary } from "./components/GrileCard";
 import "./App.css";
 
-type Tab = "intrebari" | "grile";
+type Tab = "intrebari" | "grile" | "merged";
 type StudyMode = (typeof studyModes)[number];
 
 type OpenQuestionSetKey = Exclude<StudyMode, "complet">;
@@ -82,6 +85,8 @@ const EMPTY_QUESTION_SETS: Record<OpenQuestionSetKey, Question[]> = {
 const STATS_FILE_SUGGESTED_NAME = "statistici-grile.txt";
 const ALL_OPEN_CHAPTERS_VALUE = "__all_open__";
 const DEFAULT_OPEN_CHAPTER = "Introducere";
+const MERGED_COURSE_TEXT_PATH = "/ilovepdf_merged.txt";
+const MERGED_COURSE_PDF_PATH = "/ilovepdf_merged.pdf";
 
 type OpenQuestionWithChapter = Question & { chapter: string };
 
@@ -289,6 +294,11 @@ export default function App() {
   const [isLoadingQuestions, setIsLoadingQuestions] = useState(true);
   const [questionError, setQuestionError] = useState<string | null>(null);
   const [selectedOpenChapter, setSelectedOpenChapter] = useState(ALL_OPEN_CHAPTERS_VALUE);
+  const [isMergedModalOpen, setIsMergedModalOpen] = useState(false);
+  const [mergedCourseText, setMergedCourseText] = useState("");
+  const [mergedCourseError, setMergedCourseError] = useState<string | null>(null);
+  const [mergedStudySource, setMergedStudySource] = useState<StudySource>("curs");
+  const [mergedSearchQuery, setMergedSearchQuery] = useState("");
   const [statsFileHandle, setStatsFileHandle] = useState<FileSystemFileHandle | null>(null);
   const [statsStatus, setStatsStatus] = useState(
     "Conecteaza fisierul de statistici pentru salvare automata."
@@ -403,6 +413,42 @@ export default function App() {
     };
   }, []);
 
+  useEffect(() => {
+    let isMounted = true;
+
+    async function loadMergedCourseText() {
+      try {
+        setMergedCourseError(null);
+        const response = await fetch(MERGED_COURSE_TEXT_PATH);
+
+        if (!response.ok) {
+          throw new Error("Nu am putut încărca textul cursului merged.");
+        }
+
+        const text = await response.text();
+        if (!isMounted) {
+          return;
+        }
+
+        setMergedCourseText(text);
+      } catch (error) {
+        if (!isMounted) {
+          return;
+        }
+
+        setMergedCourseError(
+          error instanceof Error ? error.message : "A apărut o eroare la încărcarea cursului merged."
+        );
+      }
+    }
+
+    loadMergedCourseText();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   const handleKey = useCallback(
     (e: KeyboardEvent) => {
       if (tab === "intrebari" && questions.length > 0 && e.key === "ArrowLeft") {
@@ -429,11 +475,28 @@ export default function App() {
     setQIndex(0);
   }, [selectedOpenChapter]);
 
+  useEffect(() => {
+    if (tab !== "intrebari") {
+      setIsMergedModalOpen(false);
+    }
+  }, [tab]);
+
+  useEffect(() => {
+    if (tab !== "merged") {
+      setMergedSearchQuery("");
+    }
+  }, [tab]);
+
   const questionCountBadge = isLoadingQuestions
     ? "..."
     : questionError
       ? "!"
       : allModeQuestions.length;
+
+  const selectedOpenChapterLabel =
+    selectedOpenChapter === ALL_OPEN_CHAPTERS_VALUE
+      ? "Toate capitolele"
+      : selectedOpenChapter;
 
   const grileHint =
     mode === "partial"
@@ -441,6 +504,9 @@ export default function App() {
       : mode === "examen"
         ? "Simulare cu 10 întrebări aleatoare din grile 2 · poți filtra pe capitole · verifici fiecare răspuns înainte de continuare · "
         : "Simulare mixtă din grile 1 + grile 2 · poți filtra pe capitole · verifici fiecare răspuns înainte de continuare · ";
+
+  const mergedHint =
+    "Alege sursa Curs / Întrebări deschise și caută rapid în materialul merged sau în întrebările filtrate curent · ";
 
   const connectStatsFile = useCallback(async () => {
     if (!supportsFilePickerApi()) {
@@ -552,6 +618,13 @@ export default function App() {
               <span className="tab-count">{questionCountBadge}</span>
             </button>
             <button
+              className={`tab-btn ${tab === "merged" ? "tab-active" : ""}`}
+              onClick={() => setTab("merged")}
+            >
+              📚 Curs Merged
+              <span className="tab-count">search</span>
+            </button>
+            <button
               className={`tab-btn tab-teal ${
                 tab === "grile" ? "tab-active-teal" : ""
               }`}
@@ -576,6 +649,11 @@ export default function App() {
           {tab === "intrebari" ? (
             <>
               Navighează cu ← → sau cu butoanele de mai jos &nbsp;·&nbsp; <kbd>F</kbd> = full screen
+            </>
+          ) : tab === "merged" ? (
+            <>
+              {mergedHint}
+              <kbd>F</kbd> = full screen
             </>
           ) : (
             <>
@@ -606,6 +684,13 @@ export default function App() {
             <span className="open-chapter-filter-count">
               {questions.length} întrebări disponibile
             </span>
+            <button
+              className="tab-btn open-merged-btn"
+              onClick={() => setIsMergedModalOpen(true)}
+              disabled={questions.length === 0}
+            >
+              📚 Vezi cursul merged
+            </button>
           </div>
         ) : null}
 
@@ -648,6 +733,24 @@ export default function App() {
               </p>
             </section>
           )
+        ) : tab === "merged" ? (
+          mergedCourseError ? (
+            <section className="app-status-card">
+              <span className="app-status-badge app-status-badge-error">Eroare</span>
+              <h2 className="app-status-title">Nu am putut încărca cursul merged</h2>
+              <p className="app-status-text">{mergedCourseError}</p>
+            </section>
+          ) : (
+            <StudySearchTab
+              mergedCourseText={mergedCourseText}
+              mergedCoursePdfPath={MERGED_COURSE_PDF_PATH}
+              questions={questions}
+              source={mergedStudySource}
+              query={mergedSearchQuery}
+              onSourceChange={setMergedStudySource}
+              onQueryChange={setMergedSearchQuery}
+            />
+          )
         ) : (
           <GrileCard
             modeLabel={currentModeMeta.label}
@@ -656,6 +759,14 @@ export default function App() {
           />
         )}
       </main>
+
+      <MergedQuestionsModal
+        isOpen={isMergedModalOpen}
+        questions={questions}
+        modeLabel={currentModeMeta.label}
+        selectedChapterLabel={selectedOpenChapterLabel}
+        onClose={() => setIsMergedModalOpen(false)}
+      />
 
       <footer className="app-footer">
         <span>SIE • {new Date().getFullYear()}</span>

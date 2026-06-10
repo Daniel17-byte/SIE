@@ -202,6 +202,10 @@ body {
   font-size: 0.82rem;
 }
 
+.open-merged-btn {
+  margin-left: auto;
+}
+
 .fullscreen-btn {
   border-color: #4a5080 !important;
 }
@@ -285,6 +289,7 @@ body {
     width: 100%;
   }
 
+
   .mode-select {
     width: 100%;
   }
@@ -292,6 +297,12 @@ body {
   .open-chapter-filter-select {
     width: 100%;
     min-width: 0;
+  }
+
+  .open-merged-btn {
+    margin-left: 0;
+    width: 100%;
+    justify-content: center;
   }
 
   .tabs {
