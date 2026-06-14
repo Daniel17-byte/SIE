@@ -286,7 +286,7 @@ async function fetchQuestionSet(filePath: string) {
 }
 
 export default function App() {
-  const [tab, setTab] = useState<Tab>("grile");
+  const [tab, setTab] = useState<Tab>("merged");
   const [mode, setMode] = useState<StudyMode>("complet");
   const [qIndex, setQIndex] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -297,7 +297,7 @@ export default function App() {
   const [isMergedModalOpen, setIsMergedModalOpen] = useState(false);
   const [mergedCourseText, setMergedCourseText] = useState("");
   const [mergedCourseError, setMergedCourseError] = useState<string | null>(null);
-  const [mergedStudySource, setMergedStudySource] = useState<StudySource>("curs");
+  const [mergedStudySource, setMergedStudySource] = useState<StudySource>("intrebari");
   const [mergedSearchQuery, setMergedSearchQuery] = useState("");
   const [statsFileHandle, setStatsFileHandle] = useState<FileSystemFileHandle | null>(null);
   const [statsStatus, setStatsStatus] = useState(
@@ -734,7 +734,24 @@ export default function App() {
             </section>
           )
         ) : tab === "merged" ? (
-          mergedCourseError ? (
+          mergedStudySource === "intrebari" && isLoadingQuestions ? (
+            <section className="app-status-card">
+              <span className="app-status-badge">Întrebări deschise</span>
+              <h2 className="app-status-title">Se încarcă întrebările pentru căutare…</h2>
+              <p className="app-status-text">
+                Pregătesc întrebările pentru modul {currentModeMeta.label.toLowerCase()}.
+              </p>
+            </section>
+          ) : mergedStudySource === "intrebari" && questionError ? (
+            <section className="app-status-card">
+              <span className="app-status-badge app-status-badge-error">Eroare</span>
+              <h2 className="app-status-title">Nu am putut încărca întrebările deschise</h2>
+              <p className="app-status-text">{questionError}</p>
+              <button className="tab-btn app-status-action" onClick={() => window.location.reload()}>
+                Reîncarcă
+              </button>
+            </section>
+          ) : mergedStudySource === "curs" && mergedCourseError ? (
             <section className="app-status-card">
               <span className="app-status-badge app-status-badge-error">Eroare</span>
               <h2 className="app-status-title">Nu am putut încărca cursul merged</h2>
