@@ -1,0 +1,15 @@
+06 - Introducere        |
+07 - Metode IE          |
+08 - Magistrale         |
+09 - Module Extensie    |
+10 - Afisaje            |
+11 - Adaptoare Grafice  |
+12 - Discuri Optice     |
+13 - grile partial + intrebari deschise partial
+14 - grile total + intrebari deschise total
+15 - grile partial + intrebari deschise partial
+16 - grile total + intrebari deschise total
+17 - examen
+
+10 simulari / zi total
+intrebarile deschise la un capitol, minim 5 de intrebari pe de rost
