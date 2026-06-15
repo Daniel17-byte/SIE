@@ -87,8 +87,9 @@ const ALL_OPEN_CHAPTERS_VALUE = "__all_open__";
 const DEFAULT_OPEN_CHAPTER = "Introducere";
 const MERGED_COURSE_TEXT_PATH = "/ilovepdf_merged.txt";
 const MERGED_COURSE_PDF_PATH = "/ilovepdf_merged.pdf";
+const OPEN_BLOCKED_QUESTIONS_KEY_PREFIX = "sie-app:open-blocked:";
 
-type OpenQuestionWithChapter = Question & { chapter: string };
+type OpenQuestionWithChapter = Question & { chapter: string; uid: string };
 
 const COURSE_CHAPTERS = [
   "Adaptoare Grafice",
@@ -197,6 +198,46 @@ function inferOpenQuestionChapter(question: Question) {
   return DEFAULT_OPEN_CHAPTER;
 }
 
+function getOpenBlockedQuestionsKey(mode: StudyMode) {
+  return `${OPEN_BLOCKED_QUESTIONS_KEY_PREFIX}${mode}`;
+}
+
+function getOpenQuestionUid(question: Question) {
+  return `${question.source}::${question.id}::${question.title}`;
+}
+
+function readBlockedOpenQuestionIds(storageKey: string) {
+  if (typeof window === "undefined") {
+    return [] as string[];
+  }
+
+  try {
+    const rawBlockedIds = window.sessionStorage.getItem(storageKey);
+    if (!rawBlockedIds) {
+      return [] as string[];
+    }
+
+    const parsedBlockedIds = JSON.parse(rawBlockedIds);
+    return Array.isArray(parsedBlockedIds)
+      ? parsedBlockedIds.filter((item): item is string => typeof item === "string")
+      : [];
+  } catch {
+    return [] as string[];
+  }
+}
+
+function writeBlockedOpenQuestionIds(storageKey: string, questionIds: string[]) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  try {
+    window.sessionStorage.setItem(storageKey, JSON.stringify([...new Set(questionIds)]));
+  } catch {
+    // Ignore storage write failures and continue with in-memory filtering.
+  }
+}
+
 type PickerWindow = Window & {
   showSaveFilePicker?: (options?: {
     suggestedName?: string;
@@ -303,11 +344,28 @@ export default function App() {
   const [statsStatus, setStatsStatus] = useState(
     "Conecteaza fisierul de statistici pentru salvare automata."
   );
+  const [blockedOpenQuestionIds, setBlockedOpenQuestionIds] = useState<string[]>([]);
+
+  const blockedOpenQuestionsKey = useMemo(() => getOpenBlockedQuestionsKey(mode), [mode]);
+
+  const blockedOpenQuestionSet = useMemo(
+    () => new Set(blockedOpenQuestionIds),
+    [blockedOpenQuestionIds]
+  );
+
+  useEffect(() => {
+    setBlockedOpenQuestionIds(readBlockedOpenQuestionIds(blockedOpenQuestionsKey));
+  }, [blockedOpenQuestionsKey]);
+
+  useEffect(() => {
+    writeBlockedOpenQuestionIds(blockedOpenQuestionsKey, blockedOpenQuestionIds);
+  }, [blockedOpenQuestionIds, blockedOpenQuestionsKey]);
 
   const allModeQuestions = useMemo<OpenQuestionWithChapter[]>(() => {
     if (mode === "partial") {
       return questionSets.partial.map((question) => ({
         ...question,
+        uid: getOpenQuestionUid(question),
         chapter: inferOpenQuestionChapter(question),
       }));
     }
@@ -315,22 +373,29 @@ export default function App() {
     if (mode === "examen") {
       return questionSets.examen.map((question) => ({
         ...question,
+        uid: getOpenQuestionUid(question),
         chapter: inferOpenQuestionChapter(question),
       }));
     }
 
     return [...questionSets.partial, ...questionSets.examen].map((question) => ({
       ...question,
+      uid: getOpenQuestionUid(question),
       chapter: inferOpenQuestionChapter(question),
     }));
   }, [mode, questionSets]);
 
+  const availableOpenQuestions = useMemo(
+    () => allModeQuestions.filter((question) => !blockedOpenQuestionSet.has(question.uid)),
+    [allModeQuestions, blockedOpenQuestionSet]
+  );
+
   const openChapterOptions = useMemo(
     () =>
-      Array.from(new Set(allModeQuestions.map((question) => question.chapter))).sort((a, b) =>
+      Array.from(new Set(availableOpenQuestions.map((question) => question.chapter))).sort((a, b) =>
         a.localeCompare(b, "ro")
       ),
-    [allModeQuestions]
+    [availableOpenQuestions]
   );
 
   useEffect(() => {
@@ -345,9 +410,9 @@ export default function App() {
   const questions = useMemo(
     () =>
       selectedOpenChapter === ALL_OPEN_CHAPTERS_VALUE
-        ? allModeQuestions
-        : allModeQuestions.filter((question) => question.chapter === selectedOpenChapter),
-    [allModeQuestions, selectedOpenChapter]
+        ? availableOpenQuestions
+        : availableOpenQuestions.filter((question) => question.chapter === selectedOpenChapter),
+    [availableOpenQuestions, selectedOpenChapter]
   );
 
   const safeQIndex = Math.min(qIndex, Math.max(questions.length - 1, 0));
@@ -491,7 +556,7 @@ export default function App() {
     ? "..."
     : questionError
       ? "!"
-      : allModeQuestions.length;
+      : availableOpenQuestions.length;
 
   const selectedOpenChapterLabel =
     selectedOpenChapter === ALL_OPEN_CHAPTERS_VALUE
@@ -570,6 +635,28 @@ export default function App() {
     },
     [statsFileHandle]
   );
+
+  const handleBlockCurrentOpenQuestion = useCallback(() => {
+    if (!currentQuestion) {
+      return;
+    }
+
+    setBlockedOpenQuestionIds((prev) => {
+      if (prev.includes(currentQuestion.uid)) {
+        return prev;
+      }
+
+      return [...prev, currentQuestion.uid];
+    });
+
+    setQIndex((index) => {
+      if (questions.length <= 1) {
+        return 0;
+      }
+
+      return Math.min(index, questions.length - 2);
+    });
+  }, [currentQuestion, questions.length]);
 
   return (
     <div className="app">
@@ -721,6 +808,7 @@ export default function App() {
               onNext={() =>
                 setQIndex((i) => Math.min(i + 1, questions.length - 1))
               }
+              onBlockCurrent={handleBlockCurrentOpenQuestion}
             />
           ) : (
             <section className="app-status-card">

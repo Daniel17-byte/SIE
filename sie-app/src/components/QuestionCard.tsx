@@ -9,6 +9,7 @@ interface Props {
   total: number;
   onPrev: () => void;
   onNext: () => void;
+  onBlockCurrent: () => void;
 }
 
 export default function QuestionCard({
@@ -17,6 +18,7 @@ export default function QuestionCard({
   total,
   onPrev,
   onNext,
+  onBlockCurrent,
 }: Props) {
   return (
     <div className="card-wrapper">
@@ -63,6 +65,15 @@ export default function QuestionCard({
           aria-label="Următorul"
         >
           Următor →
+        </button>
+      </div>
+      <div className="card-actions">
+        <button
+          className="nav-btn nav-btn-warning"
+          onClick={onBlockCurrent}
+          aria-label="Blochează întrebarea curentă"
+        >
+          🚫 Blochează întrebarea
         </button>
       </div>
     </div>

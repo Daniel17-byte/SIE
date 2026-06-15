@@ -132,6 +132,12 @@
   flex-wrap: wrap;
 }
 
+.card-actions {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .nav-btn {
   background: #3b4fd8;
   color: #fff;
@@ -154,6 +160,14 @@
   background: #252d4a;
   color: #4a5080;
   cursor: not-allowed;
+}
+
+.nav-btn-warning {
+  background: #b45309;
+}
+
+.nav-btn-warning:hover:not(:disabled) {
+  background: #c2410c;
 }
 
 .dots {
