@@ -36,32 +36,69 @@ body {
 .app-header {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
-  padding: 1rem 2rem;
+  padding: 1rem 1.5rem 0.9rem;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 0.9rem;
   position: sticky;
   top: 0;
   z-index: 10;
   box-shadow: 0 1px 2px rgba(60, 64, 67, 0.1);
+  transition: padding 0.2s ease, box-shadow 0.2s ease;
+}
+
+.app-header-compact {
+  padding-top: 0.65rem;
+  padding-bottom: 0.6rem;
+  box-shadow: 0 3px 10px rgba(60, 64, 67, 0.12);
+}
+
+.navbar-top,
+.navbar-bottom {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.mobile-menu-toggle {
+  display: none;
 }
 
 .app-title {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.9rem;
 }
 
 .app-logo {
-  font-size: 2rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-logo .nav-icon {
+  width: 21px;
+  height: 21px;
 }
 
 .app-title h1 {
   font-size: 1.3rem;
   font-weight: 800;
   color: var(--text);
+  transition: font-size 0.2s ease;
+}
+
+.app-header-compact .app-title h1 {
+  font-size: 1.16rem;
 }
 
 .app-subtitle {
@@ -76,7 +113,7 @@ body {
   margin-top: 0.35rem;
 }
 
-.header-actions {
+.navbar-controls {
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -87,17 +124,31 @@ body {
 .mode-picker {
   display: flex;
   align-items: center;
+  gap: 0.45rem;
+}
+
+.mode-picker-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .stats-status {
-  max-width: 280px;
+  max-width: 460px;
+  width: 100%;
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  padding: 0.5rem 0.7rem;
   color: var(--text-soft);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   line-height: 1.35;
 }
 
 .mode-select {
-  min-width: 170px;
+  min-width: 150px;
   background: var(--surface-soft);
   border: 1px solid var(--border);
   color: var(--text);
@@ -105,6 +156,10 @@ body {
   padding: 10px 12px;
   font-size: 0.92rem;
   font-weight: 600;
+}
+
+.nav-action-btn {
+  min-height: 40px;
 }
 
 .mode-select:focus {
@@ -116,6 +171,7 @@ body {
 .tabs {
   display: flex;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .tab-btn {
@@ -131,6 +187,29 @@ body {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.tab-btn .nav-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.tab-btn::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 5px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--primary);
+  transform: scaleX(0);
+  transform-origin: center;
+  opacity: 0;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .tab-btn:hover {
@@ -142,6 +221,13 @@ body {
   background: var(--primary) !important;
   border-color: var(--primary) !important;
   color: #fff !important;
+}
+
+.tab-active::after,
+.tab-active-teal::after {
+  transform: scaleX(1);
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.88);
 }
 
 .tab-teal:hover {
@@ -159,6 +245,14 @@ body {
   border-radius: 20px;
   padding: 1px 8px;
   font-size: 0.75rem;
+}
+
+.nav-action-btn {
+  font-size: 0.85rem;
+}
+
+.navbar-controls .tab-btn {
+  padding-inline: 12px;
 }
 
 /* ---- Main ---- */
@@ -290,25 +384,33 @@ body {
 
 @media (max-width: 920px) {
   .app-header {
-    align-items: flex-start;
+    padding: 1rem 1rem 0.9rem;
   }
 
-  .header-actions {
+  .navbar-top,
+  .navbar-bottom {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .navbar-controls {
     width: 100%;
-    justify-content: stretch;
+    justify-content: flex-start;
   }
 
   .mode-picker {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .mode-select,
+  .nav-action-btn {
     width: 100%;
   }
 
   .stats-status {
     max-width: none;
-    width: 100%;
-  }
-
-
-  .mode-select {
     width: 100%;
   }
 
@@ -325,7 +427,140 @@ body {
 
   .tabs {
     width: 100%;
+  }
+
+  .tab-btn {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-header {
+    padding: 0.7rem 0.7rem 0.65rem;
+    gap: 0.65rem;
+  }
+
+  .app-header-compact {
+    padding-top: 0.5rem;
+    padding-bottom: 0.45rem;
+  }
+
+  .app-title {
+    align-items: flex-start;
+  }
+
+  .navbar-top {
     flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .app-logo {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+  }
+
+  .app-logo .nav-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .app-title h1 {
+    font-size: 1.02rem;
+  }
+
+  .app-subtitle,
+  .app-mode-description {
+    font-size: 0.72rem;
+  }
+
+  .navbar-controls {
+    display: none;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.55rem;
+  }
+
+  .navbar-bottom {
+    display: none;
+  }
+
+  .app-header-mobile-open .navbar-controls,
+  .app-header-mobile-open .navbar-bottom {
+    display: grid;
+    width: 100%;
+    background: var(--surface-soft);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 0.6rem;
+  }
+
+  .app-header-mobile-open .navbar-bottom {
+    margin-top: -0.1rem;
+    gap: 0.6rem;
+  }
+
+  .mobile-menu-toggle {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    border: 1px solid var(--border);
+    background: var(--surface-soft);
+    color: var(--text);
+    border-radius: var(--radius-control);
+    padding: 8px 10px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .mobile-menu-toggle .nav-icon {
+    width: 15px;
+    height: 15px;
+  }
+
+  .mode-picker {
+    grid-column: 1 / -1;
+  }
+
+  .mode-picker-label {
+    font-size: 0.72rem;
+  }
+
+  .mode-select,
+  .nav-action-btn {
+    min-height: 38px;
+    font-size: 0.82rem;
+  }
+
+  .tabs {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.45rem;
+  }
+
+  .tab-btn {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 8px 10px;
+    font-size: 0.82rem;
+  }
+
+  .tab-btn .nav-icon {
+    width: 15px;
+    height: 15px;
+  }
+
+  .tab-count {
+    margin-left: auto;
+    font-size: 0.7rem;
+    padding: 1px 7px;
+  }
+
+  .stats-status {
+    font-size: 0.72rem;
+    padding: 0.45rem 0.6rem;
   }
 }
 

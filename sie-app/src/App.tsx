@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useMemo } from "react";
+import { useState, useCallback, useEffect, useMemo, type ReactNode } from "react";
 import { studyModes } from "./data/questions";
 import type { Question } from "./data/questions";
 import QuestionCard from "./components/QuestionCard";
@@ -90,6 +90,23 @@ const MERGED_COURSE_PDF_PATH = "/ilovepdf_merged.pdf";
 const OPEN_BLOCKED_QUESTIONS_KEY_PREFIX = "sie-app:open-blocked:";
 
 type OpenQuestionWithChapter = Question & { chapter: string; uid: string };
+
+function NavIcon({ children }: { children: ReactNode }) {
+  return (
+    <svg
+      className="nav-icon"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.9"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      {children}
+    </svg>
+  );
+}
 
 const COURSE_CHAPTERS = [
   "Adaptoare Grafice",
@@ -345,6 +362,8 @@ export default function App() {
     "Conecteaza fisierul de statistici pentru salvare automata."
   );
   const [blockedOpenQuestionIds, setBlockedOpenQuestionIds] = useState<string[]>([]);
+  const [isNavCompact, setIsNavCompact] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const blockedOpenQuestionsKey = useMemo(() => getOpenBlockedQuestionsKey(mode), [mode]);
 
@@ -431,6 +450,24 @@ export default function App() {
     const onFsChange = () => setIsFullscreen(!!document.fullscreenElement);
     document.addEventListener("fullscreenchange", onFsChange);
     return () => document.removeEventListener("fullscreenchange", onFsChange);
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => setIsNavCompact(window.scrollY > 18);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth > 640) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
   useEffect(() => {
@@ -660,74 +697,181 @@ export default function App() {
 
   return (
     <div className="app">
-      <header className="app-header">
-        <div className="app-title">
-          <span className="app-logo">📚</span>
-          <div>
-            <h1>{currentModeMeta.title}</h1>
-            <p className="app-subtitle">
-              Sisteme de Intrare/Ieșire și Echipamente Periferice
-            </p>
-            <p className="app-mode-description">{currentModeMeta.description}</p>
-          </div>
-        </div>
-        <div className="header-actions">
-          <div className="mode-picker">
-            <select
-              className="mode-select"
-              aria-label="Selectează setul de învățare"
-              value={mode}
-              onChange={(event) => {
-                setMode(event.target.value as StudyMode);
-                setQIndex(0);
-              }}
-            >
-              {studyModes.map((studyMode) => (
-                <option key={studyMode} value={studyMode}>
-                  {MODE_META[studyMode].label}
-                </option>
-              ))}
-            </select>
+      <header
+        className={`app-header ${isNavCompact ? "app-header-compact" : ""} ${
+          isMobileMenuOpen ? "app-header-mobile-open" : ""
+        }`}
+      >
+        <div className="navbar-top">
+          <div className="app-title">
+            <span className="app-logo" aria-hidden="true">
+              <NavIcon>
+                <path d="M4.5 6.5a2 2 0 0 1 2-2h10.2a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6.5a2 2 0 0 1-2-2z" />
+                <path d="M8 4.5v15" />
+                <path d="M10.8 8.5h5" />
+                <path d="M10.8 12h5" />
+              </NavIcon>
+            </span>
+            <div>
+              <h1>{currentModeMeta.title}</h1>
+              <p className="app-subtitle">
+                Sisteme de Intrare/Ieșire și Echipamente Periferice
+              </p>
+              <p className="app-mode-description">{currentModeMeta.description}</p>
+            </div>
           </div>
 
-          <button className="tab-btn" onClick={connectStatsFile}>
-            📄 Conecteaza statistici
+          <button
+            className="mobile-menu-toggle"
+            type="button"
+            aria-label={isMobileMenuOpen ? "Închide meniul" : "Deschide meniul"}
+            aria-expanded={isMobileMenuOpen}
+            onClick={() => setIsMobileMenuOpen((open) => !open)}
+          >
+            <NavIcon>
+              {isMobileMenuOpen ? (
+                <>
+                  <path d="M6 6l12 12" />
+                  <path d="M18 6 6 18" />
+                </>
+              ) : (
+                <>
+                  <path d="M4.5 7h15" />
+                  <path d="M4.5 12h15" />
+                  <path d="M4.5 17h15" />
+                </>
+              )}
+            </NavIcon>
+            <span>{isMobileMenuOpen ? "Închide" : "Meniu"}</span>
           </button>
 
-          <span className="stats-status" title={statsStatus}>{statsStatus}</span>
+          <div className="navbar-controls">
+            <div className="mode-picker">
+              <label className="mode-picker-label" htmlFor="study-mode-select">
+                Mod
+              </label>
+              <select
+                id="study-mode-select"
+                className="mode-select"
+                aria-label="Selectează setul de învățare"
+                value={mode}
+                onChange={(event) => {
+                  setMode(event.target.value as StudyMode);
+                  setQIndex(0);
+                  setIsMobileMenuOpen(false);
+                }}
+              >
+                {studyModes.map((studyMode) => (
+                  <option key={studyMode} value={studyMode}>
+                    {MODE_META[studyMode].label}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-          <div className="tabs">
+            <button
+              className="tab-btn nav-action-btn"
+              onClick={() => {
+                void connectStatsFile();
+                setIsMobileMenuOpen(false);
+              }}
+            >
+              <NavIcon>
+                <path d="M8 4.5h6.8L19 8.7v10.8a1.8 1.8 0 0 1-1.8 1.8H8a1.8 1.8 0 0 1-1.8-1.8V6.3A1.8 1.8 0 0 1 8 4.5z" />
+                <path d="M14.8 4.5v4.2H19" />
+                <path d="M9.5 12.2h6" />
+                <path d="M9.5 15.4h6" />
+              </NavIcon>
+              <span>Statistici</span>
+            </button>
+
+            <button
+              className="tab-btn nav-action-btn fullscreen-btn"
+              onClick={() => {
+                toggleFullscreen();
+                setIsMobileMenuOpen(false);
+              }}
+              title={isFullscreen ? "Ieși din full screen (F)" : "Full screen (F)"}
+            >
+              <NavIcon>
+                {isFullscreen ? (
+                  <>
+                    <path d="M9 5.5H5.5V9" />
+                    <path d="M15 5.5h3.5V9" />
+                    <path d="M9 18.5H5.5V15" />
+                    <path d="M15 18.5h3.5V15" />
+                  </>
+                ) : (
+                  <>
+                    <path d="M9 5.5H5.5V9" />
+                    <path d="M15 5.5h3.5V9" />
+                    <path d="M9 18.5H5.5V15" />
+                    <path d="M15 18.5h3.5V15" />
+                    <path d="M8.8 8.8L5.5 5.5" />
+                    <path d="M15.2 8.8l3.3-3.3" />
+                    <path d="M8.8 15.2l-3.3 3.3" />
+                    <path d="M15.2 15.2l3.3 3.3" />
+                  </>
+                )}
+              </NavIcon>
+              <span>{isFullscreen ? "Ieși FS" : "Full Screen"}</span>
+            </button>
+          </div>
+        </div>
+
+        <div className="navbar-bottom">
+          <div className="tabs" role="tablist" aria-label="Navigare secțiuni">
             <button
               className={`tab-btn ${tab === "intrebari" ? "tab-active" : ""}`}
-              onClick={() => setTab("intrebari")}
+              onClick={() => {
+                setTab("intrebari");
+                setIsMobileMenuOpen(false);
+              }}
             >
-              ✏️ Întrebări Deschise
+              <NavIcon>
+                <path d="M4.8 16.8l-.6 3.7 3.7-.6L18.6 9.2a1.8 1.8 0 0 0 0-2.6l-1.2-1.2a1.8 1.8 0 0 0-2.6 0z" />
+                <path d="M13.6 6.2l4.2 4.2" />
+              </NavIcon>
+              <span>Întrebări Deschise</span>
               <span className="tab-count">{questionCountBadge}</span>
             </button>
             <button
               className={`tab-btn ${tab === "merged" ? "tab-active" : ""}`}
-              onClick={() => setTab("merged")}
+              onClick={() => {
+                setTab("merged");
+                setIsMobileMenuOpen(false);
+              }}
             >
-              📚 Curs Merged
+              <NavIcon>
+                <path d="M4.5 6.5a2 2 0 0 1 2-2h10.2a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6.5a2 2 0 0 1-2-2z" />
+                <path d="M8 4.5v15" />
+                <path d="M10.8 8.5h5" />
+                <path d="M10.8 12h5" />
+              </NavIcon>
+              <span>Curs Merged</span>
               <span className="tab-count">search</span>
             </button>
             <button
               className={`tab-btn tab-teal ${
                 tab === "grile" ? "tab-active-teal" : ""
               }`}
-              onClick={() => setTab("grile")}
+              onClick={() => {
+                setTab("grile");
+                setIsMobileMenuOpen(false);
+              }}
             >
-              📝 Simulare Grile
+              <NavIcon>
+                <rect x="5" y="4.8" width="14" height="16" rx="2" />
+                <path d="M9 9.2h6" />
+                <path d="M9 12.3h6" />
+                <path d="M9 15.4h4" />
+              </NavIcon>
+              <span>Simulare Grile</span>
               <span className="tab-count">10 random</span>
             </button>
-            <button
-              className="tab-btn fullscreen-btn"
-              onClick={toggleFullscreen}
-              title={isFullscreen ? "Ieși din full screen (F)" : "Full screen (F)"}
-            >
-              {isFullscreen ? "🗗 Ieși FS" : "🗖 Full Screen"}
-            </button>
           </div>
+
+          <span className="stats-status" title={statsStatus}>{statsStatus}</span>
         </div>
       </header>
 
