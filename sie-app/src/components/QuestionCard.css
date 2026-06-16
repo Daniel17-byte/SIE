@@ -9,12 +9,13 @@
 }
 
 .card {
-  background: #1e2233;
-  border: 1px solid #2d3555;
-  border-radius: 20px;
-  padding: clamp(2rem, 2.4vw, 2.9rem) clamp(1.5rem, 3vw, 3.5rem);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  border-top: 10px solid var(--primary);
+  padding: clamp(1.5rem, 2vw, 2.1rem) clamp(1.2rem, 2.2vw, 2.2rem);
   width: 100%;
-  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 28px rgba(60, 64, 67, 0.14);
   animation: fadeIn 0.3s ease;
 }
 
@@ -31,8 +32,8 @@
 }
 
 .card-badge {
-  background: #3b4fd8;
-  color: #fff;
+  background: var(--primary-soft);
+  color: var(--primary);
   font-size: 0.88rem;
   font-weight: 700;
   padding: 6px 14px;
@@ -42,33 +43,33 @@
 }
 
 .card-counter {
-  color: #8890b0;
+  color: var(--text-soft);
   font-size: 1rem;
 }
 
 .card-title {
   font-size: clamp(1.45rem, 1.1rem + 0.9vw, 1.95rem);
   font-weight: 700;
-  color: #e8ecff;
+  color: var(--text);
   margin: 0 0 0.75rem;
   line-height: 1.4;
 }
 
 .card-source {
   font-size: 0.98rem;
-  color: #6b75a0;
+  color: var(--text-muted);
   margin: 0 0 1.85rem;
   font-style: italic;
 }
 
 .card-chapter {
   font-size: 0.92rem;
-  color: #93a0d6;
+  color: var(--text-soft);
   margin: 0 0 0.35rem;
 }
 
 .card-content {
-  color: #c8cfe8;
+  color: var(--text);
   font-size: clamp(1.08rem, 0.98rem + 0.32vw, 1.22rem);
   line-height: 1.85;
 }
@@ -77,16 +78,16 @@
 .card-content ul, .card-content ol { padding-left: 1.8rem; }
 .card-content li { margin: 0.45rem 0; }
 
-.card-content strong { color: #a5b4fc; }
-.card-content em { color: #94a3b8; }
+.card-content strong { color: var(--primary); }
+.card-content em { color: var(--text-soft); }
 
 .card-content blockquote {
-  border-left: 3px solid #3b4fd8;
+  border-left: 3px solid var(--primary);
   margin: 1.25rem 0;
   padding: 0.85rem 1.15rem;
-  background: #161929;
+  background: var(--surface-soft);
   border-radius: 0 8px 8px 0;
-  color: #94a3b8;
+  color: var(--text-soft);
 }
 
 .card-content table {
@@ -97,29 +98,29 @@
 }
 
 .card-content th {
-  background: #252d4a;
-  color: #a5b4fc;
+  background: var(--surface-strong);
+  color: var(--primary);
   padding: 12px 14px;
   text-align: left;
-  border: 1px solid #2d3555;
+  border: 1px solid var(--border);
 }
 
 .card-content td {
   padding: 12px 14px;
-  border: 1px solid #2d3555;
+  border: 1px solid var(--border);
   vertical-align: top;
 }
 
 .card-content tr:nth-child(even) td {
-  background: #161929;
+  background: var(--surface-soft);
 }
 
 .card-content code {
-  background: #252d4a;
+  background: var(--surface-strong);
   padding: 3px 7px;
   border-radius: 4px;
   font-size: 0.92em;
-  color: #93c5fd;
+  color: #1a73e8;
 }
 
 /* Navigation */
@@ -139,11 +140,11 @@
 }
 
 .nav-btn {
-  background: #3b4fd8;
+  background: var(--primary);
   color: #fff;
   border: none;
   padding: 12px 30px;
-  border-radius: 10px;
+  border-radius: var(--radius-control);
   font-size: 1.02rem;
   font-weight: 600;
   cursor: pointer;
@@ -152,13 +153,13 @@
 }
 
 .nav-btn:hover:not(:disabled) {
-  background: #4d5fe8;
+  background: var(--primary-hover);
   transform: translateY(-1px);
 }
 
 .nav-btn:disabled {
-  background: #252d4a;
-  color: #4a5080;
+  background: var(--surface-strong);
+  color: var(--text-muted);
   cursor: not-allowed;
 }
 
@@ -179,11 +180,11 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #2d3555;
+  background: var(--border);
   transition: background 0.2s;
 }
 
 .dot-active {
-  background: #3b4fd8;
+  background: var(--primary);
 }
 

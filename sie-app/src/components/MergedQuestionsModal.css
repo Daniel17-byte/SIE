@@ -1,7 +1,7 @@
 .merged-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(8, 11, 20, 0.78);
+  background: rgba(32, 33, 36, 0.35);
   backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
@@ -13,10 +13,11 @@
 .merged-modal {
   width: min(1100px, 100%);
   max-height: 90vh;
-  background: #161929;
-  border: 1px solid #2d3555;
-  border-radius: 24px;
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  border-top: 10px solid var(--primary);
+  box-shadow: 0 24px 60px rgba(60, 64, 67, 0.24);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -28,15 +29,15 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 1.35rem 1.5rem 1rem;
-  border-bottom: 1px solid #2d3555;
-  background: linear-gradient(180deg, rgba(59, 79, 216, 0.08), transparent);
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(103, 58, 183, 0.08), transparent);
 }
 
 .merged-modal-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #3b4fd8;
+  background: var(--primary);
   color: #fff;
   font-size: 0.78rem;
   font-weight: 700;
@@ -48,31 +49,31 @@
 }
 
 .merged-modal-title {
-  color: #eef2ff;
+  color: var(--text);
   font-size: clamp(1.3rem, 1.08rem + 0.9vw, 1.9rem);
   margin-bottom: 0.35rem;
 }
 
 .merged-modal-subtitle {
-  color: #93a0d6;
+  color: var(--text-soft);
   line-height: 1.6;
 }
 
 .merged-modal-close {
-  border: 1px solid #2d3555;
-  background: #1e2233;
-  color: #c8cfe8;
+  border: 1px solid var(--border);
+  background: var(--surface-soft);
+  color: var(--text-soft);
   width: 42px;
   height: 42px;
-  border-radius: 12px;
+  border-radius: var(--radius-control);
   cursor: pointer;
   font-size: 1rem;
   transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
 }
 
 .merged-modal-close:hover {
-  background: #252d4a;
-  color: #fff;
+  background: var(--surface-strong);
+  color: var(--text);
   transform: translateY(-1px);
 }
 
@@ -85,9 +86,9 @@
 }
 
 .merged-question-card {
-  background: #1e2233;
-  border: 1px solid #2d3555;
-  border-radius: 18px;
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  border-radius: 12px;
   padding: 1.2rem 1.25rem;
 }
 
@@ -112,30 +113,30 @@
 }
 
 .merged-question-badge {
-  background: rgba(59, 79, 216, 0.16);
-  color: #c7d2fe;
+  background: rgba(103, 58, 183, 0.12);
+  color: var(--primary);
 }
 
 .merged-question-chapter {
-  background: rgba(14, 165, 160, 0.12);
-  color: #99f6e4;
+  background: rgba(103, 58, 183, 0.1);
+  color: var(--primary);
 }
 
 .merged-question-title {
-  color: #eef2ff;
+  color: var(--text);
   font-size: 1.12rem;
   line-height: 1.45;
   margin-bottom: 0.45rem;
 }
 
 .merged-question-source {
-  color: #94a3b8;
+  color: var(--text-soft);
   font-style: italic;
   margin-bottom: 1rem;
 }
 
 .merged-question-content {
-  color: #dbe4ff;
+  color: var(--text);
   line-height: 1.8;
 }
 
@@ -153,19 +154,19 @@
 }
 
 .merged-question-content strong {
-  color: #a5b4fc;
+  color: var(--primary);
 }
 
 .merged-question-content em {
-  color: #cbd5e1;
+  color: var(--text-soft);
 }
 
 .merged-question-content blockquote {
-  border-left: 3px solid #3b4fd8;
-  background: #161929;
+  border-left: 3px solid var(--primary);
+  background: var(--surface-strong);
   border-radius: 0 10px 10px 0;
   padding: 0.85rem 1rem;
-  color: #94a3b8;
+  color: var(--text-soft);
 }
 
 .merged-question-content table {
@@ -176,24 +177,24 @@
 
 .merged-question-content th,
 .merged-question-content td {
-  border: 1px solid #2d3555;
+  border: 1px solid var(--border);
   padding: 0.75rem 0.85rem;
   vertical-align: top;
 }
 
 .merged-question-content th {
-  background: #252d4a;
-  color: #c7d2fe;
+  background: var(--surface-strong);
+  color: var(--primary);
   text-align: left;
 }
 
 .merged-question-content tr:nth-child(even) td {
-  background: #161929;
+  background: #f9f6ff;
 }
 
 .merged-question-content code {
-  background: #252d4a;
-  color: #93c5fd;
+  background: var(--surface-strong);
+  color: #1a73e8;
   padding: 0.2rem 0.45rem;
   border-radius: 6px;
 }

@@ -1,9 +1,26 @@
 /* ---- Reset & Globals ---- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+:root {
+  --bg: #f0ebf8;
+  --surface: #ffffff;
+  --surface-soft: #faf7ff;
+  --surface-strong: #ede7f6;
+  --border: #dadce0;
+  --text: #202124;
+  --text-soft: #5f6368;
+  --text-muted: #80868b;
+  --primary: #673ab7;
+  --primary-hover: #7e57c2;
+  --primary-soft: rgba(103, 58, 183, 0.14);
+  --danger: #d93025;
+  --radius-card: 14px;
+  --radius-control: 8px;
+}
+
 body {
-  background: #0f1120;
-  color: #c8cfe8;
+  background: var(--bg);
+  color: var(--text);
   font-family: "Inter", "Segoe UI", system-ui, sans-serif;
   min-height: 100vh;
 }
@@ -17,8 +34,8 @@ body {
 
 /* ---- Header ---- */
 .app-header {
-  background: #161929;
-  border-bottom: 1px solid #2d3555;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
   padding: 1rem 2rem;
   display: flex;
   align-items: center;
@@ -28,6 +45,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 10;
+  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.1);
 }
 
 .app-title {
@@ -43,18 +61,18 @@ body {
 .app-title h1 {
   font-size: 1.3rem;
   font-weight: 800;
-  color: #e8ecff;
+  color: var(--text);
 }
 
 .app-subtitle {
   font-size: 0.75rem;
-  color: #6b75a0;
+  color: var(--text-soft);
   margin-top: 1px;
 }
 
 .app-mode-description {
   font-size: 0.8rem;
-  color: #93a0d6;
+  color: var(--text-soft);
   margin-top: 0.35rem;
 }
 
@@ -73,24 +91,24 @@ body {
 
 .stats-status {
   max-width: 280px;
-  color: #93a0d6;
+  color: var(--text-soft);
   font-size: 0.78rem;
   line-height: 1.35;
 }
 
 .mode-select {
   min-width: 170px;
-  background: #1e2233;
-  border: 1px solid #2d3555;
-  color: #e8ecff;
-  border-radius: 10px;
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: var(--radius-control);
   padding: 10px 12px;
   font-size: 0.92rem;
   font-weight: 600;
 }
 
 .mode-select:focus {
-  outline: 2px solid rgba(59, 79, 216, 0.55);
+  outline: 2px solid rgba(103, 58, 183, 0.45);
   outline-offset: 2px;
 }
 
@@ -104,11 +122,11 @@ body {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: #1e2233;
-  border: 1px solid #2d3555;
-  color: #8890b0;
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  color: var(--text-soft);
   padding: 8px 18px;
-  border-radius: 10px;
+  border-radius: var(--radius-control);
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
@@ -116,28 +134,28 @@ body {
 }
 
 .tab-btn:hover {
-  background: #252d4a;
-  color: #c8cfe8;
+  background: var(--surface-strong);
+  color: var(--text);
 }
 
 .tab-active {
-  background: #3b4fd8 !important;
-  border-color: #3b4fd8 !important;
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
   color: #fff !important;
 }
 
 .tab-teal:hover {
-  color: #0ea5a0;
+  color: #188038;
 }
 
 .tab-active-teal {
-  background: #0ea5a0 !important;
-  border-color: #0ea5a0 !important;
+  background: #188038 !important;
+  border-color: #188038 !important;
   color: #fff !important;
 }
 
 .tab-count {
-  background: rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.28);
   border-radius: 20px;
   padding: 1px 8px;
   font-size: 0.75rem;
@@ -146,7 +164,7 @@ body {
 /* ---- Main ---- */
 .app-main {
   flex: 1;
-  padding: 2.5rem 2rem;
+  padding: 2rem 1.5rem 2.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -155,17 +173,17 @@ body {
 
 .keyboard-hint {
   font-size: 0.78rem;
-  color: #4a5080;
+  color: var(--text-muted);
   text-align: center;
 }
 
 .keyboard-hint kbd {
-  background: #252d4a;
-  border: 1px solid #3b4fd8;
+  background: var(--surface-strong);
+  border: 1px solid var(--border);
   border-radius: 4px;
   padding: 1px 6px;
   font-size: 0.75rem;
-  color: #a5b4fc;
+  color: var(--primary);
 }
 
 .open-chapter-filter-row {
@@ -178,27 +196,27 @@ body {
 }
 
 .open-chapter-filter-label {
-  color: #cbd5e1;
+  color: var(--text-soft);
   font-weight: 700;
 }
 
 .open-chapter-filter-select {
   min-width: 220px;
-  background: #1e2233;
-  border: 1px solid #2d3555;
-  color: #e8ecff;
-  border-radius: 10px;
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: var(--radius-control);
   padding: 10px 12px;
   font-size: 0.9rem;
 }
 
 .open-chapter-filter-select:focus {
-  outline: 2px solid rgba(59, 79, 216, 0.55);
+  outline: 2px solid rgba(103, 58, 183, 0.45);
   outline-offset: 2px;
 }
 
 .open-chapter-filter-count {
-  color: #93a0d6;
+  color: var(--text-soft);
   font-size: 0.82rem;
 }
 
@@ -207,22 +225,22 @@ body {
 }
 
 .fullscreen-btn {
-  border-color: #4a5080 !important;
+  border-color: var(--text-muted) !important;
 }
 
 .fullscreen-btn:hover {
-  border-color: #a5b4fc !important;
-  color: #a5b4fc !important;
+  border-color: var(--primary) !important;
+  color: var(--primary) !important;
 }
 
 .app-status-card {
   width: 100%;
   max-width: 980px;
-  background: #1e2233;
-  border: 1px solid #2d3555;
-  border-radius: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
   padding: clamp(1.4rem, 2.5vw, 2.4rem);
-  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 28px rgba(60, 64, 67, 0.14);
   text-align: center;
 }
 
@@ -230,7 +248,7 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #3b4fd8;
+  background: var(--primary);
   color: #fff;
   font-size: 0.82rem;
   font-weight: 700;
@@ -242,17 +260,17 @@ body {
 }
 
 .app-status-badge-error {
-  background: #dc2626;
+  background: var(--danger);
 }
 
 .app-status-title {
   font-size: clamp(1.3rem, 1.02rem + 0.9vw, 1.85rem);
-  color: #eef2ff;
+  color: var(--text);
   margin-bottom: 0.7rem;
 }
 
 .app-status-text {
-  color: #94a3b8;
+  color: var(--text-soft);
   line-height: 1.65;
   font-size: 0.98rem;
 }
@@ -265,9 +283,9 @@ body {
 .app-footer {
   text-align: center;
   padding: 1rem;
-  color: #4a5080;
+  color: var(--text-muted);
   font-size: 0.78rem;
-  border-top: 1px solid #1e2233;
+  border-top: 1px solid var(--border);
 }
 
 @media (max-width: 920px) {
