@@ -29,18 +29,18 @@ const MODE_META: Record<
 > = {
   partial: {
     label: "Partial",
-    title: "SIE Partial",
-    description: "Întrebări necomentate + grile 1",
+    title: "SIE",
+    description: "grile 1",
   },
   examen: {
     label: "Examen",
-    title: "SIE Examen",
-    description: "Întrebări comentate + grile 2",
+    title: "SIE",
+    description: "grile 2",
   },
   complet: {
     label: "Complet",
-    title: "SIE Complet",
-    description: "Toate întrebările deschise + grile 1 și grile 2",
+    title: "SIE",
+    description: "Full",
   },
 };
 
