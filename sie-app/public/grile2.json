@@ -8,8 +8,7 @@
       "Se reduce grosimea stratului de acoperire pentru a compensa eroarea de focalizare a razei laser."
     ],
     "correctAnswers": [
-      "Se reduce lungimea de undă a razei laser comparativ cu cea a discurilor DVD.",
-      "Se reduce grosimea stratului de acoperire pentru a compensa eroarea de focalizare a razei laser."
+      "Se reduce lungimea de undă a razei laser comparativ cu cea a discurilor DVD."
     ],
     "chapter": "Discuri Optice"
   },
@@ -23,7 +22,6 @@
       "Permite accesul la o memorie partajată de către toate firele de execuție dintr-un bloc de fire de execuție."
     ],
     "correctAnswers": [
-      "Este o arhitectura paralela pentru acceleratoare",
       "Permite partajarea unei părți a memoriei GPU cu UCP.",
       "Permite accesul la o memorie partajată de către toate firele de execuție dintr-un bloc de fire de execuție."
     ],
@@ -55,8 +53,7 @@
     ],
     "correctAnswers": [
       "Utilizează un protocol bazat pe pachete.",
-      "Permite conectarea mai multor afisaje in lant.",
-      "Este compatibil cu HDMI printr-un adaptor pasiv."
+      "Permite conectarea mai multor afisaje in lant."
     ],
     "chapter": "Afisaje"
   },
@@ -249,7 +246,6 @@
     ],
     "correctAnswers": [
       "Reduce consumul de energie față de lumina de fundal cu lămpi fluorescente.",
-      "Permite implementarea tehnicii „Full-Array Local Dimming” prin varianta sa cu șiruri de diode LED albe.",
       "Permite realizarea afișajelor profesionale prin varianta sa cu matrice de diode LED RGB."
     ],
     "chapter": "Afisaje"
@@ -580,6 +576,7 @@
       "Dimensiunea memoriilor cache este mai redusă."
     ],
     "correctAnswers": [
+      "Sincronizarea între firele de execuție paralele este mai simplă.",
       "Conține un număr mult mai mare de nuclee de procesare",
       "Latenta fiecărui nucleu de procesare este mult mai mare decât latenta unui nucleu UCP.",
       "Dimensiunea memoriilor cache este mai redusă."
@@ -687,7 +684,6 @@
     ],
     "correctAnswers": [
       "Permite utilizarea unui cablu care conține un canal HDMI Ethernet pentru partajarea unei conexiuni la Internet între două dispozitive.",
-      "Conține o magistrală serială care permite transferul codurilor telecomenzilor dacă o telecomandă este programată cu informația indicând tipul celorlalte dispozitive conectate.",
       "Permite utilizarea unui cablu cu un conector USB de tip C pentru conectarea la un afișaj"
     ],
     "chapter": "Introducere"
@@ -1031,7 +1027,8 @@
       "Modularea luminii se obține cu o cavitate optică ce conține o membrană și un film subțire care au rolul unor micro-oglinzi."
     ],
     "correctAnswers": [
-      "Modularea luminii se obține cu o cavitate optică ce conține o membrană și un film subțire care au rolul unor micro-oglinzi."
+      "Modularea luminii se obține cu o cavitate optică ce conține o membrană și un film subțire care au rolul unor micro-oglinzi.",
+      "Se poate utiliza interpolarea temporală pentru a crea nuanțe suplimentare ale culorilor primare."
     ],
     "chapter": "Afisaje"
   },
@@ -1174,7 +1171,6 @@
     ],
     "correctAnswers": [
       "Timpul de răspuns creşte dacă schimbarea de culoare necesară este redusă.",
-      "Contrastul este îmbunătăţit faţă de tehnologia MVA de bază."
     ],
     "chapter": "Afisaje"
   },

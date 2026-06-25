@@ -91,8 +91,7 @@
       "Toate modulele de extensie sunt conectate în serie."
     ],
     "correctAnswers": [
-      "Se utilizează un protocol sincron la sursa datelor.",
-      "Protocolul de comunicație utilizează ambele fronturi ale semnalului de ceas pentru transferul datelor."
+      "Se utilizează un protocol sincron la sursa datelor."
     ],
     "chapter": "Magistrale"
   },
@@ -287,6 +286,7 @@
       "În modul nativ, utilizează semnale prin tranzitul de mesaje specific magistralei PCI Express"
     ],
     "correctAnswers": [
+      "În mod compatibil, utilizează semnalele INTA#..INTD# pentru cereri de întrerupere.",
       "În mod compatibil, utilizează mesaje speciale cu rolul unor linii virtuale",
       "În modul nativ, utilizează semnale prin tranzitul de mesaje specific magistralei PCI Express"
     ],
@@ -463,7 +463,6 @@
       "Necesită cel puțin patru fire."
     ],
     "correctAnswers": [
-      "Constă din canale bidirecționale.",
       "Necesită cel puțin patru fire."
     ],
     "chapter": "Magistrale"
@@ -492,8 +491,6 @@
       "Permite adăugarea și eliminarea modulelor de extensie fără oprirea sistemului."
     ],
     "correctAnswers": [
-      "Utilizează protocolul 2eVME (Double-edge VME), la care transferurile de date au loc pe ambele fronturi ale semnalului de ceas.",
-      "Poate utiliza module de extensie cu răcire prin convecție, cu ghiduri speciale ale plăcilor care transferă căldura către șasiu.",
       "Permite adăugarea și eliminarea modulelor de extensie fără oprirea sistemului."
     ],
     "chapter": "Magistrale"
@@ -508,10 +505,8 @@
       "Pot utiliza o topologie plasă, cu toate plăcile normale interconectate fără o placă comutatoare."
     ],
     "correctAnswers": [
-      "Pot utiliza o topologie în lanț, cu placă comutatoare și plăci normale conectate în lanț.",
       "Pot utiliza o topologie stea duală, care asigură conexiuni redundante.",
-      "Se pot utiliza pentru diferite interconexiuni seriale, fără modificări.",
-      "Pot utiliza o topologie plasă, cu toate plăcile normale interconectate fără o placă comutatoare."
+      "Se pot utiliza pentru diferite interconexiuni seriale, fără modificări."
     ],
     "chapter": "Magistrale"
   },
@@ -582,7 +577,6 @@
       "Conectează toate modulele de extensie în serie."
     ],
     "correctAnswers": [
-      "Utilizează ambele fronturi ale semnalului de ceas.",
       "Este sincronizat la sursă."
     ],
     "chapter": "Magistrale"
@@ -656,8 +650,7 @@
     ],
     "correctAnswers": [
       "Pot efectua transferuri prin DMA.",
-      "Generează o cerere de întrerupere către procesorul principal.",
-      "Pot comunica cu UCP printr-o memorie partajată si prin linii de control."
+      "Generează o cerere de întrerupere către procesorul principal."
     ],
     "chapter": "Metode IE"
   },
@@ -692,7 +685,7 @@
       "Dublarea frecvenței semnalului de ceas."
     ],
     "correctAnswers": [
-      "Operare pe 2 benzi."
+      "Adăugarea unei noi benzi de comunicație."
     ],
     "chapter": "Magistrale"
   },
@@ -790,7 +783,8 @@
     ],
     "correctAnswers": [
       "Adresele de memorie sunt rezervate de sistem",
-      "În modul nativ, sunt semnalate prin tranzacții de scriere în memorie."
+      "În modul nativ, sunt semnalate prin tranzacții de scriere în memorie.",
+      "În mod compatibil, utilizează semnalele INTA#..INTD# pentru cereri de întrerupere."
     ],
     "chapter": "Metode IE"
   },
@@ -888,8 +882,7 @@
       "Include timpul necesar acceselor la memorie"
     ],
     "correctAnswers": [
-      "Nu include timpul in care se executa operatii de I/E",
-      "Include timpul necesar acceselor la memorie"
+      "Nu include timpul in care se executa operatii de I/E"
     ],
     "chapter": "Introducere"
   },
@@ -903,7 +896,6 @@
     ],
     "correctAnswers": [
       "Este sincron la sursa datelor în timpul fazelor de date.",
-      "Utilizează ambele fronturi ale semnalului de ceas pentru transferul datelor.",
       "Este asincron în timpul fazelor de adrese."
     ],
     "chapter": "Magistrale"
@@ -947,6 +939,7 @@
     ],
     "correctAnswers": [
       "În modul nativ, sunt semnalate prin tranzacții de scriere în memorie.",
+      "În modul compatibil, sunt semnalate de dispozitive cu semnalele de cerere de întrerupere INTA# .. INTD#.",
       "În modul compatibil, utilizează mesaje speciale cu rolul unor semnale de cerere de întrerupere."
     ],
     "chapter": "Metode IE"
