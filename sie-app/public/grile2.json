@@ -448,7 +448,7 @@
       "Emit lumină atunci când sunt polarizate direct.",
       "Sunt surse de lumină punctiforme."
     ],
-    "chapter": "Introducere"
+    "chapter": "Afisaje"
   },
   {
     "id": 33,
@@ -550,7 +550,7 @@
       "Uniformitatea luminozității este îmbunătățită față de VA.",
       "Reproducerea culorilor este problematică în direcția perpendiculară pe ecran."
     ],
-    "chapter": "Introducere"
+    "chapter": "Afisaje"
   },
   {
     "id": 40,
@@ -700,7 +700,7 @@
       "Utilizează un șir de transport care conține informații video, audio și grafice multiplexate.",
       "Definește modul BD-Java, care permite dezvoltarea aplicațiilor interactive."
     ],
-    "chapter": "Introducere"
+    "chapter": "Discuri Optice"
   },
   {
     "id": 50,
@@ -822,7 +822,7 @@
     "correctAnswers": [
       "Permite tehnica Full-Array Local Dimming."
     ],
-    "chapter": "Introducere"
+    "chapter": "Afisaje"
   },
   {
     "id": 58,
@@ -975,7 +975,7 @@
       "Necesită un consum redus de energie.",
       "Permite realizarea afişajelor cu grosime redusă."
     ],
-    "chapter": "Introducere"
+    "chapter": "Afisaje"
   },
   {
     "id": 69,
@@ -988,7 +988,7 @@
     "correctAnswers": [
       "Nano-cristale semiconductoare."
     ],
-    "chapter": "Introducere"
+    "chapter": "Afisaje"
   },
   {
     "id": 70,
@@ -1043,7 +1043,7 @@
     "correctAnswers": [
       "Moleculele se aliniază în straturi, iar în fiecare strat ele sunt răsucite față de straturile adiacente."
     ],
-    "chapter": "Introducere"
+    "chapter": "Afisaje"
   },
   {
     "id": 74,
