@@ -333,7 +333,7 @@
     "title": "Explicați faza colesterică a cristalelor lichide termotropice.",
     "source": "Q&A_Partea2.pdf",
     "content": "Faza colesterica este tipica pentru esteri ai colesterolului. Moleculele au o forma chirala,\nfara plan intern de simetrie. Structura este similara cu o stiva de straturi nematice 2D. Este\nutilizata in tehnologii de afisare precum Twisted Nematic.",
-    "chapter": "Introducere"
+    "chapter": "Afisaje"
   },
   {
     "id": 148,
@@ -410,28 +410,28 @@
     "title": "Explicați diferența dintre raportul de contrast static și raportul de contrast dinamic.",
     "source": "Q&A_Partea2.pdf",
     "content": "Raportul de contrast static reprezinta raportul dintre luminozitatea maxima (albul cel mai\nintens) si luminozitatea minima (negrul cel mai intens) pe care un ecran le poate reda\nsimultan, intr-un cadru fix, masurate in centrul ecranului. Este un parametru constant si\nreflecta capacitatea nativa a panoului.\n\nRaportul de contrast dinamic reprezinta raportul dintre lum max si lum min pe care ecranul\nle poate reda la momente diferite, prin ajustarea automata a luminii de fundal in functie\nde continutul afisat. Este influentat de procesarea digitala si poate avea valori foarte mari,\ndar nu reflecta contrastul real simultan.",
-    "chapter": "Introducere"
+    "chapter": "Afisaje"
   },
   {
     "id": 159,
     "title": "Explicați tehnica de spatial dithering utilizată pentru îmbunătățirea adâncimii culorii.",
     "source": "Q&A_Partea2.pdf",
     "content": "Spatial dithering, sau intercalarea spatiala a culorilor, reprezinta creearea unei noi culori\nprin pixeli adiacenti cu nuante usor diferite. Ochiul uman combina culorile pixelilor\napropiati, astfel dand \"impresia\" de o culoare noua.",
-    "chapter": "Introducere"
+    "chapter": "Afisaje"
   },
   {
     "id": 160,
     "title": "Explicați tehnica Frame Rate Control (FRC) folosită pentru îmbunătățirea adâncimii culorii.",
     "source": "Q&A_Partea2.pdf",
     "content": "Frame Rate Control reprezinta o intercalare temporala, in care un pixel sau un grup de\npixeli isi modifica usor culoarea in timpul unor cadre succesive, astfel reproducand culori\n\ncare altfel nu pot fi realizate. Calitatea tehnicii FRC poate depinde de setarile luminozitatii\nsi ale contrastului.",
-    "chapter": "Introducere"
+    "chapter": "Afisaje"
   },
   {
     "id": 161,
     "title": "Explicați conceptele de luminozitate (luminance), cromaticitate (chromaticity), nuanță (hue) și saturație (saturation).",
     "source": "Q&A_Partea2.pdf",
     "content": "Luminanta reprezinta intensitatea luminoasa pe unitatea de suprafata.\n\nCromaticitatea reprezinta calitatea unei culori independent de luminanta sa.\n\nNuanta este dependenta de lunigmea de unda a luminii, mai exact spune ce fel de culoare\neste.\n\nSaturatia este raportul lungimii de unda dominante la alte lungimi de unda, mai exact\npuritatea culorii. (cat de verde e)",
-    "chapter": "Introducere"
+    "chapter": "Afisaje"
   },
   {
     "id": 162,
@@ -634,7 +634,7 @@
     "title": "Prezentați tehnologia Advanced Color ePaper (ACeP).",
     "source": "Q&A_Partea2.pdf",
     "content": "Nu se mai folosesc filtre de culoare, ci pigmenti colorati reali direct in cerneala, de culoare\nCMY si un pigment alb opac. Se utilizeaza miscarea electroforetica selectiva a pigmentilor,\nculoarea afisata depinde de ce particule sunt aduse la suprafata prin campul electric.",
-    "chapter": "Introducere"
+    "chapter": "Afisaje"
   },
   {
     "id": 191,
@@ -648,7 +648,7 @@
     "title": "Prezentați punctele cuantice foto-emisive.",
     "source": "Q&A_Partea2.pdf",
     "content": "Punctele cuantice sunt nanocristale semiconductoare extrem de mici, care au\nproprietatea de a absorbi energie si apoi de a emite lumina colorata, printr-un proces\nnumit fotoluminescenta. Culoarea luminii emise depinde de dimensiunea punctului\ncunatic: puncte mai mici = lumina albastra, puncte mai mari = verde, galben, rosu.",
-    "chapter": "Introducere"
+    "chapter": "Afisaje"
   },
   {
     "id": 193,
@@ -746,21 +746,21 @@
     "title": "Prezintă sub-etapele funcționale ale etapei de procesare geometrică din pipeline-ul grafic.",
     "source": "Q&A_Partea2.pdf",
     "content": "Etapa de procesare geometrica din pipeline-ul grafic include operatii precum\ntransformarea obiectelor, iluminarea si taierea. Aceste operatii sunt efectuate de\nprocesoarele grafice si au rolul de a pregati obiectele 3D pentru afisare pe ecranul 2D.",
-    "chapter": "Introducere"
+    "chapter": "Adaptoare Grafice"
   },
   {
     "id": 207,
     "title": "Prezintă sub-etapele de configurare a triunghiului și de parcurgere a triunghiului din etapa de rasterizare a pipeline-ului grafic.",
     "source": "Q&A_Partea2.pdf",
     "content": "Doua sub etape:\n\n• Configurarea triunghiului\n\no Calculeaza info necesare pt rasterizare, precum pozitiile varfurilor si\n\necuatiile interpolare\n\n• Parcurgerea triunghiului\n\no\n\nIdentifica toti pixelii care se afla in interiorul triunghiului si genereaza\nfragmente pentru fiecare pixel",
-    "chapter": "Introducere"
+    "chapter": "Adaptoare Grafice"
   },
   {
     "id": 208,
     "title": "Explică tehnicile de filtrare a texturilor care pot fi utilizate în sub-etapa de umbrire a pixelilor din etapa de procesare a pixelilor.",
     "source": "Q&A_Partea2.pdf",
     "content": "Filtrarea texturii reduce efectele nedorite atunci cand o textura este mai mica sau mai\nmare decat zona pixelilor care trebuie texturati.",
-    "chapter": "Introducere"
+    "chapter": "Adaptoare Grafice"
   },
   {
     "id": 209,
