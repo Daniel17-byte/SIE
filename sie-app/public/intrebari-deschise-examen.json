@@ -158,14 +158,14 @@
     "title": "Diferenta dintre diode fluorescente si diode fosforescente",
     "source": "Q&A_Partea2.pdf",
     "content": "Fluorescenta este emisia luminii vizibile de un material in urma absorbtiei energiei. Energia\neste re-emisa atunci cand electronii revin la nivelul de energie initial. Inceteaza imediat ce\nsursa de energie este eliminata.\n\nFosforescenta este emisia luminii de un material expus la o forma de radiatie. Emisia se\nmentine si dupa ce radiatia a fost eliminata.",
-    "chapter": "Introducere"
+    "chapter": "Afisaje"
   },
   {
     "id": 122,
     "title": "Diferenta dintre șiruri de diode LED albe (EL-WLED (Edge-Lit White LED)) si matrice de diode LED albe:",
     "source": "Q&A_Partea2.pdf",
     "content": "EL-WLED\n\n• Siruri de diode LED albe amplasate la margini\n\n• Exista si variante cu diodele amplasate pe patru margini, doua margini, sau o\n\nmargine\n\n• Ofera posibilitatea modificarii intensitatii luminoase in mod diferit in diferite zone\n\n(\"local dimming\")\n\nMatrice de diode\n\n• Matrice de diode LED albe distribuite in mod uniform in spatele panoului de afisare\n\n• Setarea intensitatii luminoase se face in mod diferit pe ecran (\"full array local\n\ndimming\")\n\n• Tehnica FALD permite un control mai eficient al intensitatii decat tehnica local\n\ndimming",
-    "chapter": "Introducere"
+    "chapter": "Afisaje"
   },
   {
     "id": 123,
