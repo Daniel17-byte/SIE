@@ -403,7 +403,7 @@
     "title": "Explicați principiul tehnologiei de Compensare a Timpului de Răspuns (RTC – Response Time Compensation).",
     "source": "Q&A_Partea2.pdf",
     "content": "Timpul de raspuns reprezinta timpul necesar pentru schimbarea orientarii cristalelor\nlichide, mai exact tranzitia culorii.\n\nRTC reprezinta o tehnica de compensare a timpului de raspuns, care functioneaza prin\naplicarea unei supratensiuni controlate cristalelor. Astfel ajuta moleculele sa ajunga mai\nrapid la pozitia dorita, reducand latenta tranzitiei de culoare. Cristalele lichide sunt fortate\nsa treaca mai repede prin pozitiile intermediare, accelerand procesul de comutare si\nreducand efectul de ghosting (sau remanenta a imaginii).",
-    "chapter": "Introducere"
+    "chapter": "Afisaje"
   },
   {
     "id": 158,
