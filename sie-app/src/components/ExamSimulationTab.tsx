@@ -41,16 +41,6 @@ const PART_CONFIG: Record<ExamPart, ExamPartConfig> = {
 const GRILA_POINTS = 2;
 const OPEN_QUESTION_POINTS = 3;
 
-function parsePoints(value: string) {
-  const normalized = value.replace(",", ".").trim();
-  const numeric = Number(normalized);
-  if (!Number.isFinite(numeric)) {
-    return null;
-  }
-
-  return numeric;
-}
-
 function getRandomIndex(maxExclusive: number) {
   if (maxExclusive <= 0) {
     return 0;
@@ -92,6 +82,10 @@ function pickRandomItems<T>(items: readonly T[], count: number) {
   return shuffleItems(items).slice(0, Math.min(items.length, count));
 }
 
+function getOpenQuestionKey(question: Question) {
+  return `${question.id}::${question.title}`;
+}
+
 export default function ExamSimulationTab({
   partialOpenQuestions,
   examenOpenQuestions,
@@ -105,9 +99,15 @@ export default function ExamSimulationTab({
   const [openSessionQuestions, setOpenSessionQuestions] = useState<Question[]>([]);
   const [openIndex, setOpenIndex] = useState(0);
   const [isOpenSessionFinished, setIsOpenSessionFinished] = useState(false);
-  const [openPointsByPart, setOpenPointsByPart] = useState<Record<ExamPart, string>>({
-    partial: "",
-    examen: "",
+  const [openPointsByPart, setOpenPointsByPart] = useState<Record<ExamPart, number | null>>({
+    partial: null,
+    examen: null,
+  });
+  const [openQuestionScoresByPart, setOpenQuestionScoresByPart] = useState<
+    Record<ExamPart, Record<string, number>>
+  >({
+    partial: {},
+    examen: {},
   });
   const [grileSummaryByPart, setGrileSummaryByPart] = useState<Record<ExamPart, SimulationSummary | null>>({
     partial: null,
@@ -127,7 +127,15 @@ export default function ExamSimulationTab({
     setOpenSessionQuestions(nextQuestions);
     setOpenIndex(0);
     setIsOpenSessionFinished(false);
-  }, [currentPartConfig.openCount, openQuestionPool]);
+    setOpenQuestionScoresByPart((prev) => ({
+      ...prev,
+      [part]: {},
+    }));
+    setOpenPointsByPart((prev) => ({
+      ...prev,
+      [part]: null,
+    }));
+  }, [currentPartConfig.openCount, openQuestionPool, part]);
 
   useEffect(() => {
     if (isLoadingOpenQuestions || openQuestionError) {
@@ -141,11 +149,10 @@ export default function ExamSimulationTab({
   }, [isLoadingOpenQuestions, openQuestionError, part, startOpenSession]);
 
   const currentOpenQuestion = openSessionQuestions[openIndex] ?? null;
-  const currentOpenPointsRaw = openPointsByPart[part];
-  const currentOpenPoints = parsePoints(currentOpenPointsRaw);
+  const currentOpenQuestionScores = openQuestionScoresByPart[part] ?? {};
+  const currentOpenPoints = openPointsByPart[part];
   const currentMaxOpenPoints = currentPartConfig.openCount * OPEN_QUESTION_POINTS;
-  const hasValidOpenPoints =
-    currentOpenPoints !== null && currentOpenPoints >= 0 && currentOpenPoints <= currentMaxOpenPoints;
+  const hasValidOpenPoints = currentOpenPoints !== null;
   const currentGrileSummary = grileSummaryByPart[part];
   const currentGrilePoints = currentGrileSummary ? currentGrileSummary.score * GRILA_POINTS : null;
   const currentTotalPoints =
@@ -154,6 +161,13 @@ export default function ExamSimulationTab({
       : null;
   const currentPartPassed =
     currentTotalPoints !== null && currentTotalPoints >= currentPartConfig.minPoints;
+  const hasAllOpenQuestionScores =
+    openSessionQuestions.length > 0 &&
+    openSessionQuestions.every((question) => typeof currentOpenQuestionScores[getOpenQuestionKey(question)] === "number");
+
+  const currentOpenQuestionKey = currentOpenQuestion ? getOpenQuestionKey(currentOpenQuestion) : null;
+  const currentOpenQuestionScore =
+    currentOpenQuestionKey !== null ? currentOpenQuestionScores[currentOpenQuestionKey] : undefined;
 
   const partStatus = useMemo(
     () =>
@@ -162,8 +176,8 @@ export default function ExamSimulationTab({
         const summary = grileSummaryByPart[partKey];
         const grilePoints = summary ? summary.score * GRILA_POINTS : null;
         const maxOpenPoints = partConfig.openCount * OPEN_QUESTION_POINTS;
-        const openPoints = parsePoints(openPointsByPart[partKey]);
-        const hasOpenPoints = openPoints !== null && openPoints >= 0 && openPoints <= maxOpenPoints;
+        const openPoints = openPointsByPart[partKey];
+        const hasOpenPoints = openPoints !== null;
         const totalPoints =
           grilePoints !== null && hasOpenPoints ? grilePoints + (openPoints ?? 0) : null;
         const passed = totalPoints !== null && totalPoints >= partConfig.minPoints;
@@ -238,6 +252,42 @@ export default function ExamSimulationTab({
       setExamStatsStatus("Nu am putut salva statistica simulare examen.");
     }
   }, [buildExamStatsEntry, canSaveExamStats, onSaveExamStats]);
+
+  const handleSetCurrentOpenScore = useCallback(
+    (score: number) => {
+      if (!currentOpenQuestion) {
+        return;
+      }
+
+      const clampedScore = Math.max(0, Math.min(OPEN_QUESTION_POINTS, score));
+      const key = getOpenQuestionKey(currentOpenQuestion);
+      setOpenQuestionScoresByPart((prev) => ({
+        ...prev,
+        [part]: {
+          ...prev[part],
+          [key]: clampedScore,
+        },
+      }));
+    },
+    [currentOpenQuestion, part]
+  );
+
+  const handleFinishOpenSession = useCallback(() => {
+    if (!hasAllOpenQuestionScores) {
+      return;
+    }
+
+    const totalPoints = openSessionQuestions.reduce((sum, question) => {
+      const key = getOpenQuestionKey(question);
+      return sum + (currentOpenQuestionScores[key] ?? 0);
+    }, 0);
+
+    setOpenPointsByPart((prev) => ({
+      ...prev,
+      [part]: totalPoints,
+    }));
+    setIsOpenSessionFinished(true);
+  }, [currentOpenQuestionScores, hasAllOpenQuestionScores, openSessionQuestions, part]);
 
   return (
     <div className="exam-sim-wrapper">
@@ -330,7 +380,7 @@ export default function ExamSimulationTab({
             <span className="exam-sim-badge exam-sim-badge-secondary">Întrebări deschise</span>
             <h3>Evaluare proprie ({currentPartConfig.label})</h3>
             <p>
-              Parcurgi setul random, apoi îți treci singur nota.
+              Pentru fiecare întrebare deschisă îți dai punctaj între 0 și 3, apoi treci la următoarea.
             </p>
           </div>
           <button type="button" className="nav-btn" onClick={startOpenSession}>
@@ -349,22 +399,6 @@ export default function ExamSimulationTab({
             <p>
               Ai parcurs <strong>{openSessionQuestions.length}</strong> întrebări deschise din setul {currentPartConfig.label.toLowerCase()}.
             </p>
-            <label htmlFor="manual-open-grade">Punctaj deschise ({currentPartConfig.label}):</label>
-            <input
-              id="manual-open-grade"
-              type="number"
-              min={0}
-              max={currentMaxOpenPoints}
-              step={0.5}
-              value={currentOpenPointsRaw}
-              onChange={(event) =>
-                setOpenPointsByPart((prev) => ({
-                  ...prev,
-                  [part]: event.target.value,
-                }))
-              }
-              placeholder={`0 - ${currentMaxOpenPoints}`}
-            />
             {hasValidOpenPoints ? (
               <p className="exam-open-grade-preview">
                 Punctaj curent: grile {currentGrilePoints ?? "-"}p + deschise {currentOpenPoints}p ={" "}
@@ -386,7 +420,25 @@ export default function ExamSimulationTab({
             </div>
             <h4>{currentOpenQuestion.title}</h4>
             <p className="exam-open-source">Sursă: {currentOpenQuestion.source}</p>
-            <p className="exam-open-content">{currentOpenQuestion.content}</p>
+            <p className="exam-open-content exam-open-content-hidden">
+              Răspunsul nu este afișat în simularea de examen.
+            </p>
+
+            <div className="exam-open-score-row">
+              <span className="exam-open-score-label">Punctaj întrebare:</span>
+              <div className="exam-open-score-buttons">
+                {[0, 1, 2, 3].map((score) => (
+                  <button
+                    key={score}
+                    type="button"
+                    className={`exam-score-btn ${currentOpenQuestionScore === score ? "exam-score-btn-active" : ""}`}
+                    onClick={() => handleSetCurrentOpenScore(score)}
+                  >
+                    {score}p
+                  </button>
+                ))}
+              </div>
+            </div>
 
             <div className="exam-open-nav">
               <button
@@ -399,7 +451,12 @@ export default function ExamSimulationTab({
               </button>
 
               {openIndex === openSessionQuestions.length - 1 ? (
-                <button type="button" className="nav-btn" onClick={() => setIsOpenSessionFinished(true)}>
+                <button
+                  type="button"
+                  className="nav-btn"
+                  onClick={handleFinishOpenSession}
+                  disabled={!hasAllOpenQuestionScores}
+                >
                   ✅ Finalizează deschisele
                 </button>
               ) : (
@@ -409,6 +466,7 @@ export default function ExamSimulationTab({
                   onClick={() =>
                     setOpenIndex((index) => Math.min(index + 1, openSessionQuestions.length - 1))
                   }
+                  disabled={typeof currentOpenQuestionScore !== "number"}
                 >
                   Continuă →
                 </button>

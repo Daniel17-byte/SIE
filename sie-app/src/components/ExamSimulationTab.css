@@ -181,6 +181,47 @@
   white-space: pre-wrap;
 }
 
+.exam-open-content-hidden {
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+.exam-open-score-row {
+  margin-top: 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.exam-open-score-label {
+  color: var(--text-soft);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.exam-open-score-buttons {
+  display: flex;
+  gap: 0.45rem;
+}
+
+.exam-score-btn {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  background: var(--surface-soft);
+  color: var(--text-soft);
+  font-weight: 700;
+  min-width: 48px;
+  padding: 7px 10px;
+  cursor: pointer;
+}
+
+.exam-score-btn-active {
+  background: #188038;
+  border-color: #188038;
+  color: #fff;
+}
+
 .exam-open-nav {
   margin-top: 0.95rem;
   display: flex;
