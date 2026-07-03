@@ -224,7 +224,8 @@ body {
 }
 
 .tab-active::after,
-.tab-active-teal::after {
+.tab-active-teal::after,
+.tab-active-purple::after {
   transform: scaleX(1);
   opacity: 1;
   background: rgba(255, 255, 255, 0.88);
@@ -237,6 +238,16 @@ body {
 .tab-active-teal {
   background: #188038 !important;
   border-color: #188038 !important;
+  color: #fff !important;
+}
+
+.tab-purple:hover {
+  color: #5b3cc4;
+}
+
+.tab-active-purple {
+  background: #5b3cc4 !important;
+  border-color: #5b3cc4 !important;
   color: #fff !important;
 }
 

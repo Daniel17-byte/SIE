@@ -7,9 +7,10 @@ import StudySearchTab from "./components/StudySearchTab";
 import type { StudySource } from "./components/StudySearchTab";
 import GrileCard from "./components/GrileCard";
 import type { SimulationSummary } from "./components/GrileCard";
+import ExamSimulationTab from "./components/ExamSimulationTab";
 import "./App.css";
 
-type Tab = "intrebari" | "grile" | "merged";
+type Tab = "intrebari" | "grile" | "merged" | "simulare-examen";
 type StudyMode = (typeof studyModes)[number];
 
 type OpenQuestionSetKey = Exclude<StudyMode, "complet">;
@@ -610,6 +611,9 @@ export default function App() {
   const mergedHint =
     "Alege sursa Curs / Întrebări deschise și caută rapid în materialul merged sau în întrebările filtrate curent · ";
 
+  const examHint =
+    "Simulare examen pe 2 părți: Partial (9 grile + 8 deschise) / Examen (9 grile + 11 deschise) · random nou la fiecare sesiune · ";
+
   const connectStatsFile = useCallback(async () => {
     if (!supportsFilePickerApi()) {
       setStatsStatus("Browserul nu suporta scriere directa in fisier. Incearca Chrome sau Edge.");
@@ -654,13 +658,36 @@ export default function App() {
 
   const handleSimulationComplete = useCallback(
     async (summary: SimulationSummary) => {
+      const entry = formatStatsEntry(summary);
+
       if (!statsFileHandle) {
         setStatsStatus("Simularea s-a incheiat, dar fisierul de statistici nu este conectat.");
         return;
       }
 
       try {
-        await appendStatsEntry(statsFileHandle, formatStatsEntry(summary));
+        await appendStatsEntry(statsFileHandle, entry);
+        setStatsStatus(`Salvat automat (${new Date().toLocaleTimeString("ro-RO")})`);
+      } catch (error) {
+        setStatsStatus(
+          error instanceof Error
+            ? `Eroare la salvare: ${error.message}`
+            : "Eroare necunoscuta la salvare."
+        );
+      }
+    },
+    [statsFileHandle]
+  );
+
+  const handleCustomStatsEntry = useCallback(
+    async (entry: string) => {
+      if (!statsFileHandle) {
+        setStatsStatus("Statistica nu a fost salvata pentru ca fisierul nu este conectat.");
+        return;
+      }
+
+      try {
+        await appendStatsEntry(statsFileHandle, entry);
         setStatsStatus(`Salvat automat (${new Date().toLocaleTimeString("ro-RO")})`);
       } catch (error) {
         setStatsStatus(
@@ -869,6 +896,24 @@ export default function App() {
               <span>Simulare Grile</span>
               <span className="tab-count">10 random</span>
             </button>
+            <button
+              className={`tab-btn tab-purple ${
+                tab === "simulare-examen" ? "tab-active-purple" : ""
+              }`}
+              onClick={() => {
+                setTab("simulare-examen");
+                setIsMobileMenuOpen(false);
+              }}
+            >
+              <NavIcon>
+                <path d="M7 5.2h10a1.8 1.8 0 0 1 1.8 1.8v11a1.8 1.8 0 0 1-1.8 1.8H7A1.8 1.8 0 0 1 5.2 18V7A1.8 1.8 0 0 1 7 5.2z" />
+                <path d="M9 9.2h6" />
+                <path d="M9 12.4h6" />
+                <path d="M9 15.6h3.5" />
+              </NavIcon>
+              <span>Simulare Examen</span>
+              <span className="tab-count">2 părți</span>
+            </button>
           </div>
 
           <span className="stats-status" title={statsStatus}>{statsStatus}</span>
@@ -884,6 +929,11 @@ export default function App() {
           ) : tab === "merged" ? (
             <>
               {mergedHint}
+              <kbd>F</kbd> = full screen
+            </>
+          ) : tab === "simulare-examen" ? (
+            <>
+              {examHint}
               <kbd>F</kbd> = full screen
             </>
           ) : (
@@ -1001,11 +1051,26 @@ export default function App() {
             />
           )
         ) : (
-          <GrileCard
-            modeLabel={currentModeMeta.label}
-            sources={GRILE_SOURCES[mode]}
-            onSimulationComplete={handleSimulationComplete}
-          />
+          tab === "grile" ? (
+            <GrileCard
+              modeLabel={currentModeMeta.label}
+              sources={GRILE_SOURCES[mode]}
+              onSimulationComplete={handleSimulationComplete}
+            />
+          ) : (
+            <ExamSimulationTab
+              partialOpenQuestions={questionSets.partial}
+              examenOpenQuestions={questionSets.examen}
+              grileSources={{
+                partial: GRILE_SOURCES.partial,
+                examen: GRILE_SOURCES.examen,
+              }}
+              onSimulationComplete={handleSimulationComplete}
+              onSaveExamStats={handleCustomStatsEntry}
+              isLoadingOpenQuestions={isLoadingQuestions}
+              openQuestionError={questionError}
+            />
+          )
         )}
       </main>
 

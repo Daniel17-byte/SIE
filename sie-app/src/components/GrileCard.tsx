@@ -10,7 +10,7 @@ interface GrilaQuestion {
   chapter?: string;
 }
 
-interface QuizSourceConfig {
+export interface QuizSourceConfig {
   id: string;
   path: string;
   label: string;
@@ -55,10 +55,11 @@ interface Props {
   modeLabel: string;
   sources: readonly QuizSourceConfig[];
   onSimulationComplete?: (summary: SimulationSummary) => void;
+  quizSize?: number;
 }
 
-const QUIZ_SIZE = 10;
-const QUIZ_HISTORY_LIMIT = QUIZ_SIZE * 3;
+const DEFAULT_QUIZ_SIZE = 10;
+const QUIZ_HISTORY_MULTIPLIER = 3;
 const ALL_CHAPTERS_VALUE = "__all__";
 const DEFAULT_CHAPTER_LABEL = "Introducere";
 
@@ -180,9 +181,18 @@ function getRandomIndex(maxExclusive: number) {
   }
 
   if (typeof crypto !== "undefined" && typeof crypto.getRandomValues === "function") {
+    // Rejection sampling avoids modulo bias for perfectly uniform indexes.
     const randomValues = new Uint32Array(1);
-    crypto.getRandomValues(randomValues);
-    return randomValues[0] % maxExclusive;
+    const upperBound = 0x1_0000_0000;
+    const threshold = upperBound - (upperBound % maxExclusive);
+
+    let randomValue = 0;
+    do {
+      crypto.getRandomValues(randomValues);
+      randomValue = randomValues[0];
+    } while (randomValue >= threshold);
+
+    return randomValue % maxExclusive;
   }
 
   return Math.floor(Math.random() * maxExclusive);
@@ -229,12 +239,12 @@ function readRecentQuestionHistory(historyKey: string) {
   }
 }
 
-function writeRecentQuestionHistory(historyKey: string, questionIds: string[]) {
+function writeRecentQuestionHistory(historyKey: string, questionIds: string[], maxEntries: number) {
   if (typeof window === "undefined") {
     return;
   }
 
-  const nextHistory = [...new Set(questionIds)].slice(0, QUIZ_HISTORY_LIMIT);
+  const nextHistory = [...new Set(questionIds)].slice(0, maxEntries);
 
   try {
     window.localStorage.setItem(historyKey, JSON.stringify(nextHistory));
@@ -284,7 +294,9 @@ function isExactMatch(selectedAnswers: string[], correctAnswers: string[]) {
   return correctAnswers.every((answer) => selectedSet.has(answer));
 }
 
-const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete }) => {
+const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete, quizSize = DEFAULT_QUIZ_SIZE }) => {
+  const effectiveQuizSize = Math.max(1, Math.floor(quizSize));
+  const historyLimit = effectiveQuizSize * QUIZ_HISTORY_MULTIPLIER;
   const [questionPool, setQuestionPool] = useState<QuizQuestion[]>([]);
   const [quizQuestions, setQuizQuestions] = useState<QuizQuestion[]>([]);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string[]>>({});
@@ -302,8 +314,8 @@ const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete }) => {
   );
 
   const activeQuizHistoryKey = useMemo(
-    () => `${getQuizHistoryKey(sources)}:${selectedChapter}`,
-    [selectedChapter, sources]
+    () => `${getQuizHistoryKey(sources)}:${selectedChapter}:size-${effectiveQuizSize}`,
+    [effectiveQuizSize, selectedChapter, sources]
   );
 
   const blockedQuestionsKey = useMemo(
@@ -325,7 +337,7 @@ const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete }) => {
   }, [blockedQuestionIds, blockedQuestionsKey]);
 
   const startQuiz = useCallback((questions: QuizQuestion[]) => {
-    const quizSize = Math.min(QUIZ_SIZE, questions.length);
+    const nextQuizSize = Math.min(effectiveQuizSize, questions.length);
     const recentQuestionHistory = readRecentQuestionHistory(activeQuizHistoryKey);
     const recentQuestionSet = new Set(recentQuestionHistory);
 
@@ -337,7 +349,7 @@ const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete }) => {
     );
 
     const pickedQuestions = [...freshQuestions, ...repeatedQuestions]
-      .slice(0, quizSize)
+      .slice(0, nextQuizSize)
       .map((question) => ({
         ...question,
         // Shuffle options per appearance to avoid learning answer positions.
@@ -347,14 +359,14 @@ const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete }) => {
     writeRecentQuestionHistory(activeQuizHistoryKey, [
       ...pickedQuestions.map((question) => question.uid),
       ...recentQuestionHistory,
-    ]);
+    ], historyLimit);
 
     setQuizQuestions(pickedQuestions);
     setSelectedAnswers({});
     setReviewedAnswers({});
     setCurrentIndex(0);
     setIsSubmitted(false);
-  }, [activeQuizHistoryKey]);
+  }, [activeQuizHistoryKey, effectiveQuizSize, historyLimit]);
 
   useEffect(() => {
     let isMounted = true;
@@ -638,7 +650,7 @@ const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete }) => {
           <span className="grile-badge">Simulare grile</span>
           <h2 className="grile-title">Se încarcă întrebările…</h2>
           <p className="grile-subtitle">
-            Pregătesc un set aleator de {QUIZ_SIZE} întrebări din {sourceLabels} pentru modul {modeLabel.toLowerCase()}.
+              Pregătesc un set aleator de {effectiveQuizSize} întrebări din {sourceLabels} pentru modul {modeLabel.toLowerCase()}.
           </p>
         </div>
       </div>
