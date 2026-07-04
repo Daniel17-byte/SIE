@@ -62,6 +62,7 @@ const DEFAULT_QUIZ_SIZE = 10;
 const QUIZ_HISTORY_MULTIPLIER = 3;
 const ALL_CHAPTERS_VALUE = "__all__";
 const DEFAULT_CHAPTER_LABEL = "Introducere";
+const QUIZ_FREQUENCY_KEY_PREFIX = "sie-app:quiz-frequency:";
 
 const COURSE_CHAPTERS = [
   "Adaptoare Grafice",
@@ -219,6 +220,60 @@ function getBlockedQuestionsKey(sources: readonly QuizSourceConfig[]) {
   return `sie-app:quiz-blocked:${sourceIds}`;
 }
 
+function getQuizFrequencyKey(sources: readonly QuizSourceConfig[], chapter: string, quizSize: number) {
+  const sourceIds = sources.map((source) => source.id).sort().join("+");
+  return `${QUIZ_FREQUENCY_KEY_PREFIX}${sourceIds}:${chapter}:size-${quizSize}`;
+}
+
+function readQuestionFrequencyMap(frequencyKey: string) {
+  if (typeof window === "undefined") {
+    return {} as Record<string, number>;
+  }
+
+  try {
+    const rawFrequencyMap = window.localStorage.getItem(frequencyKey);
+    if (!rawFrequencyMap) {
+      return {} as Record<string, number>;
+    }
+
+    const parsed = JSON.parse(rawFrequencyMap);
+    if (!parsed || typeof parsed !== "object") {
+      return {} as Record<string, number>;
+    }
+
+    return Object.entries(parsed).reduce<Record<string, number>>((acc, [key, value]) => {
+      if (typeof key !== "string" || typeof value !== "number") {
+        return acc;
+      }
+
+      acc[key] = Math.max(0, Math.floor(value));
+      return acc;
+    }, {});
+  } catch {
+    return {} as Record<string, number>;
+  }
+}
+
+function writeQuestionFrequencyMap(frequencyKey: string, frequencyMap: Record<string, number>) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  try {
+    window.localStorage.setItem(frequencyKey, JSON.stringify(frequencyMap));
+  } catch {
+    // Ignore storage write failures and continue with in-memory randomization.
+  }
+}
+
+function hashString(value: string) {
+  let hash = 0;
+  for (let i = 0; i < value.length; i += 1) {
+    hash = (hash * 31 + value.charCodeAt(i)) >>> 0;
+  }
+  return hash;
+}
+
 function readRecentQuestionHistory(historyKey: string) {
   if (typeof window === "undefined") {
     return [] as string[];
@@ -318,6 +373,11 @@ const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete, quizSi
     [effectiveQuizSize, selectedChapter, sources]
   );
 
+  const activeQuizFrequencyKey = useMemo(
+    () => getQuizFrequencyKey(sources, selectedChapter, effectiveQuizSize),
+    [effectiveQuizSize, selectedChapter, sources]
+  );
+
   const blockedQuestionsKey = useMemo(
     () => getBlockedQuestionsKey(sources),
     [sources]
@@ -340,12 +400,29 @@ const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete, quizSi
     const nextQuizSize = Math.min(effectiveQuizSize, questions.length);
     const recentQuestionHistory = readRecentQuestionHistory(activeQuizHistoryKey);
     const recentQuestionSet = new Set(recentQuestionHistory);
+    const questionFrequencyMap = readQuestionFrequencyMap(activeQuizFrequencyKey);
+    const sessionSeed = (Date.now() ^ Math.floor(performance.now() * 1000)) >>> 0;
 
-    const freshQuestions = shuffleQuestions(
-      questions.filter((question) => !recentQuestionSet.has(question.uid))
+    const rankByFrequency = (pool: QuizQuestion[]) =>
+      [...pool].sort((left, right) => {
+        const leftCount = questionFrequencyMap[left.uid] ?? 0;
+        const rightCount = questionFrequencyMap[right.uid] ?? 0;
+
+        if (leftCount !== rightCount) {
+          return leftCount - rightCount;
+        }
+
+        // Clock-seeded tie-breaker keeps the order changing between sessions.
+        const leftTie = (hashString(left.uid) ^ sessionSeed) >>> 0;
+        const rightTie = (hashString(right.uid) ^ sessionSeed) >>> 0;
+        return leftTie - rightTie;
+      });
+
+    const freshQuestions = rankByFrequency(
+      shuffleQuestions(questions.filter((question) => !recentQuestionSet.has(question.uid)))
     );
-    const repeatedQuestions = shuffleQuestions(
-      questions.filter((question) => recentQuestionSet.has(question.uid))
+    const repeatedQuestions = rankByFrequency(
+      shuffleQuestions(questions.filter((question) => recentQuestionSet.has(question.uid)))
     );
 
     const pickedQuestions = [...freshQuestions, ...repeatedQuestions]
@@ -361,12 +438,17 @@ const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete, quizSi
       ...recentQuestionHistory,
     ], historyLimit);
 
+    for (const question of pickedQuestions) {
+      questionFrequencyMap[question.uid] = (questionFrequencyMap[question.uid] ?? 0) + 1;
+    }
+    writeQuestionFrequencyMap(activeQuizFrequencyKey, questionFrequencyMap);
+
     setQuizQuestions(pickedQuestions);
     setSelectedAnswers({});
     setReviewedAnswers({});
     setCurrentIndex(0);
     setIsSubmitted(false);
-  }, [activeQuizHistoryKey, effectiveQuizSize, historyLimit]);
+  }, [activeQuizFrequencyKey, activeQuizHistoryKey, effectiveQuizSize, historyLimit]);
 
   useEffect(() => {
     let isMounted = true;

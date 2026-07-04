@@ -40,50 +40,64 @@ const PART_CONFIG: Record<ExamPart, ExamPartConfig> = {
 
 const GRILA_POINTS = 2;
 const OPEN_QUESTION_POINTS = 3;
+const OPEN_FREQUENCY_KEY_PREFIX = "sie-app:open-frequency:";
 
-function getRandomIndex(maxExclusive: number) {
-  if (maxExclusive <= 0) {
-    return 0;
-  }
-
-  if (typeof crypto !== "undefined" && typeof crypto.getRandomValues === "function") {
-    const randomValues = new Uint32Array(1);
-    const upperBound = 0x1_0000_0000;
-    const threshold = upperBound - (upperBound % maxExclusive);
-
-    let randomValue = 0;
-    do {
-      crypto.getRandomValues(randomValues);
-      randomValue = randomValues[0];
-    } while (randomValue >= threshold);
-
-    return randomValue % maxExclusive;
-  }
-
-  return Math.floor(Math.random() * maxExclusive);
-}
-
-function shuffleItems<T>(items: readonly T[]) {
-  const shuffled = [...items];
-
-  for (let i = shuffled.length - 1; i > 0; i -= 1) {
-    const j = getRandomIndex(i + 1);
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-
-  return shuffled;
-}
-
-function pickRandomItems<T>(items: readonly T[], count: number) {
-  if (count <= 0 || items.length === 0) {
-    return [] as T[];
-  }
-
-  return shuffleItems(items).slice(0, Math.min(items.length, count));
-}
 
 function getOpenQuestionKey(question: Question) {
   return `${question.id}::${question.title}`;
+}
+
+function getOpenFrequencyKey(part: ExamPart) {
+  return `${OPEN_FREQUENCY_KEY_PREFIX}${part}`;
+}
+
+function readOpenFrequencyMap(frequencyKey: string) {
+  if (typeof window === "undefined") {
+    return {} as Record<string, number>;
+  }
+
+  try {
+    const rawMap = window.localStorage.getItem(frequencyKey);
+    if (!rawMap) {
+      return {} as Record<string, number>;
+    }
+
+    const parsed = JSON.parse(rawMap);
+    if (!parsed || typeof parsed !== "object") {
+      return {} as Record<string, number>;
+    }
+
+    return Object.entries(parsed).reduce<Record<string, number>>((acc, [key, value]) => {
+      if (typeof key !== "string" || typeof value !== "number") {
+        return acc;
+      }
+
+      acc[key] = Math.max(0, Math.floor(value));
+      return acc;
+    }, {});
+  } catch {
+    return {} as Record<string, number>;
+  }
+}
+
+function writeOpenFrequencyMap(frequencyKey: string, frequencyMap: Record<string, number>) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  try {
+    window.localStorage.setItem(frequencyKey, JSON.stringify(frequencyMap));
+  } catch {
+    // Ignore storage write failures and continue with in-memory randomization.
+  }
+}
+
+function hashString(value: string) {
+  let hash = 0;
+  for (let i = 0; i < value.length; i += 1) {
+    hash = (hash * 31 + value.charCodeAt(i)) >>> 0;
+  }
+  return hash;
 }
 
 export default function ExamSimulationTab({
@@ -122,8 +136,35 @@ export default function ExamSimulationTab({
     [examenOpenQuestions, part, partialOpenQuestions]
   );
 
+  const openFrequencyKey = useMemo(() => getOpenFrequencyKey(part), [part]);
+
   const startOpenSession = useCallback(() => {
-    const nextQuestions = pickRandomItems(openQuestionPool, currentPartConfig.openCount);
+    const frequencyMap = readOpenFrequencyMap(openFrequencyKey);
+    const sessionSeed = (Date.now() ^ Math.floor(performance.now() * 1000)) >>> 0;
+
+    const rankedPool = [...openQuestionPool].sort((left, right) => {
+      const leftKey = getOpenQuestionKey(left);
+      const rightKey = getOpenQuestionKey(right);
+      const leftCount = frequencyMap[leftKey] ?? 0;
+      const rightCount = frequencyMap[rightKey] ?? 0;
+
+      if (leftCount !== rightCount) {
+        return leftCount - rightCount;
+      }
+
+      const leftTie = (hashString(leftKey) ^ sessionSeed) >>> 0;
+      const rightTie = (hashString(rightKey) ^ sessionSeed) >>> 0;
+      return leftTie - rightTie;
+    });
+
+    const nextQuestions = rankedPool.slice(0, Math.min(rankedPool.length, currentPartConfig.openCount));
+
+    for (const question of nextQuestions) {
+      const key = getOpenQuestionKey(question);
+      frequencyMap[key] = (frequencyMap[key] ?? 0) + 1;
+    }
+    writeOpenFrequencyMap(openFrequencyKey, frequencyMap);
+
     setOpenSessionQuestions(nextQuestions);
     setOpenIndex(0);
     setIsOpenSessionFinished(false);
@@ -135,7 +176,7 @@ export default function ExamSimulationTab({
       ...prev,
       [part]: null,
     }));
-  }, [currentPartConfig.openCount, openQuestionPool, part]);
+  }, [currentPartConfig.openCount, openFrequencyKey, openQuestionPool, part]);
 
   useEffect(() => {
     if (isLoadingOpenQuestions || openQuestionError) {
