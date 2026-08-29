@@ -17,14 +17,14 @@
     "id": 3,
     "title": "Diagrama de timp — operație de scriere pe magistrală sincronă",
     "source": "4 SIE-Magistrale-1.pdf, p. 14–17",
-    "content": "1. La **frontul crescător** al ceasului, **masterul** plasează adresa pe liniile de adrese și activează semnalul de scriere (WR).\n2. Mastrul plasează **datele** pe magistrală (în același ciclu sau în ciclul următor, conform specificației).\n3. La **frontul ceasului** următor, **slave-ul** eșantionează datele și le memorează.\n4. Dacă slave-ul nu poate finaliza operația la timp, activează semnalul **WAIT** (sau nu activează ACK) → masterul introduce **stări de așteptare** și menține datele pe magistrală.\n5. Masterul dezactivează WR și eliberează liniile la terminarea ciclului.\n\n> **Dezavantaj**: dacă un transfer se termină înainte de un număr întreg de cicli de ceas, trebuie așteptat sfârşitul ciclului; viteza se alege după dispozitivul cel mai lent.",
+    "content": "1. La **frontul crescător** al ceasului, masterul plasează adresa şi activează **WR**.\n2. Masterul plasează datele (acelaşi ciclu sau următorul).\n3. La ciclul următor, **slave-ul** eşantionează şi memorează datele.\n4. Dacă slave-ul e prea lent, activează **WAIT** → masterul introduce stări de aşteptare.\n5. Masterul dezactivează WR la final.\n\n**Dezavantaj**: viteza magistralei e limitată de dispozitivul cel mai lent.",
     "chapter": "Magistrale"
   },
   {
     "id": 4,
     "title": "Arbitraj centralizat prin conectarea în lanț (daisy chaining)",
     "source": "5 SIE-Magistrale-2.pdf, p. 8–12",
-    "content": "Schema utilizează **două linii de control**:\n- **BUSREQ** (Bus Request) — SAU cablat, toate dispozitivele o pot activa simultan;\n- **BUSGNT** (Bus Grant) — linie de acordare, înlănțuită fizic prin toate dispozitivele.\n\n**Funcționare:**\n1. Un dispozitiv care dorește accesul activează **BUSREQ**.\n2. Arbitrul (central) detectează BUSREQ și activează **BUSGNT**.\n3. BUSGNT se propagă de la primul dispozitiv spre celelalte.\n4. Primul dispozitiv care **a solicitat** magistrala interceptează BUSGNT (nu îl propagă mai departe), obţine controlul magistralei şi activează **BUSY**.\n5. Un dispozitiv care **nu a solicitat** lasă BUSGNT să continue spre el.\n\n**Prioritatea** este determinată de poziția fizică: dispozitivul cel mai apropiat de arbitru are prioritatea maximă.\n\n**Avantaje**: număr redus de linii de control; poate conecta teoretic orice număr de dispozitive.  \n**Dezavantaje**: priorități fixe; un dispozitiv cu prioritate înaltă poate bloca celelalte; susceptibil la defecte pe linia BUSGNT.",
+    "content": "Linii: **BUSREQ** (SAU cablat, orice dispozitiv o poate activa) și **BUSGNT** (înlănţuită fizic prin toate dispozitivele).\n\n**Funcţionare:**\n1. Dispozitivul care vrea acces activează **BUSREQ**.\n2. Arbitrul (central) activează **BUSGNT**, care se propagă din aproape în aproape.\n3. Primul dispozitiv care a solicitat magistrala interceptează BUSGNT (nu îl propagă mai departe), devine master şi activează **BUSY**.\n\n**Prioritatea** e dată de poziţia fizică: cel mai aproape de arbitru are prioritate maximă.\n\n**Avantaje**: puţine linii de control, orice număr de dispozitive. **Dezavantaje**: priorităţi fixe, un dispozitiv poate bloca restul, sensibil la defecte pe linia BUSGNT.",
     "chapter": "Magistrale"
   },
   {
@@ -45,7 +45,7 @@
     "id": 7,
     "title": "Arbitrajul descentralizat cu 3 linii",
     "source": "5 SIE-Magistrale-2.pdf, p. 17–20",
-    "content": "Schema foloseşte **3 linii**:\n- **BUSREQ** — SAU cablat, orice dispozitiv o poate activa;\n- **BUSY** — activată de dispozitivul care controlează magistrala;\n- **Linie de arbitrare** — conectată în lanț prin toate dispozitivele (similar cu BUSGNT, dar fără arbitru central).\n\n**Funcționare:**\n1. Un dispozitiv care dorește accesul activează **BUSREQ**.\n2. Dacă **BUSY** este inactiv, semnalul de arbitrare se propagă prin lanț.\n3. Primul dispozitiv din lanț care **a solicitat** magistrala interceptează semnalul de arbitrare, devine master şi activează **BUSY**.\n4. La terminarea utilizării, masterul dezactivează BUSY.\n\n**Avantaje față de centralizat**: cost mai redus, viteză mai ridicată, nu este susceptibilă la defectele unui arbitru central.",
+    "content": "Linii: **BUSREQ** (SAU cablat), **BUSY**, şi o **linie de arbitrare** înlănţuită prin toate dispozitivele (fără arbitru central).\n\n**Funcţionare:**\n1. Dispozitivul activează BUSREQ.\n2. Dacă BUSY e inactiv, semnalul de arbitrare se propagă prin lanţ.\n3. Primul dispozitiv din lanţ care a cerut magistrala îl interceptează, devine master şi activează BUSY.\n\n**Avantaje faţă de centralizat**: cost mai redus, viteză mai mare, fără punct unic de defect.",
     "chapter": "Magistrale"
   },
   {
@@ -66,28 +66,28 @@
     "id": 10,
     "title": "Trei îmbunătățiri introduse de PCI Express față de PCI precedente",
     "source": "5 SIE-Magistrale-2.pdf, p. 38–54",
-    "content": "1. **Conexiune serială punct-la-punct** — elimină dezavantajele magistralei paralele (nesimetrie de propagare, dificultatea sincronizării), permiţând frecvenţe de operare mult mai ridicate (2,5 → 64 GT/s în funcţie de generaţie).\n\n2. **Performanţă scalabilă** — lăţimea legăturii este variabilă (x1, x4, x8, x16 benzi de comunicaţie), setată automat, adaptând performanţa la cerinţele fiecărui dispozitiv.\n\n3. **Protocol bazat pe pachete cu facilităţi avansate** — include calitate a serviciilor (QoS), gestiune avansată a puterii consumate şi a erorilor, tranzacţii de tip split (similare PCI-X) şi posibilitatea conectării/deconectării perifericelor în timpul funcţionării (hot-plug).\n\n> *Alte îmbunătăţiri menţionate în curs: model software compatibil cu PCI; suport MSI (Message Signaled Interrupts); codificare 128b/130b din Gen 3.*",
+    "content": "1. **Conexiune serială punct-la-punct** — elimină nesimetria de propagare a magistralei paralele, permiţând frecvenţe mult mai ridicate (2,5 → 64 GT/s).\n2. **Performanţă scalabilă** — lăţime variabilă (x1, x4, x8, x16 benzi), setată automat după cerinţele dispozitivului.\n3. **Protocol pe pachete** — QoS, gestiune avansată a puterii şi erorilor, tranzacţii split, hot-plug.",
     "chapter": "Magistrale"
   },
   {
     "id": 11,
     "title": "Caracteristicile magistralei VXS (VMEbus Switched Serial)",
     "source": "7 SIE-Magistrale-4.pdf, p. 13–15",
-    "content": "- **VXS** combină magistrala VME paralelă cu **conexiuni seriale comutatoare de viteză ridicată**.\n- Standarde ANSI/VITA 41.x (InfiniBand, Serial RapidIO, Gigabit Ethernet, PCI Express ×4).\n- Interconexiune serială comutată cu **conexiuni punct-la-punct** între module; semnalele de ceas şi date sunt combinate într-un şir de biţi serial.\n- **Rate de date**: 3,125 sau 6,25 Gbiţi/s; cu codificare 8b/10b → 312,5 sau 625 MB/s; cu codificare 64b/66b → 378 sau 756 MB/s.\n- **Plăci comutatoare** (1–2): conţin un comutator; **plăci normale** (până la 18): se conectează la plăcile comutatoare.\n- Topologii de baze de bord: **stea simplă, stea duală, plasă, lanţ**.",
+    "content": "- **VXS** combină VME paralel cu conexiuni seriale comutate de viteză mare (ANSI/VITA 41.x).\n- Rate: 3,125 sau 6,25 Gbiţi/s (8b/10b → 312,5/625 MB/s).\n- **Plăci comutatoare** (1–2) + **plăci normale** (până la 18), conectate la ele.\n- Topologii: stea simplă, stea duală, plasă, lanţ.",
     "chapter": "Magistrale"
   },
   {
     "id": 12,
     "title": "Arhitectura unui sistem CompactPCI",
     "source": "8 SIE-Module-Extensie.pdf, p. 22–30",
-    "content": "- **CompactPCI** (cPCI) combină specificaţiile electrice ale magistralei **PCI paralele de 32 sau 64 biţi** cu formatele de placă **Eurocard 3U şi 6U**.\n- Are o **placă de bază pasivă** (numai conectori, fără componente active) → întreţinere simplă, fiabilitate ridicată.\n- **Conectori**: HM (Hard Metric), pas 2 mm; module 3U au J1 (32 biţi) şi opţional J2 (64 biţi sau pini de I/O); module 6U au J1–J5; placa de bază are P1–P2 (3U) sau P1–P5 (6U).\n- Suportă **până la 8 socluri** periferice per segment de magistrală.\n- Extensii: **Hot Swap** (PICMG 2.1 — inserare la cald), **Ethernet** (PICMG 2.16 — reţea locală între module, max. 2 Gbiţi/s per soclu).\n- **Avantaje**: modularitate, robusteţe, scalabilitate, independenţă faţă de procesor, cost redus al circuitelor PCI/PCIe.",
+    "content": "- **CompactPCI** combină magistrala PCI paralelă (32/64 biţi) cu formatele Eurocard 3U/6U.\n- **Placă de bază pasivă** (fără componente active) → fiabilitate ridicată.\n- Conectori **HM**, pas 2mm; până la **8 socluri** periferice per segment.\n- Extensii: **Hot Swap** (PICMG 2.1), **Ethernet** (PICMG 2.16).\n- **Avantaje**: modularitate, robusteţe, scalabilitate, cost redus.",
     "chapter": "Module Extensie"
   },
   {
     "id": 13,
     "title": "Arhitectura unui sistem CompactPCI Serial",
     "source": "8 SIE-Module-Extensie.pdf, p. 40–44",
-    "content": "- **CompactPCI Serial** (PICMG CPCI-S.0) **înlocuieşte complet** magistrala PCI paralelă cu **interconexiuni seriale rapide**.\n- Conectorii HM originali sunt înlocuiţi cu conectori **AirMax** (rate de 12 Gbiţi/s; până la 184 perechi pe modul 3U).\n- Formate **Eurocard 3U şi 6U**, cu răcire prin convecţie sau conducţie; **placă de bază complet pasivă**.\n- Module 3U: până la **6 conectori** (P1–P6); module 6U: până la **7 conectori** (P0–P6); P2–P6 au 360 pini de I/O definiţi de utilizator.\n- **Interfaţe suportate** per soclu periferic: o legătură PCIe (×8), SATA/SAS, USB 2.0, USB 3.0, până la 8 interfeţe Ethernet.\n- Permite **înlocuirea modulelor în timpul funcţionării** (hot-swap).",
+    "content": "- **CompactPCI Serial** (PICMG CPCI-S.0) înlocuieşte complet PCI paralel cu interconexiuni seriale.\n- Conectori **AirMax** (12 Gbiţi/s).\n- Format Eurocard 3U/6U, placă de bază complet pasivă.\n- Interfeţe per soclu: PCIe ×8, SATA/SAS, USB 2.0/3.0, Ethernet.\n- Permite **hot-swap**.",
     "chapter": "Module Extensie"
   },
   {
@@ -115,7 +115,7 @@
     "id": 17,
     "title": "Operaţiile executate de UCP pentru transferul controlului la subrutina de tratare a întreruperii",
     "source": "2 SIE-Metode-IE-1.pdf, p. 25–27",
-    "content": "1. **Termină execuţia instrucţiunii curente** (suspendarea are loc între instrucţiuni, nu în mijlocul uneia).\n2. **Activează semnalul IACK** (Interrupt Acknowledge), confirmând recunoaşterea cererii.\n3. **Identifică sursa întreruperii** (prin linie dedicată, interogare software/hardware sau vector furnizat de sursă).\n4. **Determină adresa subrutinei de tratare**:\n   - *Ntreruperi ne-vectorizate*: adresă fixă prestabilită în memorie;\n   - *Ntreruperi vectorizate*: adresa este furnizată de sursa de întrerupere sub forma unui **vector de întrerupere**.\n5. **Salvează contorul de program (PC)** şi alte informaţii de stare (registre flags, eventual alţi registri) — de obicei pe stivă.\n6. **Încarcă adresa subrutinei de tratare în PC**, transferând astfel controlul execuţiei la subrutină.",
+    "content": "1. **Termină execuţia instrucţiunii curente.**\n2. **Activează IACK** (Interrupt Acknowledge).\n3. **Identifică sursa întreruperii** (linie dedicată, interogare sau vector furnizat de sursă).\n4. **Determină adresa subrutinei**: fixă (întreruperi ne-vectorizate) sau dată de vectorul de întrerupere (vectorizate).\n5. **Salvează PC** şi starea (de regulă pe stivă).\n6. **Încarcă adresa subrutinei în PC.**",
     "chapter": "Metode IE"
   },
   {
@@ -129,21 +129,21 @@
     "id": 21,
     "title": "Conectarea în serie a liniilor de întrerupere",
     "source": "3 SIE-Metode-IE-2.pdf, p. 8–10",
-    "content": "Dispozitivele sunt conectate în **lanţ (daisy chain)**, fiecare cu o intrare **PI** (Priority In) şi o ieşire **PO** (Priority Out). Linia de cerere IREQ este **comună** pentru toate (SAU cablat). Dispozitivul cu **prioritatea maximă** este plasat primul în lanţ.\n\n**Funcţionare:**\n1. Un dispozitiv activează **IREQ**; UCP detectează cererea şi activează **IACK**.\n2. Semnalul IACK se propagă de la primul dispozitiv (prin PI → PO) spre celelalte.\n3. Primul dispozitiv care **a solicitat** întreruperea **interceptează IACK** (nu îl propagă la PO) şi plasează **vectorul de întrerupere** pe magistrala de date.\n4. UCP foloseşte vectorul pentru a sări la subrutina de tratare corespunzătoare.\n5. Un dispozitiv care **nu a solicitat** lasă semnalul IACK să continue (PI → PO).",
+    "content": "Dispozitive în **lanţ** (PI/PO); linia **IREQ** e comună (SAU cablat); prioritatea maximă = primul din lanţ.\n\n**Funcţionare:**\n1. Un dispozitiv activează IREQ; UCP activează IACK.\n2. IACK se propagă din aproape în aproape (PI → PO).\n3. Primul dispozitiv care a cerut întreruperea interceptează IACK şi plasează **vectorul de întrerupere** pe magistrala de date.",
     "chapter": "Metode IE"
   },
   {
     "id": 22,
     "title": "Componentele unui controler DMA necesare pentru execuţia unui transfer",
     "source": "3 SIE-Metode-IE-2.pdf, p. 17–22",
-    "content": "| Componentă | Funcţie |\n|---|---|\n| **Registrul de adresă I/O (IOAR)** | Memorează adresa dispozitivului de I/O implicat în transfer; se transmite de UCP la iniţializare |\n| **Contorul de date (DC)** | Memorează numărul de octeţi/cuvinte rămase de transferat; se decrementează după fiecare ciclu DMA; când DC = 0, transferul s-a terminat |\n| **Registrul de adresă memorie** | Memorează adresa curentă din memoria principală de la/la care se transferă date; se incrementează după fiecare ciclu pentru a adresa locaţia următoare |\n| **Logica de control** | Generează semnalele **DMAREQ** (cerere de magistrală) şi recepţionează **DMAACK** (acordare magistrală); coordonează transferul şi generează o **cerere de ntrerupere** (IREQ) la terminare |\n| **Registrul de stare/comandă** | Memorează direcţia transferului (citire/scriere), starea operaţiei şi parametrii primiţi de la UCP în secvenţa de iniţializare |",
+    "content": "| Componentă | Funcţie |\n|---|---|\n| **IOAR** | Adresa dispozitivului de I/O, transmisă de UCP la iniţializare |\n| **Contorul de date (DC)** | Nr. octeţi rămaşi de transferat; se decrementează după fiecare ciclu; DC=0 → transfer terminat |\n| **Reg. adresă memorie** | Adresa curentă din memorie; se incrementează după fiecare ciclu |\n| **Logica de control** | Generează DMAREQ/recepţionează DMAACK; coordonează transferul; generează IREQ la final |\n| **Reg. stare/comandă** | Direcţia transferului, starea operaţiei, parametrii de la UCP |",
     "chapter": "Metode IE"
   },
   {
     "id": 23,
     "title": "Deosebirile dintre VME320 şi VME64x",
     "source": "7 SIE-Magistrale-4.pdf, p. 9–12",
-    "content": "| Aspect | VME64x | VME320 (VME 2eSST) |\n|---|---|---|\n| **Rată de transfer** | Max. **160 MB/s** (protocol 2eVME — Double-edge VME) | **> 320 MB/s** (vârf > 500 MB/s), protocol **2eSST** (Double-edge Source Synchronous Transfer) |\n| **Topologie interconectare** | Magistrală partajată convenţională | **Conexiune în stea**: toţi conectorii legaţi la conectorul din mijlocul plăcii de bază |\n| **Protocol de date** | Protocol 2eVME | Protocol **2eSST** — sincron la sursă în fazele de date |\n| **Conectori** | 5 rânduri × 32 pini (160 pini) + conector suplimentar 95 pini | Aceeaşi bază mecanică VME64x; modificare de protocol şi topologie |\n| **Alte caracteristici VME64x** | Pini alimentare 3,3 V; 141 pini I/O utilizator; inserare în funcţionare; panouri frontale cu pini de ghidare | — |",
+    "content": "| Aspect | VME64x | VME320 (2eSST) |\n|---|---|---|\n| **Rată** | max. 160 MB/s (protocol 2eVME) | > 320 MB/s (vârf > 500 MB/s), protocol 2eSST |\n| **Topologie** | magistrală partajată | conexiune în stea (toţi conectorii la conectorul central) |\n| **Protocol de date** | 2eVME | 2eSST — sincron la sursă |\n| **Conectori** | 5×32 pini + conector suplimentar 95 pini | aceeaşi bază mecanică VME64x |",
     "chapter": "Magistrale"
   },
   {
@@ -157,7 +157,7 @@
     "id": 25,
     "title": "Rolul terminatorului de magistrală şi tipuri de conexiune",
     "source": "4 SIE-Magistrale-1.pdf, p. 6–9",
-    "content": "**Rolul**: terminatorul elimină sau reduce **reflexiile de semnal** cauzate de discontinuităţile de impedanţă (conectori, sarcini capacitive, treceri între straturi). Fără terminator, reflexiile produc oscilaţii ale tensiunii şi curentului care reduc fiabilitatea transferurilor.\n\n**Terminator rezistiv serie**:\n- Se conectează **în serie** cu linia, la capătul transmisiei (lângă driver).\n- Condiţia ideală: **R_s + Z_s = Z_0** (Rs — rezistenţa serie, Zs — impedanţa sursei, Z0 — impedanţa caracteristică a liniei).\n- Absoarbe unda reflectată la recepţie la nivel de sursă.\n\n**Terminator rezistiv paralel**:\n- Se conectează **în paralel** la capătul receptor, formând un **divizor de tensiune**.\n- Rezistenţa echivalentă trebuie să fie egală cu Z0.\n- Poate fi utilizat pentru **magistrale bidirecţionale**.",
+    "content": "**Rol**: elimină reflexiile de semnal cauzate de discontinuităţile de impedanţă; fără terminator, reflexiile produc oscilaţii care reduc fiabilitatea transferurilor.\n\n**Terminator serie**: în serie, lângă driver; condiţia ideală R_s + Z_s = Z_0; absoarbe unda reflectată la sursă.\n\n**Terminator paralel**: la capătul receptor, formează un divizor de tensiune ≈ Z_0; poate fi folosit la magistrale bidirecţionale.",
     "chapter": "Magistrale"
   },
   {
@@ -178,7 +178,7 @@
     "id": 30,
     "title": "Avantajele utilizării modulelor COM Express",
     "source": "8 SIE-Module-Extensie.pdf, p. 64–71",
-    "content": "1. **Performanţe ridicate** — datorită magistralelor şi interfeţelor seriale cu viteze ridicate (PCIe, USB, SATA, Ethernet, afişaj).\n2. **Flexibilitate** — disponibile în dimensiuni multiple (Mini 84×55 mm, Compact 95×95 mm, Basic 125×95 mm, Extended 155×110 mm) şi tipuri variate de configuraţii ale pinilor (tipuri 1, 2, 3, 4, 5, 6, 7, 10).\n3. **Versatilitate de utilizare** — pot fi folosite atât independent (calculator pe o singură placă) cât şi ca modul mezanin procesor conectat la o placă purtătoare a utilizatorului.\n4. **Cost şi timp de dezvoltare reduse** — utilizatorul proiectează numai placa purtătoare cu I/O specific aplicaţiei.\n5. **Actualizări simple** — la o nouă generaţie de procesor, se înlocuieşte doar modulul COM Express, placa purtătoare rămânând neschimbată.",
+    "content": "1. **Performanţe ridicate** — magistrale seriale rapide (PCIe, USB, SATA, Ethernet, afişaj).\n2. **Flexibilitate** — mai multe dimensiuni (Mini, Compact, Basic, Extended) şi tipuri de pini (1–7, 10).\n3. **Versatilitate** — funcţionează independent sau ca modul mezanin pe o placă purtătoare.\n4. **Cost/timp de dezvoltare reduse** — utilizatorul proiectează doar placa purtătoare.\n5. **Actualizări simple** — la o nouă generaţie de procesor se schimbă doar modulul COM Express.",
     "chapter": "Module Extensie"
   },
   {
