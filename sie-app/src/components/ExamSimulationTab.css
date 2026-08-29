@@ -50,10 +50,17 @@
   background: #188038;
 }
 
+.exam-sim-top-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
 .exam-part-switch {
   display: flex;
   gap: 0.55rem;
-  margin-top: 0.85rem;
 }
 
 .exam-part-btn {
@@ -73,65 +80,40 @@
 }
 
 .exam-sim-intro-meta {
-  margin-top: 0.75rem;
-  font-size: 0.9rem;
+  margin-top: 0.6rem;
+  font-size: 0.86rem;
 }
 
-.exam-score-rules {
+.exam-status-bar {
   margin-top: 0.85rem;
-  display: grid;
-  gap: 0.35rem;
-  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
-.exam-part-status-grid {
-  margin-top: 0.85rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 0.65rem;
-}
-
-.exam-part-status-card {
+.exam-status-chip {
   border: 1px solid var(--border);
-  border-radius: var(--radius-control);
+  border-radius: 999px;
   background: var(--surface-soft);
-  padding: 0.7rem;
-  display: grid;
-  gap: 0.2rem;
-}
-
-.exam-part-status-card h4 {
-  color: var(--text);
-  margin-bottom: 0.2rem;
-}
-
-.exam-part-status-card p {
   color: var(--text-soft);
-  font-size: 0.85rem;
-}
-
-.exam-part-status-pass {
-  border-color: #188038;
-  background: rgba(24, 128, 56, 0.08);
-}
-
-.exam-overall-status {
-  margin-top: 0.8rem;
-  color: var(--danger);
+  padding: 5px 12px;
+  font-size: 0.82rem;
   font-weight: 700;
-  font-size: 0.9rem;
 }
 
-.exam-overall-status-pass {
+.exam-status-chip-pass {
+  border-color: #188038;
+  background: rgba(24, 128, 56, 0.1);
   color: #188038;
 }
 
-.exam-save-row {
-  margin-top: 0.7rem;
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  flex-wrap: wrap;
+.exam-status-chip-final {
+  background: var(--surface);
+}
+
+.exam-save-btn {
+  margin-left: auto;
 }
 
 .exam-save-status {
@@ -139,12 +121,24 @@
   font-size: 0.8rem;
 }
 
+.exam-open-phase-btn {
+  align-self: center;
+}
+
 .exam-open-header {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: 0.8rem;
   flex-wrap: wrap;
+}
+
+.exam-open-header h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-weight: 600;
+  margin-top: 0;
 }
 
 .exam-open-status {
@@ -174,6 +168,10 @@
 
 .exam-open-source {
   font-size: 0.82rem;
+}
+
+.exam-open-answer-toggle {
+  margin-top: 0.6rem;
 }
 
 .exam-open-content {

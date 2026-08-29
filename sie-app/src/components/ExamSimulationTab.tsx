@@ -113,6 +113,7 @@ export default function ExamSimulationTab({
   const [openSessionQuestions, setOpenSessionQuestions] = useState<Question[]>([]);
   const [openIndex, setOpenIndex] = useState(0);
   const [isOpenSessionFinished, setIsOpenSessionFinished] = useState(false);
+  const [isOpenAnswerVisible, setIsOpenAnswerVisible] = useState(false);
   const [openPointsByPart, setOpenPointsByPart] = useState<Record<ExamPart, number | null>>({
     partial: null,
     examen: null,
@@ -127,6 +128,10 @@ export default function ExamSimulationTab({
     partial: null,
     examen: null,
   });
+  const [openPhaseStartedByPart, setOpenPhaseStartedByPart] = useState<Record<ExamPart, boolean>>({
+    partial: false,
+    examen: false,
+  });
   const [examStatsStatus, setExamStatsStatus] = useState("");
 
   const currentPartConfig = PART_CONFIG[part];
@@ -137,6 +142,7 @@ export default function ExamSimulationTab({
   );
 
   const openFrequencyKey = useMemo(() => getOpenFrequencyKey(part), [part]);
+  const isOpenPhaseStarted = openPhaseStartedByPart[part];
 
   const startOpenSession = useCallback(() => {
     const frequencyMap = readOpenFrequencyMap(openFrequencyKey);
@@ -179,7 +185,7 @@ export default function ExamSimulationTab({
   }, [currentPartConfig.openCount, openFrequencyKey, openQuestionPool, part]);
 
   useEffect(() => {
-    if (isLoadingOpenQuestions || openQuestionError) {
+    if (!isOpenPhaseStarted || isLoadingOpenQuestions || openQuestionError) {
       setOpenSessionQuestions([]);
       setOpenIndex(0);
       setIsOpenSessionFinished(false);
@@ -187,7 +193,12 @@ export default function ExamSimulationTab({
     }
 
     startOpenSession();
-  }, [isLoadingOpenQuestions, openQuestionError, part, startOpenSession]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoadingOpenQuestions, isOpenPhaseStarted, openQuestionError, part]);
+
+  useEffect(() => {
+    setIsOpenAnswerVisible(false);
+  }, [openIndex, openSessionQuestions]);
 
   const currentOpenQuestion = openSessionQuestions[openIndex] ?? null;
   const currentOpenQuestionScores = openQuestionScoresByPart[part] ?? {};
@@ -333,99 +344,92 @@ export default function ExamSimulationTab({
   return (
     <div className="exam-sim-wrapper">
       <section className="exam-sim-intro-card">
-        <div>
-          <span className="exam-sim-badge">Simulare examen</span>
-          <h2>2 părți separate: Partial / Examen</h2>
-          <p>
-            Fiecare parte are grile random și întrebări deschise random. Pentru întrebările deschise
-            îți treci singur nota.
-          </p>
-        </div>
+        <div className="exam-sim-top-row">
+          <div>
+            <span className="exam-sim-badge">Simulare examen</span>
+            <h2>Partial / Examen · {currentPartConfig.grileCount} grile + {currentPartConfig.openCount} deschise, notate manual</h2>
+          </div>
 
-        <div className="exam-part-switch" role="tablist" aria-label="Alege partea de simulare">
-          {(Object.keys(PART_CONFIG) as ExamPart[]).map((partKey) => (
-            <button
-              key={partKey}
-              type="button"
-              className={`exam-part-btn ${part === partKey ? "exam-part-btn-active" : ""}`}
-              onClick={() => setPart(partKey)}
-            >
-              {PART_CONFIG[partKey].label}
-            </button>
-          ))}
+          <div className="exam-part-switch" role="tablist" aria-label="Alege partea de simulare">
+            {(Object.keys(PART_CONFIG) as ExamPart[]).map((partKey) => (
+              <button
+                key={partKey}
+                type="button"
+                className={`exam-part-btn ${part === partKey ? "exam-part-btn-active" : ""}`}
+                onClick={() => setPart(partKey)}
+              >
+                {PART_CONFIG[partKey].label}
+              </button>
+            ))}
+          </div>
         </div>
 
         <p className="exam-sim-intro-meta">
-          {currentPartConfig.label}: {currentPartConfig.grileCount} grile random + {currentPartConfig.openCount} întrebări deschise random.
+          Punctaj: grilă = {GRILA_POINTS}p, deschisă = {OPEN_QUESTION_POINTS}p · prag minim Partial{" "}
+          {PART_CONFIG.partial.minPoints}p / Examen {PART_CONFIG.examen.minPoints}p, ambele obligatorii.
         </p>
 
-        <div className="exam-score-rules">
-          <p>
-            Punctaj: 1 grilă = {GRILA_POINTS}p, 1 întrebare deschisă = {OPEN_QUESTION_POINTS}p.
-          </p>
-          <p>
-            Prag minim: Partial {PART_CONFIG.partial.minPoints}p, Examen {PART_CONFIG.examen.minPoints}p.
-            Trebuie luate ambele părți.
-          </p>
-        </div>
-
-        <div className="exam-part-status-grid">
+        <div className="exam-status-bar">
           {partStatus.map((entry) => (
-            <div
+            <span
               key={entry.partKey}
-              className={`exam-part-status-card ${entry.passed ? "exam-part-status-pass" : "exam-part-status-pending"}`}
+              className={`exam-status-chip ${entry.passed ? "exam-status-chip-pass" : ""}`}
             >
-              <h4>{entry.label}</h4>
-              <p>
-                Grile: {entry.grilePoints ?? "-"} / {entry.maxGrilePoints}p
-              </p>
-              <p>
-                Deschise: {entry.openPoints ?? "-"} / {entry.maxOpenPoints}p
-              </p>
-              <p>
-                Total: {entry.totalPoints ?? "-"}p (minim {entry.minPoints}p)
-              </p>
-            </div>
+              {entry.label}: {entry.totalPoints ?? "-"}/{entry.maxGrilePoints + entry.maxOpenPoints}p
+              (min {entry.minPoints}p)
+            </span>
           ))}
-        </div>
+          <span className={`exam-status-chip exam-status-chip-final ${isOverallPassed ? "exam-status-chip-pass" : ""}`}>
+            {isOverallPassed ? "Promovat" : "Neeligibil"}
+          </span>
 
-        <p className={`exam-overall-status ${isOverallPassed ? "exam-overall-status-pass" : ""}`}>
-          Status final: {isOverallPassed ? "Promovat (ambele părți luate)" : "Neeligibil încă - trebuie luate ambele părți"}
-        </p>
-
-        <div className="exam-save-row">
           <button
             type="button"
-            className="tab-btn"
+            className="tab-btn exam-save-btn"
             onClick={() => {
               void handleSaveExamStats();
             }}
             disabled={!canSaveExamStats}
           >
-            Salveaza statistica examen
+            Salvează statistica
           </button>
           {examStatsStatus ? <span className="exam-save-status">{examStatsStatus}</span> : null}
         </div>
       </section>
 
-      <GrileCard
-        modeLabel={`Simulare ${currentPartConfig.label}`}
-        sources={grileSources[part]}
-        quizSize={currentPartConfig.grileCount}
-        onSimulationComplete={handlePartGrileComplete}
-      />
-
+      {!isOpenPhaseStarted ? (
+        <>
+          <GrileCard
+            modeLabel={`Simulare ${currentPartConfig.label}`}
+            sources={grileSources[part]}
+            quizSize={currentPartConfig.grileCount}
+            onSimulationComplete={handlePartGrileComplete}
+            examMode
+          />
+          {currentGrileSummary ? (
+            <button
+              type="button"
+              className="nav-btn exam-open-phase-btn"
+              onClick={() =>
+                setOpenPhaseStartedByPart((prev) => ({
+                  ...prev,
+                  [part]: true,
+                }))
+              }
+            >
+              Continuă cu întrebările deschise →
+            </button>
+          ) : null}
+        </>
+      ) : (
       <section className="exam-open-card">
         <div className="exam-open-header">
-          <div>
-            <span className="exam-sim-badge exam-sim-badge-secondary">Întrebări deschise</span>
-            <h3>Evaluare proprie ({currentPartConfig.label})</h3>
-            <p>
-              Pentru fiecare întrebare deschisă îți dai punctaj între 0 și 3, apoi treci la următoarea.
-            </p>
-          </div>
+          <h3>
+            <span className="exam-sim-badge exam-sim-badge-secondary">Deschise</span>
+            Evaluare proprie ({currentPartConfig.label}) — dai punctaj 0-3 pentru fiecare
+          </h3>
           <button type="button" className="nav-btn" onClick={startOpenSession}>
-            🔄 Întrebări deschise noi
+            🔄 Set nou
           </button>
         </div>
 
@@ -461,9 +465,22 @@ export default function ExamSimulationTab({
             </div>
             <h4>{currentOpenQuestion.title}</h4>
             <p className="exam-open-source">Sursă: {currentOpenQuestion.source}</p>
-            <p className="exam-open-content exam-open-content-hidden">
-              Răspunsul nu este afișat în simularea de examen.
-            </p>
+
+            <button
+              type="button"
+              className="nav-btn nav-btn-secondary exam-open-answer-toggle"
+              onClick={() => setIsOpenAnswerVisible((visible) => !visible)}
+            >
+              {isOpenAnswerVisible ? "🙈 Ascunde răspunsul" : "👁 Arată răspunsul"}
+            </button>
+
+            {isOpenAnswerVisible ? (
+              <p className="exam-open-content">{currentOpenQuestion.content}</p>
+            ) : (
+              <p className="exam-open-content exam-open-content-hidden">
+                Răspunsul este ascuns — dă-ți singur punctajul înainte să-l verifici.
+              </p>
+            )}
 
             <div className="exam-open-score-row">
               <span className="exam-open-score-label">Punctaj întrebare:</span>
@@ -516,6 +533,7 @@ export default function ExamSimulationTab({
           </div>
         ) : null}
       </section>
+      )}
     </div>
   );
 }

@@ -266,13 +266,6 @@
     "chapter": "Afisaje"
   },
   {
-    "id": 137,
-    "title": "Descrieți structura unui afișaj color cu cristale lichide care utilizează tehnologia Twisted Nematic (TN).",
-    "source": "Q&A_Partea2.pdf",
-    "content": "Un afisaj TN este compus din urmatoarele straturi:\n\n1. Sursa de lumina de fond\n\n2. Polarizator interior - permite doar lumina polarizata liniar\n\n3. Placa de sticla + strat de aliniere - orientare initiala a cristalelor lichide",
-    "chapter": "Afisaje"
-  },
-  {
     "id": 138,
     "title": "Strat de cristale lichide TN - moleculele sunt rasucite la 90°, permitand ghidarea polarizarii luminii",
     "source": "Q&A_Partea2.pdf",
@@ -280,24 +273,10 @@
     "chapter": "Afisaje"
   },
   {
-    "id": 140,
-    "title": "Prezentați două deosebiri dintre diodele OLED fluorescente și diodele OLED fosforescente.",
-    "source": "Q&A_Partea2.pdf",
-    "content": "Fluorescenta functioneaza prin emisia luminii vizibile de un material in urma absorbtiei\nenergiei. Energia este re-emisa atunci cand electronii revin la nivelul de energie initial.\nInceteaza imediat ce sursa de energie este eliminata. (deci emit lumina cat timp sunt\nalimentate)\n\nIn cazul fosforescentei, este emisia luminii de un material expus la o forma de radiatie.\nEmisia se mentine si dupa ce radiatia a fost eliminata. (astea se cumva se \"incarca\" si emit\nlumina si dupa ce e scoasa sursa de radiatie)",
-    "chapter": "Afisaje"
-  },
-  {
     "id": 141,
     "title": "Explicați principiul tehnologiilor Patterned Vertical Alignment (PVA) și Super-PVA, utilizate la afișajele cu cristale lichide.",
     "source": "Q&A_Partea2.pdf",
     "content": "PVA\n\n• Utilizeaza electrozi in zigzag in locul protuberantelor clasice, pentru a controla\n\norientarea cristalelor lichide\n\n• Ofera contrast imbunatatit si un timp de raspuns comparabil cu MVA, dar acesta\n\nscade daca diferentele de nuante sunt mici\n\n• Poate folosi FRC pentru afisaje low-cost, dar calitatea culorii scade la unghiuri\n\nfoarte mici (perpendicular pe ecran)\n\nS-PVA\n\n•\n\nImbunatateste timpul de raspuns printr-o versiune avansata a tehnicii RTC\n\n• Suporta culori reale de 24 sau 30 biti, fara simulare\n\n• Fiecare sub-pixel este impartit in doua sectiuni aliniate in directii opuse, pentru o\n\nmai buna uniformitate si unghiuri largi de vizualizare",
-    "chapter": "Afisaje"
-  },
-  {
-    "id": 142,
-    "title": "3 avantaje ale afisajelor cu cristale lichide cu matrice activa fata de cele cu matrice pasiva",
-    "source": "Q&A_Partea2.pdf",
-    "content": "1. Timp de raspuns mai redus\n\no Fiecare pixel este controlat individual care permite aplicarea rapida si\n\nprecisa a tensiunii, rezultand timp de raspuns mai mici.\n\n2. Contrast mai ridicat\n\no Controlul mai precis al pixelilor permite obtinerea unui contrast\n\nsuperior, intrucat fiecare pixel poate fi activat sau dezactivat eficient\nfara interferentele intre vecini.\n\n3. Unghi de vizualizare mai mare si luminozitate mai sporita\n\no Structura cu tranzistori si control individual permite afisarea culorilor\nmai consistente si clare chiar si atunci cand ecranul este privit din\nunghiuri laterale.",
     "chapter": "Afisaje"
   },
   {
@@ -396,13 +375,6 @@
     "title": "Prezentați avantajele iluminării de fundal cu LED comparativ cu iluminarea cu lămpi fluorescente CCFL.",
     "source": "Q&A_Partea2.pdf",
     "content": "Spre deosebire de lampile fluorescente, consumul de energie este redus, durata de viata\nmai lunga a diodelor, se pot realiza afisaje cu grosime redusa, iar contrastul si\nluminozitatea sunt mai ridicate.",
-    "chapter": "Afisaje"
-  },
-  {
-    "id": 157,
-    "title": "Explicați principiul tehnologiei de Compensare a Timpului de Răspuns (RTC – Response Time Compensation).",
-    "source": "Q&A_Partea2.pdf",
-    "content": "Timpul de raspuns reprezinta timpul necesar pentru schimbarea orientarii cristalelor\nlichide, mai exact tranzitia culorii.\n\nRTC reprezinta o tehnica de compensare a timpului de raspuns, care functioneaza prin\naplicarea unei supratensiuni controlate cristalelor. Astfel ajuta moleculele sa ajunga mai\nrapid la pozitia dorita, reducand latenta tranzitiei de culoare. Cristalele lichide sunt fortate\nsa treaca mai repede prin pozitiile intermediare, accelerand procesul de comutare si\nreducand efectul de ghosting (sau remanenta a imaginii).",
     "chapter": "Afisaje"
   },
   {
@@ -998,13 +970,6 @@
     "title": "Explică sistemul de detecție și corectare a erorilor Cross Interleaved Reed-",
     "source": "Q&A_Partea2.pdf",
     "content": "Solomon Code (CIRC) utilizat în cadrul cadrelor discurilor compacte.\n\nSistemul CIRC este folosit pe discurile compacte pentru detectia si corectarea erorilor. El\nare doua componente: intercalarea incrucisata, care imprastie erorile lungi in erori scurte\nprin rearanjarea datelor, si codul Reed-Solomon, care detecteaza si corecteaza aceste\n\nerori. Astfel, CIRC asigura redarea fiabila a datelor chiar si in prezenta zgarieturilor sau\ndefectelor pe disc.",
-    "chapter": "Discuri Optice"
-  },
-  {
-    "id": 243,
-    "title": "Desenează structura și explică funcționarea unui ansamblu optic de citire.",
-    "source": "Q&A_Partea2.pdf",
-    "content": "Un laser emite un fascicul care este focalizat pe suprafata discului cu ajutorul unor lentile\nsi oglinzi semitransparente. Fasciculul loveste suprafata discului, unde intalneste cavitati\nsi suprafete plane. Reflectivitatea diferita a acestora face ca intensitatea luminii reflectate\nsa varieze. Lumina reflectata este directionata catre o fotodioda, care o transforma intr-un\nsemnal electric.\n\nUn sistem servo cu trei fascicule mentine laserul aliniat pe pista si focalizat corect, chiar\ndaca discul are variatii de pozitie sau planeitate. Acest sistem permite citirea precisa a\ndatelor de pe disc in timp real.",
     "chapter": "Discuri Optice"
   },
   {

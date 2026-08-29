@@ -56,6 +56,8 @@ interface Props {
   sources: readonly QuizSourceConfig[];
   onSimulationComplete?: (summary: SimulationSummary) => void;
   quizSize?: number;
+  /** Exam simulation: no back navigation, no immediate correct/wrong reveal, no block/reroll. */
+  examMode?: boolean;
 }
 
 const DEFAULT_QUIZ_SIZE = 10;
@@ -349,7 +351,13 @@ function isExactMatch(selectedAnswers: string[], correctAnswers: string[]) {
   return correctAnswers.every((answer) => selectedSet.has(answer));
 }
 
-const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete, quizSize = DEFAULT_QUIZ_SIZE }) => {
+const GrileCard: FC<Props> = ({
+  modeLabel,
+  sources,
+  onSimulationComplete,
+  quizSize = DEFAULT_QUIZ_SIZE,
+  examMode = false,
+}) => {
   const effectiveQuizSize = Math.max(1, Math.floor(quizSize));
   const historyLimit = effectiveQuizSize * QUIZ_HISTORY_MULTIPLIER;
   const [questionPool, setQuestionPool] = useState<QuizQuestion[]>([]);
@@ -725,6 +733,28 @@ const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete, quizSi
     setCurrentIndex((index) => Math.min(index + 1, quizQuestions.length - 1));
   };
 
+  const handleExamContinue = () => {
+    if (!currentQuestion) {
+      return;
+    }
+
+    const currentSelection = selectedAnswers[currentQuestion.uid] ?? [];
+    if (currentSelection.length === 0) {
+      return;
+    }
+
+    setReviewedAnswers((prev) => ({
+      ...prev,
+      [currentQuestion.uid]: true,
+    }));
+
+    if (currentIndex === quizQuestions.length - 1) {
+      handleSubmitQuiz();
+    } else {
+      goToNextQuestion();
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="grile-wrapper">
@@ -959,9 +989,10 @@ const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete, quizSi
               optionClasses.push("quiz-option-selected");
             }
 
-            if (currentQuestion.hasAnswerKey && isCurrentReviewed && isCorrectAnswer) {
+            if (!examMode && currentQuestion.hasAnswerKey && isCurrentReviewed && isCorrectAnswer) {
               optionClasses.push("quiz-option-correct");
             } else if (
+              !examMode &&
               currentQuestion.hasAnswerKey &&
               isCurrentReviewed &&
               checked &&
@@ -991,13 +1022,15 @@ const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete, quizSi
       </div>
 
       <div className="card-nav">
-        <button
-          className="nav-btn"
-          onClick={() => setCurrentIndex((index) => Math.max(index - 1, 0))}
-          disabled={currentIndex === 0}
-        >
-          ← Anterior
-        </button>
+        {!examMode ? (
+          <button
+            className="nav-btn"
+            onClick={() => setCurrentIndex((index) => Math.max(index - 1, 0))}
+            disabled={currentIndex === 0}
+          >
+            ← Anterior
+          </button>
+        ) : null}
 
         <div className="dots">
           {quizQuestions.map((question, index) => (
@@ -1010,7 +1043,15 @@ const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete, quizSi
           ))}
         </div>
 
-        {!isCurrentReviewed ? (
+        {examMode ? (
+          <button
+            className="nav-btn"
+            onClick={handleExamContinue}
+            disabled={currentSelection.length === 0}
+          >
+            {currentIndex === quizQuestions.length - 1 ? "✅ Finalizează" : "Continuă →"}
+          </button>
+        ) : !isCurrentReviewed ? (
           <button
             className="nav-btn"
             onClick={handleCheckAnswer}
@@ -1029,14 +1070,16 @@ const GrileCard: FC<Props> = ({ modeLabel, sources, onSimulationComplete, quizSi
         )}
       </div>
 
-      <div className="quiz-actions quiz-actions-bottom">
-        <button className="nav-btn nav-btn-warning" onClick={handleBlockCurrentQuestion}>
-          🚫 Blochează întrebarea
-        </button>
-        <button className="nav-btn nav-btn-secondary" onClick={handleRetake}>
-          🔄 Întrebări noi
-        </button>
-      </div>
+      {!examMode ? (
+        <div className="quiz-actions quiz-actions-bottom">
+          <button className="nav-btn nav-btn-warning" onClick={handleBlockCurrentQuestion}>
+            🚫 Blochează întrebarea
+          </button>
+          <button className="nav-btn nav-btn-secondary" onClick={handleRetake}>
+            🔄 Întrebări noi
+          </button>
+        </div>
+      ) : null}
     </div>
   );
 };
