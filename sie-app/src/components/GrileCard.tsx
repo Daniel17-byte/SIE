@@ -368,7 +368,7 @@ const GrileCard: FC<Props> = ({
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedChapter, setSelectedChapter] = useState(ALL_CHAPTERS_VALUE);
+  const [selectedChapters, setSelectedChapters] = useState<string[]>([]);
   const [blockedQuestionIds, setBlockedQuestionIds] = useState<string[]>([]);
 
   const sourceLabels = useMemo(
@@ -376,14 +376,22 @@ const GrileCard: FC<Props> = ({
     [sources]
   );
 
+  const chapterFilterKey = useMemo(
+    () =>
+      selectedChapters.length === 0
+        ? ALL_CHAPTERS_VALUE
+        : [...selectedChapters].sort((a, b) => a.localeCompare(b, "ro")).join("+"),
+    [selectedChapters]
+  );
+
   const activeQuizHistoryKey = useMemo(
-    () => `${getQuizHistoryKey(sources)}:${selectedChapter}:size-${effectiveQuizSize}`,
-    [effectiveQuizSize, selectedChapter, sources]
+    () => `${getQuizHistoryKey(sources)}:${chapterFilterKey}:size-${effectiveQuizSize}`,
+    [chapterFilterKey, effectiveQuizSize, sources]
   );
 
   const activeQuizFrequencyKey = useMemo(
-    () => getQuizFrequencyKey(sources, selectedChapter, effectiveQuizSize),
-    [effectiveQuizSize, selectedChapter, sources]
+    () => getQuizFrequencyKey(sources, chapterFilterKey, effectiveQuizSize),
+    [chapterFilterKey, effectiveQuizSize, sources]
   );
 
   const blockedQuestionsKey = useMemo(
@@ -529,23 +537,27 @@ const GrileCard: FC<Props> = ({
   }, [questionPool]);
 
   useEffect(() => {
-    if (
-      selectedChapter !== ALL_CHAPTERS_VALUE &&
-      !chapterOptions.includes(selectedChapter)
-    ) {
-      setSelectedChapter(ALL_CHAPTERS_VALUE);
-    }
-  }, [chapterOptions, selectedChapter]);
+    setSelectedChapters((prev) => {
+      const next = prev.filter((chapter) => chapterOptions.includes(chapter));
+      return next.length === prev.length ? prev : next;
+    });
+  }, [chapterOptions]);
+
+  const selectedChapterSet = useMemo(() => new Set(selectedChapters), [selectedChapters]);
 
   const chapterQuestionPool = useMemo(() => {
-    if (selectedChapter === ALL_CHAPTERS_VALUE) {
+    if (selectedChapterSet.size === 0) {
       return questionPool;
     }
 
-    return questionPool.filter(
-      (question) => question.chapter === selectedChapter
+    return questionPool.filter((question) => selectedChapterSet.has(question.chapter));
+  }, [questionPool, selectedChapterSet]);
+
+  const toggleChapter = useCallback((chapter: string) => {
+    setSelectedChapters((prev) =>
+      prev.includes(chapter) ? prev.filter((item) => item !== chapter) : [...prev, chapter]
     );
-  }, [questionPool, selectedChapter]);
+  }, []);
 
   const filteredQuestionPool = useMemo(
     () => chapterQuestionPool.filter((question) => !blockedQuestionSet.has(question.uid)),
@@ -614,7 +626,7 @@ const GrileCard: FC<Props> = ({
   );
 
   const selectedChapterLabel =
-    selectedChapter === ALL_CHAPTERS_VALUE ? "Toate capitolele" : selectedChapter;
+    selectedChapters.length === 0 ? "Toate capitolele" : selectedChapters.join(", ");
 
   const simulationSummary = useMemo<SimulationSummary>(() => {
     const chapterMap = new Map<string, ChapterScoreSummary>();
@@ -785,7 +797,7 @@ const GrileCard: FC<Props> = ({
   }
 
   if (!currentQuestion) {
-    const isChapterFilterActive = selectedChapter !== ALL_CHAPTERS_VALUE;
+    const isChapterFilterActive = selectedChapters.length > 0;
 
     return (
       <div className="grile-wrapper">
@@ -794,7 +806,7 @@ const GrileCard: FC<Props> = ({
           <h2 className="grile-title">Nu există întrebări disponibile</h2>
           <p className="grile-subtitle">
             {isChapterFilterActive
-              ? `Nu există întrebări în capitolul "${selectedChapter}" pentru ${sourceLabels}.`
+              ? `Nu există întrebări în capitolele selectate (${selectedChapterLabel}) pentru ${sourceLabels}.`
               : `Verifică fișierele pentru ${sourceLabels} și încearcă din nou.`}
           </p>
         </div>
@@ -956,22 +968,27 @@ const GrileCard: FC<Props> = ({
         </div>
 
         <div className="chapter-filter-row">
-          <label htmlFor="chapter-select" className="chapter-filter-label">
-            Capitol
-          </label>
-          <select
-            id="chapter-select"
-            className="chapter-filter-select"
-            value={selectedChapter}
-            onChange={(event) => setSelectedChapter(event.target.value)}
-          >
-            <option value={ALL_CHAPTERS_VALUE}>Toate capitolele</option>
+          <span className="chapter-filter-label">Capitole</span>
+          <div className="chapter-filter-checkboxes">
+            <label className="chapter-filter-checkbox">
+              <input
+                type="checkbox"
+                checked={selectedChapters.length === 0}
+                onChange={() => setSelectedChapters([])}
+              />
+              Toate capitolele
+            </label>
             {chapterOptions.map((chapter) => (
-              <option key={chapter} value={chapter}>
+              <label key={chapter} className="chapter-filter-checkbox">
+                <input
+                  type="checkbox"
+                  checked={selectedChapters.includes(chapter)}
+                  onChange={() => toggleChapter(chapter)}
+                />
                 {chapter}
-              </option>
+              </label>
             ))}
-          </select>
+          </div>
           <span className="chapter-filter-count">
             {filteredQuestionPool.length} întrebări disponibile
           </span>
